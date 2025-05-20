@@ -1,0 +1,259 @@
+unit ufrmDebugParameters;
+
+interface
+
+{$INCLUDE ..\AspDefineDiretivas.inc}
+{$J+}
+
+uses
+  SysUtils, Variants, Classes, Graphics, Forms, TypInfo,
+  Dialogs, IniFiles, MyDlls_DR,  ClassLibraryVCL, Sics_94,
+  {$IFNDEF IS_MOBILE}
+  Windows, Messages,
+  {$ENDIF IS_MOBILE}
+  System.UITypes, Vcl.StdCtrls, Vcl.Controls, Vcl.CheckLst;
+
+type
+  TTipoDebug = (tbGeral, tbSocketSendReceive, tbAtividadeDeSocket, tbAlocacaoDeSenhasNasFilas, tbGeracaoSenhas,
+                tbTimers, tbProtocoloSics, tbJornalEletronico, tbRegistrosBD, tbAtividadeConexaoBD, tbCarregarSenhas, tbCarregarFilas);
+
+  TfrmDebugParameters = class(TForm)
+    grpDebug: TGroupBox;
+    edDebugNivel: TEdit;
+    Label1: TLabel;
+    chkDebugMode: TCheckBox;
+    Label2: TLabel;
+    edDebugFileName: TEdit;
+    btnOK: TButton;
+    btnCancela: TButton;
+    btnAplicar: TButton;
+    memoDebug: TMemo;
+    chkWordWrap: TCheckBox;
+    chklistTiposDebug: TCheckListBox;
+    btnLimparMemo: TButton;
+    procedure chkDebugModeClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure btnAplicarClick(Sender: TObject);
+    procedure btnCancelaClick(Sender: TObject);
+    procedure chkWordWrapClick(Sender: TObject);
+    procedure btnLimparMemoClick(Sender: TObject);
+    procedure chklistTiposDebugClickCheck(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    class procedure CarregaParametros;
+    class procedure Debugar(TipoDebug : TTipoDebug; msg : string);
+    class procedure ShowForm;
+  end;
+
+var
+  frmDebugParameters: TfrmDebugParameters;
+
+  vgDebugParameters : record
+                        ModoDebug     : boolean;
+                        NivelDebug    : integer;
+                        TiposDebug    : set of TTipoDebug;
+                        DebugFileName : string;
+                      end;
+
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uFuncoes;
+
+function fileSize(const FileName: String): LongInt;
+var
+  SearchRec : TSearchRec;
+begin
+  if SysUtils.FindFirst(FileName, faAnyFile, SearchRec) = 0 then
+    Result := SearchRec.Size
+  else
+    Result := 0;
+
+  SysUtils.FindClose(SearchRec);
+end;
+
+
+class procedure TfrmDebugParameters.CarregaParametros;
+var
+  i : TTipoDebug;
+begin
+  with TIniFile.Create(GetIniFileName) do
+  try
+    with vgDebugParameters do
+    begin
+      ModoDebug     := ReadBool   ('DEBUG', 'ModoDebug'     , False                            );
+      NivelDebug    := ReadInteger('DEBUG', 'NivelDebug'    , 2                                );
+      DebugFileName := ReadString ('DEBUG', 'DebugFileName' , GetApplicationPath + '\DEBUG.LOG');
+
+      TiposDebug := [];
+      for i := Low(TTipoDebug) to High(TTipoDebug) do
+        if ReadBool('DEBUG', 'TipoDebug' + inttostr(ord(i)), true) then
+          TiposDebug := TiposDebug + [i];
+    end;
+  finally
+    Free;
+  end;
+end;
+
+procedure TfrmDebugParameters.chkWordWrapClick(Sender: TObject);
+begin
+  memoDebug.WordWrap := chkWordWrap.Checked;
+end;
+
+procedure TfrmDebugParameters.chkDebugModeClick(Sender: TObject);
+begin
+  EnableDisableAllControls(grpDebug, (Sender as TCheckBox).Checked, (Sender as TCheckBox));
+end;
+
+procedure TfrmDebugParameters.chklistTiposDebugClickCheck(Sender: TObject);
+var
+  i : integer;
+begin
+  vgDebugParameters.TiposDebug := [];
+  for i := 0 to chklistTiposDebug.Count - 1 do
+    if chklistTiposDebug.Checked[i] then
+      vgDebugParameters.TiposDebug := vgDebugParameters.TiposDebug + [TTipoDebug(i)];
+end;
+
+// 1 - mensagem na tela   2 - grava log   3 - mensagem na tela e grava log
+class procedure TfrmDebugParameters.Debugar(TipoDebug : TTipoDebug; msg: string);
+const
+  UltimoLog : TDateTime = 0;
+var
+  f  : textfile;
+  fn : string;
+  i  : integer;
+begin
+  if not (vgDebugParameters.ModoDebug  and (TipoDebug in vgDebugParameters.TiposDebug)) then
+    Exit;
+
+  if UltimoLog = 0 then
+    UltimoLog := now;
+
+  msg := FormatDateTime('dd/mm/yy hh:nn:ss,zzz', now) + ' (' + FormatDateTime('nn:ss,zzz', now - UltimoLog) + ') - [' + GetEnumName(TypeInfo(TTipoDebug), ord(TipoDebug)) + '] - ' + msg;
+
+  if (vgDebugParameters.NivelDebug = 1) or (vgDebugParameters.NivelDebug = 3) then
+  begin
+    if Assigned(frmDebugParameters) then
+    begin
+      if frmDebugParameters.memoDebug.Lines.Count > 200 then
+        for i := 1 to 100 do
+          frmDebugParameters.memoDebug.Lines.Delete(0);
+
+      frmDebugParameters.memoDebug.Lines.Add(msg);
+    end;
+  end;
+
+  if (vgDebugParameters.NivelDebug = 2) or (vgDebugParameters.NivelDebug = 3) then
+  begin
+    fn := vgDebugParameters.DebugFileName;
+
+    if fileSize(fn) >= 10000000 then
+      RenameFile (fn, fn + FormatDateTime('_ddmmyyyy_hhnnss',now) + '.bak');
+
+    AssignFile(f, fn);
+    try
+      if FileExists(fn) then
+        Append(f)
+      else
+        Rewrite(f);
+
+      WriteLn(f, msg);
+    finally
+      CloseFile(f);
+    end;
+  end;
+
+  UltimoLog := now;
+end;
+
+procedure TfrmDebugParameters.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  SavePosition(Sender as TForm);
+end;
+
+procedure TfrmDebugParameters.FormCreate(Sender: TObject);
+var
+  i : TTipoDebug;
+begin
+  LoadPosition(Sender as TForm);
+
+  for i := Low(TTipoDebug) to High(TTipoDebug) do
+    chklistTiposDebug.items.add(GetEnumName(TypeInfo(TTipoDebug), ord(i)));
+end;
+
+procedure TfrmDebugParameters.FormShow(Sender: TObject);
+var
+  i: integer;
+begin
+  with vgDebugParameters do
+  begin
+    chkDebugMode.Checked := ModoDebug           ;
+    edDebugNivel.Text    := inttostr(NivelDebug);
+    edDebugFileName.Text := DebugFileName       ;
+
+    for i := 0 to chklistTiposDebug.Count - 1 do
+      chklistTiposDebug.Checked[i] := (TTipoDebug(i) in TiposDebug);
+  end;
+
+  chkDebugModeClick(chkDebugMode);
+end;
+
+class procedure TfrmDebugParameters.ShowForm;
+begin
+  if not Assigned(frmDebugParameters) then
+    frmDebugParameters := TfrmDebugParameters.Create(Application);
+
+  frmDebugParameters.Show;
+end;
+
+procedure TfrmDebugParameters.btnAplicarClick(Sender: TObject);
+var
+  i : TTipoDebug;
+begin
+  with TIniFile.Create(GetIniFileName) do
+  try
+    with vgDebugParameters do
+    begin
+      ModoDebug     := chkDebugMode.Checked       ;
+      NivelDebug    := strtoint(edDebugNivel.Text);
+      DebugFileName := edDebugFileName.Text       ;
+
+      WriteBool   ('DEBUG', 'ModoDebug'    , ModoDebug    );
+      WriteInteger('DEBUG', 'NivelDebug'   , NivelDebug   );
+      WriteString ('DEBUG', 'DebugFileName', DebugFileName);
+
+      for i := Low(TTipoDebug) to High(TTipoDebug) do
+        WriteBool('DEBUG', 'TipoDebug' + inttostr(ord(i)), i in vgDebugParameters.TiposDebug);
+    end;
+  finally
+    Free;
+  end;
+end;
+
+procedure TfrmDebugParameters.btnCancelaClick(Sender: TObject);
+begin
+  CarregaParametros;
+  Close;
+end;
+
+procedure TfrmDebugParameters.btnLimparMemoClick(Sender: TObject);
+begin
+  memoDebug.Clear;
+end;
+
+procedure TfrmDebugParameters.btnOKClick(Sender: TObject);
+begin
+  btnAplicar.Click;
+  Close;
+end;
+
+end.

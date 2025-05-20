@@ -1,0 +1,681 @@
+unit sics_3;
+
+interface
+
+{$INCLUDE ..\AspDefineDiretivas.inc}
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Grids, ExtCtrls, MyDlls_DR, StrUtils, IniFiles, sics_91,
+  DB, DBClient, DBGrids, ASPDbGrid, System.Math, uDataSetHelper;
+
+type
+  TfrmSicsPIMonitor = class(TForm)
+    PIsUpdateTimer: TTimer;
+    cdsPIs: TClientDataSet;
+    cdsPIsPINOME: TStringField;
+    cdsPIsID_PI: TIntegerField;
+    cdsPIsID_PIMONITORAMENTO: TIntegerField;
+    dtsPIs: TDataSource;
+    dbgrdPIs: TASPDbGrid;
+    cdsPIsVALOR: TStringField;
+    cdsPIsClone: TClientDataSet;
+    cdsPIsID_PINIVEL: TIntegerField;
+    cdsPIsID_PINIVEL_ANTERIOR: TIntegerField;
+    cdsPIsCODIGOCOR: TIntegerField;
+    cdsPIsNOMENIVEL: TStringField;
+    cdsPIsCOR_PAINELELETRONICO: TStringField;
+    cdsPIsPOSICAONIVEL: TIntegerField;
+    cdsPIsNivelUltExec: TClientDataSet;
+    cdsPIsNivelUltExecID_PI: TIntegerField;
+    cdsPIsNivelUltExecID_PINIVEL: TIntegerField;
+    cdsPIsNivelUltExecDATAHORA: TDateTimeField;
+    cdsPIsPOSICAONIVEL_ANTERIOR: TIntegerField;
+    btnFechar: TButton;
+    lblSegundosRecalcular: TLabel;
+    cdsPIsVALOR_NUMERICO: TIntegerField;
+    cdsPIsFLAG_VALOR_EM_SEGUNDOS: TBooleanField;
+    TimerAtualizarPaineis: TTimer;
+    cdsPIsGRUPOSPASIDRELACIONADOS: TStringField;
+    cdsPIsClone_AlarmesAtivos: TClientDataSet;
+    cdsPIsMENSAGEMTRADUZIDA: TStringField;
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure PIsUpdateTimerTimer(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure dbgrdPIsDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure cdsPIsAfterOpen(DataSet: TDataSet);
+    procedure TimerAtualizarPaineisTimer(Sender: TObject);
+  private
+    FIntervaloMinutosReenviarAlarme: Integer;
+    FReenviarAlarme: Boolean;
+    FEnviarAlarmeAoDescerNivel: Boolean;
+    FThreadCalculoPISRodando: Boolean;
+
+    procedure AtualizarValoresPIS;
+    procedure EnviarAlarmes;
+    function GetThreadCalculoPISRodando: Boolean;
+  public
+    procedure CarregarPIs;
+    property ThreadCalculoPISRodando: Boolean read GetThreadCalculoPISRodando;
+  end;
+
+var
+  frmSicsPIMonitor: TfrmSicsPIMonitor;
+
+implementation
+
+uses sics_94, DateUtils, uFuncoes, Sics_m, System.TimeSpan,
+  udmContingencia, uCalculoPIs, uPI;
+
+type 
+  TMyDBGrid = class(TDBGrid)
+  public 
+    property DefaultRowHeight; 
+  end; 
+
+{$R *.dfm}
+
+function Alinha (Texto : string; Caracteres : integer; Alinhamento : TAlinhamentoPI) : string;
+var
+  i : integer;
+begin
+  Result := Texto;
+  if Caracteres > length(Texto) then
+  begin
+    case Alinhamento of
+      apiEsquerdo : for i := length(Texto) + 1 to Caracteres do
+                      Result := Result + ' ';
+      apiDireito  : for i := length(Texto) + 1 to Caracteres do
+                      Result := ' ' + Result;
+      apiCentralizado : begin
+                          if (Caracteres - length(Texto)) mod 2 = 0 then
+                            for i := length(Texto) + 1 to (Caracteres + length(Texto)) div 2 do
+                              Result := ' ' + Result + ' '
+                          else
+                          begin
+                            for i := length(Texto) + 1 to (Caracteres + length(Texto)) div 2 do
+                              Result := Result + ' ';
+                            for i := length(Texto) to (Caracteres + length(Texto)) div 2 do
+                              Result := ' ' + Result;
+                          end;
+                        end;
+    end;  { case }
+  end;
+end;  { func Alinha }
+
+
+function EstaNoHorario(IdHorario : integer) : boolean;
+begin
+  Result := false;
+  with dmSicsMain.cdsHorarios do
+  try
+    // VERIFICAR LINHA ABAIXO PARA VER SE DA PRA COMPARAR O TIME COM O CAMPO EM AsDateTime
+    if Locate('ID_PIHORARIO', IdHorario, []) and (time > FieldByName('HORAINICIO').AsDateTime) and (time <= FieldByName('HORAFIM').AsDateTime) then
+      case DayOfWeek(now) of
+        1 : Result := FieldByName('DOMINGO'     ).AsBoolean;
+        2 : Result := FieldByName('SEGUNDAFEIRA').AsBoolean;
+        3 : Result := FieldByName('TERCAFEIRA'  ).AsBoolean;
+        4 : Result := FieldByName('QUARTAFEIRA' ).AsBoolean;
+        5 : Result := FieldByName('QUINTAFEIRA' ).AsBoolean;
+        6 : Result := FieldByName('SEXTAFEIRA'  ).AsBoolean;
+        7 : Result := FieldByName('SABADO'      ).AsBoolean;
+      end;  { case }
+  except
+    Result := false;
+  end;
+end;
+
+
+function GetEmailAddressesList (IdsList : string) : string;
+var
+  BM : TBookmark;
+begin
+  Result := '';
+  with dmSicsMain.cdsEmails do
+  begin
+    BM := GetBookmark;
+    try
+      First;
+      while not eof do
+      begin
+        if Pos(';' + FieldByName('ID').AsString + ';', IdsList) > 0 then
+          Result := Result + FieldByName('ENDERECO').AsString + ',';
+        Next;
+      end;
+      Result := Copy (Result, 1, length(Result) - 1);
+    finally
+      GotoBookmark(BM);
+      FreeBookmark(BM);
+    end;
+  end;
+end;  { func NGetEmailAddressesList }
+
+
+function GetCelNumbersList (IdsList : string) : string;
+var
+  BM : TBookmark;
+begin
+  Result := '';
+  with dmSicsMain.cdsCelulares do
+  begin
+    BM := GetBookmark;
+    try
+      First;
+      while not eof do
+      begin
+        if Pos(';' + FieldByName('ID').AsString + ';', IdsList) > 0 then
+          Result := Result + FieldByName('PREFIXO').AsString + FieldByName('NUMERO').AsString + ',';
+        Next;
+      end;
+      Result := Copy (Result, 1, length(Result) - 1);
+    finally
+      GotoBookmark(BM);
+      FreeBookmark(BM);
+    end;
+  end;
+end;  { func NGetEmailAddressesList }
+
+{=======================================================================}
+
+procedure TfrmSicsPIMonitor.CarregarPIs;
+begin
+  cdsPIs.DisableControls;
+  try
+    with dmSicsMain.cdsMonitoramentos do
+    begin
+      First;
+
+      while not Eof do
+      begin
+
+        if EstaNoHorario(FieldByName('ID_PIHORARIO').AsInteger) then
+        begin
+          if not cdsPIs.Locate('ID_PI', FieldByName('ID_PI').Value, []) then
+          begin
+            cdsPIs.Append;
+            cdsPIs.FieldByName('ID_PI').Value := FieldByName('ID_PI').Value;
+            cdsPIs.FieldByName('PINOME').Value := FieldByName('PINOME').Value;
+            cdsPIs.FieldByName('ID_PIMONITORAMENTO').Value := FieldByName('ID_PIMONITORAMENTO').Value;
+            cdsPIs.Post;
+          end
+        end
+        else
+          if cdsPIs.Locate('ID_PI', FieldByName('ID_PI').Value, []) then
+            cdsPIs.Delete;
+
+        Next;
+      end;
+    end;
+
+  finally
+    cdsPIs.EnableControls;
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.btnFecharClick(Sender: TObject);
+begin
+  Close;
+end; { proc btnFecharClick }
+
+procedure TfrmSicsPIMonitor.FormResize(Sender: TObject);
+const
+  OFF = 5;
+begin
+  dbgrdPIs.Left     := OFF;
+  dbgrdPIs.Top      := OFF;
+  dbgrdPIs.Width    := ClientWidth - 2*OFF;
+  dbgrdPIs.Height   := ClientHeight - btnFechar.Height - 3*OFF;
+  btnFechar.Left := ClientWidth - OFF - btnFechar.Width;
+  btnFechar.Top  := ClientHeight - OFF - btnFechar.Height;
+
+
+  with dbgrdPIs do
+  begin
+    Columns[1].Width := Canvas.TextWidth(' HH:MM:SS ');
+    Columns[2].Width := Canvas.TextWidth(' Atenção ') + 10;
+    Columns[0].Width := ClientWidth - Columns[1].Width - Columns[2].Width - 4;
+  end;
+
+  dbgrdPIs.Repaint;
+end;
+
+
+function TfrmSicsPIMonitor.GetThreadCalculoPISRodando: Boolean;
+var
+  LBool: Boolean;
+begin
+  TThread.Synchronize(nil, procedure begin
+    LBool := FThreadCalculoPISRodando;
+  end);
+  result := LBool;
+end;
+
+
+procedure TfrmSicsPIMonitor.FormCreate(Sender: TObject);
+var
+  IniFile : TIniFile;
+begin
+  FThreadCalculoPISRodando := False;
+  PIsUpdateTimer.Tag := vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs+1;
+  PIsUpdateTimerTimer(PIsUpdateTimer);
+
+  TimerAtualizarPaineis.Interval := Max(60000, vgParametrosModulo.IntervaloEmSegsParaEnvioDePIsViaWS*1000);
+  TimerAtualizarPaineis.Enabled := True;
+
+  cdsPIs.CreateDataSet;
+  cdsPIsNivelUltExec.CreateDataSet;
+
+  IniFile := TIniFile.Create(GetIniFileName);
+  try
+    FIntervaloMinutosReenviarAlarme := IniFile.ReadInteger('Settings', 'TempoEmMinutosParaNaoDispararAlarmesDeMesmoNivel', 10   );
+    FReenviarAlarme                 := IniFile.ReadBool   ('Settings', 'RepetirAlarmeAposIntervalo'                      , False);
+    FEnviarAlarmeAoDescerNivel      := IniFile.ReadBool   ('Settings', 'EnviarAlarmeAoDescerNivel'                       , False);
+  finally
+    IniFile.Free;
+  end;  { try .. finally }
+
+  dbgrdPIs.Font.Size := 12; // para forçar o rowheight ser maior, mas no evento do canvas uso o tamanho 8
+
+  LoadPosition (Sender as TForm);
+end;
+
+
+procedure TfrmSicsPIMonitor.FormDestroy(Sender: TObject);
+var
+  IniFile: TIniFile;
+begin
+  IniFile := TIniFile.Create(GetIniFileName);
+  try
+    IniFile.WriteInteger('Settings', 'TempoEmMinutosParaNaoDispararAlarmesDeMesmoNivel', FIntervaloMinutosReenviarAlarme);
+    IniFile.WriteBool   ('Settings', 'RepetirAlarmeAposIntervalo'                      , FReenviarAlarme);
+    IniFile.WriteBool   ('Settings', 'EnviarAlarmeAoDescerNivel'                       , FEnviarAlarmeAoDescerNivel);
+  finally
+    IniFile.Free;
+  end;  { try .. finally }
+
+  SavePosition (Sender as TForm);
+end;
+
+procedure TfrmSicsPIMonitor.AtualizarValoresPIS;
+var
+  PIValue: Double;
+  VariavelNoPainel, TextToWallBoard, sOldIndexFieldNames: string;
+  IdNivel, IdNivelFirst: Integer;
+  LPIComposto, LPISomenteHorarios: Boolean;
+  LValorHorario: TTimeSpan;
+begin
+  dmSicsMain.cdsPISNiveis.First;
+  IdNivelFirst := dmSicsMain.cdsPISNiveis.FieldByName('ID_PINIVEL').AsInteger;
+
+  with cdsPIS do
+  begin
+    First;
+
+    while not Eof do
+    begin
+
+      if dmSicsMain.cdsMonitoramentos.Locate('ID_PIMONITORAMENTO', FieldByName('ID_PIMONITORAMENTO').AsInteger, []) then
+      begin
+        IdNivel := -1;
+        PIValue := dmSicsMain.cdsMonitoramentos.FieldByName('VALOR').AsFloat;
+
+        with dmSicsMain.cdsAlarmes do
+        begin
+          sOldIndexFieldNames := IndexFieldNames;
+          IndexFieldNames := 'ID_PIMONITORAMENTO;POSICAONIVEL'; // tem que manter o campo ID_PIMONITORAMENTO devido ao mastersource/masterfields
+          try
+            if not IsEmpty then
+            begin
+              IdNivel := IdNivelFirst;
+
+              // para analisar o nivel de acordo com o LIMIAR, deve ser do ULTIMO para o PRIMEIRO
+              Last;
+              while not Bof do
+              begin
+                if not FieldByName('LIMIAR').IsNull then
+                  if ( (FieldByName('SUPERIOR').AsBoolean)     and (PIValue >= FieldByName('LIMIAR').AsFloat) ) or
+                     ( (not FieldByName('SUPERIOR').AsBoolean) and (PIValue <= FieldByName('LIMIAR').AsFloat) ) then
+                  begin
+                    IdNivel := FieldByName('ID_PINIVEL').AsInteger;
+                    Break;
+                  end;
+                Prior;
+              end;
+            end;
+          finally
+            IndexFieldNames := sOldIndexFieldNames;
+          end;
+
+        end;
+
+        LPIComposto := TTipoPI(dmSicsMain.cdsMonitoramentosPITIPO.Value) = tpiCombinacaoDeIndicadores;
+        LPISomenteHorarios := LPIComposto and dmSicsMain.PICompostoSomentePorIndicadoresComFormatoHorario(dmSicsMain.cdsMonitoramentosID_PI.Value);
+
+        Edit;
+        if (Trunc(PIValue) = CONST_DADO_INDISPONIVEL ) or
+           (Trunc(PIValue) = CONST_DADO_DESATUALIZADO) or
+           (Trunc(PIValue) = CONST_DADO_INVALIDO     ) then
+        begin
+          case Trunc(PIValue) of
+            CONST_DADO_INDISPONIVEL  : FieldByName('VALOR').AsString := '----';
+            CONST_DADO_DESATUALIZADO : FieldByName('VALOR').AsString := '#obsoleto#';
+            CONST_DADO_INVALIDO      : FieldByName('VALOR').AsString := '#erro#';
+          end;
+
+          FieldByName('VALOR_NUMERICO').AsInteger := Trunc(PIValue);
+          FieldByName('FLAG_VALOR_EM_SEGUNDOS').AsBoolean := False;
+        end
+        else if ((not LPIComposto) and dmSicsMain.cdsMonitoramentos.FieldByName('FORMATOHORARIO').AsBoolean) or
+           ((LPIComposto) and (LPISomenteHorarios)) then
+        begin
+          LValorHorario := TTimeSpan.Subtract(PIValue, 0);
+
+          if (LValorHorario.Days > 0) or (LValorHorario.Hours > 0) then
+            FieldByName('VALOR').AsString := FormatFloat('00', (LValorHorario.Days*HoursPerDay)+LValorHorario.Hours) + 'h' +
+                                             FormatFloat('00', LValorHorario.Minutes)
+          else
+            FieldByName('VALOR').AsString := FormatFloat('00', LValorHorario.Minutes) + ':' +
+                                             FormatFloat('00', LValorHorario.Seconds);
+
+          FieldByName('VALOR_NUMERICO').AsInteger := Trunc(LValorHorario.TotalSeconds);
+          FieldByName('FLAG_VALOR_EM_SEGUNDOS').AsBoolean := True;
+        end
+        else
+        begin
+          FieldByName('VALOR').AsString := IntToStr(Trunc(PIValue));
+          FieldByName('VALOR_NUMERICO').AsInteger := Trunc(PIValue);
+          FieldByName('FLAG_VALOR_EM_SEGUNDOS').AsBoolean := False;
+        end;
+
+        if IdNivel >= 0 then
+        begin
+          if dmSicsMain.cdsPisNiveis.Locate('ID_PINIVEL', IdNivel, []) then
+          begin
+            FieldByName('ID_PINIVEL').Value := dmSicsMain.cdsPisNiveis.FieldByName('ID_PINIVEL').Value;
+            FieldByName('NOMENIVEL').Value := dmSicsMain.cdsPisNiveis.FieldByName('NOME').Value;
+            FieldByName('CODIGOCOR').Value := dmSicsMain.cdsPisNiveis.FieldByName('CODIGOCOR').Value;
+            FieldByName('COR_PAINELELETRONICO').Value := dmSicsMain.cdsPisNiveis.FieldByName('COR_PAINELELETRONICO').Value;
+            FieldByName('POSICAONIVEL').AsInteger := dmSicsMain.cdsPisNiveis.FieldByName('POSICAO').Value;
+          end;
+        end
+        else
+        begin
+          FieldByName('ID_PINIVEL').Clear;
+          FieldByName('NOMENIVEL').Clear;
+          FieldByName('CODIGOCOR').Clear;
+          FieldByName('COR_PAINELELETRONICO').Clear;
+          FieldByName('POSICAONIVEL').Clear;
+        end;
+        Post;
+
+        if IdNivel >= 0 then
+        begin
+          VariavelNoPainel := Alinha(FieldByName('VALOR').AsString,
+                                     dmSicsMain.cdsMonitoramentos.FieldByName('CARACTERES').AsInteger,
+                                     TAlinhamentoPI(dmSicsMain.cdsMonitoramentos.FieldByName('ALINHAMENTO').AsInteger));
+          ASPEzPorEnviaVariavel('{{' + FieldByName('COR_PAINELELETRONICO').AsString + '}}' + VariavelNoPainel, TextToWallBoard, '00', FieldByName('ID_PI').AsInteger, false, false);
+        end;
+
+      end;
+
+      Next;
+
+      Application.ProcessMessages;
+    end;
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.EnviarAlarmes;
+
+  procedure MontaMensagemTraduzida;
+  var
+    Mensagem : string;
+    iPos     : Integer;
+    sAux     : string;
+  begin
+    if (dmSicsMain.cdsMonitoramentos.Locate('ID_PIMONITORAMENTO', cdsPIs.FieldByName('ID_PIMONITORAMENTO').AsInteger, [])) and
+       (dmSicsMain.cdsAlarmes.Locate('ID_PINIVEL', cdsPIs.FieldByName('ID_PINIVEL').Value, [])) then
+      Mensagem := dmSicsMain.cdsAlarmes.FieldByName('MENSAGEM').AsString
+    else
+      Mensagem := '';
+
+    Mensagem := AnsiReplaceStr(Mensagem, '{{PI}}'     , cdsPIs.FieldByName('PINOME').AsString     );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Valor}}'  , cdsPIs.FieldByName('VALOR').AsString      );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Nivel}}'  , cdsPIs.FieldByName('NOMENIVEL').AsString  );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Nível}}'  , cdsPIs.FieldByName('NOMENIVEL').AsString  );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Unidade}}', vgParametrosModulo.NomeUnidade            );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Hora}}'   , FormatDateTime('hh:nn', now)              );
+    Mensagem := AnsiReplaceStr(Mensagem, '{{Data}}'   , FormatDateTime('dd/mm', now)              );
+
+    // se informou o "Nome de PI" para extrair o respectivo valor
+    iPos := Pos('{{PI[', Mensagem);
+    while iPos > 0 do
+    begin
+
+      // pegando o Nome informado
+      sAux := '';
+      Inc(iPos, 5);
+      while iPos < Length(Mensagem) do
+      begin
+        sAux := sAux + Mensagem[iPos];
+        Inc(iPos);
+        if Mensagem[iPos] = ']' then
+          Break;
+      end;
+
+      // pegando o valor da PI e substituindo na mensagem
+      if cdsPIsClone.Locate('PINOME', Trim(sAux), []) then
+        Mensagem := AnsiReplaceStr(Mensagem, '{{PI[' + sAux + ']}}' , cdsPIsClone.FieldByName('VALOR').AsString);
+
+      // verificando se ha mais casos de "Nome de PI"
+      iPos := Pos('{{PI[', Mensagem);
+    end;
+
+    cdsPIs.Edit;
+    cdsPIs.FieldByName('MENSAGEMTRADUZIDA').AsString := Mensagem;
+    cdsPIs.Post;
+  end;
+
+  procedure CheckExecutaAcaoDeAlarme;
+  var
+    AcaoDeAlarme    : TAcaoAlarmePI;
+    IdsRelacionados : string;
+  begin
+    IdsRelacionados := ';';
+    if (dmSicsMain.cdsMonitoramentos.Locate('ID_PIMONITORAMENTO', cdsPIs.FieldByName('ID_PIMONITORAMENTO').AsInteger, [])) and
+       (dmSicsMain.cdsAlarmes.Locate('ID_PINIVEL', cdsPIs.FieldByName('ID_PINIVEL').Value, [])) then
+    begin
+      AcaoDeAlarme := TAcaoAlarmePI(dmSicsMain.cdsAlarmes.FieldByName('ID_PIACAODEALARME').AsInteger);
+      if AcaoDeAlarme <> aaNenhuma then
+      begin
+        with dmSicsMain.cdsIdsRelacionados do
+        begin
+          First;
+          while not eof do
+          begin
+            IdsRelacionados := IdsRelacionados + FieldByName('ID_RELACIONADO').AsString + ';';
+            Next;
+          end;
+        end;
+      end;
+    end  { if Locate }
+    else
+    begin
+      AcaoDeAlarme    := aaNenhuma;
+      IdsRelacionados := '';
+    end;
+
+    if AcaoDeAlarme <> aaNenhuma then
+    begin
+      case AcaoDeAlarme of
+        aaEnviarEmail    : AspEnviaEmail (GetEmailAddressesList (IdsRelacionados), '** SICS - Alerta ' +  cdsPIs.FieldByName('NOMENIVEL').AsString + ' **', cdsPIs.FieldByName('MENSAGEMTRADUZIDA').AsString);
+        aaEnviarSMS      : AspEnviaSMS   (GetCelNumbersList     (IdsRelacionados), cdsPIs.FieldByName('MENSAGEMTRADUZIDA').AsString);
+        aaMensagemParaPA : begin
+                             frmSicsMain.EnviaAlarmesParaPAs (IdsRelacionados, cdsPIs.FieldByName('PINOME').AsString, cdsPIs.FieldByName('NOMENIVEL').AsString, cdsPIs.FieldByName('CODIGOCOR').AsInteger, cdsPIs.FieldByName('MENSAGEMTRADUZIDA').AsString);
+                             cdsPIs.Edit;
+                             cdsPIs.FieldByName('GRUPOSPASIDRELACIONADOS').AsString := IdsRelacionados;
+                             cdsPIs.Post;
+                           end;
+      end;
+    end;
+  end;
+
+var
+  bMudou, bMudouMaisCritico: Boolean;
+  DataHoraUltimaExec: TDateTime;
+
+begin
+  with cdsPIS do
+  begin
+    DisableControls;
+    try
+      First;
+      while not Eof do
+      begin
+        if not FieldByName('ID_PINIVEL').IsNull then
+        begin
+          bMudou := FieldByName('ID_PINIVEL').Value <> FieldByName('ID_PINIVEL_ANTERIOR').Value;
+          bMudouMaisCritico := (FieldByName('POSICAONIVEL').AsInteger > 1) and (FieldByName('POSICAONIVEL').AsInteger > FieldByName('POSICAONIVEL_ANTERIOR').AsInteger);
+
+          if bMudou then
+          begin
+            Edit;
+            FieldByName('ID_PINIVEL_ANTERIOR').Value := FieldByName('ID_PINIVEL').Value;
+            FieldByName('POSICAONIVEL_ANTERIOR').Value := FieldByName('POSICAONIVEL').Value;
+            FieldByName('GRUPOSPASIDRELACIONADOS').Clear;
+            FieldByName('MENSAGEMTRADUZIDA').Clear;
+            Post;
+          end;
+
+          MontaMensagemTraduzida;
+
+          if cdsPIsNivelUltExec.Locate('ID_PI;ID_PINIVEL', VarArrayOf([FieldByName('ID_PI').Value, FieldByName('ID_PINIVEL').Value]), []) then
+            DataHoraUltimaExec := cdsPIsNivelUltExec.FieldByName('DATAHORA').AsDatetime
+          else
+            DataHoraUltimaExec := Now;
+
+          if (bMudou) or
+            ( (FReenviarAlarme) and (SecondsBetween(Now, DataHoraUltimaExec) > (FIntervaloMinutosReenviarAlarme * 60)) ) then
+          begin
+
+            if cdsPIsNivelUltExec.Locate('ID_PI;ID_PINIVEL', VarArrayOf([FieldByName('ID_PI').Value, FieldByName('ID_PINIVEL').Value]), []) then
+              cdsPIsNivelUltExec.Edit
+            else
+            begin
+              cdsPIsNivelUltExec.Append;
+              cdsPIsNivelUltExec.FieldByName('ID_PI').Value := FieldByName('ID_PI').Value;
+              cdsPIsNivelUltExec.FieldByName('ID_PINIVEL').Value := FieldByName('ID_PINIVEL').Value;
+            end;
+            cdsPIsNivelUltExec.FieldByName('DATAHORA').AsDatetime := Now;
+            cdsPIsNivelUltExec.Post;
+
+            if (bMudou and (bMudouMaisCritico or FEnviarAlarmeAoDescerNivel)) or
+               (not bMudou and FReenviarAlarme) then
+              CheckExecutaAcaoDeAlarme;
+          end;
+        end;
+
+        Next;
+      end;
+    finally
+      EnableControls;
+    end;
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.TimerAtualizarPaineisTimer(Sender: TObject);
+begin
+  TimerAtualizarPaineis.Enabled := False;
+  try
+    frmSicsMain.ProcessarMensagensPaineis;
+  finally
+    TimerAtualizarPaineis.Enabled := True;
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.PIsUpdateTimerTimer(Sender: TObject);
+begin
+  if vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs = 0 then
+    Exit;
+
+  PIsUpdateTimer.Enabled := False;
+  try
+    PIsUpdateTimer.Tag := PIsUpdateTimer.Tag-1;
+    if PIsUpdateTimer.Tag > 0 then
+      lblSegundosRecalcular.Caption := IntToStr(PIsUpdateTimer.Tag) + 's'
+    else
+    begin
+      if (dmSicsContingencia.TipoFuncionamento = tfContingente) and
+         (not dmSicsContingencia.ContingenciaAtivo) then
+      begin
+        lblSegundosRecalcular.Caption := 'Contingência! PIs desativados...';
+        PIsUpdateTimer.Tag := vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs;
+        Exit;
+      end;
+
+      if not ThreadCalculoPISRodando then
+      begin
+        lblSegundosRecalcular.Caption := 'Calculando...';
+        FThreadCalculoPISRodando := True;
+        TThread.CreateAnonymousThread(procedure
+        begin
+          try
+            TCalculoPIs.Executar;
+          except
+            on E: Exception do
+              TThread.Synchronize(nil, procedure begin MyLogException(E); end);
+          end;
+
+          TThread.Synchronize(nil, procedure
+          begin
+            FThreadCalculoPISRodando := False;
+
+            CarregarPIs;
+            AtualizarValoresPIS;
+            EnviarAlarmes;
+            frmSicsMain.GravarAlarmesAtivosPorPA;
+
+            PIsUpdateTimer.Tag := vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs;
+
+            //RA
+            TPIManager.IntegrarPIs(vgParametrosModulo.IdUnidade,
+                                   tiAPI,
+                                   cdsPIs,
+                                   vgParametrosModulo.CaminhoAPI);
+
+            lblSegundosRecalcular.Caption := IntToStr(PIsUpdateTimer.Tag) + 's';
+            PIsUpdateTimer.Enabled := True;
+          end);
+        end).Start;
+      end;
+    end;
+  finally
+    if not ThreadCalculoPISRodando then
+      PIsUpdateTimer.Enabled := True;
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.dbgrdPIsDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  with Sender as TDbGrid do
+  begin
+
+    if (Column.FieldName = 'NOMENIVEL') and (not dtsPIs.DataSet.FieldByName('CODIGOCOR').IsNull) then
+      Canvas.Brush.Color := TColor(dtsPIs.DataSet.FieldByName('CODIGOCOR').AsInteger);
+
+//    Canvas.Font.Size := 8;
+
+    DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
+procedure TfrmSicsPIMonitor.cdsPIsAfterOpen(DataSet: TDataSet);
+begin
+  cdsPIsClone              .CloneCursor(cdsPIS, True);
+  cdsPIsClone_AlarmesAtivos.CloneCursor(cdsPIS, True);
+end;
+
+end.

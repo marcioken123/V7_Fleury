@@ -1,0 +1,385 @@
+program Sics;
+
+{$INCLUDE ..\AspDefineDiretivas.inc}
+
+uses
+  Sharemem,
+  Forms,
+  Midaslib,
+  Dialogs,
+  SysUtils,
+  SvcMgr,
+  WinSvc,
+  Classes,
+  Windows,
+  Vcl.Themes,
+  Vcl.Styles,
+  IniFiles,
+  MyDlls_DR,
+  repPrview in 'repPrview.pas' {frmSicsRepPreview},
+  sics_2 in 'sics_2.pas' {frmSicsSituacaoAtendimento},
+  sics_m in 'sics_m.pas' {frmSicsMain},
+  ProtocoloSics in 'ProtocoloSics.pas',
+  NBackup in 'NBackup.pas' {frmSicsBackup},
+  cfgGenerica in 'cfgGenerica.pas' {frmSicsConfiguraTabela},
+  sics_94 in 'sics_94.pas' {dmSicsMain: TDataModule},
+  cfgPrioridades in 'cfgPrioridades.pas' {frmSicsConfigPrioridades},
+  Sics_92 in 'Sics_92.pas' {frmSicsGerarNovaSenhaOuUtilizarUltima},
+  udmCadPIS in 'udmCadPIS.pas' {dmSicsCadPIS: TDataModule},
+  udmCadAlarmes in 'udmCadAlarmes.pas' {dmSicsCadAlarmes: TDataModule},
+  udmCadHor in 'udmCadHor.pas' {dmSicsCadHor: TDataModule},
+  udmCadNiveis in 'udmCadNiveis.pas' {dmSicsCadNiveis: TDataModule},
+  ufrmCadPIS in 'ufrmCadPIS.pas' {frmSicsCadPIS},
+  ufrmCadAlarmes in 'ufrmCadAlarmes.pas' {frmSicsCadAlarmes},
+  ufrmCadHor in 'ufrmCadHor.pas' {frmSicsCadHor},
+  ufrmCadNiveis in 'ufrmCadNiveis.pas' {frmSicsCadNiveis},
+  sics_3 in 'sics_3.pas' {frmSicsPIMonitor},
+  uServico in 'uServico.pas' {srvSicsApp: TService},
+  Sics_91 in 'Sics_91.pas',
+  sics_dm in 'sics_dm.pas' {dmSicsServidor: TDataModule},
+  udmContingencia in 'udmContingencia.pas' {dmSicsContingencia: TDataModule},
+  ufrmContingencia in 'ufrmContingencia.pas' {frmSicsContingencia},
+  uFuncoes in 'uFuncoes.pas',
+  ufrmPrincipalInoperante in 'ufrmPrincipalInoperante.pas' {frmSicsPrincipalInoperante},
+  uqrCfgGenerica in 'uqrCfgGenerica.pas' {qrSicsCfgGenerica: TQuickRep},
+  udmWebServer in 'udmWebServer.pas' {dmSicsWebServer: TDataModule},
+  sics_4 in 'sics_4.pas' {frmSicsConexoes},
+  ufrmCadTotens in 'ufrmCadTotens.pas' {frmSicsCadTotens},
+  udmCadTotens in 'udmCadTotens.pas' {dmSicsCadTotens: TDataModule},
+  ufrmParamsNiveisSLA in 'ufrmParamsNiveisSLA.pas' {frmSicsParamsNiveisSLA},
+  sics_5 in 'sics_5.pas' {frmSicsProcessosParalelos},
+  uFrmConfiguracoesSicsMultiPA in 'uFrmConfiguracoesSicsMultiPA.pas' {FrmConfiguracoesSicsMultiPA},
+  uFrmBaseConfiguracoesSics in 'uFrmBaseConfiguracoesSics.pas' {FrmBaseConfiguracoesSics},
+  uFrmConfiguracoesSicsOnLine in 'uFrmConfiguracoesSicsOnLine.pas' {FrmConfiguracoesSicsOnLine},
+  ufrmDebugParameters in 'ufrmDebugParameters.pas' {frmDebugParameters},
+  uFrmConfiguracoesSicsTGS in 'uFrmConfiguracoesSicsTGS.pas' {FrmConfiguracoesSicsTGS},
+  uFrmConfiguracoesSicsPA in 'uFrmConfiguracoesSicsPA.pas' {FrmConfiguracoesSicsPA},
+  udmCadBase in 'udmCadBase.pas' {dmSicsCadBase: TDataModule},
+  uSelecaoGrupos in 'uSelecaoGrupos.pas' {FrmSelecaoGrupos},
+  Sics_Common_Splash in '..\Common\Sics_Common_Splash.pas' {frmSicsSplash},
+  MyAspFuncoesUteis_VCL in '..\Common\Library\MyAspFuncoesUteis_VCL.pas',
+  untLog in '..\Common\Library\untLog.pas',
+  AspJson in '..\Common\Library\AspJson.pas',
+  ASPDbGrid in '..\Common\ASPDbGrid.pas',
+  uCalculoPIs in 'uCalculoPIs.pas' {CalculoPIs: TDataModule},
+  uPushNotificationServer in 'uPushNotificationServer.pas' {PushNotificationServer: TDataModule},
+  uPushConsts in '..\Common\uPushConsts.pas',
+  uPushSender in 'uPushSender.pas',
+  uFrmConfiguracoesSicsCallCenter in 'uFrmConfiguracoesSicsCallCenter.pas' {FrmConfiguracoesSicsCallCenter},
+  uCallCenterConsts in '..\Common\uCallCenterConsts.pas',
+  uPI in '..\Common\uPI.pas',
+  UConexaoBD in '..\Common\UConexaoBD.pas',
+  ASPGenerator in '..\..\..\..\00. Library\Common\Rio\ASPGenerator.pas',
+  ASPHTTPRequest in '..\..\..\..\00. Library\Common\Rio\ASPHTTPRequest.pas',
+  uTempoUnidade in 'uTempoUnidade.pas',
+  uDataSetHelper in '..\Common\uDataSetHelper.pas',
+  uMessenger in 'uMessenger.pas',
+  ServiceProvider.Intf in '..\Common\ServiceProvider\Intf\ServiceProvider.Intf.pas',
+  ServiceProvider.Einstein.Impl in '..\Common\ServiceProvider\Einstein\ServiceProvider.Einstein.Impl.pas',
+  ServiceProvider.GupShup.Client in '..\Common\ServiceProvider\GupShup\ServiceProvider.GupShup.Client.pas',
+  ServiceProvider.GupShup.Impl in '..\Common\ServiceProvider\GupShup\ServiceProvider.GupShup.Impl.pas',
+  ServiceProvider.Twilio.Client in '..\Common\ServiceProvider\Twilio\ServiceProvider.Twilio.Client.pas',
+  ServiceProvider.Twilio.Impl in '..\Common\ServiceProvider\Twilio\ServiceProvider.Twilio.Impl.pas',
+  uScriptUnidades in '..\Common\uScriptUnidades.pas';
+
+{$R *.RES}
+
+function IsServiceRunning: Boolean;
+var
+  Svc     : Integer;
+  SvcMgr  : Integer;
+  ServSt  : TServiceStatus;
+  ServInfo: uServico.TServiceInfo;
+begin
+  ServInfo := uServico.GetServiceInfo;
+
+  Result := False;
+  SvcMgr := OpenSCManager(nil, nil, SC_MANAGER_CONNECT);
+  if SvcMgr = 0 then
+    Exit;
+  try
+    // RTC_DATASERVICE_NAME is the name of your Service component
+    Svc := OpenService(SvcMgr, PChar(ServInfo.Name), SERVICE_QUERY_STATUS);
+    if Svc = 0 then
+      Exit;
+    try
+      if not QueryServiceStatus(Svc, ServSt) then
+        Exit;
+      Result := (ServSt.dwCurrentState = SERVICE_RUNNING) or (ServSt.dwCurrentState = SERVICE_START_PENDING);
+    finally
+      CloseServiceHandle(Svc);
+    end;
+  finally
+    CloseServiceHandle(SvcMgr);
+  end;
+end;
+
+function IsDesktopMode: Boolean;
+begin
+  // I use "-S" parameter to run the app in GUI mode, even when the service is active
+  if (Win32Platform <> VER_PLATFORM_WIN32_NT) or FindCmdLineSwitch('S', ['-', '/'], True) then // standard
+    Result := True
+  else
+    Result := not FindCmdLineSwitch('INSTALL', ['-', '/'], True) and not FindCmdLineSwitch('UNINSTALL', ['-', '/'], True) and not IsServiceRunning;
+end;
+
+var
+  GlobalLog: uFuncoes.TLog;
+  aux1, aux2 : string;
+  i : integer;
+
+begin
+  {$IFDEF DEBUG}ReportMemoryLeaksOnShutdown := True;{$ENDIF}
+
+  SysUtils.FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
+  SysUtils.FormatSettings.LongTimeFormat  := 'hh:nn:ss';
+
+  vIsDesktopMode := IsDesktopMode;
+
+  TfrmDebugParameters.CarregaParametros;
+  TfrmDebugParameters.Debugar(tbGeral, 'INICIOU');
+
+  if not vIsDesktopMode then
+    SetIniFileName(GetServiceIniFileName);
+
+  // Depending on mode we want to use, initialize the application and forms/datamodules ...
+  if not vIsDesktopMode then
+  begin
+    SvcMgr.Application.Initialize;
+    SvcMgr.Application.Title := 'SICS';
+    CriarForm(vIsDesktopMode, TsrvSicsApp, srvSicsApp);
+
+    // Forms.Application.OnException := GlobalLog.ExceptionHandler;
+  end
+  else
+  begin
+    if ContaProcessos(ExtractFileName(Vcl.Forms.Application.ExeName)) > 1 then
+    begin
+      Vcl.Forms.Application.MessageBox ('Um processo deste aplicativo já está rodando. Por favor feche-o antes de tentar rodar o programa novamente.',
+                                    'SICS - Sistema Inteligente de Chamada de Senhas', MB_ICONINFORMATION);
+      Halt;
+    end;
+
+    Vcl.Forms.Application.Initialize;
+    GlobalLog := uFuncoes.TLog.Create(Vcl.Forms.Application);
+    Vcl.Forms.Application.OnException := GlobalLog.ExceptionHandler;
+    Vcl.Forms.Application.Title       := 'SICS';
+  end;
+
+  {$REGION '//Parâmetros do INI'}
+    with TIniFile.Create(GetIniFileName) do
+    try
+      //vgParametrosModulo.ArqUpdateDir                := ReadString ('Settings' , 'ArqUpdateDir'               , ''                                                    );
+      vgParametrosModulo.DBDirUnidades               := ReadString ('Settings' , 'BaseDeUnidades'                , ''                                                    );
+      vgParametrosModulo.PathGBak                    := ReadString ('Settings' , 'PathGBak'                   , 'C:\Program Files\Firebird\Firebird_2_5\bin\gbak.exe' );
+      vgParametrosModulo.TCPPortRetrocompatibilidade := ReadInteger('Settings' , 'TcpPortRetrocompatibilidade', 0                                                     );
+      vgParametrosModulo.ReportarTemposMaximos       := ReadBool   ('Settings' , 'ReportarTemposMaximos'      , False                                                 );
+      vgParametrosModulo.DirXmlWS                    := ReadString ('Settings' , 'DirXmlWS'                   , GetApplicationPath + '\XML\'                          );
+      vgParametrosModulo.TimeOutPA                   := ReadInteger('Settings' , 'TimeOutPA'                  , 0                                                     );
+      vgParametrosModulo.ReportarChamadasComTE       := ReadBool   ('Settings' , 'ReportarChamadasComTE'      , False                                                 );
+      vgParametrosModulo.TimeOutPing                 := ReadInteger('Settings' , 'TimeOutPing'                , 100                                                   );
+      vgParametrosModulo.SomenteCdb_CorteAoFinal     := ReadBool   ('Settings' , 'SomenteCdbCorteAoFinal'     , False                                                 );
+      vgParametrosModulo.PermiteExcluirSenhas        := ReadBool   ('Settings' , 'PermiteExcluirSenhas'       , True                                                  );
+      vgParametrosModulo.ProximoNaoEncerraPausa      := ReadBool   ('Settings' , 'ProximoNaoEncerraPausa'     , false                                                 );
+
+      //LM
+      vgParametrosModulo.DBHostUnidades                      := ReadString ('Settings' , 'DBHost'                     , ''                                             );
+      vgParametrosModulo.DBBancoUnidades                     := ReadString ('Settings' , 'DBBanco'                    , ''                                             );
+      vgParametrosModulo.DBUsuarioUnidades                   := ReadString ('Settings' , 'DBUsuario'                  , 'sa'                                           );
+      vgParametrosModulo.DBSenhaUnidades                     := ReadString ('Settings' , 'DBSenha'                    , ''                                             );
+      vgParametrosModulo.DBOSAuthentUnidades                 := ReadBool   ('Settings' , 'DBOSAuthent'                , False                                          );
+
+      //RA
+      vgParametrosModulo.IdUnidade                   := ReadInteger('Settings' , 'IdUnidade'                  , 0                                                     );
+      vgParametrosModulo.BaseDeUnidades              := ReadString ('Settings' , 'BaseDeUnidades'             , EmptyStr                                              );
+      vgParametrosModulo.CaminhoAPI                  := ReadString ('Settings' , 'CaminhoAPI'                 , ''                                                    );
+      vgParametrosModulo.DiasDeviceOcioso            := ReadInteger('Settings' , 'DiasDeviceOcioso'           , 7                                                     );
+      vgParametrosModulo.AtualizarHoraTrocaFila      := ReadBool   ('Settings' , 'AtualizarHoraTrocaFila'     , False                                                 );
+
+      vgParametrosModulo.SmtpNomeRemetente           := ReadString ('SMTP'     , 'SMTPNomeRemetente'          , 'SICS - Sistema Inteligente de Chamada de Senhas'     );
+      vgParametrosModulo.SmtpEmailRemetente          := ReadString ('SMTP'     , 'SMTPEmailRemetente'         , 'suporte_sw@aspect.com.br'                            );
+
+      vgParametrosModulo.WebserverAtivo              := ReadBool   ('WebServer', 'Ativo'                      , False                                                 );
+      vgParametrosModulo.WebserverPort               := ReadInteger('WebServer', 'Port'                       , 80                                                    );
+
+      //LM
+      vgParametrosModulo.FileAtivo                   := ReadInteger('FileServer', 'Ativo'                     , 0                                                     );
+      vgParametrosModulo.FilePorta                   := ReadInteger('FileServer', 'Porta'                     , 80                                                    );
+      vgParametrosModulo.TAGEspecial                 := ReadInteger('Settings',   'TAGEspecial'               , 0                                                     );
+      vgParametrosModulo.RetrocompatibilidadeDeProtocolo := ReadBool('Settings' , 'RetrocompatibilidadeDeProtocolo', True                                          );
+      vgParametrosModulo.GerarIdTicketAoChamarEspecificaQueNaoExista := ReadBool('Settings' , 'GerarIdTicketAoChamarEspecificaQueNaoExista', True                                          );
+
+      vgParametrosModulo.QuantidadeSenhasCalculoTMEPorFila := ReadInteger('Settings', 'QuantidadeSenhasCalculoTMEPorFila', 20      );
+      vgParametrosModulo.LimparFilasMeiaNoite              := ReadBool   ('Settings', 'LimparFilasMeiaNoite'             , False   );
+      vgParametrosModulo.TMAPorFilaInicialEmMinutos        := ReadInteger('Settings', 'TMAPorFilaInicialEmMinutos'       , 4       );
+
+      vgParametrosModulo.ParametrosTEE.ConsiderarPAsDeslogadas           := ReadBool   ('CalculoTEE' , 'ConsiderarPAsDeslogadas'           , False );
+      vgParametrosModulo.ParametrosTEE.MinutosConsiderarPAsDeslogadas    := ReadInteger('CalculoTEE' , 'MinutosConsiderarPAsDeslogadas'    , 60    );
+      vgParametrosModulo.ParametrosTEE.InverterEnvioDeTEE_TME            := ReadBool   ('CalculoTEE' , 'InverterEnvioDeTEE_TME'            , False );
+      vgParametrosModulo.ParametrosTEE.LogarParametrosDeCalculo          := ReadBool   ('CalculoTEE' , 'LogarParametrosDeCalculo'          , False );
+
+      vgParametrosModulo.EmailsMonitoramento.Enviar              := ReadBool   ('EmailsDeMonitoramento', 'EnviarEmailsDeMonitoramento', false);
+      vgParametrosModulo.EmailsMonitoramento.ConexaoEquipamentos := ReadString ('EmailsDeMonitoramento', 'ConexaoEquipamentos'        , ''   );
+      vgParametrosModulo.EmailsMonitoramento.FaltaPapel          := ReadString ('EmailsDeMonitoramento', 'FaltaPapel'                 , ''   );
+
+      //vgParametrosModulo.PathRT := GetPathRealTime;
+      vgParametrosModulo.DelayChamadaAutomatica := ReadInteger('Settings' , 'DelayChamadaAutomatica'   , 0                                    );
+
+      //KM
+      vgParametrosModulo.QtdeUltimasSenhasParaComporTMA            := ReadInteger('PIs' , 'QtdeUltimasSenhasParaComporTMA'           , 5  );
+      vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs         := ReadInteger('PIs' , 'IntervaloEmSegsParaRecalculoDePIs'        , 20 );
+      vgParametrosModulo.IntervaloEmSegsParaEnvioDePIsViaWS        := ReadInteger('PIs' , 'IntervaloEmSegsParaEnvioDePIsViaWS'       , 300);
+      vgParametrosModulo.FormatoHorarioNoJornalEletronico          := TFormatoHorarioNoJornalEletronico(ReadInteger('PIs' , 'FormatoHorarioNoJornalEletronico', Integer(TFormatoHorarioNoJornalEletronico.fhExtenso)));
+      vgParametrosModulo.IntervaloEmSegsParaConsiderarDadoObsoleto := ReadInteger('PIs' , 'IntervaloEmSegsParaConsiderarDadoObsoleto', 300);
+
+      //RA
+      vgParametrosModulo.UrlApi                                 := ReadString ('API Atendimento', 'UrlApi'           , EmptyStr        );
+      vgParametrosModulo.NomeUnidadeApi                         := ReadString ('API Atendimento', 'NomeUnidadeApi'   , EmptyStr        );
+      vgParametrosModulo.IntervaloApi                           := ReadInteger('API Atendimento', 'IntervaloApi'     , 0               );
+      vgParametrosModulo.TempoMaximoSemRetornoAPI               := ReadInteger('API Atendimento', 'TempoMaximoSemRetornoAPI', 10       );
+      vgParametrosModulo.Especialidades                         := ReadString ('API Atendimento', 'Especialidades'   , EmptyStr        );
+      vgParametrosModulo.TextoSemEspera                         := ReadString ('API Atendimento', 'TextoSemEspera'   , 'Sem espera'    );
+      vgParametrosModulo.FormatoHorarioEsperaNoJornalEletronico := TFormatoHorarioNoJornalEletronico(ReadInteger('API Atendimento' , 'FormatoHorarioEsperaNoJornalEletronico', Integer(TFormatoHorarioNoJornalEletronico.fhExtenso)));
+
+      //RA
+      vgParametrosModulo.Provider    := ReadString('API Messenger', 'Provider'   , EmptyStr); //Twilio | GupShup | Einstein
+      vgParametrosModulo.APIKey      := ReadString('API Messenger', 'APIKey'     , EmptyStr);
+      vgParametrosModulo.AuthToken   := ReadString('API Messenger', 'AuthToken'  , EmptyStr);
+      vgParametrosModulo.PhoneNumber := ReadString('API Messenger', 'PhoneNumber', EmptyStr);
+      vgParametrosModulo.TempoMinutosEnvio := ReadInteger('API Messenger', 'TempoMinutosEnvio', 0);
+
+      //LBC
+      i := Low(vgParametrosModulo.DadosAdicionaisAImprimirNaSenha);
+      aux1 := ReadString('Settings', 'DadosAdicionaisAImprimirNaSenha', '');
+      while aux1 <> '' do
+      begin
+        SeparaStrings(aux1, ',', aux2, aux1);
+
+        if i <= High(vgParametrosModulo.DadosAdicionaisAImprimirNaSenha) then
+        begin
+          vgParametrosModulo.DadosAdicionaisAImprimirNaSenha[i].Chave := aux2;
+          i := i + 1;
+        end
+        else
+          break;
+      end;
+
+      //WriteString ('Settings' , 'ArqUpdateDir'               , vgParametrosModulo.ArqUpdateDir                );
+      WriteString ('Settings' , 'BaseDeUnidades'             , vgParametrosModulo.DBDirUnidades               );
+      WriteString ('Settings' , 'PathGBak'                   , vgParametrosModulo.PathGBak                    );
+      WriteInteger('Settings' , 'TcpPortRetrocompatibilidade', vgParametrosModulo.TCPPortRetrocompatibilidade );
+      WriteBool   ('Settings' , 'ReportarTemposMaximos'      , vgParametrosModulo.ReportarTemposMaximos       );
+      WriteString ('Settings' , 'DirXmlWS'                   , vgParametrosModulo.DirXmlWS                    );
+      WriteInteger('Settings' , 'TimeOutPA'                  , vgParametrosModulo.TimeOutPA                   );
+      WriteInteger('Settings' , 'TimeOutPing'                , vgParametrosModulo.TimeOutPing                 );
+      WriteBool   ('Settings' , 'SomenteCdbCorteAoFinal'     , vgParametrosModulo.SomenteCdb_CorteAoFinal     );
+      WriteBool   ('Settings' , 'PermiteExcluirSenhas'       , vgParametrosModulo.PermiteExcluirSenhas        );
+      WriteBool   ('Settings' , 'ProximoNaoEncerraPausa'     , vgParametrosModulo.ProximoNaoEncerraPausa      );
+      WriteInteger('Settings' , 'DelayChamadaAutomatica'     , vgParametrosModulo.DelayChamadaAutomatica      );
+
+      //LM
+      WriteString ('Settings' , 'DBHost'                     , vgParametrosModulo.DBHostUnidades              );
+      WriteString ('Settings' , 'DBBanco'                    , vgParametrosModulo.DBBancoUnidades             );
+      WriteString ('Settings' , 'DBUsuario'                  , vgParametrosModulo.DBUsuarioUnidades           );
+      WriteString ('Settings' , 'DBSenha'                    , vgParametrosModulo.DBSenhaUnidades             );
+      WriteBool   ('Settings' , 'DBOSAuthent'                , vgParametrosModulo.DBOSAuthentUnidades         );
+      WriteInteger('Settings' , 'QuantidadeSenhasCalculoTMEPorFila' , vgParametrosModulo.QuantidadeSenhasCalculoTMEPorFila  );
+
+      WriteBool   ('CalculoTEE' , 'ConsiderarPAsDeslogadas'        , vgParametrosModulo.ParametrosTEE.ConsiderarPAsDeslogadas       );
+      WriteInteger('CalculoTEE' , 'MinutosConsiderarPAsDeslogadas' , vgParametrosModulo.ParametrosTEE.MinutosConsiderarPAsDeslogadas);
+      WriteBool   ('CalculoTEE' , 'InverterEnvioDeTEE_TME'         , vgParametrosModulo.ParametrosTEE.InverterEnvioDeTEE_TME        );
+      WriteBool   ('CalculoTEE' , 'LogarParametrosDeCalculo'       , vgParametrosModulo.ParametrosTEE.LogarParametrosDeCalculo      );
+
+      //RA
+      WriteInteger('Settings' , 'IdUnidade'                  , vgParametrosModulo.IdUnidade                   );
+      WriteString ('Settings' , 'BaseDeUnidades'             , vgParametrosModulo.BaseDeUnidades              );
+      WriteString ('Settings' , 'CaminhoAPI'                 , vgParametrosModulo.CaminhoAPI                  );
+      WriteInteger('Settings' , 'DiasDeviceOcioso'           , vgParametrosModulo.DiasDeviceOcioso            );
+      WriteBool   ('Settings' , 'AtualizarHoraTrocaFila'     , vgParametrosModulo.AtualizarHoraTrocaFila      );
+
+      WriteString ('SMTP'     , 'SMTPNomeRemetente'          , vgParametrosModulo.SmtpNomeRemetente           );
+      WriteString ('SMTP'     , 'SMTPEmailRemetente'         , vgParametrosModulo.SmtpEmailRemetente          );
+
+      WriteBool   ('WebServer', 'Ativo'                      , vgParametrosModulo.WebserverAtivo              );
+      WriteInteger('WebServer', 'Port'                       , vgParametrosModulo.WebserverPort               );
+
+      WriteBool   ('EmailsDeMonitoramento', 'EnviarEmailsDeMonitoramento', vgParametrosModulo.EmailsMonitoramento.Enviar             );
+      WriteString ('EmailsDeMonitoramento', 'ConexaoEquipamentos'        , vgParametrosModulo.EmailsMonitoramento.ConexaoEquipamentos);
+      WriteString ('EmailsDeMonitoramento', 'FaltaPapel'                 , vgParametrosModulo.EmailsMonitoramento.FaltaPapel         );
+
+      //KM
+      WriteInteger('PIs', 'QtdeUltimasSenhasParaComporTMA'           , vgParametrosModulo.QtdeUltimasSenhasParaComporTMA           );
+      WriteInteger('PIs', 'IntervaloEmSegsParaRecalculoDePIs'        , vgParametrosModulo.IntervaloEmSegsParaRecalculoDePIs        );
+      WriteInteger('PIs', 'IntervaloEmSegsParaEnvioDePIsViaWS'       , vgParametrosModulo.IntervaloEmSegsParaEnvioDePIsViaWS       );
+      WriteInteger('PIs', 'FormatoHorarioNoJornalEletronico'         , Integer(vgParametrosModulo.FormatoHorarioNoJornalEletronico));
+      WriteInteger('PIs', 'IntervaloEmSegsParaConsiderarDadoObsoleto', vgParametrosModulo.IntervaloEmSegsParaConsiderarDadoObsoleto);
+
+      //LM
+      WriteInteger('FileServer', 'Ativo'                      , vgParametrosModulo.FileAtivo);
+      WriteInteger('FileServer', 'Porta'                      , vgParametrosModulo.FilePorta);
+      WriteInteger('Settings',   'TAGEspecial'                , vgParametrosModulo.TAGEspecial);
+      WriteBool   ('Settings' , 'RetrocompatibilidadeDeProtocolo ', vgParametrosModulo.RetrocompatibilidadeDeProtocolo);
+      WriteBool   ('Settings' , 'GerarIdTicketAoChamarEspecificaQueNaoExista ', vgParametrosModulo.GerarIdTicketAoChamarEspecificaQueNaoExista);
+
+      //RA
+      WriteString ('API Atendimento', 'UrlApi'                  , vgParametrosModulo.UrlApi                  );
+      WriteString ('API Atendimento', 'NomeUnidadeApi'          , vgParametrosModulo.NomeUnidadeApi          );
+      WriteInteger('API Atendimento', 'IntervaloApi'            , vgParametrosModulo.IntervaloApi            );
+      WriteInteger('API Atendimento', 'TempoMaximoSemRetornoAPI', vgParametrosModulo.TempoMaximoSemRetornoAPI);
+      WriteString ('API Atendimento', 'Especialidades'          , vgParametrosModulo.Especialidades          );
+      WriteString ('API Atendimento', 'TextoSemEspera'          , vgParametrosModulo.TextoSemEspera          );
+      WriteInteger('API Atendimento', 'FormatoHorarioEsperaNoJornalEletronico', Integer(vgParametrosModulo.FormatoHorarioEsperaNoJornalEletronico));
+
+      //RA
+      WriteString('API Messenger', 'Provider'   , vgParametrosModulo.Provider   );
+      WriteString('API Messenger', 'APIKey'     , vgParametrosModulo.APIKey     );
+      WriteString('API Messenger', 'AuthToken'  , vgParametrosModulo.AuthToken  );
+      WriteString('API Messenger', 'PhoneNumber', vgParametrosModulo.PhoneNumber);
+      WriteInteger('API Messenger', 'TempoMinutosEnvio', vgParametrosModulo.TempoMinutosEnvio);
+
+      //LBC
+      aux1 := '';
+      for i := Low(vgParametrosModulo.DadosAdicionaisAImprimirNaSenha) to High(vgParametrosModulo.DadosAdicionaisAImprimirNaSenha) do
+        if vgParametrosModulo.DadosAdicionaisAImprimirNaSenha[i].Chave <> '' then
+          aux1 := aux1 + vgParametrosModulo.DadosAdicionaisAImprimirNaSenha[i].Chave + ',';
+      WriteString('Settings', 'DadosAdicionaisAImprimirNaSenha', aux1);
+    finally
+      Free;
+    end; { try .. finaly }
+  {$ENDREGION}
+
+  //AspUpd_ChecarEFazerUpdate(vgParametrosModulo.ArqUpdateDir);
+
+  try
+    if vIsDesktopMode then
+      TfrmSicsSplash.ShowStatus('Carregando...');
+
+    CriarForm(vIsDesktopMode, TdmSicsContingencia, dmSicsContingencia);
+    dmSicsContingencia.CarregarConfiguracoes(True);
+
+    if not dmSicsContingencia.SituacaoIrregular then
+    begin
+      if (dmSicsContingencia.TipoFuncionamento = tfPrincipal) and (dmSicsContingencia.ContingenciaAtivo) then
+        CriarForm(vIsDesktopMode, TfrmSicsPrincipalInoperante, frmSicsPrincipalInoperante)
+      else
+      begin
+        if (dmSicsContingencia.TipoFuncionamento = tfContingente) and (not dmSicsContingencia.ContingenciaAtivo) then
+          CriarForm(vIsDesktopMode, TfrmSicsContingencia, frmSicsContingencia)
+        else
+          CriarFormsDmsInicializacao(False);
+      end
+    end;
+  finally
+    if vIsDesktopMode then
+      TfrmSicsSplash.Hide;
+  end;
+
+  if not dmSicsContingencia.SituacaoIrregular then
+  begin
+    if vIsDesktopMode then
+      Vcl.Forms.Application.Run
+    else
+      SvcMgr.Application.Run;
+  end;
+
+end.
