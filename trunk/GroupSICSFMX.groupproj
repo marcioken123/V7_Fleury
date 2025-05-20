@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6BC1DEDE-5205-4048-9B5A-2B1C17276277}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="03. PA\SicsPA.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="04. MultiPA\SicsMultiPA.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="05. OnLine\SicsOnLine.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="02. TGS\SicsTgs.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="10. Call Center\SicsCallCenter.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="12. Totem Touch\SicsTotemTouch.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SicsPA">
+        <MSBuild Projects="03. PA\SicsPA.dproj"/>
+    </Target>
+    <Target Name="SicsPA:Clean">
+        <MSBuild Projects="03. PA\SicsPA.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsPA:Make">
+        <MSBuild Projects="03. PA\SicsPA.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsMultiPA">
+        <MSBuild Projects="04. MultiPA\SicsMultiPA.dproj"/>
+    </Target>
+    <Target Name="SicsMultiPA:Clean">
+        <MSBuild Projects="04. MultiPA\SicsMultiPA.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsMultiPA:Make">
+        <MSBuild Projects="04. MultiPA\SicsMultiPA.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsOnLine">
+        <MSBuild Projects="05. OnLine\SicsOnLine.dproj"/>
+    </Target>
+    <Target Name="SicsOnLine:Clean">
+        <MSBuild Projects="05. OnLine\SicsOnLine.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsOnLine:Make">
+        <MSBuild Projects="05. OnLine\SicsOnLine.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsTgs">
+        <MSBuild Projects="02. TGS\SicsTgs.dproj"/>
+    </Target>
+    <Target Name="SicsTgs:Clean">
+        <MSBuild Projects="02. TGS\SicsTgs.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsTgs:Make">
+        <MSBuild Projects="02. TGS\SicsTgs.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsCallCenter">
+        <MSBuild Projects="10. Call Center\SicsCallCenter.dproj"/>
+    </Target>
+    <Target Name="SicsCallCenter:Clean">
+        <MSBuild Projects="10. Call Center\SicsCallCenter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsCallCenter:Make">
+        <MSBuild Projects="10. Call Center\SicsCallCenter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsTotemTouch">
+        <MSBuild Projects="12. Totem Touch\SicsTotemTouch.dproj"/>
+    </Target>
+    <Target Name="SicsTotemTouch:Clean">
+        <MSBuild Projects="12. Totem Touch\SicsTotemTouch.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsTotemTouch:Make">
+        <MSBuild Projects="12. Totem Touch\SicsTotemTouch.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SicsPA;SicsMultiPA;SicsOnLine;SicsTgs;SicsCallCenter;SicsTotemTouch"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SicsPA:Clean;SicsMultiPA:Clean;SicsOnLine:Clean;SicsTgs:Clean;SicsCallCenter:Clean;SicsTotemTouch:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SicsPA:Make;SicsMultiPA:Make;SicsOnLine:Make;SicsTgs:Make;SicsCallCenter:Make;SicsTotemTouch:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

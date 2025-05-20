@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{3479CF53-6E96-42F3-9CDF-F7528523614E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="07. Ferramentas\01. SCC\SCC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\03. SicsTVGuardian\SicsTVGuardian.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\07. Migrabanco SQLServer\MigraDBSics.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\08. TV Monitor\SicsTVMonitor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\09. PlaylistManager\PlaylistManager.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SCC">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj"/>
+    </Target>
+    <Target Name="SCC:Clean">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCC:Make">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsTVGuardian">
+        <MSBuild Projects="07. Ferramentas\03. SicsTVGuardian\SicsTVGuardian.dproj"/>
+    </Target>
+    <Target Name="SicsTVGuardian:Clean">
+        <MSBuild Projects="07. Ferramentas\03. SicsTVGuardian\SicsTVGuardian.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsTVGuardian:Make">
+        <MSBuild Projects="07. Ferramentas\03. SicsTVGuardian\SicsTVGuardian.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MigraDBSics">
+        <MSBuild Projects="07. Ferramentas\07. Migrabanco SQLServer\MigraDBSics.dproj"/>
+    </Target>
+    <Target Name="MigraDBSics:Clean">
+        <MSBuild Projects="07. Ferramentas\07. Migrabanco SQLServer\MigraDBSics.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MigraDBSics:Make">
+        <MSBuild Projects="07. Ferramentas\07. Migrabanco SQLServer\MigraDBSics.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsTVMonitor">
+        <MSBuild Projects="07. Ferramentas\08. TV Monitor\SicsTVMonitor.dproj"/>
+    </Target>
+    <Target Name="SicsTVMonitor:Clean">
+        <MSBuild Projects="07. Ferramentas\08. TV Monitor\SicsTVMonitor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsTVMonitor:Make">
+        <MSBuild Projects="07. Ferramentas\08. TV Monitor\SicsTVMonitor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PlaylistManager">
+        <MSBuild Projects="07. Ferramentas\09. PlaylistManager\PlaylistManager.dproj"/>
+    </Target>
+    <Target Name="PlaylistManager:Clean">
+        <MSBuild Projects="07. Ferramentas\09. PlaylistManager\PlaylistManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PlaylistManager:Make">
+        <MSBuild Projects="07. Ferramentas\09. PlaylistManager\PlaylistManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SCC;SicsTVGuardian;MigraDBSics;SicsTVMonitor;PlaylistManager"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SCC:Clean;SicsTVGuardian:Clean;MigraDBSics:Clean;SicsTVMonitor:Clean;PlaylistManager:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SCC:Make;SicsTVGuardian:Make;MigraDBSics:Make;SicsTVMonitor:Make;PlaylistManager:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

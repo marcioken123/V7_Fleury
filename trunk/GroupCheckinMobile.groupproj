@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A7304C62-8CF9-47C6-A488-4DC1488FFFC9}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="09. Checkin Mobile\CheckinMobile.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\05. Servidor Checkin\ServidorAspect.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\01. SCC\SCC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="01. Servidor\Sics.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="07. Ferramentas\06. Servidor Checkin - WebAdmin\ServidorAspectWebAdmin.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="03. PA\SicsPA.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CheckinMobile">
+        <MSBuild Projects="09. Checkin Mobile\CheckinMobile.dproj"/>
+    </Target>
+    <Target Name="CheckinMobile:Clean">
+        <MSBuild Projects="09. Checkin Mobile\CheckinMobile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CheckinMobile:Make">
+        <MSBuild Projects="09. Checkin Mobile\CheckinMobile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ServidorAspect">
+        <MSBuild Projects="07. Ferramentas\05. Servidor Checkin\ServidorAspect.dproj"/>
+    </Target>
+    <Target Name="ServidorAspect:Clean">
+        <MSBuild Projects="07. Ferramentas\05. Servidor Checkin\ServidorAspect.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServidorAspect:Make">
+        <MSBuild Projects="07. Ferramentas\05. Servidor Checkin\ServidorAspect.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SCC">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj"/>
+    </Target>
+    <Target Name="SCC:Clean">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCC:Make">
+        <MSBuild Projects="07. Ferramentas\01. SCC\SCC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sics">
+        <MSBuild Projects="01. Servidor\Sics.dproj"/>
+    </Target>
+    <Target Name="Sics:Clean">
+        <MSBuild Projects="01. Servidor\Sics.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sics:Make">
+        <MSBuild Projects="01. Servidor\Sics.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ServidorAspectWebAdmin">
+        <MSBuild Projects="07. Ferramentas\06. Servidor Checkin - WebAdmin\ServidorAspectWebAdmin.dproj"/>
+    </Target>
+    <Target Name="ServidorAspectWebAdmin:Clean">
+        <MSBuild Projects="07. Ferramentas\06. Servidor Checkin - WebAdmin\ServidorAspectWebAdmin.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServidorAspectWebAdmin:Make">
+        <MSBuild Projects="07. Ferramentas\06. Servidor Checkin - WebAdmin\ServidorAspectWebAdmin.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SicsPA">
+        <MSBuild Projects="03. PA\SicsPA.dproj"/>
+    </Target>
+    <Target Name="SicsPA:Clean">
+        <MSBuild Projects="03. PA\SicsPA.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SicsPA:Make">
+        <MSBuild Projects="03. PA\SicsPA.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CheckinMobile;ServidorAspect;SCC;Sics;ServidorAspectWebAdmin;SicsPA"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CheckinMobile:Clean;ServidorAspect:Clean;SCC:Clean;Sics:Clean;ServidorAspectWebAdmin:Clean;SicsPA:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CheckinMobile:Make;ServidorAspect:Make;SCC:Make;Sics:Make;ServidorAspectWebAdmin:Make;SicsPA:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
