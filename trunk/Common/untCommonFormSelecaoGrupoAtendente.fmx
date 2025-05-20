@@ -1,0 +1,10 @@
+inherited FrmSelecaoGrupoAtendente: TFrmSelecaoGrupoAtendente
+  Caption = 'Sele'#231#227'o Grupo de Atendente'
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    inherited Lista: TListBox
+      Viewport.Width = 337.000000000000000000
+      Viewport.Height = 272.000000000000000000
+    end
+  end
+end

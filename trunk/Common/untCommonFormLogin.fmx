@@ -1,0 +1,146 @@
+inherited FrmLogin: TFrmLogin
+  ActiveControl = edtAtendente
+  BorderIcons = [biSystemMenu]
+  Caption = 'Login de Atendente'
+  ClientHeight = 268
+  ClientWidth = 342
+  Position = MainFormCenter
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 342.000000000000000000
+    Size.Height = 268.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 342.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 342.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        ImageIndex = 0
+        Position.X = 318.000000000000000000
+        Visible = False
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 342.000000000000000000
+      Size.Height = 241.000000000000000000
+      OnResize = lytFundoResize
+      inherited rectFundo: TRectangle
+        Size.Width = 342.000000000000000000
+        Size.Height = 241.000000000000000000
+        Stroke.Kind = None
+      end
+    end
+    object layLogin: TLayout
+      Align = Client
+      Size.Width = 342.000000000000000000
+      Size.Height = 241.000000000000000000
+      Size.PlatformDefault = False
+      object rectCampos: TRectangle
+        Align = Client
+        Fill.Color = claWhite
+        Size.Width = 342.000000000000000000
+        Size.Height = 184.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object lytCampos: TLayout
+          Align = Client
+          Size.Width = 342.000000000000000000
+          Size.Height = 184.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object cboPA: TComboBox
+            Anchors = [akLeft, akTop, akRight]
+            Enabled = False
+            Items.Strings = (
+              'cfdsfds')
+            ItemIndex = 0
+            Position.X = 6.000000000000000000
+            Position.Y = 27.000000000000000000
+            Size.Width = 329.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            OnChange = cboPAChange
+          end
+          object edtAtendente: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            StyleLookup = 'edtAtendendoStyle1'
+            TabOrder = 1
+            TextSettings.Font.Size = 14.000000000000000000
+            Position.X = 6.000000000000000000
+            Position.Y = 72.000000000000000000
+            Size.Width = 329.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Atendente'
+            StyledSettings = []
+          end
+          object edtSenha: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            StyleLookup = 'edtSenhaStyle1'
+            TabOrder = 2
+            Password = True
+            TextSettings.Font.Size = 14.000000000000000000
+            Position.X = 6.000000000000000000
+            Position.Y = 122.000000000000000000
+            Size.Width = 329.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Senha'
+            StyledSettings = []
+          end
+        end
+      end
+      object pnlBottom: TPanel
+        Align = Bottom
+        Position.Y = 184.000000000000000000
+        Size.Width = 342.000000000000000000
+        Size.Height = 57.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'pushpanel'
+        TabOrder = 0
+        object lytBotoes: TLayout
+          Align = Client
+          Size.Width = 342.000000000000000000
+          Size.Height = 57.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object btnCancelar: TButton
+            StyledSettings = [FontColor]
+            ModalResult = 2
+            Position.X = 179.000000000000000000
+            Position.Y = 14.000000000000000000
+            Size.Width = 140.000000000000000000
+            Size.Height = 31.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'btVermelho'
+            TabOrder = 4
+            Text = 'Cancelar'
+            TextSettings.Font.Size = 14.000000000000000000
+          end
+          object btnOK: TButton
+            Default = True
+            StyledSettings = [FontColor]
+            Position.X = 24.000000000000000000
+            Position.Y = 14.000000000000000000
+            Size.Width = 140.000000000000000000
+            Size.Height = 31.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'btVerde'
+            TabOrder = 2
+            Text = 'OK'
+            TextSettings.Font.Size = 14.000000000000000000
+            OnClick = btnOKClick
+          end
+        end
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 91
+    Top = 102
+  end
+end

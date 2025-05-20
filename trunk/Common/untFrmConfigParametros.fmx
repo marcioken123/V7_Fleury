@@ -1,0 +1,156 @@
+inherited FrmConfigParametros: TFrmConfigParametros
+  Caption = 'Configura'#231#245'es de par'#226'metros'
+  ClientHeight = 224
+  ClientWidth = 305
+  Position = DesktopCenter
+  Visible = True
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    Size.Width = 305.000000000000000000
+    Size.Height = 224.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 305.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 305.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Configura'#231#227'o de par'#226'metros'
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 281.000000000000000000
+        Visible = False
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00754944415428536D905D0E80200C8339A0BF51EF64A28917542FC1785A403B
+                1C89287DE9D27E038261E62384509B82900FD2CB305A6BDD17D49CE0ED3B10B0
+                290249A9F0DEAF0AC4859F006CD7A359A35C7A9203B814AFC2E624008AF878F8
+                2020F2AE082409484416DECB3F9D182AED3209C8CCFB0DDCF39DF98136F81100
+                00000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 305.000000000000000000
+      Size.Height = 197.000000000000000000
+      inherited rectFundo: TRectangle
+        Fill.Color = claWhite
+        Size.Width = 305.000000000000000000
+        Size.Height = 147.000000000000000000
+        Stroke.Kind = None
+      end
+      object edtIP: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 0
+        KeyboardType = NumbersAndPunctuation
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 73.000000000000000000
+        Position.Y = 23.000000000000000000
+        Size.Width = 223.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object lblIp: TLabel
+        AutoSize = True
+        Position.X = 9.000000000000000000
+        Position.Y = 23.000000000000000000
+        Size.Width = 12.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'IP'
+      end
+      object lblPorta: TLabel
+        AutoSize = True
+        Position.X = 9.000000000000000000
+        Position.Y = 63.000000000000000000
+        Size.Width = 30.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Porta'
+      end
+      object lblModulo: TLabel
+        AutoSize = True
+        Position.X = 9.000000000000000000
+        Position.Y = 101.000000000000000000
+        Size.Width = 41.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'M'#243'dulo'
+      end
+      object edtPorta: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 1
+        KeyboardType = NumberPad
+        Text = '0'
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 73.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object edtModulo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 2
+        KeyboardType = NumberPad
+        Text = '0'
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 73.000000000000000000
+        Position.Y = 97.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object rectBotoes: TRectangle
+        Align = Bottom
+        Position.Y = 147.000000000000000000
+        Size.Width = 305.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object btnCancelar: TButton
+          Cancel = True
+          Position.X = 157.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 124.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtVermelho'
+          TabOrder = 0
+          Text = 'Cancelar'
+          OnClick = btnCancelarClick
+        end
+        object btnConfirmar: TButton
+          Default = True
+          Position.X = 32.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 116.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtVerde'
+          TabOrder = 1
+          Text = 'Gravar'
+          OnClick = btnConfirmarClick
+        end
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Top = 125
+  end
+end

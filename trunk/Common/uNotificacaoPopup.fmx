@@ -1,0 +1,112 @@
+object NotificacaoPopup: TNotificacaoPopup
+  Left = 0
+  Top = 0
+  Border.Styling = False
+  BorderStyle = None
+  Caption = 'Form2'
+  ClientHeight = 130
+  ClientWidth = 201
+  Cursor = crHandPoint
+  Position = Designed
+  Transparency = True
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnMouseDown = FormMouseDown
+  OnMouseUp = FormMouseUp
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object TimerAutoClose: TTimer
+    Enabled = False
+    OnTimer = TimerAutoCloseTimer
+    Left = 4
+    Top = 103
+  end
+  object layBase: TLayout
+    Align = Contents
+    Size.Width = 201.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object recMensagem: TRectangle
+      Fill.Color = xFFC6C6C6
+      HitTest = False
+      Position.X = 1.000000000000000000
+      Position.Y = 28.000000000000000000
+      Size.Width = 199.000000000000000000
+      Size.Height = 101.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 5.000000000000000000
+      YRadius = 5.000000000000000000
+    end
+    object recTitulo: TRectangle
+      Fill.Color = claGreen
+      HitTest = False
+      Position.X = 1.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 199.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 5.000000000000000000
+      YRadius = 5.000000000000000000
+    end
+    object lFechar: TLabel
+      StyledSettings = [Family, Size]
+      Position.X = 185.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 12.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.WordWrap = False
+      Text = 'X'
+    end
+    object lHoraRecebimento: TLabel
+      Position.X = 151.000000000000000000
+      Position.Y = 112.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = '00:00:00'
+    end
+    object lMensagem: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 6.000000000000000000
+      Position.Y = 29.000000000000000000
+      Size.Width = 189.000000000000000000
+      Size.Height = 96.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 
+        'Existem 999 pessoas na fila "Nome da Fila Bem Grande", situa'#231#227'o ' +
+        '"Critica bagario!"'
+    end
+    object lTitulo: TLabel
+      StyledSettings = [Family, Size]
+      Position.X = 9.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Style = [fsBold]
+      Text = 'Aten'#231#227'o (05:00)'
+      object GlowEffect1: TGlowEffect
+        Softness = 0.400000005960464500
+        GlowColor = claWhite
+        Opacity = 0.899999976158142100
+      end
+    end
+  end
+  object timerShow: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = timerShowTimer
+    Left = 32
+    Top = 104
+  end
+end

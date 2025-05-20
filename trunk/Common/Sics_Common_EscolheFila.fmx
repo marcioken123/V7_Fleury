@@ -1,0 +1,59 @@
+object frmSicsCommon_EscolheFila: TfrmSicsCommon_EscolheFila
+  Left = 654
+  Top = 155
+  Caption = 'Escolha de fila'
+  ClientHeight = 389
+  ClientWidth = 485
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  Left = 654
+  Top = 155
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object Label1: TLabel
+    Height = 13.000000000000000000
+    Width = 181.000000000000000000
+    Left = 2
+    Top = 2
+  end
+  object OkBtn: TButton
+    Height = 24.000000000000000000
+    Position.X = 408.000000000000000000
+    Position.Y = 355.000000000000000000
+    TabOrder = 0
+    Width = 73.000000000000000000
+    Left = 33
+    Top = 258
+  end
+  object CancelBtn: TButton
+    Height = 24.000000000000000000
+    Position.X = 328.000000000000000000
+    Position.Y = 355.000000000000000000
+    TabOrder = 1
+    Width = 73.000000000000000000
+    Left = 130
+    Top = 258
+  end
+  object listFilas: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Top
+    Height = 345.000000000000000000
+    TabOrder = 2
+    Width = 485.000000000000000000
+    OnClick = listFilasClick
+    OnDblClick = listFilasDblClick
+    Left = 32
+    Top = 64
+  end
+end

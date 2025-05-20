@@ -1,0 +1,197 @@
+inherited FrmAlteracaoSenha: TFrmAlteracaoSenha
+  BorderIcons = [biSystemMenu]
+  Caption = 'Altera'#231#227'o de Senha'
+  ClientHeight = 297
+  ClientWidth = 342
+  Position = MainFormCenter
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    Size.Width = 342.000000000000000000
+    Size.Height = 297.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 342.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 318.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 318.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 342.000000000000000000
+      Size.Height = 270.000000000000000000
+      TabOrder = 1
+      inherited rectFundo: TRectangle
+        Size.Width = 342.000000000000000000
+        Size.Height = 270.000000000000000000
+      end
+    end
+    object layLogin: TLayout
+      Align = Client
+      Size.Width = 342.000000000000000000
+      Size.Height = 270.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object rectCima: TRectangle
+        Align = Top
+        Fill.Color = xFF005E8D
+        Size.Width = 342.000000000000000000
+        Size.Height = 65.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object lbllNomeAtend: TLabel
+          StyledSettings = []
+          Position.X = 14.000000000000000000
+          Position.Y = 36.000000000000000000
+          Size.Width = 129.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Nome do atendente:'
+        end
+        object lbllNomeAtendValor: TLabel
+          StyledSettings = []
+          Position.X = 127.000000000000000000
+          Position.Y = 38.000000000000000000
+          Size.Width = 201.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = '   '
+        end
+        object lblNumAtend: TLabel
+          StyledSettings = []
+          Position.X = 14.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 129.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'N'#250'mero do atendente:'
+        end
+        object lblNumAtendValor: TLabel
+          StyledSettings = []
+          Position.X = 143.000000000000000000
+          Position.Y = 14.000000000000000000
+          Size.Width = 186.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = '   '
+        end
+      end
+      object rectCampos: TRectangle
+        Align = Client
+        Fill.Color = claWhite
+        Size.Width = 342.000000000000000000
+        Size.Height = 151.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object lytCampos: TLayout
+          Align = Center
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          Size.Width = 305.000000000000000000
+          Size.Height = 137.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object edtConfirmacaoSenha: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 2
+            Password = True
+            TextSettings.Font.Size = 14.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 88.000000000000000000
+            Size.Width = 288.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Confirma'#231#227'o da senha'
+            StyledSettings = []
+            OnKeyDown = edtConfirmacaoSenhaKeyDown
+          end
+          object edtNovaSenha: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 1
+            Password = True
+            TextSettings.Font.Size = 14.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 50.000000000000000000
+            Size.Width = 288.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Nova senha'
+            StyledSettings = []
+          end
+          object edtSenhaAtual: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 0
+            Password = True
+            TextSettings.Font.Size = 14.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 12.000000000000000000
+            Size.Width = 288.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Senha atual'
+            StyledSettings = []
+          end
+        end
+      end
+      object pnlBottom: TPanel
+        Align = Bottom
+        Position.Y = 216.000000000000000000
+        Size.Width = 342.000000000000000000
+        Size.Height = 54.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object lytBotoes: TLayout
+          Align = Center
+          Size.Width = 217.000000000000000000
+          Size.Height = 45.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object btnCancelar: TButton
+            StyledSettings = [FontColor]
+            ModalResult = 2
+            Position.X = 113.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 37.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'BtVermelho'
+            TabOrder = 4
+            Text = 'Cancelar'
+            TextSettings.Font.Size = 14.000000000000000000
+          end
+          object btnOK: TButton
+            StyledSettings = [FontColor]
+            ModalResult = 1
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 37.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'btVerde'
+            TabOrder = 3
+            Text = 'OK'
+            TextSettings.Font.Size = 14.000000000000000000
+            OnClick = btnOKClick
+          end
+        end
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 259
+    Top = 27
+  end
+end

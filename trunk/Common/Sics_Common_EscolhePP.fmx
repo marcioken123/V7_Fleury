@@ -1,0 +1,56 @@
+object frmSicsCommon_EscolhePP: TfrmSicsCommon_EscolhePP
+  Left = 742
+  Top = 130
+  Caption = 'Escolha de Processo Paralelo'
+  ClientHeight = 365
+  ClientWidth = 344
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  Left = 742
+  Top = 130
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object Label1: TAspLabel
+    AutoSize = True
+    Height = 32.000000000000000000
+    Position.X = 2.000000000000000000
+    Position.Y = 2.000000000000000000
+    Text = 'Iniciar processo paralelo do tipo:'
+    Width = 149.000000000000000000
+  end
+  object listPPs: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Height = 150.000000000000000000
+    Position.X = 32.000000000000000000
+    Position.Y = 64.000000000000000000
+    TabOrder = 0
+    Width = 250.000000000000000000
+    OnClick = listPPsClick
+    OnDblClick = listPPsDblClick
+  end
+  object OkBtn: TAspButton
+    Height = 24.000000000000000000
+    Position.X = 33.000000000000000000
+    Position.Y = 258.000000000000000000
+    TabOrder = 1
+    Width = 73.000000000000000000
+  end
+  object CancelBtn: TAspButton
+    Height = 24.000000000000000000
+    Position.X = 130.000000000000000000
+    Position.Y = 258.000000000000000000
+    TabOrder = 2
+    Width = 73.000000000000000000
+  end
+end

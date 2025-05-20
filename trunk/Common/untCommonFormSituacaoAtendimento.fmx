@@ -1,0 +1,421 @@
+inherited FrmSituacaoAtendimento: TFrmSituacaoAtendimento
+  ClientHeight = 670
+  ClientWidth = 978
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 978.000000000000000000
+    Size.Height = 670.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 978.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 978.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 978.000000000000000000
+      Size.Height = 643.000000000000000000
+    end
+    object Layout1: TLayout
+      Align = Client
+      Size.Width = 978.000000000000000000
+      Size.Height = 643.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object grpFiltro: TGroupBox
+        Align = Top
+        Size.Width = 978.000000000000000000
+        Size.Height = 54.000000000000000000
+        Size.PlatformDefault = False
+        Text = ' Filtros '
+        TabOrder = 1
+        object lblEstado: TLabel
+          AutoSize = True
+          Position.X = 9.000000000000000000
+          Position.Y = 23.000000000000000000
+          Size.Width = 39.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Estado'
+        end
+        object cmbEstado: TComboBox
+          DisableFocusEffect = False
+          Position.X = 50.000000000000000000
+          Position.Y = 20.000000000000000000
+          Size.Width = 231.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+        end
+        object lblPausa: TLabel
+          AutoSize = True
+          Position.X = 329.000000000000000000
+          Position.Y = 23.000000000000000000
+          Size.Width = 34.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Pausa'
+        end
+        object cmbPausa: TComboBox
+          DisableFocusEffect = False
+          Position.X = 364.000000000000000000
+          Position.Y = 20.000000000000000000
+          Size.Width = 231.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+        end
+      end
+      object TabControl: TTabControl
+        Align = Client
+        Size.Width = 978.000000000000000000
+        Size.Height = 589.000000000000000000
+        Size.PlatformDefault = False
+        TabIndex = 0
+        TabOrder = 0
+        TabPosition = Top
+        object tabPAs: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          Size.Width = 40.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'PAs'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object grdPAs: TGrid
+            Align = Client
+            Size.Width = 978.000000000000000000
+            Size.Height = 563.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Options = [ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick]
+            RowCount = 100
+            RowHeight = 21.000000000000000000
+            Viewport.Width = 958.000000000000000000
+            Viewport.Height = 522.000000000000000000
+          end
+        end
+        object tabAtendentes: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 80.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Atendentes'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object grdAtds: TGrid
+            Align = Client
+            Size.Width = 50.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Options = [ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick]
+            RowCount = 100
+            RowHeight = 21.000000000000000000
+            Viewport.Width = 30.000000000000000000
+            Viewport.Height = 9.000000000000000000
+          end
+        end
+      end
+    end
+  end
+  object cdsPAs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 24
+    Top = 152
+    object cdsPAsId_PA: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      DisplayWidth = 30
+      FieldName = 'Id_PA'
+    end
+    object cdsPAsLKUP_PA: TStringField
+      DisplayLabel = 'PA'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_PA'
+      LookupDataSet = DMClient.cdsPAs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_PA'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsLKUP_GRUPO: TStringField
+      DisplayLabel = 'Grupo'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPO'
+      LookupDataSet = DMClient.cdsGruposDePAs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'LKUP_ID_GRUPO'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsLKUP_STATUS: TStringField
+      DisplayLabel = 'Estado'
+      DisplayWidth = 80
+      FieldKind = fkLookup
+      FieldName = 'LKUP_STATUS'
+      LookupDataSet = DMClient.cdsStatusPAs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'Nome'
+      KeyFields = 'Id_Status'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsLKUP_ATD: TStringField
+      DisplayLabel = 'Atendente'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_ATD'
+      LookupDataSet = DMClient.cdsAtendentes
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Atd'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsSENHA: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      DisplayWidth = 80
+      FieldName = 'SENHA'
+    end
+    object cdsPAsNomeCliente: TStringField
+      DisplayLabel = 'Nome Cliente'
+      DisplayWidth = 150
+      FieldName = 'NomeCliente'
+      Size = 60
+    end
+    object cdsPAsHorario: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 120
+      FieldName = 'Horario'
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPAsLKUP_MOTIVOPAUSA: TStringField
+      DisplayLabel = 'Motivo Pausa'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_MOTIVOPAUSA'
+      LookupDataSet = DMClient.cdsMotivosPausa
+      LookupKeyFields = 'ID'
+      LookupResultField = 'Nome'
+      KeyFields = 'Id_MotivoPausa'
+      Visible = False
+      Size = 60
+      Lookup = True
+    end
+    object cdsPAsLKUP_FILA: TStringField
+      DisplayLabel = 'Veio da fila'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_FILA'
+      LookupDataSet = DMClient.cdsFilas
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Fila'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsLKUP_ID_GRUPO: TIntegerField
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_ID_GRUPO'
+      LookupDataSet = DMClient.cdsPAs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'IdGrupo'
+      KeyFields = 'Id_PA'
+      Visible = False
+      Lookup = True
+    end
+    object cdsPAsId_Status: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_Status'
+      Visible = False
+    end
+    object cdsPAsId_Atd: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_Atd'
+      Visible = False
+    end
+    object cdsPAsId_Fila: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_Fila'
+      Visible = False
+    end
+    object cdsPAsId_MotivoPausa: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_MotivoPausa'
+      Visible = False
+    end
+  end
+  object cdsAtds: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 376
+    Top = 112
+    object IntegerField2: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      DisplayWidth = 30
+      FieldName = 'Id_Atd'
+    end
+    object cdsAtdsLKUP_ATD: TStringField
+      DisplayLabel = 'Atendente'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_ATD'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Atd'
+      Size = 30
+      Lookup = True
+    end
+    object cdsAtdsLKUP_ID_GRUPO: TIntegerField
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_ID_GRUPO'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'IdGrupo'
+      KeyFields = 'Id_Atd'
+      Visible = False
+      Lookup = True
+    end
+    object cdsAtdsLKUP_GRUPO: TStringField
+      DisplayLabel = 'Grupo'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPO'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'LKUP_ID_GRUPO'
+      Size = 30
+      Lookup = True
+    end
+    object cdsAtdsId_Status: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_Status'
+      Visible = False
+    end
+    object cdsAtdsLKUP_STATUS: TStringField
+      DisplayLabel = 'Estado'
+      DisplayWidth = 80
+      FieldKind = fkLookup
+      FieldName = 'LKUP_STATUS'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'Nome'
+      KeyFields = 'Id_Status'
+      Size = 30
+      Lookup = True
+    end
+    object IntegerField1: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_PA'
+      Visible = False
+    end
+    object cdsAtdsLKUP_PA: TStringField
+      DisplayLabel = 'PA'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_PA'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_PA'
+      Lookup = True
+    end
+    object IntegerField4: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      DisplayWidth = 80
+      FieldName = 'SENHA'
+    end
+    object cdsAtdsNomeCliente: TStringField
+      DisplayWidth = 150
+      FieldName = 'NomeCliente'
+      Size = 60
+    end
+    object DateTimeField1: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 120
+      FieldName = 'Horario'
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsAtdsId_Fila: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_Fila'
+      Visible = False
+    end
+    object cdsAtdsLKUP_FILA: TStringField
+      DisplayLabel = 'Veio da fila'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_FILA'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Fila'
+      Size = 30
+      Lookup = True
+    end
+    object cdsAtdsId_MotivoPausa: TIntegerField
+      DisplayWidth = 60
+      FieldName = 'Id_MotivoPausa'
+      Visible = False
+    end
+    object cdsAtdsLKUP_MOTIVOPAUSA: TStringField
+      DisplayLabel = 'Motivo Pausa'
+      DisplayWidth = 100
+      FieldKind = fkLookup
+      FieldName = 'LKUP_MOTIVOPAUSA'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'Nome'
+      KeyFields = 'Id_MotivoPausa'
+      Size = 60
+      Lookup = True
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = cdsAtds
+    ScopeMappings = <>
+    Left = 488
+    Top = 312
+  end
+  object BindSourceDB: TBindSourceDB
+    DataSet = cdsPAs
+    ScopeMappings = <>
+    Left = 30
+    Top = 506
+  end
+  object BindingsList: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 28
+    Top = 570
+    object LinkGridToDataSourceBindSourceDB: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB
+      GridControl = grdPAs
+      Columns = <>
+    end
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = grdAtds
+      Columns = <>
+    end
+  end
+end

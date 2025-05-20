@@ -1,0 +1,138 @@
+object frmSicsCommon_AlteraSenha: TfrmSicsCommon_AlteraSenha
+  Left = 360
+  Top = 177
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Alterar senha'
+  ClientHeight = 208
+  ClientWidth = 366
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  Left = 360
+  Top = 177
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object btnOK: TButton
+    Anchors = [akLeft, akBottom]
+    Default = True
+    Height = 25.000000000000000000
+    ModalResult = 1
+    Position.X = 170.000000000000000000
+    Position.Y = 173.000000000000000000
+    TabOrder = 1
+    Text = '&OK'
+    Width = 75.000000000000000000
+  end
+  object btnCancel: TButton
+    Anchors = [akLeft, akBottom]
+    Cancel = True
+    Height = 25.000000000000000000
+    ModalResult = 2
+    Position.X = 259.000000000000000000
+    Position.Y = 173.000000000000000000
+    TabOrder = 2
+    Text = '&Cancela'
+    Width = 75.000000000000000000
+  end
+  object Panel1: TPanel
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Height = 145.000000000000000000
+    Position.X = 16.000000000000000000
+    Position.Y = 16.000000000000000000
+    Width = 345.000000000000000000
+    TabOrder = 0
+    object Label5: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 113.000000000000000000
+      Text = 'Con&firma'#231#227'o da senha:'
+      Width = 121.000000000000000000
+    end
+    object Label4: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 87.000000000000000000
+      Text = '&Nova senha:'
+      Width = 66.000000000000000000
+    end
+    object Label3: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 62.000000000000000000
+      Text = 'Senha &atual:'
+      Width = 65.000000000000000000
+    end
+    object Label2: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 37.000000000000000000
+      Text = 'Nome do atendente:'
+      Width = 111.000000000000000000
+    end
+    object lblAtdNome: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 136.000000000000000000
+      Position.Y = 37.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = 'lblAtdNome'
+      Width = 65.000000000000000000
+    end
+    object lblAtdId: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 136.000000000000000000
+      Position.Y = 12.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = 'lblAtdId'
+      Width = 42.000000000000000000
+    end
+    object Label1: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 12.000000000000000000
+      Text = 'N'#250'mero do atendente:'
+      Width = 122.000000000000000000
+    end
+    object edConfirmaSenha: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 2
+      Text = 'edConfirmaSenha'
+      Position.X = 136.000000000000000000
+      Position.Y = 108.000000000000000000
+      Width = 194.000000000000000000
+      Height = 21.000000000000000000
+    end
+    object edNovaSenha: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Text = 'edNovaSenha'
+      Position.X = 136.000000000000000000
+      Position.Y = 83.000000000000000000
+      Width = 194.000000000000000000
+      Height = 21.000000000000000000
+    end
+    object edSenhaAtual: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 0
+      Text = 'edSenhaAtual'
+      Position.X = 136.000000000000000000
+      Position.Y = 58.000000000000000000
+      Width = 194.000000000000000000
+      Height = 21.000000000000000000
+    end
+  end
+end

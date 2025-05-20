@@ -1,0 +1,274 @@
+inherited FrmProcessoParalelo: TFrmProcessoParalelo
+  Caption = 'Processos Paralelos'
+  ClientHeight = 339
+  ClientWidth = 636
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 636.000000000000000000
+    Size.Height = 339.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 636.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 636.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Images = ilPrincipal
+        ImageIndex = 0
+        Position.X = 612.000000000000000000
+        Visible = False
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 636.000000000000000000
+      Size.Height = 245.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 636.000000000000000000
+        Size.Height = 245.000000000000000000
+      end
+    end
+    object Layout1: TLayout
+      Align = Bottom
+      Position.Y = 289.000000000000000000
+      Size.Width = 636.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object layBotoes: TLayout
+        Align = Center
+        Size.Width = 371.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnNovo: TButton
+          Anchors = [akBottom]
+          StyledSettings = [FontColor]
+          Position.X = 15.404254913330080000
+          Position.Y = 8.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtVerde'
+          TabOrder = 0
+          Text = '&Novo'
+          TextSettings.Font.Size = 14.000000000000000000
+          OnClick = btnNovoClick
+        end
+        object btnFinalizar: TButton
+          Anchors = [akBottom]
+          StyledSettings = [FontColor]
+          Position.X = 134.936172485351600000
+          Position.Y = 8.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtAzulEscuro'
+          TabOrder = 2
+          Text = 'Fin&alizar'
+          TextSettings.Font.Size = 14.000000000000000000
+          OnClick = btnFinalizarClick
+        end
+        object btnFechar: TButton
+          Anchors = [akBottom]
+          StyledSettings = [FontColor]
+          Position.X = 255.595748901367200000
+          Position.Y = 8.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 37.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtVermelho'
+          TabOrder = 1
+          Text = '&Fechar'
+          TextSettings.Font.Size = 14.000000000000000000
+          OnClick = btnFecharClick
+        end
+      end
+    end
+    object grdPPs: TGrid
+      Align = Client
+      CanFocus = True
+      ClipChildren = True
+      Size.Width = 636.000000000000000000
+      Size.Height = 245.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      StyledSettings = [Family, Style, FontColor]
+      TabOrder = 2
+      RowHeight = 21.000000000000000000
+      Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+      Viewport.Width = 618.000000000000000000
+      Viewport.Height = 206.000000000000000000
+    end
+    object lblEmAndamento: TLabel
+      Align = Top
+      StyledSettings = []
+      Position.Y = 27.000000000000000000
+      Size.Width = 636.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      Text = ' Em andamento'
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 206
+    Top = 119
+  end
+  object cdsPPs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsPPsAfterOpen
+    Left = 39
+    Top = 84
+    object cdsPPsId_EventoPP: TIntegerField
+      DisplayWidth = 40
+      FieldName = 'Id_EventoPP'
+      Visible = False
+    end
+    object cdsPPsId_TipoPP: TIntegerField
+      DisplayWidth = 40
+      FieldName = 'Id_TipoPP'
+      Visible = False
+    end
+    object cdsPPsId_PA: TIntegerField
+      DisplayWidth = 40
+      FieldName = 'Id_PA'
+      Visible = False
+    end
+    object cdsPPsId_Atd: TIntegerField
+      DisplayWidth = 40
+      FieldName = 'Id_Atd'
+      Visible = False
+    end
+    object cdsPPslkp_TipoPP_Nome: TStringField
+      DisplayLabel = 'Tipo do processo paralelo'
+      DisplayWidth = 150
+      FieldKind = fkLookup
+      FieldName = 'lkp_TipoPP_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_TipoPP'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPsTicketNumber: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      DisplayWidth = 80
+      FieldName = 'TicketNumber'
+    end
+    object cdsPPsNomeCliente: TStringField
+      DisplayLabel = 'Nome do cliente'
+      DisplayWidth = 120
+      FieldName = 'NomeCliente'
+      Size = 60
+    end
+    object cdsPPslkp_PA_Nome: TStringField
+      DisplayLabel = 'Onde iniciou'
+      DisplayWidth = 120
+      FieldKind = fkLookup
+      FieldName = 'lkp_PA_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_PA'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPslkp_Atd_Nome: TStringField
+      DisplayLabel = 'Quem iniciou'
+      DisplayWidth = 120
+      FieldKind = fkLookup
+      FieldName = 'lkp_Atd_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Atd'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPsHorario: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Hor'#225'rio'
+      DisplayWidth = 120
+      FieldName = 'Horario'
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPPsCTRL_RegistroAtualizado: TBooleanField
+      FieldName = 'CTRL_RegistroAtualizado'
+      Visible = False
+    end
+  end
+  object dtsPPs: TDataSource
+    DataSet = cdsPPs
+    OnStateChange = dtsPPsStateChange
+    OnDataChange = dtsPPsDataChange
+    Left = 127
+    Top = 123
+  end
+  object bndPPs: TBindSourceDB
+    DataSource = dtsPPs
+    ScopeMappings = <>
+    Left = 177
+    Top = 160
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 68
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndPPs
+      GridControl = grdPPs
+      Columns = <>
+    end
+  end
+  object ilPrincipal: TImageList
+    Source = <
+      item
+        MultiResBitmap = <
+          item
+            Width = 16
+            Height = 16
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+              61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              02C149444154384FA553CF4B1B41147E33BB310AB18A2655839AD8A45A72B067
+              3591D6A4B4D0A2A078126A3077D17FC0FFA3A078128A871E8AD0A249A926A814
+              94823F3054532A890926AEA649B326BBB3D39969D0B6A7423F989DD9F9E6BD7D
+              EFFB66E17F81AA33AC05020DA85C5EA194B6B2CD91402C7658A504D60606BC06
+              C6AF24C3F8AA13F2F2D9F6B6C2F7317F2C7B3C35A0AA6F9C1313DE07B3B36E40
+              E863D8EBF5708E8307138C577BE7E63CCE60F039369936D95E27E74405EC65B1
+              636C2C68D175308A45309C4E385E5CCC02A58F28C60D65555D7D383363919249
+              909B9BA188317C999FCFD41BC63D5101C278186532709D4840E9E000503C0EEE
+              A9291BAF0411F2AE777ADA42F7F64065DCF5D111E86CD634CD52369B25514164
+              707058A3F4755B7B7B5D7D632368171750E77643F3E424505695B2B4047A2A05
+              724B0B141505CEE2F10A4268DCBFB1F1F646C488CF37A401ACD8791256A69ECD
+              82C96A05200448A904A6D656F8C182BFC5E3AA44E9E89358EC3D8F132D70F8A3
+              D10F1242FEF3D3D3BCC1BE8A6419F4CB4B204C13D6225096E8EF608E9B041C14
+              A0081857989540350D68A5F26BB060830D99F1ACE4D3EA71819B04DC364C69C4
+              E670D8785FDA551E8C7285051A40D89A1FBCEB7209617FB7582488F4F7F710C3
+              88B88241DB9DA626A176ADD301A6CE0EC0362BD4383AE1FAE4041AED76708742
+              7F24112286FBFA12F742A12EB4BF2F6CACEDEA8262A10059A60745286BB5DBDD
+              4D4CC40AB3BA96B943BABBE17861214BCDE6FBA2022ACBCA55382CD436BB5C50
+              C8E7219B4C2A98892A4B92EF3C9D3ECCA5D350D3D606063B53DADA021DC0226B
+              5A9D4880346DE43C954A7D67FE179855B9B3338510E21F8AC5761EAFAF6798A0
+              3E2593D9C9B1BB90CFE520B1BB5B3401BCE0DCED3D603A6892149175BD42101A
+              7DBAB9F9B94A09889F4D5597584B3DEC124D04A2D14F55EA16CBE3E35275F98F
+              00F809D99359B4837C1A6A0000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\SICS\V5\branches\Proj_16620\2. TGS\Resources\Close.p' +
+              'ng'
+          end>
+        Name = 'Close'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'Close'
+          end>
+      end>
+    Left = 304
+    Top = 152
+  end
+end

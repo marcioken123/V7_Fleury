@@ -1,0 +1,144 @@
+inherited FrmControleRemoto: TFrmControleRemoto
+  BorderIcons = [biSystemMenu]
+  BorderStyle = Single
+  Caption = 'Controle Remoto'
+  ClientHeight = 231
+  ClientWidth = 237
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 237.000000000000000000
+    Size.Height = 231.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 237.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 213.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 213.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 237.000000000000000000
+      Size.Height = 204.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 237.000000000000000000
+        Size.Height = 204.000000000000000000
+      end
+      object cbbTV: TComboBox
+        Position.X = 16.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 209.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 17.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'TV'
+      end
+      object btnVolMais: TButton
+        Position.X = 16.000000000000000000
+        Position.Y = 102.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = '+'
+        OnClick = btnVolMaisClick
+      end
+      object btnVolMenos: TButton
+        Position.X = 16.000000000000000000
+        Position.Y = 136.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = '-'
+        OnClick = btnVolMaisClick
+      end
+      object btnCanMais: TButton
+        Position.X = 190.000000000000000000
+        Position.Y = 105.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = '+'
+        OnClick = btnVolMaisClick
+      end
+      object btnCanMenos: TButton
+        Position.X = 189.000000000000000000
+        Position.Y = 140.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = '-'
+        OnClick = btnVolMaisClick
+      end
+      object Label2: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 49.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Volume'
+      end
+      object Label3: TLabel
+        Position.X = 181.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Canal'
+      end
+      object SwCloseCaption: TSwitch
+        IsChecked = False
+        Position.X = 174.000000000000000000
+        Position.Y = 173.000000000000000000
+        Size.Width = 49.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        OnSwitch = btnVolMaisClick
+      end
+      object Label4: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 178.000000000000000000
+        Size.Width = 89.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Closed Caption'
+        TabOrder = 6
+      end
+    end
+  end
+  object ClientSocket: TIdTCPClient
+    ConnectTimeout = 0
+    Host = '127.0.0.1'
+    IPVersion = Id_IPv4
+    Port = 0
+    ReadTimeout = -1
+    Left = 96
+    Top = 112
+  end
+  object cdsTVs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 96
+    Top = 41
+    object cdsTVsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTVsTCPIP: TStringField
+      FieldName = 'TCPIP'
+      Size = 100
+    end
+  end
+end

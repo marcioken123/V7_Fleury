@@ -1,0 +1,17 @@
+inherited FrmSelecaoMotivoPausa: TFrmSelecaoMotivoPausa
+  Caption = 'Escolha de Motivo de Pausa'
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    inherited lblSubTitulo: TLabel
+      Text = 'Selecione o motivo da pausa'
+    end
+    inherited Lista: TListBox
+      Viewport.Width = 337.000000000000000000
+      Viewport.Height = 272.000000000000000000
+    end
+  end
+  inherited ilPrincipal: TImageList
+    Left = 112
+    Top = 128
+  end
+end

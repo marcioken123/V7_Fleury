@@ -1,0 +1,74 @@
+object frmSICSSplashFmx: TfrmSICSSplashFmx
+  Left = 0
+  Top = 0
+  BorderStyle = None
+  ClientHeight = 199
+  ClientWidth = 208
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 208.000000000000000000
+    Size.Height = 199.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Thickness = 3.000000000000000000
+  end
+  object Layout1: TLayout
+    Align = Center
+    Size.Width = 208.000000000000000000
+    Size.Height = 199.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label1: TLabel
+      AutoSize = True
+      StyledSettings = [Family]
+      Position.X = 10.000000000000000000
+      Position.Y = 50.000000000000000000
+      Size.Width = 188.000000000000000000
+      Size.Height = 80.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claCoral
+      TextSettings.HorzAlign = Center
+      Text = 'Sistema Inteligente de Chamada de Senhas'
+    end
+    object Line1: TLine
+      LineType = Top
+      Position.X = 10.000000000000000000
+      Position.Y = 155.000000000000000000
+      Size.Width = 188.000000000000000000
+      Size.Height = 9.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object SICS: TLabel
+      AutoSize = True
+      StyledSettings = [Family]
+      Position.X = 75.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 24.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claCoral
+      TextSettings.HorzAlign = Center
+      TextSettings.WordWrap = False
+      Text = 'SICS'
+    end
+    object StatusLabel: TLabel
+      Position.X = 10.000000000000000000
+      Position.Y = 168.000000000000000000
+      Size.Width = 188.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      Text = '...'
+    end
+  end
+end

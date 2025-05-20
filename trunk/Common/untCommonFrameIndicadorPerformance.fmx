@@ -1,0 +1,77 @@
+inherited FraIndicadorPerformance: TFraIndicadorPerformance
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 702.000000000000000000
+    Size.Height = 430.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 702.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 678.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Indicador Performance'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 678.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 702.000000000000000000
+      Size.Height = 393.000000000000000000
+      inherited rectFundo: TRectangle
+        Align = Contents
+        Size.Width = 702.000000000000000000
+        Size.Height = 393.000000000000000000
+      end
+      object grdPIs: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 702.000000000000000000
+        Size.Height = 393.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowHeight = 21.000000000000000000
+        Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        OnDrawColumnCell = grdPIsDrawColumnCell
+        Viewport.Width = 698.000000000000000000
+        Viewport.Height = 368.000000000000000000
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 155
+    Top = 159
+    object LinkGridPI: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndPIS
+      GridControl = grdPIs
+      Columns = <>
+    end
+  end
+  inherited ilPrincipal: TImageList
+    Left = 400
+    Top = 160
+  end
+  object CDSPIsClone: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 331
+    Top = 160
+  end
+  object dtsPIs: TDataSource
+    DataSet = CDSPIsClone
+    Left = 273
+    Top = 158
+  end
+  object bndPIS: TBindSourceDB
+    DataSet = CDSPIsClone
+    ScopeMappings = <>
+    Left = 217
+    Top = 160
+  end
+end

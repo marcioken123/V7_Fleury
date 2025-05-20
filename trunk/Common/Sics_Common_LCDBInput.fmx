@@ -1,0 +1,64 @@
+inherited frmSicsCommon_LCDBInput: TfrmSicsCommon_LCDBInput
+  Left = 250
+  Top = 106
+  Caption = 'Input do leitor de c'#243'digo de barras'
+  ClientHeight = 191
+  ClientWidth = 299
+  Left = 250
+  Top = 106
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 299.000000000000000000
+    Size.Height = 191.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 299.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 275.000000000000000000
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 275.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 299.000000000000000000
+      Size.Height = 0.000000000000000000
+      TabOrder = 1
+      inherited rectFundo: TRectangle
+        Size.Width = 299.000000000000000000
+        Size.Height = 0.000000000000000000
+      end
+    end
+    object memoLCDBInput: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Align = Top
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Position.Y = 27.000000000000000000
+      Size.Width = 299.000000000000000000
+      Size.Height = 191.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Viewport.Width = 295.000000000000000000
+      Viewport.Height = 187.000000000000000000
+    end
+    object btnClear: TButton
+      Anchors = [akRight, akBottom]
+      Cancel = True
+      Default = True
+      Position.X = 218.000000000000000000
+      Position.Y = 160.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = '&Limpa'
+      OnClick = btnClearClick
+      Left = 104
+      Top = 120
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 202
+    Top = 123
+  end
+end

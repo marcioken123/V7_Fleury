@@ -1,0 +1,112 @@
+object frmSicsCommon_LoginAtd: TfrmSicsCommon_LoginAtd
+  Left = 572
+  Top = 368
+  Caption = 'Login de Atendente'
+  ClientHeight = 155
+  ClientWidth = 342
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnShow = FormShow
+  Left = 572
+  Top = 368
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object lblSenha: TAspLabel
+    AutoSize = True
+    Height = 16.000000000000000000
+    Position.X = 37.000000000000000000
+    Position.Y = 86.000000000000000000
+    Text = '&Senha:'
+    Width = 36.000000000000000000
+  end
+  object lblAtendente: TAspLabel
+    AutoSize = True
+    Height = 16.000000000000000000
+    Position.X = 18.000000000000000000
+    Position.Y = 54.000000000000000000
+    Text = '&Atendente:'
+    Width = 58.000000000000000000
+  end
+  object lblPA: TAspLabel
+    AutoSize = True
+    Height = 16.000000000000000000
+    Position.X = 56.000000000000000000
+    Position.Y = 14.000000000000000000
+    Text = '&PA:'
+    Width = 18.000000000000000000
+  end
+  object AtdSenhaEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 4
+    Position.X = 86.000000000000000000
+    Position.Y = 82.000000000000000000
+    Width = 226.000000000000000000
+    Height = 21.000000000000000000
+  end
+  object OKBtn: TAspButton
+    Default = True
+    Height = 25.000000000000000000
+    ModalResult = 1
+    Position.X = 83.000000000000000000
+    Position.Y = 119.000000000000000000
+    TabOrder = 5
+    Text = '&OK'
+    Width = 75.000000000000000000
+  end
+  object CancelBtn: TAspButton
+    Cancel = True
+    Height = 25.000000000000000000
+    ModalResult = 2
+    Position.X = 178.000000000000000000
+    Position.Y = 119.000000000000000000
+    TabOrder = 6
+    Text = '&Cancela'
+    Width = 75.000000000000000000
+  end
+  object IdAtdEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 86.000000000000000000
+    Position.Y = 50.000000000000000000
+    Width = 36.000000000000000000
+    Height = 21.000000000000000000
+    OnChangeTracking = IdAtdEditChange
+  end
+  object IdPAEdit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Position.X = 86.000000000000000000
+    Position.Y = 10.000000000000000000
+    Width = 36.000000000000000000
+    Height = 21.000000000000000000
+    OnChangeTracking = IdPAEditChange
+  end
+  object PANomeCombo: TComboBox
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    DisableFocusEffect = False
+    Height = 21.000000000000000000
+    ItemHeight = 19.000000000000000000
+    Position.X = 126.000000000000000000
+    Position.Y = 10.000000000000000000
+    TabOrder = 1
+    Width = 186.000000000000000000
+    OnChange = PANomeComboChange
+  end
+  object AtdNomeCombo: TComboBox
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    DisableFocusEffect = False
+    Height = 21.000000000000000000
+    ItemHeight = 19.000000000000000000
+    Position.X = 126.000000000000000000
+    Position.Y = 50.000000000000000000
+    TabOrder = 3
+    Width = 186.000000000000000000
+    OnChange = AtdNomeComboChange
+  end
+end

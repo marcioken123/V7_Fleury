@@ -1,0 +1,170 @@
+object frmSicsCommon_VisualizaManipulaPPs: TfrmSicsCommon_VisualizaManipulaPPs
+  Left = 710
+  Top = 129
+  Caption = 'Processos Paralelos'
+  ClientHeight = 237
+  ClientWidth = 419
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  OnShow = FormShow
+  Left = 710
+  Top = 129
+  DesignerMasterStyle = 0
+  object Label1: TAspLabel
+    AutoSize = True
+    Position.X = 15.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 127.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Processos paralelos em andamento:'
+  end
+  object gridPPs: TStringGrid
+    Position.X = 15.000000000000000000
+    Position.Y = 45.000000000000000000
+    Size.Width = 394.000000000000000000
+    Size.Height = 120.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    RowCount = 100
+    RowHeight = 21.000000000000000000
+    Viewport.Width = 374.000000000000000000
+    Viewport.Height = 79.000000000000000000
+  end
+  object btnNovo: TAspButton
+    Position.X = 20.000000000000000000
+    Position.Y = 180.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = '&Novo'
+    OnClick = btnNovoClick
+  end
+  object btnFinalizar: TAspButton
+    Position.X = 105.000000000000000000
+    Position.Y = 180.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = '&Finalizar'
+    OnClick = btnFinalizarClick
+  end
+  object btnFechar: TAspButton
+    Position.X = 335.000000000000000000
+    Position.Y = 180.000000000000000000
+    Size.Width = 75.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Fe&char'
+    OnClick = btnFecharClick
+  end
+  object dsPPs: TDataSource
+    DataSet = cdsPPs
+    Left = 232
+    Top = 48
+  end
+  object cdsPPs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsPPsAfterOpen
+    Left = 280
+    Top = 56
+    object cdsPPsId_EventoPP: TIntegerField
+      FieldName = 'Id_EventoPP'
+      Visible = False
+    end
+    object cdsPPsId_TipoPP: TIntegerField
+      FieldName = 'Id_TipoPP'
+      Visible = False
+    end
+    object cdsPPsId_PA: TIntegerField
+      FieldName = 'Id_PA'
+      Visible = False
+    end
+    object cdsPPsId_Atd: TIntegerField
+      FieldName = 'Id_Atd'
+      Visible = False
+    end
+    object cdsPPslkp_TipoPP_Nome: TStringField
+      DisplayLabel = 'Tipo do processo paralelo'
+      FieldKind = fkLookup
+      FieldName = 'lkp_TipoPP_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_TipoPP'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPsTicketNumber: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      FieldName = 'TicketNumber'
+    end
+    object cdsPPsNomeCliente: TStringField
+      DisplayLabel = 'Nome do cliente'
+      FieldName = 'NomeCliente'
+      Size = 60
+    end
+    object cdsPPslkp_PA_Nome: TStringField
+      DisplayLabel = 'Onde iniciou'
+      FieldKind = fkLookup
+      FieldName = 'lkp_PA_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_PA'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPslkp_Atd_Nome: TStringField
+      DisplayLabel = 'Quem iniciou'
+      FieldKind = fkLookup
+      FieldName = 'lkp_Atd_Nome'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'Id_Atd'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPsHorario: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Hor'#225'rio'
+      FieldName = 'Horario'
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPPsCTRL_RegistroAtualizado: TBooleanField
+      FieldName = 'CTRL_RegistroAtualizado'
+      Visible = False
+    end
+  end
+  object cdsClonePPs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 344
+    Top = 56
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = cdsPPs
+    ScopeMappings = <>
+    Left = 192
+    Top = 104
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = gridPPs
+      Columns = <>
+    end
+  end
+end

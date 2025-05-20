@@ -1,0 +1,114 @@
+object FrmBase: TFrmBase
+  Left = 0
+  Top = 0
+  ClientHeight = 379
+  ClientWidth = 561
+  StyleBook = frmStyleBook.stbWin7
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnResize = FormResize
+  OnShow = FormShow
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 0
+  object layBase: TLayout
+    Align = Client
+    Size.Width = 561.000000000000000000
+    Size.Height = 379.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object recCaption: TRectangle
+      Align = Top
+      Fill.Color = claBlack
+      Size.Width = 561.000000000000000000
+      Size.Height = 27.000000000000000000
+      Size.PlatformDefault = False
+      object lblCaption: TLabel
+        Align = Client
+        StyledSettings = []
+        Size.Width = 537.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = '<Caption>'
+      end
+      object btnCloseForm: TButton
+        Align = Right
+        Cursor = crHandPoint
+        Position.X = 537.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btnCloseFormStyle1'
+        TabOrder = 0
+        OnClick = btnCloseFormClick
+        object imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00764944415428536D904B0E80200C443DA0DFA07732D1C40BAA87005C35A033
+                0AC60F6F53327DA5844C4416EF7D912540AED8E7A1D55A6F5F91B931C6A25677
+                10C432294462C3393706E11CF80161DA2FFA10BDE14D5C097148AEC264F77C3C
+                AAA288BC4E0A118AD65A83DAF09F561CF2D07B415144E603D3159DEA7D116EAF
+                0000000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+          Align = Center
+          Cursor = crHandPoint
+          HitTest = False
+          Size.Width = 9.000000000000000000
+          Size.Height = 9.000000000000000000
+          Size.PlatformDefault = False
+          object GlowEffect1: TGlowEffect
+            Softness = 0.100000001490116100
+            GlowColor = xFF02A7FF
+            Opacity = 1.000000000000000000
+            Trigger = 'IsMouseOver=true'
+            Enabled = False
+          end
+        end
+      end
+    end
+    object lytFundo: TLayout
+      Align = Client
+      Size.Width = 561.000000000000000000
+      Size.Height = 352.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object rectFundo: TRectangle
+        Align = Client
+        Fill.Color = claNull
+        Size.Width = 561.000000000000000000
+        Size.Height = 352.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object recAguardando: TRectangle
+      Fill.Color = claBlack
+      Opacity = 0.300000011920929000
+      Position.X = 152.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 34.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+  end
+  object bndList: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 313
+    Top = 84
+  end
+end
