@@ -1,0 +1,335 @@
+inherited frmSicsReportCustom: TfrmSicsReportCustom
+  inherited layBase: TLayout
+    Size.Height = 711.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      inherited lblCaption: TLabel
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Relat'#243'rio de tempos'
+      end
+      inherited btnCloseFrame: TButton
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00764944415428536D904B0E80200C443DA0DFA07732D1C40BAA87005C35A033
+                0AC60F6F53327DA5844C4416EF7D912540AED8E7A1D55A6F5F91B931C6A25677
+                10C432294462C3393706E11CF80161DA2FFA10BDE14D5C097148AEC264F77C3C
+                AAA288BC4E0A118AD65A83DAF09F561CF2D07B415144E603D3159DEA7D116EAF
+                0000000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Height = 607.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Height = 607.000000000000000000
+      end
+      object MainGrid: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 1281.000000000000000000
+        Size.Height = 607.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowHeight = 21.000000000000000000
+        RowCount = 0
+        Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        Viewport.Width = 1277.000000000000000000
+        Viewport.Height = 582.000000000000000000
+      end
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Position.Y = 634.000000000000000000
+      Size.Width = 1281.000000000000000000
+      Size.Height = 77.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      object FecharButton: TButton
+        Anchors = [akLeft, akBottom]
+        Images = MainForm.imgResources
+        ImageIndex = 17
+        Position.X = 304.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 113.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVermelho'
+        TabOrder = 6
+        Text = 'Fechar'
+        OnClick = FecharButtonClick
+      end
+      object ExportBtn: TButton
+        Anchors = [akLeft, akBottom]
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Position.X = 153.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btexportar'
+        TabOrder = 5
+        Text = 'E&xportar'
+        OnClick = ExportBtnClick
+      end
+      object RecordsLabel: TLabel
+        Anchors = [akRight, akBottom]
+        Position.X = 1141.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 78.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Trailing
+        Text = '0'
+      end
+      object Label1: TLabel
+        Anchors = [akRight, akBottom]
+        AutoSize = True
+        Position.X = 1223.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 46.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'registros'
+      end
+      object chkMostrarTipoSenha: TCheckBox
+        Anchors = [akRight, akBottom]
+        Position.X = 1035.000000000000000000
+        Position.Y = 30.000000000000000000
+        Size.Width = 225.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Mostrar &tipos das senhas'
+        OnChange = chkMostrarTipoSenhaChange
+      end
+      object chkMostrarNomeDosClientes: TCheckBox
+        Anchors = [akRight, akBottom]
+        Position.X = 1035.000000000000000000
+        Position.Y = 54.000000000000000000
+        Size.Width = 241.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Mostrar &nomes dos clientes'
+        OnChange = chkMostrarNomeDosClientesChange
+      end
+      object chkMostrarTags: TCheckBox
+        Anchors = [akRight, akBottom]
+        Position.X = 1036.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 174.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Mostrar ta&gs'
+        OnChange = chkMostrarTagsChange
+      end
+      object ProgressBar1: TProgressBar
+        Anchors = [akRight, akBottom]
+        Orientation = Horizontal
+        Position.X = 915.000000000000000000
+        Position.Y = 32.000000000000000000
+        Visible = False
+      end
+      object PrintPreviewButton: TButton
+        Anchors = [akLeft, akBottom]
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Position.X = 6.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btimprimir'
+        TabOrder = 4
+        Text = 'I&mprimir'
+        OnClick = PrintPreviewButtonClick
+      end
+    end
+  end
+  object MainMenu1: TMenuBar [1]
+    Align = MostTop
+    Size.Width = 1281.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    object ShortcutsMenu: TMenuItem
+      Text = 'Shortcuts'
+      Visible = False
+      object MenuPrint: TMenuItem
+        Locked = True
+        ShortCut = 32848
+        Text = 'Print'
+        OnClick = PrintPreviewButtonClick
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 374
+    Top = 234
+    object LinkGridEventos: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndEventos
+      GridControl = MainGrid
+      Columns = <>
+    end
+  end
+  inherited ilPrincipal: TImageList
+    Left = 312
+    Top = 232
+  end
+  object dsEventos: TDataSource
+    AutoEdit = False
+    DataSet = cdsEventos
+    OnDataChange = dsEventosDataChange
+    Left = 456
+    Top = 97
+  end
+  object qryEventos: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '   E.*'
+      '   S.NUMEROTICKET AS NUMEROTICKET,'
+      '   T.NOME         AS NOMETIPOEVENTO,'
+      '   F1.NOME        AS NOMEFILAESPERA,'
+      '   F2.NOME        AS TIPOTICKET,'
+      '   P.NOME         AS NOMEPA,'
+      '   A.NOME         AS NOMEATD,'
+      '   C.NOME         AS NOMECLIENTE'
+      'FROM'
+      '   EVENTOS E'
+      
+        '   LEFT JOIN TICKETS       S  ON  E.ID_TICKET         = S.ID  AN' +
+        'D E.ID_UNIDADE = S.ID_UNIDADE'
+      
+        '   LEFT JOIN TIPOS_EVENTOS T  ON  E.ID_TIPOEVENTO     = T.ID  AN' +
+        'D E.ID_UNIDADE = T.ID_UNIDADE'
+      
+        '   LEFT JOIN FILAS         F1 ON  E.ID_FILAESPERA     = F1.ID AN' +
+        'D E.ID_UNIDADE = F1.ID_UNIDADE'
+      
+        '   LEFT JOIN FILAS         F2 ON  E.ID_FILATIPOTICKET = F2.ID AN' +
+        'D E.ID_UNIDADE = F2.ID_UNIDADE'
+      
+        '   LEFT JOIN PAS           P  ON  E.ID_PA             = P.ID  AN' +
+        'D E.ID_UNIDADE = P.ID_UNIDADE'
+      
+        '   LEFT JOIN ATENDENTES    A  ON  E.ID_ATENDENTE      = A.ID  AN' +
+        'D E.ID_UNIDADE = A.ID_UNIDADE'
+      
+        '   LEFT JOIN CLIENTES      C  ON  S.ID_CLIENTE        = C.ID  AN' +
+        'D S.ID_UNIDADE = C.ID_UNIDADE'
+      'WHERE'
+      '  E.ID_UNIDADE = :ID_UNIDADE'
+      
+        ' AND ((E.INICIO >= :IniSinceTime)and(E.INICIO <= :IniUntilTime )' +
+        ')'
+      'ORDER BY'
+      '  E.ID_TICKET, E.INICIO'
+      '')
+    Left = 200
+    Top = 97
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'INISINCETIME'
+        DataType = ftDateTime
+        ParamType = ptInput
+      end
+      item
+        Name = 'INIUNTILTIME'
+        DataType = ftDateTime
+        ParamType = ptInput
+      end>
+  end
+  object cdsEventos: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID_UNIDADE;ID_TICKET;INICIO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspEventosTmp'
+    BeforeOpen = cdsEventosBeforeOpen
+    AfterOpen = cdsEventosAfterOpen
+    Left = 375
+    Top = 97
+  end
+  object qryTabelasUnidades: TFDQuery
+    Left = 56
+    Top = 120
+  end
+  object cdsEventosTmp: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspEventosTmp'
+    Left = 376
+    Top = 151
+  end
+  object dspEventosTmp: TDataSetProvider
+    DataSet = qryEventos
+    Left = 287
+    Top = 97
+  end
+  object qryGetTagsTicket: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  NN.ID_TAG AS ID,'
+      '  T.NOME    AS NOMETAG'
+      'FROM'
+      '  NN_TICKETS_TAGS NN'
+      '  JOIN TAGS T ON NN.ID_UNIDADE = T.ID_UNIDADE AND'
+      '                 NN.ID_TAG = T.ID'
+      'WHERE'
+      '  NN.ID_UNIDADE = :ID_UNIDADE AND'
+      '  NN.ID_TICKET = :ID_TICKET')
+    Left = 53
+    Top = 55
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_TICKET'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object bndEventos: TBindSourceDB
+    DataSource = dsEventos
+    ScopeMappings = <>
+    Left = 226
+    Top = 232
+  end
+  object dtsMain: TDataSource
+    DataSet = cdsEventos
+    OnStateChange = dtsMainStateChange
+    Left = 444
+    Top = 233
+  end
+end

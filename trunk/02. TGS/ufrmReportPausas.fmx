@@ -1,0 +1,278 @@
+inherited frmReportPausas: TfrmReportPausas
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 1261.000000000000000000
+    Size.Height = 715.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 1261.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1237.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Relat'#243'rio de tempos Pausas e Logins'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1237.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Margins.Top = 10.000000000000000000
+      Size.Width = 1261.000000000000000000
+      Size.Height = 637.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 1261.000000000000000000
+        Size.Height = 637.000000000000000000
+      end
+      inherited MainGrid: TGrid
+        Size.Width = 1261.000000000000000000
+        Size.Height = 637.000000000000000000
+        Viewport.Width = 1261.000000000000000000
+        Viewport.Height = 637.000000000000000000
+      end
+    end
+    inherited lytRodape: TLayout
+      Position.Y = 674.000000000000000000
+      Size.Width = 1261.000000000000000000
+      Size.Height = 41.000000000000000000
+      inherited FecharButton: TButton
+        Position.X = 302.000000000000000000
+        Position.Y = 4.000000000000000000
+        StyleLookup = 'btvermelho'
+      end
+      inherited ExportBtn: TButton
+        Position.Y = 4.000000000000000000
+      end
+      inherited RecordsLabel: TLabel
+        Anchors = [akTop, akRight]
+        Position.X = 1106.000000000000000000
+      end
+      inherited Label1: TLabel
+        Anchors = [akTop, akRight]
+        Position.X = 1196.000000000000000000
+      end
+      inherited chkMostrarTipoSenha: TCheckBox
+        Position.X = 1001.000000000000000000
+        Position.Y = 8.000000000000000000
+        Visible = False
+      end
+      inherited chkMostrarNomeDosClientes: TCheckBox
+        Position.X = 1015.000000000000000000
+        Position.Y = 8.000000000000000000
+        Visible = False
+      end
+      inherited chkMostrarTags: TCheckBox
+        Position.X = 626.000000000000000000
+        Position.Y = -26.000000000000000000
+        Visible = False
+      end
+      inherited ProgressBar1: TProgressBar
+        Position.X = 1142.000000000000000000
+        Position.Y = 8.000000000000000000
+      end
+      inherited PrintPreviewButton: TButton
+        Position.X = 5.000000000000000000
+        Position.Y = 4.000000000000000000
+      end
+    end
+  end
+  inherited MainMenu1: TMenuBar
+    Visible = False
+  end
+  inherited bndList: TBindingsList
+    Left = 353
+    Top = 172
+  end
+  inherited qryEventos: TFDQuery
+    SQL.Strings = (
+      'select                                                       '
+      '   0 as ID_UNIDADE,                '
+      '   E.ID, E.ID_TIPOEVENTO, E.ID_PA, E.ID_ATENDENTE, E.ID_TICKET,'
+      '   E.ID_FILAESPERA, E.ID_FILATIPOTICKET, E.ID_MOTIVOPAUSA,'
+      '   E.INICIO, E.FIM, E.DURACAO_OLD, E.DURACAO_SEGUNDOS,'
+      '   T.NOME          AS NOMETIPOEVENTO,'
+      '   P.NOME'#9#9'       AS NOMEPA,'
+      '   A.NOME          AS NOMEATD,'
+      '   MP.NOME         AS NOMEMOTIVOPAUSA'
+      'from'
+      '   EVENTOS E'
+      '   left join TIPOS_EVENTOS T  on E.ID_TIPOEVENTO     = T .ID'
+      '   left join PAS           P  on E.ID_PA             = P .ID'
+      '   left join ATENDENTES    A  on E.ID_ATENDENTE      = A .ID'
+      '   left join MOTIVOS_PAUSA MP on E.ID_MOTIVOPAUSA    = MP.ID'
+      'where ('
+      '(E.ID_TIPOEVENTO IN(4, 5) ))')
+    Left = 152
+    Top = 131
+    ParamData = <>
+    object qryEventosID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object qryEventosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qryEventosID_TIPOEVENTO: TIntegerField
+      FieldName = 'ID_TIPOEVENTO'
+    end
+    object qryEventosID_PA: TIntegerField
+      FieldName = 'ID_PA'
+    end
+    object qryEventosID_ATENDENTE: TIntegerField
+      FieldName = 'ID_ATENDENTE'
+    end
+    object qryEventosID_TICKET: TIntegerField
+      FieldName = 'ID_TICKET'
+    end
+    object qryEventosID_FILAESPERA: TIntegerField
+      FieldName = 'ID_FILAESPERA'
+    end
+    object qryEventosID_FILATIPOTICKET: TIntegerField
+      FieldName = 'ID_FILATIPOTICKET'
+    end
+    object qryEventosID_MOTIVOPAUSA: TIntegerField
+      FieldName = 'ID_MOTIVOPAUSA'
+    end
+    object qryEventosINICIO: TSQLTimeStampField
+      FieldName = 'INICIO'
+    end
+    object qryEventosFIM: TSQLTimeStampField
+      FieldName = 'FIM'
+    end
+    object qryEventosDURACAO_OLD: TSQLTimeStampField
+      FieldName = 'DURACAO_OLD'
+    end
+    object qryEventosDURACAO_SEGUNDOS: TIntegerField
+      FieldName = 'DURACAO_SEGUNDOS'
+    end
+    object qryEventosNOMETIPOEVENTO: TStringField
+      FieldName = 'NOMETIPOEVENTO'
+      Size = 15
+    end
+    object qryEventosNOMEPA: TStringField
+      FieldName = 'NOMEPA'
+      Size = 30
+    end
+    object qryEventosNOMEATD: TStringField
+      FieldName = 'NOMEATD'
+      Size = 60
+    end
+    object qryEventosNOMEMOTIVOPAUSA: TStringField
+      FieldName = 'NOMEMOTIVOPAUSA'
+      Size = 60
+    end
+  end
+  inherited cdsEventos: TClientDataSet
+    Left = 222
+    Top = 114
+    object cdsEventosID_UNIDADE: TIntegerField
+      DisplayLabel = 'Id Unid.'
+      DisplayWidth = 5
+      FieldName = 'ID_UNIDADE'
+      Required = True
+      Visible = False
+    end
+    object cdsEventosLKP_NOME_UNIDADE: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 70
+      FieldKind = fkLookup
+      FieldName = 'LKP_NOME_UNIDADE'
+      LookupDataSet = dmUnidades.cdsUnidades
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_UNIDADE'
+      Size = 40
+      Lookup = True
+    end
+    object cdsEventosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+      Visible = False
+    end
+    object cdsEventosID_TIPOEVENTO: TSmallintField
+      FieldName = 'ID_TIPOEVENTO'
+      Visible = False
+    end
+    object cdsEventosID_PA: TSmallintField
+      FieldName = 'ID_PA'
+      Visible = False
+    end
+    object cdsEventosID_ATENDENTE: TSmallintField
+      FieldName = 'ID_ATENDENTE'
+      Visible = False
+    end
+    object cdsEventosID_MOTIVOPAUSA: TIntegerField
+      FieldName = 'ID_MOTIVOPAUSA'
+      Visible = False
+    end
+    object cdsEventosNOMETIPOEVENTO: TStringField
+      DisplayLabel = 'Evento'
+      DisplayWidth = 80
+      FieldName = 'NOMETIPOEVENTO'
+      Size = 15
+    end
+    object cdsEventosNOMEPA: TStringField
+      DisplayLabel = 'PA'
+      DisplayWidth = 80
+      FieldName = 'NOMEPA'
+      Size = 30
+    end
+    object cdsEventosNOMEATD: TStringField
+      DisplayLabel = 'Atendente'
+      DisplayWidth = 100
+      FieldName = 'NOMEATD'
+      Size = 60
+    end
+    object cdsEventosNOMEMOTIVOPAUSA: TStringField
+      DisplayLabel = 'Motivo da Pausa'
+      DisplayWidth = 140
+      FieldName = 'NOMEMOTIVOPAUSA'
+      Size = 60
+    end
+    object cdsEventosINICIO: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'In'#237'cio'
+      DisplayWidth = 120
+      FieldName = 'INICIO'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosFIM: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Fim'
+      DisplayWidth = 120
+      FieldName = 'FIM'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosDURACAO_SEGUNDOS: TIntegerField
+      DisplayLabel = 'Dura'#231#227'o'
+      DisplayWidth = 70
+      FieldName = 'DURACAO_SEGUNDOS'
+      OnGetText = cdsEventosDURACAO_SEGUNDOSGetText
+    end
+    object cdsEventosID_TICKET: TIntegerField
+      FieldName = 'ID_TICKET'
+      Visible = False
+    end
+    object cdsEventosID_FILAESPERA: TIntegerField
+      FieldName = 'ID_FILAESPERA'
+      Visible = False
+    end
+    object cdsEventosID_FILATIPOTICKET: TIntegerField
+      FieldName = 'ID_FILATIPOTICKET'
+      Visible = False
+    end
+    object cdsEventosDURACAO_OLD: TSQLTimeStampField
+      FieldName = 'DURACAO_OLD'
+      Visible = False
+    end
+  end
+  inherited bndEventos: TBindSourceDB
+    Left = 444
+  end
+  inherited dtsMain: TDataSource
+    Left = 402
+    Top = 131
+  end
+end

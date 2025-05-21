@@ -1,0 +1,233 @@
+inherited frmReportPP: TfrmReportPP
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 1261.000000000000000000
+    Size.Height = 715.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 1261.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1237.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Relat'#243'rio de tempos PP'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1237.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Margins.Top = 10.000000000000000000
+      Size.Width = 1261.000000000000000000
+      Size.Height = 601.000000000000000000
+      TabOrder = 8
+      inherited rectFundo: TRectangle
+        Size.Width = 1261.000000000000000000
+        Size.Height = 601.000000000000000000
+      end
+      inherited MainGrid: TGrid
+        Size.Width = 1261.000000000000000000
+        Size.Height = 601.000000000000000000
+        Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick]
+        Viewport.Width = 1261.000000000000000000
+        Viewport.Height = 601.000000000000000000
+      end
+    end
+    inherited lytRodape: TLayout
+      Position.Y = 638.000000000000000000
+      Size.Width = 1261.000000000000000000
+      inherited FecharButton: TButton
+        Position.X = 301.000000000000000000
+      end
+      inherited RecordsLabel: TLabel
+        Position.X = 1098.000000000000000000
+      end
+      inherited Label1: TLabel
+        Position.X = 1179.000000000000000000
+      end
+      inherited chkMostrarTipoSenha: TCheckBox
+        Position.X = 1018.000000000000000000
+        Position.Y = 31.000000000000000000
+      end
+      inherited chkMostrarNomeDosClientes: TCheckBox
+        Position.X = 1018.000000000000000000
+      end
+      inherited chkMostrarTags: TCheckBox
+        Position.X = 1018.000000000000000000
+        Position.Y = 6.000000000000000000
+      end
+      inherited ProgressBar1: TProgressBar
+        Position.X = 898.000000000000000000
+      end
+    end
+  end
+  inherited MainMenu1: TMenuBar
+    Visible = False
+  end
+  inherited bndList: TBindingsList
+    Left = 371
+  end
+  inherited dsEventos: TDataSource
+    Left = 273
+    Top = 154
+  end
+  inherited qryEventos: TFDQuery
+    Left = 202
+    Top = 124
+  end
+  inherited cdsEventos: TClientDataSet
+    Left = 303
+    Top = 78
+    object cdsEventosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+      Visible = False
+    end
+    object cdsEventosID_UNIDADE: TIntegerField
+      DisplayLabel = 'Id Unid.'
+      DisplayWidth = 5
+      FieldName = 'ID_UNIDADE'
+      Required = True
+      Visible = False
+    end
+    object cdsEventosID_TICKET: TIntegerField
+      FieldName = 'ID_TICKET'
+      Visible = False
+    end
+    object cdsEventosID_FILATIPOTICKET: TIntegerField
+      FieldName = 'ID_FILATIPOTICKET'
+      Visible = False
+    end
+    object cdsEventosID_TIPOPP: TSmallintField
+      FieldName = 'ID_TIPOPP'
+      Visible = False
+    end
+    object cdsEventosID_PA_INICIO: TSmallintField
+      FieldName = 'ID_PA_INICIO'
+      Visible = False
+    end
+    object cdsEventosID_ATD_INICIO: TSmallintField
+      FieldName = 'ID_ATD_INICIO'
+      Visible = False
+    end
+    object cdsEventosID_PA_FIM: TSmallintField
+      FieldName = 'ID_PA_FIM'
+      Visible = False
+    end
+    object cdsEventosID_ATD_FIM: TSmallintField
+      FieldName = 'ID_ATD_FIM'
+      Visible = False
+    end
+    object cdsEventosLKP_NOME_UNIDADE: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 120
+      FieldKind = fkLookup
+      FieldName = 'LKP_NOME_UNIDADE'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_UNIDADE'
+      Size = 40
+      Lookup = True
+    end
+    object cdsEventosNUMEROTICKET: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      DisplayWidth = 70
+      FieldName = 'NUMEROTICKET'
+    end
+    object cdsEventosNOMECLIENTE: TStringField
+      DisplayLabel = 'Nome cliente'
+      DisplayWidth = 120
+      FieldName = 'NOMECLIENTE'
+      Visible = False
+      Size = 60
+    end
+    object cdsEventosTIPOTICKET: TStringField
+      DisplayLabel = 'Tipo senha'
+      DisplayWidth = 60
+      FieldName = 'TIPOTICKET'
+      Visible = False
+      Size = 30
+    end
+    object cdsEventosNOMETIPOPP: TStringField
+      DisplayLabel = 'Processo Paralelo'
+      DisplayWidth = 100
+      FieldName = 'NOMETIPOPP'
+      Size = 60
+    end
+    object cdsEventosNOMEPAINICIO: TStringField
+      DisplayLabel = 'PA (In'#237'cio)'
+      DisplayWidth = 100
+      FieldName = 'NOMEPAINICIO'
+      Size = 30
+    end
+    object cdsEventosNOMEATDINICIO: TStringField
+      DisplayLabel = 'Atendente (In'#237'cio)'
+      DisplayWidth = 100
+      FieldName = 'NOMEATDINICIO'
+      Size = 60
+    end
+    object cdsEventosNOMEPAFIM: TStringField
+      DisplayLabel = 'PA (Fim)'
+      DisplayWidth = 80
+      FieldName = 'NOMEPAFIM'
+      Size = 30
+    end
+    object cdsEventosNOMEATDFIM: TStringField
+      DisplayLabel = 'Atendente (Fim)'
+      DisplayWidth = 80
+      FieldName = 'NOMEATDFIM'
+      Size = 60
+    end
+    object cdsEventosINICIO: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'In'#237'cio'
+      DisplayWidth = 120
+      FieldName = 'INICIO'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosFIM: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Fim'
+      DisplayWidth = 120
+      FieldName = 'FIM'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosDURACAO_SEGUNDOS: TIntegerField
+      DisplayLabel = 'Dura'#231#227'o'
+      DisplayWidth = 80
+      FieldName = 'DURACAO_SEGUNDOS'
+      OnGetText = cdsEventosDURACAO_SEGUNDOSGetText
+    end
+    object cdsEventosINTCALC_TAGS: TStringField
+      DisplayLabel = 'Tags'
+      DisplayWidth = 60
+      FieldKind = fkInternalCalc
+      FieldName = 'INTCALC_TAGS'
+      Visible = False
+      Size = 50
+    end
+  end
+  inherited cdsEventosTmp: TClientDataSet
+    Left = 73
+    Top = 157
+  end
+  inherited dspEventosTmp: TDataSetProvider
+    Left = 143
+    Top = 110
+  end
+  inherited bndEventos: TBindSourceDB
+    Left = 450
+  end
+  inherited dtsMain: TDataSource
+    Top = 200
+  end
+  object cdsEventosTmpPP: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEventosTmpPP'
+    Left = 183
+    Top = 162
+  end
+end

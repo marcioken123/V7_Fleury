@@ -1,0 +1,194 @@
+inherited frmLines: TfrmLines
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 702.000000000000000000
+    Size.Height = 430.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 702.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 678.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Situa'#231#227'o da Espera'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 678.000000000000000000
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00754944415428536D904B0E80200C4439A0DFA07732D1C40BAA97B0AC1AD029
+                964494D9B499796D098699F710426D0A826F2597662022F705D527D4F66D08D8
+                1481A41478EF1705E2C04F00D6EBD1A4562EDDE400CEBA293F85C9510004F1F1
+                A85640F85D114852F044EDE59F0E349566990464E6ED06F3EB9E1A1806F55600
+                00000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Margins.Top = 10.000000000000000000
+      Size.Width = 702.000000000000000000
+      Size.Height = 393.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 702.000000000000000000
+        Size.Height = 393.000000000000000000
+        Stroke.Kind = None
+        object LinesGrid: TGrid
+          Align = Client
+          CanFocus = True
+          ClipChildren = True
+          Size.Width = 702.000000000000000000
+          Size.Height = 354.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TabStop = False
+          RowHeight = 21.000000000000000000
+          RowCount = 0
+          Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick]
+          OnDrawColumnCell = LinesGridDrawColumnCell
+          Viewport.Width = 702.000000000000000000
+          Viewport.Height = 354.000000000000000000
+        end
+        object rectTotalSenhas: TRectangle
+          Align = Bottom
+          Fill.Kind = None
+          Position.Y = 354.000000000000000000
+          Size.Width = 702.000000000000000000
+          Size.Height = 39.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+        end
+      end
+      object CloseBtn: TButton
+        Anchors = [akRight, akBottom]
+        ImageIndex = 17
+        Position.X = 624.000000000000000000
+        Position.Y = 367.000000000000000000
+        Size.Width = 75.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = '&Fechar'
+        Visible = False
+        OnClick = CloseBtnClick
+      end
+    end
+  end
+  object lblTotalSenhas: TLabel [1]
+    Anchors = [akLeft, akBottom]
+    AutoSize = True
+    StyledSettings = [Family, Size, FontColor]
+    Position.X = 24.000000000000000000
+    Position.Y = 409.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.WordWrap = False
+    Text = 'Total senhas:'
+  end
+  inherited bndList: TBindingsList
+    Left = 108
+    Top = 21
+    object LinkGridToDataSourcebnd1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd1
+      GridControl = LinesGrid
+      Columns = <
+        item
+          MemberName = 'FILA'
+          Width = 40
+        end
+        item
+          MemberName = 'NOME'
+          Width = 200
+        end
+        item
+          MemberName = 'SENHA'
+        end
+        item
+          MemberName = 'MAIOR_ESPERA'
+          Width = 100
+        end>
+    end
+  end
+  object cdsFila: TClientDataSet
+    Aggregates = <>
+    AutoCalcFields = False
+    FieldDefs = <
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 150
+      end
+      item
+        Name = 'MAIOR_ESPERA'
+        DataType = ftTime
+      end
+      item
+        Name = 'TEMPO_ESPERA'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'FILA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SENHA'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'FILA'
+    Params = <>
+    StoreDefs = True
+    AfterPost = cdsFilaAfterPost
+    AfterDelete = cdsFilaAfterDelete
+    OnCalcFields = cdsFilaCalcFields
+    Left = 177
+    Top = 95
+    object cdsFilaNOME: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 300
+      FieldName = 'NOME'
+      Size = 150
+    end
+    object cdsFilaTEMPO_ESPERA: TDateTimeField
+      DisplayLabel = 'Tempo Espera'
+      DisplayWidth = 80
+      FieldName = 'TEMPO_ESPERA'
+      Visible = False
+      DisplayFormat = 'dd/mm/yyyy hh:nn:ss'
+    end
+    object cdsFilaFILA: TIntegerField
+      DisplayLabel = 'Fila'
+      DisplayWidth = 50
+      FieldName = 'FILA'
+    end
+    object cdsFilaSENHA: TIntegerField
+      DisplayLabel = 'Senhas'
+      DisplayWidth = 50
+      FieldName = 'SENHA'
+    end
+    object cdsFilaMAIOR_ESPERA: TTimeField
+      DisplayLabel = 'Maior Espera'
+      DisplayWidth = 80
+      FieldKind = fkCalculated
+      FieldName = 'MAIOR_ESPERA'
+      Calculated = True
+    end
+  end
+  object bnd1: TBindSourceDB
+    DataSet = cdsFila
+    ScopeMappings = <>
+    Left = 135
+    Top = 97
+  end
+end

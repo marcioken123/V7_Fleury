@@ -1,0 +1,2042 @@
+inherited frmSicsConfiguraTabela: TfrmSicsConfiguraTabela
+  Size.Width = 1152.000000000000000000
+  Size.Height = 587.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 1132.000000000000000000
+    Size.Height = 567.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      Size.Width = 1132.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1108.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Configura'#231#227'o'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1108.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 1132.000000000000000000
+      Size.Height = 485.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 1132.000000000000000000
+        Size.Height = 422.000000000000000000
+        Stroke.Kind = None
+      end
+      object lytBusca: TLayout
+        Align = Top
+        Size.Width = 1132.000000000000000000
+        Size.Height = 63.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object lblConfigTabela: TLabel
+          AutoSize = True
+          Position.X = 5.000000000000000000
+          Position.Y = 22.000000000000000000
+          Size.Width = 36.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Tabela:'
+        end
+        object edBusca: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          Position.X = 77.000000000000000000
+          Position.Y = 16.000000000000000000
+          Size.Width = 200.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnKeyDown = edBuscaKeyDown
+          OnKeyUp = edBuscaKeyUp
+        end
+        object btnIncluirBusca: TSpeedButton
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Position.X = 281.000000000000000000
+          Position.Y = 18.000000000000000000
+          Size.Width = 67.000000000000000000
+          Size.Height = 29.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btVerde'
+          Text = 'Ok'
+          OnClick = btnIncluirBuscaClick
+        end
+      end
+      object gridGenerico: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Margins.Right = 50.000000000000000000
+        PopupMenu = mnuPopGrid
+        Size.Width = 1082.000000000000000000
+        Size.Height = 422.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        RowHeight = 21.000000000000000000
+        Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        OnHeaderClick = gridGenericoHeaderClick
+        OnSelectCell = gridGenericoSelectCell
+        OnDrawColumnCell = gridGenericoDrawColumnCell
+        OnCellDblClick = gridGenericoCellDblClick
+        Viewport.Width = 1062.000000000000000000
+        Viewport.Height = 397.000000000000000000
+      end
+      object btnDescer: TButton
+        Anchors = [akTop, akRight]
+        ImageIndex = 22
+        Position.X = 1090.000000000000000000
+        Position.Y = 110.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'actiontoolbutton'
+        TabOrder = 2
+      end
+      object btnSubir: TButton
+        Anchors = [akTop, akRight]
+        ImageIndex = 21
+        Position.X = 1090.000000000000000000
+        Position.Y = 75.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'actiontoolbutton'
+        TabOrder = 0
+      end
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Padding.Top = 13.000000000000000000
+      Padding.Bottom = 12.000000000000000000
+      Position.Y = 512.000000000000000000
+      Size.Width = 1132.000000000000000000
+      Size.Height = 55.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object btnIncluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btAdicionar'
+        TabOrder = 5
+        Text = '&Incluir'
+        OnClick = btnIncluirClick
+      end
+      object btnExcluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Margins.Left = 5.000000000000000000
+        Position.X = 147.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btExcluir'
+        TabOrder = 6
+        Text = 'E&xcluir'
+        OnClick = btnExcluirClick
+      end
+      object btnApagarSenha: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Margins.Left = 5.000000000000000000
+        Position.X = 294.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btExcluir'
+        TabOrder = 7
+        Text = 'Apagar &senha'
+        OnClick = btnApagarSenhaClick
+      end
+      object btnListagem: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Margins.Left = 5.000000000000000000
+        Position.X = 588.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btImprimir'
+        TabOrder = 10
+        Text = 'Listagem'
+        OnClick = btnListagemClick
+      end
+      object btnConfirmar: TButton
+        Align = Right
+        Margins.Right = 5.000000000000000000
+        Position.X = 927.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVerde'
+        TabOrder = 12
+        Text = '&OK'
+        OnClick = btnConfirmarClick
+      end
+      object btnCancelar: TButton
+        Align = Right
+        Position.X = 1032.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVermelho'
+        TabOrder = 13
+        Text = '&Cancelar'
+        OnClick = btnCancelarClick
+      end
+      object btnPrintCDB: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Margins.Left = 5.000000000000000000
+        Position.X = 441.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btImprimir'
+        TabOrder = 8
+        Text = 'Imprimir  c'#243'digo de barras'
+        TextSettings.WordWrap = True
+        OnClick = btnPrintCDBClick
+      end
+      object btnCopiarNome: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Margins.Left = 5.000000000000000000
+        Position.X = 735.000000000000000000
+        Position.Y = 13.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btCopiar'
+        TabOrder = 9
+        Text = 'Copiar nome para login'
+        OnClick = btnCopiarNomeClick
+      end
+    end
+  end
+  object mnuPopGrid: TPopupMenu [1]
+    OnPopup = mnuPopGridPopup
+    Left = 256
+    Top = 200
+    object mnuLimpar: TMenuItem
+      Text = 'Limpar'
+      OnClick = mnuLimparClick
+    end
+    object mnuItemCopiarCor: TMenuItem
+      Text = 'Copiar'
+      OnClick = mnuItemCopiarCorClick
+    end
+    object mnuItemColarCor: TMenuItem
+      Text = 'Colar'
+      OnClick = mnuItemColarCorClick
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 198
+    Top = 118
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndDataSet
+      GridControl = gridGenerico
+      Columns = <>
+    end
+  end
+  object dsGenerico: TDataSource
+    OnStateChange = dsGenericoStateChange
+    Left = 89
+    Top = 206
+  end
+  object cdsFilas: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspFilas'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 32
+    object cdsFilasID: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsFilasATIVO: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsFilasNOMENOTICKET: TStringField
+      DisplayLabel = 'Nome no Ticket'
+      FieldName = 'NOMENOTICKET'
+      Size = 30
+    end
+    object cdsFilasNOMENOTOTEM: TStringField
+      DisplayLabel = 'Nome no Totem'
+      DisplayWidth = 70
+      FieldName = 'NOMENOTOTEM'
+      Size = 70
+    end
+    object cdsFilasRANGEMINIMO: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'M'#237'nimo'
+      FieldName = 'RANGEMINIMO'
+    end
+    object cdsFilasRANGEMAXIMO: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'M'#225'ximo'
+      FieldName = 'RANGEMAXIMO'
+    end
+    object cdsFilasTROCARMILHAR: TStringField
+      Tag = 1
+      Alignment = taCenter
+      FieldName = 'TROCARMILHAR'
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasTROCARDEZENADEMILHAR: TStringField
+      Tag = 1
+      Alignment = taCenter
+      FieldName = 'TROCARDEZENADEMILHAR'
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasGERACAOAUTOMATICA: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Gera Autom.'
+      FieldName = 'GERACAOAUTOMATICA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasCODIGOCOR: TIntegerField
+      DisplayLabel = 'Cor'
+      FieldName = 'CODIGOCOR'
+      ReadOnly = True
+    end
+    object cdsFilasPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsFilasID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsFilasMETAESPERA: TSQLTimeStampField
+      FieldName = 'METAESPERA'
+    end
+    object cdsFilasIMPRIME_CDB: TStringField
+      FieldName = 'IMPRIME_CDB'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasLIMIAR_AMARELO: TTimeField
+      FieldName = 'LIMIAR_AMARELO'
+    end
+    object cdsFilasLIMIAR_VERMELHO: TTimeField
+      FieldName = 'LIMIAR_VERMELHO'
+    end
+    object cdsFilasLIMIAR_LARANJA: TTimeField
+      FieldName = 'LIMIAR_LARANJA'
+    end
+    object cdsFilasTAMANHO_NOME_FILA: TIntegerField
+      FieldName = 'TAMANHO_NOME_FILA'
+    end
+    object cdsFilasNEGRITO_NOME_FILA: TStringField
+      FieldName = 'NEGRITO_NOME_FILA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasITALICO_NOME_FILA: TStringField
+      FieldName = 'ITALICO_NOME_FILA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasSUBLINHADO_NOME_FILA: TStringField
+      FieldName = 'SUBLINHADO_NOME_FILA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasCOR_NOME_FILA: TIntegerField
+      FieldName = 'COR_NOME_FILA'
+    end
+    object cdsFilasIMAGEM_FILA: TBlobField
+      FieldName = 'IMAGEM_FILA'
+    end
+    object cdsFilasALINHAMENTO_IMAGEM: TIntegerField
+      FieldName = 'ALINHAMENTO_IMAGEM'
+    end
+    object cdsFilasCONTADOR: TIntegerField
+      FieldName = 'CONTADOR'
+    end
+  end
+  object dspFilas: TDataSetProvider
+    DataSet = qryFilas
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 513
+    Top = 32
+  end
+  object qryGeneratorGenericoTESTARREMOVER: TFDQuery
+    SQL.Strings = (
+      'SELECT GEN_ID (GEN_ID_FILA, 1) AS ID FROM RDB$DATABASE')
+    Left = 84
+    Top = 147
+  end
+  object cdsPaineis: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspPaineis'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 96
+    object cdsPaineisID: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPaineisNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsPaineisID_MODELOPAINEL: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Md'
+      FieldName = 'ID_MODELOPAINEL'
+      Required = True
+    end
+    object cdsPaineisLKUP_MODELOPAINEL: TStringField
+      DisplayLabel = 'Modelo'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_MODELOPAINEL'
+      LookupDataSet = cdsLkpModelosDePaineis
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_MODELOPAINEL'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPaineisENDERECOSERIAL: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'End.Serial'
+      FieldName = 'ENDERECOSERIAL'
+      Size = 15
+    end
+    object cdsPaineisTCPIP: TStringField
+      DisplayLabel = 'TCP/IP'
+      FieldName = 'TCPIP'
+      Size = 1000
+    end
+    object cdsPaineisMANTERULTIMASENHA: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Manter '#218'ltima'
+      FieldName = 'MANTERULTIMASENHA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPaineisMONITORAMENTO: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Monitoramento'
+      FieldName = 'MONITORAMENTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPaineisID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsPaineisMENSAGEM: TMemoField
+      FieldName = 'MENSAGEM'
+      BlobType = ftMemo
+    end
+    object cdsPaineisID_CANAL_TV: TIntegerField
+      FieldName = 'ID_CANAL_TV'
+    end
+  end
+  object dspPaineis: TDataSetProvider
+    DataSet = qryPaineis
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 96
+  end
+  object cdsGruposDePAs: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDePAs'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 128
+    object cdsGruposDePAsID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsGruposDePAsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsGruposDePAsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDePAs: TDataSetProvider
+    DataSet = qryGruposDePAs
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 128
+  end
+  object cdsLkpModelosDePaineis: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpModelosDePaineis'
+    Left = 48
+    Top = 292
+  end
+  object dspLkpModelosDePaineis: TDataSetProvider
+    DataSet = qryLkpModelosDePaineis
+    Options = [poPropogateChanges]
+    Left = 48
+    Top = 320
+  end
+  object cdsGruposDePaineis: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDePaineis'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 64
+    object cdsGruposDePaineisID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsGruposDePaineisNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsGruposDePaineisID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDePaineis: TDataSetProvider
+    DataSet = qryGruposDePaineis
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 64
+  end
+  object cdsPAs: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspPAs'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 160
+    object cdsPAsID: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPAsATIVO: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPAsNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsPAsID_GRUPOPA: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'GR'
+      FieldName = 'ID_GRUPOPA'
+    end
+    object cdsPAsLKUP_GRUPO: TStringField
+      DisplayLabel = 'Grupo'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPO'
+      LookupDataSet = cdsLkpGruposPAs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_GRUPOPA'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsID_PAINEL: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'PN'
+      FieldName = 'ID_PAINEL'
+    end
+    object cdsPAsLKUP_PAINEL: TStringField
+      DisplayLabel = 'Painel'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_PAINEL'
+      LookupDataSet = cdsLkpPainel
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_PAINEL'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsNOMENOPAINEL: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Texto no Painel'
+      FieldName = 'NOMENOPAINEL'
+      Size = 60
+    end
+    object cdsPAsNOMEPORVOZ: TStringField
+      DisplayLabel = 'Texto por voz'
+      FieldName = 'NOMEPORVOZ'
+      Size = 60
+    end
+    object cdsPAsMAGAZINE: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Magazine'
+      FieldName = 'MAGAZINE'
+    end
+    object cdsPAsID_FILAAUTOENCAMINHA: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'FL'
+      FieldName = 'ID_FILAAUTOENCAMINHA'
+    end
+    object cdsPAsLKUP_FILAAUTOENCAMINHA: TStringField
+      DisplayLabel = 'AutoEncaminha'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_FILAAUTOENCAMINHA'
+      LookupDataSet = cdsLkpFila
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_FILAAUTOENCAMINHA'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsPAsID_ATENDENTE_AUTOLOGIN: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Atd'
+      FieldName = 'ID_ATENDENTE_AUTOLOGIN'
+    end
+    object cdsPAsLKP_ATENDENTE: TStringField
+      DisplayLabel = 'AutoLogin'
+      DisplayWidth = 20
+      FieldKind = fkLookup
+      FieldName = 'LKP_ATENDENTE'
+      LookupDataSet = cdsLkpAtendentes
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_ATENDENTE_AUTOLOGIN'
+      Size = 30
+      Lookup = True
+    end
+    object cdsPAsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsPAsOBEDECERSEQUENCIAFILAS: TStringField
+      FieldName = 'OBEDECERSEQUENCIAFILAS'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspPAs: TDataSetProvider
+    DataSet = qryPAs
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 160
+  end
+  object cdsGruposDeAtendentes: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDeAtendentes'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 191
+    object cdsGruposDeAtendentesID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsGruposDeAtendentesNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsGruposDeAtendentesID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDeAtendentes: TDataSetProvider
+    DataSet = qryGrupoDeAtendentes
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 192
+  end
+  object cdsAtendentes: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspAtendentes'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsAtendentesReconcileError
+    Left = 407
+    Top = 223
+    object cdsAtendentesID: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      DisplayWidth = 30
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsAtendentesATIVO: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Ativo'
+      DisplayWidth = 10
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsAtendentesNOME: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 150
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsAtendentesID_GRUPOATENDENTE: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Gr'
+      DisplayWidth = 30
+      FieldName = 'ID_GRUPOATENDENTE'
+    end
+    object cdsAtendentesLKUP_GRUPOATENDENTE: TStringField
+      DisplayLabel = 'Grupo'
+      DisplayWidth = 150
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPOATENDENTE'
+      LookupDataSet = cdsLkpGruposAtendentes
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_GRUPOATENDENTE'
+      Size = 30
+      Lookup = True
+    end
+    object cdsAtendentesLOGIN: TStringField
+      DisplayLabel = 'Login'
+      DisplayWidth = 150
+      FieldName = 'LOGIN'
+      Size = 30
+    end
+    object cdsAtendentesREGISTROFUNCIONAL: TStringField
+      DisplayLabel = 'Registro Funcional'
+      DisplayWidth = 150
+      FieldName = 'REGISTROFUNCIONAL'
+      Size = 15
+    end
+    object cdsAtendentesNOMERELATORIO: TStringField
+      DisplayLabel = 'Nome Nos Relat'#243'rios'
+      DisplayWidth = 150
+      FieldName = 'NOMERELATORIO'
+      Size = 15
+    end
+    object cdsAtendentesSENHALOGIN: TStringField
+      DisplayLabel = 'Senha'
+      FieldName = 'SENHALOGIN'
+      Visible = False
+      Size = 32
+    end
+    object cdsAtendentesID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspAtendentes: TDataSetProvider
+    DataSet = qryAtendentes
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 224
+  end
+  object cdsEmails: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspEmails'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 256
+    object cdsEmailsID: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsEmailsNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsEmailsENDERECO: TStringField
+      DisplayLabel = 'Endere'#231'o'
+      FieldName = 'ENDERECO'
+      Size = 60
+    end
+    object cdsEmailsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspEmails: TDataSetProvider
+    DataSet = qryEmails
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 256
+  end
+  object cdsCelulares: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspCelulares'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 289
+    object cdsCelularesID: TIntegerField
+      Alignment = taCenter
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCelularesNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsCelularesPREFIXO: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Prefixo'
+      FieldName = 'PREFIXO'
+      Size = 15
+    end
+    object cdsCelularesNUMERO: TStringField
+      DisplayLabel = 'N'#250'mero'
+      FieldName = 'NUMERO'
+      Size = 15
+    end
+    object cdsCelularesID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsCelularesID_PUSH: TStringField
+      FieldName = 'ID_PUSH'
+      Size = 255
+    end
+    object cdsCelularesPRATAFORMA: TStringField
+      FieldName = 'PRATAFORMA'
+    end
+  end
+  object dspCelulares: TDataSetProvider
+    DataSet = qryCelulares
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 288
+  end
+  object cdsTags: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspTags'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 320
+    object cdsTagsID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTagsATIVO: TStringField
+      Tag = 1
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      Size = 1
+    end
+    object cdsTagsNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTagsID_GRUPOTAG: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'GR'
+      FieldName = 'ID_GRUPOTAG'
+    end
+    object cdsTagsLKP_GRUPO: TStringField
+      DisplayLabel = 'Grupo'
+      FieldKind = fkLookup
+      FieldName = 'LKP_GRUPO'
+      LookupDataSet = cdsLkpGruposTags
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_GRUPOTAG'
+      Size = 30
+      Lookup = True
+    end
+    object cdsTagsCODIGOCOR: TIntegerField
+      DisplayLabel = 'Cor'
+      FieldName = 'CODIGOCOR'
+    end
+    object cdsTagsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsTagsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspTags: TDataSetProvider
+    DataSet = qryTags
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 320
+  end
+  object cdsGruposDeTags: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDeTags'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 352
+    object cdsGruposDeTagsID: TIntegerField
+      DisplayLabel = 'Id'
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsGruposDeTagsATIVO: TStringField
+      Tag = 1
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      Size = 1
+    end
+    object cdsGruposDeTagsNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsGruposDeTagsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsGruposDeTagsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDeTags: TDataSetProvider
+    DataSet = qryGruposDeTags
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 352
+  end
+  object qryAtendentes: TFDQuery
+    Connection = dmUnidades.conn
+    SQL.Strings = (
+      'SELECT * FROM ATENDENTES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 228
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object qryAtendentesID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryAtendentesID_GRUPOATENDENTE: TIntegerField
+      FieldName = 'ID_GRUPOATENDENTE'
+      Origin = 'ID_GRUPOATENDENTE'
+    end
+    object qryAtendentesNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Size = 60
+    end
+    object qryAtendentesLOGIN: TStringField
+      FieldName = 'LOGIN'
+      Origin = 'LOGIN'
+      Size = 30
+    end
+    object qryAtendentesREGISTROFUNCIONAL: TStringField
+      FieldName = 'REGISTROFUNCIONAL'
+      Origin = 'REGISTROFUNCIONAL'
+      Size = 15
+    end
+    object qryAtendentesNOMERELATORIO: TStringField
+      FieldName = 'NOMERELATORIO'
+      Origin = 'NOMERELATORIO'
+      Size = 15
+    end
+    object qryAtendentesSENHALOGIN: TStringField
+      FieldName = 'SENHALOGIN'
+      Origin = 'SENHALOGIN'
+      Size = 32
+    end
+    object qryAtendentesATIVO: TStringField
+      FieldName = 'ATIVO'
+      Origin = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryAtendentesID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Origin = 'ID_UNIDADE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+  end
+  object qryFilas: TFDQuery
+    SQL.Strings = (
+      'SELECT '
+      '  * '
+      'FROM '
+      '  FILAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 32
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryGruposDePaineis: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_PAINEIS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 64
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryPaineis: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM PAINEIS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 96
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qryGruposDePAs: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_PAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 128
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryPAs: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM PAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 160
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryGrupoDeAtendentes: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_ATENDENTES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 192
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryEmails: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM EMAILS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 260
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryCelulares: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM CELULARES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 284
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryTags: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM TAGS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 320
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryGruposDeTags: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_TAGS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 348
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object qryLkpModelosDePaineis: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM MODELOS_PAINEIS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 48
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpGruposPAs: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpGruposPAs'
+    Left = 76
+    Top = 292
+  end
+  object dspLkpGruposPAs: TDataSetProvider
+    DataSet = qryLkpGruposPAs
+    Left = 76
+    Top = 320
+  end
+  object qryLkpGruposPAs: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  GRUPOS_PAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 76
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpGruposAtendentes: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpGruposAtendentes'
+    Left = 104
+    Top = 292
+  end
+  object dspLkpGruposAtendentes: TDataSetProvider
+    DataSet = qryLkpGruposAtendentes
+    Left = 104
+    Top = 320
+  end
+  object qryLkpGruposAtendentes: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  GRUPOS_ATENDENTES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 104
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpGruposTags: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpGruposTags'
+    Left = 136
+    Top = 292
+  end
+  object dspLkpGruposTags: TDataSetProvider
+    DataSet = qryLkpGruposTags
+    Left = 136
+    Top = 320
+  end
+  object qryLkpGruposTags: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  GRUPOS_TAGS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 137
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpFila: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpFila'
+    Left = 164
+    Top = 292
+  end
+  object dspLkpFila: TDataSetProvider
+    DataSet = qryLkpFila
+    Left = 164
+    Top = 320
+  end
+  object qryLkpFila: TFDQuery
+    SQL.Strings = (
+      'SELECT '
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  FILAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 164
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpPainel: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpPainel'
+    Left = 192
+    Top = 292
+  end
+  object dspLkpPainel: TDataSetProvider
+    DataSet = qryLkpPainel
+    Left = 192
+    Top = 320
+  end
+  object qryLkpPainel: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  PAINEIS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 192
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsLkpAtendentes: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpAtendentes'
+    Left = 220
+    Top = 292
+  end
+  object dspLkpAtendentes: TDataSetProvider
+    DataSet = qryLkpAtendentes
+    Left = 220
+    Top = 320
+  end
+  object qryLkpAtendentes: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  ATENDENTES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 220
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsTVs: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspTVs'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 384
+    object IntegerField1: TIntegerField
+      DisplayLabel = 'Id'
+      FieldName = 'ID'
+      Required = True
+    end
+    object StringField2: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTVsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsTVsIPTV: TStringField
+      FieldName = 'IPTV'
+      Size = 15
+    end
+    object cdsTVsPORTATV: TIntegerField
+      FieldName = 'PORTATV'
+    end
+    object cdsTVsULTIMAATUALIZACAO: TSQLTimeStampField
+      FieldName = 'ULTIMAATUALIZACAO'
+    end
+    object cdsTVsIDGRUPOTVSPLAYLISTS: TIntegerField
+      FieldName = 'IDGRUPOTVSPLAYLISTS'
+    end
+    object cdsTVsID_CANAL_TV_PADRAO: TIntegerField
+      FieldName = 'ID_CANAL_TV_PADRAO'
+    end
+  end
+  object dspTVs: TDataSetProvider
+    DataSet = qryTVs
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 384
+  end
+  object qryTVs: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM TVS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 380
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object cdsPPs: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspPPs'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 733
+    Top = 372
+    object cdsPPsID: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPPsATIVO: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPPsNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsPPsID_GRUPOPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'GR'
+      FieldName = 'ID_GRUPOPP'
+    end
+    object cdsPPsLKUP_GRUPO: TStringField
+      DisplayLabel = 'Grupo'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPO'
+      LookupDataSet = cdsLkpGruposPPs
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_GRUPOPP'
+      Size = 60
+      Lookup = True
+    end
+    object cdsPPsCODIGOCOR: TIntegerField
+      DisplayLabel = 'Cor'
+      FieldName = 'CODIGOCOR'
+    end
+    object cdsPPsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsPPsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspPPs: TDataSetProvider
+    DataSet = qryPPs
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 824
+    Top = 375
+  end
+  object qryPPs: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM PPS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 920
+    Top = 375
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object cdsLkpGruposPPs: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkpGruposPPs'
+    Left = 251
+    Top = 292
+  end
+  object dspLkpGruposPPs: TDataSetProvider
+    DataSet = qryLkpGruposPPs
+    Left = 251
+    Top = 320
+  end
+  object qryLkpGruposPPs: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  GRUPOS_PPS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 251
+    Top = 348
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsGruposDePPs: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDePPs'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 738
+    Top = 311
+    object cdsGruposDePPsID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsGruposDePPsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsGruposDePPsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsGruposDePPsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDePPs: TDataSetProvider
+    DataSet = qryGruposDePPs
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 827
+    Top = 311
+  end
+  object qryGruposDePPs: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_PPS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 917
+    Top = 310
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object cdsMotivosPausa: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspMotivosPausa'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 482
+    object IntegerField2: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = '#'
+      FieldName = 'ID'
+      Required = True
+    end
+    object StringField1: TStringField
+      Tag = 1
+      Alignment = taCenter
+      DisplayLabel = 'Ativo'
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object StringField3: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsMotivosPausaID_GRUPOMOTIVOSPAUSA: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'GR'
+      FieldName = 'ID_GRUPOMOTIVOSPAUSA'
+    end
+    object StringField4: TStringField
+      DisplayLabel = 'Grupo'
+      FieldKind = fkLookup
+      FieldName = 'LKUP_GRUPO'
+      LookupDataSet = cdsLkpGruposMotivosPausa
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_GRUPOMOTIVOSPAUSA'
+      Size = 60
+      Lookup = True
+    end
+    object IntegerField4: TIntegerField
+      DisplayLabel = 'Cor'
+      FieldName = 'CODIGOCOR'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsMotivosPausaID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspMotivosPausa: TDataSetProvider
+    DataSet = qryMotivosPausa
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 482
+  end
+  object qryMotivosPausa: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM MOTIVOS_PAUSA'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 490
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object cdsGruposDeMotivosPausa: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspGruposDeMotivosPausa'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 408
+    Top = 450
+    object IntegerField6: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object StringField5: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object IntegerField7: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsGruposDeMotivosPausaID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+  end
+  object dspGruposDeMotivosPausa: TDataSetProvider
+    DataSet = qryGruposDeMotivosPausa
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 450
+  end
+  object qryGruposDeMotivosPausa: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPOS_MOTIVOS_PAUSA'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 458
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object cdsLkpGruposMotivosPausa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspLkpGruposMotivosPausa'
+    Left = 779
+    Top = 238
+  end
+  object dspLkpGruposMotivosPausa: TDataSetProvider
+    DataSet = qryLkpGruposMotivosPausa
+    Left = 283
+    Top = 320
+  end
+  object qryLkpGruposMotivosPausa: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME'
+      'FROM'
+      '  GRUPOS_MOTIVOS_PAUSA'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 283
+    Top = 349
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dtsGenerico: TDataSource
+    Left = 166
+    Top = 205
+  end
+  object bndDataSet: TBindSourceDB
+    DataSet = cdsAtendentes
+    ScopeMappings = <>
+    Left = 323
+    Top = 180
+  end
+  object qryClientes: TFDQuery
+    SQL.Strings = (
+      'SELECT * FROM CLIENTES'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 608
+    Top = 420
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object dspClientes: TDataSetProvider
+    DataSet = qryClientes
+    Options = [poPropogateChanges]
+    BeforeUpdateRecord = dspGenericoBeforeUpdateRecord
+    Left = 512
+    Top = 416
+  end
+  object cdsClientes: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspClientes'
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforePost = cdsGenericoBeforePost
+    OnFilterRecord = cdsAtendentesFilterRecord
+    OnNewRecord = cdsFilasNewRecord
+    OnReconcileError = cdsGenericoReconcileError
+    Left = 407
+    Top = 415
+    object cdsClientesID: TIntegerField
+      DisplayLabel = '#'
+      DisplayWidth = 1
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsClientesNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsClientesLOGIN: TStringField
+      DisplayLabel = 'Login'
+      FieldName = 'LOGIN'
+      Size = 30
+    end
+    object cdsClientesSENHALOGIN: TStringField
+      FieldName = 'SENHALOGIN'
+      Size = 32
+    end
+    object cdsClientesATIVO: TStringField
+      DisplayLabel = 'Ativo'
+      DisplayWidth = 10
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsClientesID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsClientesLOGADO_NUMERO_MESA: TIntegerField
+      FieldName = 'LOGADO_NUMERO_MESA'
+    end
+  end
+  object cdsCache: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 752
+    Top = 152
+  end
+end

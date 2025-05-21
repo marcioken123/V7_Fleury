@@ -1,0 +1,144 @@
+inherited frmSicsCadNiveis: TfrmSicsCadNiveis
+  Size.Width = 622.000000000000000000
+  Size.Height = 354.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 602.000000000000000000
+    Size.Height = 334.000000000000000000
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 602.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 578.000000000000000000
+        Text = 'Cadastro de N'#237'veis'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 578.000000000000000000
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00724944415428536D904B0E80200C0539A0DFA07732D1C40B8A9750560DE82B
+                9644B4B369F33A058221221763AC8D0272CB736E060FBEA2E4276AFB0E586C54
+                21930721844584B4F003C27A3D4C1295C8491EE2AC5E85CD91050CD2E3512D8B
+                C83B55C88878A0F6FC4F3B9A4A66052C12D176030B769E3EE6F5543B00000000
+                49454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 602.000000000000000000
+      Size.Height = 243.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 602.000000000000000000
+        Size.Height = 243.000000000000000000
+      end
+      object dbgCadNiveis: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 602.000000000000000000
+        Size.Height = 243.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowHeight = 21.000000000000000000
+        Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        Viewport.Width = 602.000000000000000000
+        Viewport.Height = 243.000000000000000000
+      end
+    end
+    inherited lytRodape: TLayout
+      Padding.Top = 12.000000000000000000
+      Padding.Bottom = 12.000000000000000000
+      Position.Y = 280.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 54.000000000000000000
+      inherited btnCancelar: TButton
+        Align = Right
+        Position.X = 497.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Height = 30.000000000000000000
+        StyleLookup = 'btVermelho'
+        TabOrder = 3
+      end
+      inherited btnOK: TButton
+        Align = Right
+        Margins.Right = 5.000000000000000000
+        Position.X = 387.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Height = 30.000000000000000000
+        StyleLookup = 'btVerde'
+        TabOrder = 2
+      end
+      object btnExcluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Margins.Left = 5.000000000000000000
+        Position.X = 147.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btExcluir'
+        TabOrder = 1
+        Text = 'E&xcluir'
+        OnClick = btnExcluirClick
+      end
+      object btnIncluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Position.Y = 12.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btAdicionar'
+        TabOrder = 0
+        Text = '&Incluir'
+        OnClick = btnIncluirClick
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 199
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd1
+      GridControl = dbgCadNiveis
+      Columns = <
+        item
+          MemberName = 'ID_PINIVEL'
+        end
+        item
+          MemberName = 'NOME'
+        end
+        item
+          MemberName = 'COR'
+        end
+        item
+          MemberName = 'CODIGOCOR'
+        end>
+    end
+  end
+  object dtsCadNiveis: TDataSource
+    OnDataChange = dtsCadNiveisDataChange
+    Left = 95
+    Top = 96
+  end
+  object bnd1: TBindSourceDB
+    DataSource = dtsCadNiveis
+    ScopeMappings = <>
+    Left = 241
+    Top = 246
+  end
+end

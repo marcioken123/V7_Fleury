@@ -1,0 +1,925 @@
+inherited frmSicsConfigPrioridades: TfrmSicsConfigPrioridades
+  Size.Width = 741.000000000000000000
+  Size.Height = 481.000000000000000000
+  OnKeyDown = FrameKeyDown
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 721.000000000000000000
+    Size.Height = 461.000000000000000000
+    TabOrder = 3
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 721.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 697.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Prioridades de Atendimento'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 697.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 721.000000000000000000
+      Size.Height = 371.000000000000000000
+      TabOrder = 1
+      inherited rectFundo: TRectangle
+        Size.Width = 721.000000000000000000
+        Size.Height = 371.000000000000000000
+        Stroke.Kind = None
+      end
+      object PageControl: TTabControl
+        Align = Client
+        Size.Width = 721.000000000000000000
+        Size.Height = 371.000000000000000000
+        Size.PlatformDefault = False
+        TabHeight = 49.000000000000000000
+        TabIndex = 0
+        TabOrder = 0
+        TabPosition = Top
+        Sizes = (
+          721s
+          322s
+          721s
+          322s)
+        object TabSheet1: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          Size.Width = 80.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Prioridades'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object Layout1: TLayout
+            Align = Client
+            Size.Width = 721.000000000000000000
+            Size.Height = 322.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 13
+            object btnExcluir: TButton
+              Images = MainForm.imgResources
+              ImageIndex = 29
+              Position.X = 272.000000000000000000
+              Position.Y = 124.000000000000000000
+              Size.Width = 24.000000000000000000
+              Size.Height = 24.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'actiontoolbutton'
+              TabOrder = 8
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              OnClick = btnExcluirClick
+            end
+            object btnIncluir: TButton
+              Images = MainForm.imgResources
+              ImageIndex = 28
+              Position.X = 272.000000000000000000
+              Position.Y = 90.000000000000000000
+              Size.Width = 24.000000000000000000
+              Size.Height = 24.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'actiontoolbutton'
+              TabOrder = 7
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              OnClick = btnIncluirClick
+            end
+            object listOrdem: TGrid
+              Anchors = [akLeft, akTop, akRight, akBottom]
+              CanFocus = True
+              ClipChildren = True
+              Position.X = 314.000000000000000000
+              Position.Y = 72.000000000000000000
+              Size.Width = 367.000000000000000000
+              Size.Height = 229.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 12
+              RowHeight = 21.000000000000000000
+              RowCount = 0
+              Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick]
+              Viewport.Width = 363.000000000000000000
+              Viewport.Height = 204.000000000000000000
+            end
+            object lblOrdemAtend: TLabel
+              AutoSize = True
+              Position.X = 316.000000000000000000
+              Position.Y = 53.000000000000000000
+              Size.Width = 128.000000000000000000
+              Size.Height = 16.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.WordWrap = False
+              Text = 'Ordem de &atendimento:'
+            end
+            object lblFilasDisp: TLabel
+              AutoSize = True
+              Position.X = 10.000000000000000000
+              Position.Y = 52.000000000000000000
+              Size.Width = 88.000000000000000000
+              Size.Height = 16.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.WordWrap = False
+              Text = 'Filas &dispon'#237'veis:'
+            end
+            object cbbPA: TComboBox
+              ItemIndex = 0
+              Position.X = 44.000000000000000000
+              Position.Y = 9.000000000000000000
+              Size.Width = 284.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 21
+            end
+            object lblPA: TLabel
+              AutoSize = True
+              Position.X = 7.000000000000000000
+              Position.Y = 17.000000000000000000
+              Size.Width = 17.000000000000000000
+              Size.Height = 16.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.WordWrap = False
+              Text = 'PA:'
+            end
+            object btnSubir: TButton
+              Anchors = [akTop, akRight]
+              AutoTranslate = False
+              Images = MainForm.imgResources
+              ImageIndex = 21
+              Position.X = 690.000000000000000000
+              Position.Y = 89.000000000000000000
+              Size.Width = 24.000000000000000000
+              Size.Height = 24.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'actiontoolbutton'
+              TabOrder = 9
+              OnClick = btnSubirClick
+            end
+            object btnDescer: TButton
+              Anchors = [akTop, akRight]
+              Images = MainForm.imgResources
+              ImageIndex = 22
+              Position.X = 690.000000000000000000
+              Position.Y = 123.000000000000000000
+              Size.Width = 24.000000000000000000
+              Size.Height = 24.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'actiontoolbutton'
+              TabOrder = 10
+              OnClick = btnDescerClick
+            end
+            object chkObedecerOrdem: TCheckBox
+              Anchors = [akLeft, akBottom]
+              Position.X = 312.000000000000000000
+              Position.Y = 303.000000000000000000
+              Size.Width = 209.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 22
+              Text = 'Obedecer esta ordem'
+            end
+            object lstFilas: TListBox
+              Anchors = [akLeft, akTop, akBottom]
+              Position.X = 8.000000000000000000
+              Position.Y = 72.000000000000000000
+              Size.Width = 249.000000000000000000
+              Size.Height = 229.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 23
+              AlternatingRowBackground = True
+              DisableFocusEffect = True
+              DefaultItemStyles.ItemStyle = ''
+              DefaultItemStyles.GroupHeaderStyle = ''
+              DefaultItemStyles.GroupFooterStyle = ''
+              ShowCheckboxes = True
+              OnItemClick = lstFilasItemClick
+              Viewport.Width = 245.000000000000000000
+              Viewport.Height = 225.000000000000000000
+            end
+          end
+        end
+        object TabSheet2: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 53.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Metas'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object gridMetasDeEsperaDasFilas: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 721.000000000000000000
+            Size.Height = 322.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            RowCount = 7
+            Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+            Viewport.Width = 721.000000000000000000
+            Viewport.Height = 322.000000000000000000
+          end
+        end
+      end
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Padding.Top = 11.000000000000000000
+      Padding.Bottom = 12.000000000000000000
+      Position.Y = 408.000000000000000000
+      Size.Width = 721.000000000000000000
+      Size.Height = 53.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object btnSalvar: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Margins.Left = 5.000000000000000000
+        Position.X = 147.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btSalvar'
+        TabOrder = 1
+        Text = '&Salvar'
+        OnClick = btnSalvarClick
+      end
+      object btnCarregar: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Position.Y = 11.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btopen'
+        TabOrder = 0
+        Text = 'Ca&rregar'
+        OnClick = btnCarregarClick
+      end
+      object btnOK: TButton
+        Align = Right
+        Images = MainForm.imgResources
+        ModalResult = 1
+        Margins.Right = 5.000000000000000000
+        Position.X = 546.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 85.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVerde'
+        TabOrder = 2
+        Text = '&OK'
+        OnClick = btnOKClick
+      end
+      object btnCancela: TButton
+        Align = Right
+        Cancel = True
+        Images = MainForm.imgResources
+        ModalResult = 2
+        Position.X = 636.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 85.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVermelho'
+        TabOrder = 3
+        Text = '&Cancelar'
+        OnClick = btnCancelaClick
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 444
+    Top = 130
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndPA
+      FieldName = 'NOME'
+      Control = cbbPA
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = bndPA
+      FieldName = 'OBEDECERSEQUENCIAFILAS'
+      Control = chkObedecerOrdem
+      Track = True
+      CustomFormat = '%s = '#39'T'#39
+    end
+    object LinkGridMeta: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndFIlas
+      GridControl = gridMetasDeEsperaDasFilas
+      Columns = <
+        item
+          MemberName = 'NOME'
+          Width = 150
+        end
+        item
+          MemberName = 'METAESPERA'
+          Width = 150
+        end>
+    end
+    object LinkFillControlToField2: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Track = True
+      FillDataSource = bndPAsFilas
+      FillDisplayFieldName = 'LKUP_FILA'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkGridToDataSourcebndPAsFilas: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bndPAsFilas
+      GridControl = listOrdem
+      Columns = <
+        item
+          MemberName = 'LKUP_FILA'
+        end
+        item
+          MemberName = 'POSICAO'
+        end>
+    end
+    object LinkFillControlToFieldNOME: TLinkFillControlToField
+      DataSource = bndFIlas
+      FieldName = 'NOME'
+      Direction = linkDataToControl
+      Track = True
+      FillDataSource = bndFIlas
+      FillDisplayFieldName = 'NOME'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object cdsPAs: TClientDataSet
+    Aggregates = <>
+    Filter = 'ATIVO <> '#39'F'#39
+    Filtered = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_GRUPOPA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_PAINEL'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_FILAAUTOENCAMINHA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'NOMENOPAINEL'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'MAGAZINE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'OBEDECERSEQUENCIAFILAS'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'ATIVO'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'POSICAO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_ATENDENTE_AUTOLOGIN'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOMEPORVOZ'
+        DataType = ftString
+        Size = 60
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'ID'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspPAs'
+    StoreDefs = True
+    AfterOpen = cdsPAsAfterOpen
+    AfterPost = cdsPAsAfterPost
+    AfterDelete = cdsPAsAfterDelete
+    AfterScroll = cdsPAsAfterScroll
+    OnReconcileError = cdsPAsReconcileError
+    Left = 453
+    Top = 14
+    object cdsPAsID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object cdsPAsID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPAsID_GRUPOPA: TIntegerField
+      FieldName = 'ID_GRUPOPA'
+    end
+    object cdsPAsID_PAINEL: TIntegerField
+      FieldName = 'ID_PAINEL'
+    end
+    object cdsPAsID_FILAAUTOENCAMINHA: TIntegerField
+      FieldName = 'ID_FILAAUTOENCAMINHA'
+    end
+    object cdsPAsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsPAsNOMENOPAINEL: TStringField
+      FieldName = 'NOMENOPAINEL'
+      Size = 60
+    end
+    object cdsPAsMAGAZINE: TIntegerField
+      FieldName = 'MAGAZINE'
+    end
+    object cdsPAsOBEDECERSEQUENCIAFILAS: TStringField
+      FieldName = 'OBEDECERSEQUENCIAFILAS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPAsATIVO: TStringField
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPAsPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+    end
+    object cdsPAsID_ATENDENTE_AUTOLOGIN: TIntegerField
+      FieldName = 'ID_ATENDENTE_AUTOLOGIN'
+    end
+    object cdsPAsNOMEPORVOZ: TStringField
+      FieldName = 'NOMEPORVOZ'
+      Size = 60
+    end
+  end
+  object dspPAs: TDataSetProvider
+    DataSet = qryPAS
+    Left = 497
+    Top = 15
+  end
+  object cdsFilas: TClientDataSet
+    Aggregates = <>
+    Filter = 'ATIVO <> '#39'F'#39
+    Filtered = True
+    Params = <>
+    ProviderName = 'dspFilas'
+    AfterOpen = cdsFilasAfterOpen
+    BeforeInsert = cdsFilasBeforeInsert
+    BeforeDelete = cdsFilasBeforeDelete
+    OnReconcileError = cdsPAsReconcileError
+    Left = 441
+    Top = 71
+    object cdsFilasID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+      Visible = False
+    end
+    object cdsFilasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+      Visible = False
+    end
+    object cdsFilasNOME: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 300
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsFilasRANGEMINIMO: TIntegerField
+      FieldName = 'RANGEMINIMO'
+      Visible = False
+    end
+    object cdsFilasRANGEMAXIMO: TIntegerField
+      FieldName = 'RANGEMAXIMO'
+      Visible = False
+    end
+    object cdsFilasTROCARMILHAR: TStringField
+      FieldName = 'TROCARMILHAR'
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasTROCARDEZENADEMILHAR: TStringField
+      FieldName = 'TROCARDEZENADEMILHAR'
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasMETAESPERA: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Meta de Espera'
+      DisplayWidth = 120
+      FieldName = 'METAESPERA'
+      OnGetText = cdsFilasMETAESPERAGetText
+      OnSetText = cdsFilasMETAESPERASetText
+      DisplayFormat = 'nn:ss'
+      EditMask = '!90:00;1;_'
+    end
+    object cdsFilasPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+      Visible = False
+    end
+    object cdsFilasATIVO: TStringField
+      FieldName = 'ATIVO'
+      Size = 1
+    end
+    object cdsFilasNOMENOTICKET: TStringField
+      FieldName = 'NOMENOTICKET'
+      Size = 30
+    end
+    object cdsFilasGERACAOAUTOMATICA: TStringField
+      FieldName = 'GERACAOAUTOMATICA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilasCODIGOCOR: TIntegerField
+      FieldName = 'CODIGOCOR'
+    end
+    object cdsFilasNOMENOTOTEM: TStringField
+      FieldName = 'NOMENOTOTEM'
+      Size = 70
+    end
+  end
+  object dspFilas: TDataSetProvider
+    DataSet = qryFilas
+    Left = 488
+    Top = 72
+  end
+  object qryFilas: TFDQuery
+    SQL.Strings = (
+      'select  '
+      '  * '
+      'from '
+      '  FILAS '
+      'WHERE '
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 552
+    Top = 70
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsPAs: TDataSource
+    DataSet = cdsPAs
+    Left = 389
+    Top = 15
+  end
+  object dsFilas: TDataSource
+    DataSet = cdsFilas
+    Left = 392
+    Top = 71
+  end
+  object cdsPAs_Filas: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID_PA'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_FILA'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'POSICAO'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'POSICAO'
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspPAs_Filas'
+    StoreDefs = True
+    Left = 683
+    Top = 96
+    object cdsPAs_FilasID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+      Visible = False
+    end
+    object cdsPAs_FilasID_PA: TIntegerField
+      FieldName = 'ID_PA'
+      Required = True
+      Visible = False
+    end
+    object cdsPAs_FilasID_FILA: TIntegerField
+      FieldName = 'ID_FILA'
+      Required = True
+      Visible = False
+    end
+    object cdsPAs_FilasPOSICAO: TIntegerField
+      DisplayLabel = 'Posi'#231#227'o'
+      DisplayWidth = 60
+      FieldName = 'POSICAO'
+    end
+    object cdsPAs_FilasLKUP_FILA: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 350
+      FieldKind = fkLookup
+      FieldName = 'LKUP_FILA'
+      LookupDataSet = cdsFilas
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_FILA'
+      Size = 30
+      Lookup = True
+    end
+  end
+  object cdsLkupFilas: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_UNIDADE'
+        ParamType = ptInput
+      end>
+    ProviderName = 'dspLkupFilas'
+    Left = 441
+    Top = 184
+    object cdsLkupFilasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsLkupFilasNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsLkupFilasRANGEMINIMO: TIntegerField
+      FieldName = 'RANGEMINIMO'
+    end
+    object cdsLkupFilasRANGEMAXIMO: TIntegerField
+      FieldName = 'RANGEMAXIMO'
+    end
+    object cdsLkupFilasTROCARMILHAR: TStringField
+      FieldName = 'TROCARMILHAR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsLkupFilasTROCARDEZENADEMILHAR: TStringField
+      FieldName = 'TROCARDEZENADEMILHAR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsLkupFilasMETAESPERA: TSQLTimeStampField
+      FieldName = 'METAESPERA'
+    end
+    object cdsLkupFilasNOMENOTICKET: TStringField
+      FieldName = 'NOMENOTICKET'
+      Size = 30
+    end
+    object cdsLkupFilasGERACAOAUTOMATICA: TStringField
+      FieldName = 'GERACAOAUTOMATICA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsLkupFilasPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+    end
+    object cdsLkupFilasATIVO: TStringField
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsLkupFilasCODIGOCOR: TIntegerField
+      FieldName = 'CODIGOCOR'
+    end
+    object cdsLkupFilasNOMENOTOTEM: TStringField
+      FieldName = 'NOMENOTOTEM'
+      Size = 70
+    end
+  end
+  object dspLkupFilas: TDataSetProvider
+    DataSet = tblLkupFilas
+    Left = 442
+    Top = 243
+  end
+  object tblLkupFilas: TFDQuery
+    SQL.Strings = (
+      'select '
+      '  * '
+      'from '
+      '  FILAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 439
+    Top = 304
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object cdsSalvarPAs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 360
+    Top = 273
+    object cdsSalvarPAsID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsSalvarPAsOBEDECERSEQUENCIAFILAS: TStringField
+      FieldName = 'OBEDECERSEQUENCIAFILAS'
+      Size = 1
+    end
+  end
+  object cdsSalvarFilas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 362
+    Top = 226
+    object cdsSalvarFilasID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsSalvarFilasMETAESPERA: TSQLTimeStampField
+      FieldName = 'METAESPERA'
+    end
+  end
+  object bndPA: TBindSourceDB
+    DataSet = cdsPAs
+    ScopeMappings = <>
+    Left = 200
+    Top = 49
+  end
+  object bndFIlas: TBindSourceDB
+    DataSet = cdsFilas
+    ScopeMappings = <>
+    Left = 258
+    Top = 133
+  end
+  object bndPAsFilas: TBindSourceDB
+    DataSet = cdsPAs_Filas
+    ScopeMappings = <>
+    Left = 303
+    Top = 66
+  end
+  object qryPAS: TFDQuery
+    SQL.Strings = (
+      'select '
+      '  * '
+      'from '
+      '  PAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE'
+      'order by '
+      '  ID')
+    Left = 552
+    Top = 13
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryPASID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object qryPASID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qryPASID_GRUPOPA: TIntegerField
+      FieldName = 'ID_GRUPOPA'
+    end
+    object qryPASID_PAINEL: TIntegerField
+      FieldName = 'ID_PAINEL'
+    end
+    object qryPASID_FILAAUTOENCAMINHA: TIntegerField
+      FieldName = 'ID_FILAAUTOENCAMINHA'
+    end
+    object qryPASNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object qryPASNOMENOPAINEL: TStringField
+      FieldName = 'NOMENOPAINEL'
+      Size = 60
+    end
+    object qryPASMAGAZINE: TIntegerField
+      FieldName = 'MAGAZINE'
+    end
+    object qryPASOBEDECERSEQUENCIAFILAS: TStringField
+      FieldName = 'OBEDECERSEQUENCIAFILAS'
+      FixedChar = True
+      Size = 1
+    end
+    object qryPASATIVO: TStringField
+      FieldName = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryPASPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+    end
+    object qryPASID_ATENDENTE_AUTOLOGIN: TIntegerField
+      FieldName = 'ID_ATENDENTE_AUTOLOGIN'
+    end
+    object qryPASNOMEPORVOZ: TStringField
+      FieldName = 'NOMEPORVOZ'
+      Size = 60
+    end
+  end
+  object qryPAs_Filas: TFDQuery
+    SQL.Strings = (
+      'SELECT '
+      '  * '
+      'FROM '
+      '  NN_PAS_FILAS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE'
+      'order by '
+      '  ID_PA')
+    Left = 690
+    Top = 49
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryPAs_FilasID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+      Required = True
+    end
+    object qryPAs_FilasID_PA: TIntegerField
+      FieldName = 'ID_PA'
+      Required = True
+    end
+    object qryPAs_FilasID_FILA: TIntegerField
+      FieldName = 'ID_FILA'
+      Required = True
+    end
+    object qryPAs_FilasPOSICAO: TIntegerField
+      FieldName = 'POSICAO'
+    end
+  end
+  object dspPAs_Filas: TDataSetProvider
+    DataSet = qryPAs_Filas
+    Left = 624
+    Top = 47
+  end
+  object dtsPAs_Filas: TDataSource
+    DataSet = cdsPAs_Filas
+    Left = 597
+    Top = 93
+  end
+end

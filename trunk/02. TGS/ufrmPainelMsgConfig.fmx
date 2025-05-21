@@ -1,0 +1,177 @@
+inherited frmPainelMsgConfig: TfrmPainelMsgConfig
+  Left = 402
+  Top = 128
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'frmPainelMsgConfig'
+  ClientHeight = 334
+  ClientWidth = 511
+  OnResize = FormResize
+  Left = 402
+  Top = 128
+  DesignerMasterStyle = 3
+  inherited layBase: TAspLayout
+    Size.Width = 511.000000000000000000
+    Size.Height = 334.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      Size.Width = 511.000000000000000000
+      inherited lblCaption: TAspLabel
+        Size.Width = 511.000000000000000000
+      end
+    end
+    inherited lytFundo: TAspLayout
+      Size.Width = 511.000000000000000000
+      Size.Height = 307.000000000000000000
+      object dbMemo: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Size.Width = 511.000000000000000000
+        Size.Height = 191.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Viewport.Width = 503.000000000000000000
+        Viewport.Height = 183.000000000000000000
+      end
+      object OkBtn: TAspButton
+        Position.X = 338.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+      object CancelBtn: TAspButton
+        Position.X = 426.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+      object SaveBtn: TAspButton
+        Position.X = 40.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 27.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        OnClick = SaveBtnClick
+      end
+      object OpenBtn: TAspButton
+        Position.X = 4.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 27.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        OnClick = OpenBtnClick
+      end
+      object PainelLabel: TAspLabel
+        AutoSize = True
+        Position.X = 8.000000000000000000
+        Position.Y = 276.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = '&Painel:'
+      end
+      object dblkpPainel: TComboBox
+        Position.X = 72.000000000000000000
+        Position.Y = 238.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+      end
+      object dblkpTotens: TComboBox
+        Position.X = 72.000000000000000000
+        Position.Y = 266.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+      end
+      object cboComandosPaineis: TComboBox
+        Position.X = 272.000000000000000000
+        Position.Y = 266.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+      end
+    end
+  end
+  object cdsPaineis: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspPaineis'
+    Left = 104
+    Top = 56
+  end
+  object dspPaineis: TDataSetProvider
+    DataSet = qryPaineis
+    Left = 144
+    Top = 40
+  end
+  object qryPaineis: TFDQuery
+
+    Params = <>
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME,'
+      '  MENSAGEM'
+      'FROM'
+      '  PAINEIS')
+    Left = 240
+    Top = 88
+  end
+  object dtsPaineis: TDataSource
+    DataSet = cdsPaineis
+    Left = 40
+    Top = 96
+  end
+  object cdsTotens: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspTotens'
+    Left = 88
+    Top = 88
+  end
+  object dspTotens: TDataSetProvider
+    DataSet = qryTotens
+    Left = 144
+    Top = 128
+  end
+  object qryTotens: TFDQuery
+
+    Params = <>
+    SQL.Strings = (
+      'SELECT'
+      '  ID,'
+      '  NOME,'
+      '  MENSAGEM'
+      'FROM'
+      '  TOTENS')
+    Left = 72
+    Top = 160
+  end
+  object dtsTotens: TDataSource
+    DataSet = cdsTotens
+    Left = 40
+    Top = 40
+  end
+  object HTTPRIO: THTTPRIO
+    HTTPWebNode.Agent = 'Borland SOAP 1.2'
+    HTTPWebNode.UseUTF8InHeader = True
+    HTTPWebNode.InvokeOptions = [soIgnoreInvalidCerts, soAutoCheckAccessPointViaUDDI]
+    HTTPWebNode.WebNodeOptions = []
+    Converter.Options = [soSendMultiRefObj, soTryAllSchema, soRootRefNodesToBody, soCacheMimeResponse, soUTF8EncodeXML]
+    Left = 152
+    Top = 80
+  end
+end

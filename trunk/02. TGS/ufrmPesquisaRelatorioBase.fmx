@@ -1,0 +1,150 @@
+inherited frmPesquisaRelatorioBase: TfrmPesquisaRelatorioBase
+  ClientHeight = 480
+  ClientWidth = 640
+  Position = OwnerFormCenter
+  DesignerMasterStyle = 3
+  inherited layBase: TLayout
+    Size.Width = 640.000000000000000000
+    Size.Height = 480.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 640.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 616.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 616.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 640.000000000000000000
+      Size.Height = 453.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 640.000000000000000000
+        Size.Height = 453.000000000000000000
+      end
+      object TagsPanel: TPanel
+        Position.X = 318.000000000000000000
+        Position.Y = 125.000000000000000000
+        Size.Width = 114.000000000000000000
+        Size.Height = 192.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object TagsTreeView: TTreeView
+          Align = Client
+          Size.Width = 114.000000000000000000
+          Size.Height = 167.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 114.000000000000000000
+          Viewport.Height = 167.000000000000000000
+        end
+        object rect5: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 114.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object TagsLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 114.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            TextSettings.WordWrap = False
+            Text = 'Ta&gs'
+          end
+        end
+      end
+      object pnlUnidades: TRectangle
+        Fill.Color = claWhite
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 318.000000000000000000
+        Size.Width = 337.000000000000000000
+        Size.Height = 127.000000000000000000
+        Size.PlatformDefault = False
+        object Rectangle8: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 337.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          object Label18: TLabel
+            Align = Client
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 5.000000000000000000
+            Size.Width = 332.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Unidades'
+          end
+        end
+        object lbUnidades: TListBox
+          Align = Client
+          Margins.Left = 1.000000000000000000
+          Margins.Top = 1.000000000000000000
+          Margins.Right = 1.000000000000000000
+          Margins.Bottom = 1.000000000000000000
+          Size.Width = 335.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          DisableFocusEffect = True
+          ItemHeight = 25.000000000000000000
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          ShowCheckboxes = True
+          OnChange = lbUnidadesChange
+          OnChangeCheck = lbUnidadesChangeCheck
+          Viewport.Width = 335.000000000000000000
+          Viewport.Height = 100.000000000000000000
+          object ListBoxItem1: TListBoxItem
+            Size.Width = 331.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'ListBoxItem1'
+          end
+          object ListBoxItem2: TListBoxItem
+            Position.Y = 25.000000000000000000
+            Size.Width = 331.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'ListBoxItem2'
+          end
+          object ListBoxItem3: TListBoxItem
+            Position.Y = 50.000000000000000000
+            Size.Width = 331.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'ListBoxItem3'
+          end
+        end
+      end
+    end
+  end
+  object imgsTags: TImageList
+    Source = <>
+    Destination = <>
+    Left = 88
+    Top = 216
+  end
+  object cdsUnidades: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 306
+    Top = 226
+  end
+end

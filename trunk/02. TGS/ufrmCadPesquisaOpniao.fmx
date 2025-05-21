@@ -1,0 +1,165 @@
+inherited frmCadPesquisaOpniao: TfrmCadPesquisaOpniao
+  Size.Width = 622.000000000000000000
+  Size.Height = 445.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 602.000000000000000000
+    Size.Height = 425.000000000000000000
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 602.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 578.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Cadastro de Pesquisa de Opni'#227'o'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 578.000000000000000000
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00754944415428536D905D0E80200C8339A0BF51EF64A28917542FC1785A403B
+                1C89287DE9D27E038261E62384509B82900FD2CB305A6BDD17D49CE0ED3B10B0
+                290249A9F0DEAF0AC4859F006CD7A359A35C7A9203B814AFC2E624008AF878F8
+                2020F2AE082409484416DECB3F9D182AED3209C8CCFB0DDCF39DF98136F81100
+                00000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 602.000000000000000000
+      Size.Height = 334.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 602.000000000000000000
+        Size.Height = 69.000000000000000000
+      end
+      object dbgCadPesquisaOpniao: TGrid
+        Align = Top
+        CanFocus = True
+        ClipChildren = True
+        Size.Width = 602.000000000000000000
+        Size.Height = 265.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowHeight = 21.000000000000000000
+        Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        Viewport.Width = 598.000000000000000000
+        Viewport.Height = 240.000000000000000000
+      end
+      object ComboBox1: TComboBox
+        Position.X = 16.000000000000000000
+        Position.Y = 302.000000000000000000
+        Size.Width = 273.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+      object ComboBox2: TComboBox
+        Position.X = 315.000000000000000000
+        Position.Y = 302.000000000000000000
+        Size.Width = 273.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+      object Label1: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 153.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Multipla Escolha - Vigente'
+        TabOrder = 3
+      end
+      object Label2: TLabel
+        Position.X = 315.000000000000000000
+        Position.Y = 280.000000000000000000
+        Text = 'Dissertativa - Vigente'
+        TabOrder = 4
+      end
+    end
+    inherited lytRodape: TLayout
+      Padding.Top = 12.000000000000000000
+      Padding.Bottom = 12.000000000000000000
+      Position.Y = 371.000000000000000000
+      Size.Width = 602.000000000000000000
+      Size.Height = 54.000000000000000000
+      inherited btnCancelar: TButton
+        Align = Right
+        Position.X = 497.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Height = 30.000000000000000000
+        StyleLookup = 'btVermelho'
+        TabOrder = 3
+      end
+      inherited btnOK: TButton
+        Align = Right
+        Margins.Right = 5.000000000000000000
+        Position.X = 387.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Height = 30.000000000000000000
+        StyleLookup = 'btVerde'
+        TabOrder = 2
+      end
+      object btnExcluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Margins.Left = 5.000000000000000000
+        Position.X = 147.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btExcluir'
+        TabOrder = 1
+        Text = 'E&xcluir'
+        OnClick = btnExcluirClick
+      end
+      object btnIncluir: TButton
+        Align = Left
+        StyledSettings = [Family, Size, Style, FontColor, Other]
+        Images = MainForm.imgResources
+        Position.Y = 12.000000000000000000
+        Size.Width = 142.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btAdicionar'
+        TabOrder = 0
+        Text = '&Incluir'
+        OnClick = btnIncluirClick
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 199
+    Top = 94
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd1
+      GridControl = dbgCadPesquisaOpniao
+      Columns = <>
+    end
+  end
+  object dtsCadPesquisaOpniao: TDataSource
+    OnDataChange = dtsCadPesquisaOpniaoDataChange
+    Left = 95
+    Top = 96
+  end
+  object bnd1: TBindSourceDB
+    DataSource = dtsCadPesquisaOpniao
+    ScopeMappings = <>
+    Left = 305
+    Top = 166
+  end
+end

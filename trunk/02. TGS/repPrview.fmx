@@ -1,0 +1,198 @@
+inherited frmSicsRepPreview: TfrmSicsRepPreview
+  Left = 305
+  Top = 97
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Visualiza'#231#227'o de Impress'#227'o'
+  ClientHeight = 513
+  ClientWidth = 608
+  Left = 305
+  Top = 97
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 608.000000000000000000
+    Size.Height = 513.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 608.000000000000000000
+      inherited lblCaption: TAspLabel
+        Size.Width = 608.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 608.000000000000000000
+      Size.Height = 429.000000000000000000
+    end
+    object ToolbarPanel: TPanel
+      Align = Top
+      Position.Y = 27.000000000000000000
+      Size.Width = 608.000000000000000000
+      Size.Height = 35.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnResize = StatusBarResize
+      object ZFitWidBtn: TButton
+        Hint = 'Ajustar zoom pela largura da p'#225'gina'
+        Images = MainForm.imgResources
+        ImageIndex = 11
+        Position.X = 43.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = Z100BtnClick
+      end
+      object Z100Btn: TButton
+        Hint = 'Zoom'
+        Images = MainForm.imgResources
+        ImageIndex = 15
+        Position.X = 15.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = Z100BtnClick
+      end
+      object ZFitPageBtn: TButton
+        Hint = 'Ajustar zoom pela p'#225'gina inteira'
+        Images = MainForm.imgResources
+        ImageIndex = 10
+        Position.X = 71.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = Z100BtnClick
+      end
+      object FirstBtn: TButton
+        Hint = 'Primeira p'#225'gina'
+        Images = MainForm.imgResources
+        ImageIndex = 9
+        Position.X = 111.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = FirstBtnClick
+      end
+      object PriorBtn: TButton
+        Hint = 'P'#225'gina anterior'
+        Images = MainForm.imgResources
+        ImageIndex = 14
+        Position.X = 139.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = FirstBtnClick
+      end
+      object NextBtn: TButton
+        Hint = 'Pr'#243'xima p'#225'gina'
+        Images = MainForm.imgResources
+        ImageIndex = 13
+        Position.X = 166.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = FirstBtnClick
+      end
+      object LastBtn: TButton
+        Hint = #218'ltima p'#225'gina'
+        Images = MainForm.imgResources
+        ImageIndex = 12
+        Position.X = 193.000000000000000000
+        Position.Y = 6.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = FirstBtnClick
+      end
+      object PrintBtn: TButton
+        Hint = 'Imprimir'
+        Images = MainForm.imgResources
+        ImageIndex = 5
+        Position.X = 239.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = PrintBtnClick
+      end
+      object CloseBtn: TButton
+        Hint = 'Cancelar visualiza'#231#227'o'
+        Anchors = [akTop]
+        Cancel = True
+        Images = MainForm.imgResources
+        ImageIndex = 17
+        Position.X = 519.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 82.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Text = 'Fe&char'
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = CloseBtnClick
+      end
+    end
+    object StatusBar: TStatusBar
+      Position.Y = 491.000000000000000000
+      ShowSizeGrip = True
+      Size.Width = 608.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object lblItemStatusBarItem0: TAspLabel
+        Align = Left
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lblItemStatusBarItem1: TAspLabel
+        Align = Left
+        Position.X = 120.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lblItemStatusBarItem2: TAspLabel
+        Align = Client
+        Size.Width = 368.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object PrintDialog: TPrintDialog [1]
+    Copies = 1
+    FromPage = 1
+    MinPage = 1
+    Options = [poPageNums, poWarning, poDisablePrintToFile]
+    Left = 29
+    Top = 76
+  end
+end

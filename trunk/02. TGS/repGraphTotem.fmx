@@ -1,0 +1,15 @@
+object qrSicsGraphic: TqrSicsGraphic
+  Left = 0
+  Top = 0
+  ClientHeight = 1123
+  ClientWidth = 794
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+end

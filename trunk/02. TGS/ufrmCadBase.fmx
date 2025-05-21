@@ -1,0 +1,76 @@
+inherited frmSicsCadBase: TfrmSicsCadBase
+  Size.Width = 1081.000000000000000000
+  Size.Height = 705.000000000000000000
+  inherited layBase: TLayout
+    Size.Width = 1081.000000000000000000
+    Size.Height = 705.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 1081.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1057.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Cadastro de '
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1057.000000000000000000
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00744944415428536D905D0A802010843B60BF58770A0ABA6075891284456BD6
+                56C8DA799965E65B150B22DA420855A108B9E19E87DE3967BFA0E427BC79070C
+                D62A90940AEFFD2C405CF809C0723D1A25CA25275980937A1536070650C4C7C3
+                0D83C85B154812F08077FC4F3B8652BA4C0C12D17A0351EA9EAA1BCE9F2B0000
+                000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 1081.000000000000000000
+      Size.Height = 622.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 1081.000000000000000000
+        Size.Height = 622.000000000000000000
+      end
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Position.Y = 649.000000000000000000
+      Size.Width = 1081.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object btnCancelar: TButton
+        Anchors = [akTop, akRight]
+        Images = MainForm.imgResources
+        Position.X = 610.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Cancelar'
+        OnClick = btnCancelarClick
+      end
+      object btnOK: TButton
+        Anchors = [akTop, akRight]
+        Enabled = False
+        Images = MainForm.imgResources
+        Position.X = 497.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Confirmar'
+        OnClick = btnOKClick
+      end
+    end
+  end
+end

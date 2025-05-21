@@ -1,0 +1,135 @@
+inherited frmDadosPorUnidade: TfrmDadosPorUnidade
+  Left = 389
+  Top = 280
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Unidades'
+  ClientHeight = 455
+  ClientWidth = 269
+  Left = 389
+  Top = 280
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 269.000000000000000000
+    Size.Height = 455.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 269.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 245.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 245.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 269.000000000000000000
+      Size.Height = 428.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 269.000000000000000000
+        Size.Height = 428.000000000000000000
+      end
+      object gridUnidades: TGrid
+        Align = Client
+        CanFocus = True
+        ClipChildren = True
+        Margins.Bottom = 40.000000000000000000
+        Size.Width = 269.000000000000000000
+        Size.Height = 388.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowHeight = 21.000000000000000000
+        Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+        OnDrawColumnCell = gridUnidadesDrawColumnCell
+        OnCellClick = gridUnidadesCellClick
+        Left = 5
+        Top = 5
+        Viewport.Width = 267.000000000000000000
+        Viewport.Height = 365.000000000000000000
+      end
+    end
+    object btnFechar: TButton
+      Anchors = [akRight, akBottom]
+      Position.X = 185.000000000000000000
+      Position.Y = 424.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = '&Fechar'
+      OnClick = btnFecharClick
+    end
+    object btnAutoScroll: TSpeedButton
+      Anchors = [akLeft, akBottom]
+      Images = ImageList1
+      ImageIndex = 0
+      Position.X = 10.000000000000000000
+      Position.Y = 424.000000000000000000
+      Size.Width = 25.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = btnAutoScrollClick
+    end
+  end
+  object tmrScroll: TTimer [1]
+    Enabled = False
+    OnTimer = tmrScrollTimer
+    Left = 144
+    Top = 64
+  end
+  inherited bndList: TBindingsList
+    Left = 75
+    Top = 197
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDBUnidades
+      GridControl = gridUnidades
+      Columns = <
+        item
+          MemberName = 'NOME'
+          Header = 'Unidade'
+          Width = 245
+        end>
+    end
+  end
+  object BindSourceDBUnidades: TBindSourceDB
+    ScopeMappings = <>
+    Left = 176
+    Top = 216
+  end
+  object ImageList1: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 21
+        MultiResBitmap.Width = 21
+        MultiResBitmap.TransparentColor = 536870912
+        MultiResBitmap = <
+          item
+            Width = 21
+            Height = 21
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000015000000150806000000A917A5
+              96000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00C249444154384F63189AE04B79ED7F281304406C429830782BA3F21FC9E0FF
+              F800481EA408A41EA40F8641624C200259E0E7D2E5603E884D0E00EB45361044
+              93EA526400330BEC5218608F8E64E0E96C6684721918191971627C8011E64AE1
+              2777D055421D841D400D46D103330BC5A5D402F437143D1C91313E80D7505098
+              E2C2F8C0080B53B43283F230051908CADAC8009EF86100295701F5E28E10906B
+              817AA13C04006522262C39896800D20B72048C4D8C59206712C260801EA64305
+              30300000EC6BCC02017CAACE0000000049454E44AE426082}
+            FileName = 'C:\Projetos\SICS\V5\2. TGS\imagens\AutoScroll.bmp'
+          end>
+        Name = 'AutoScroll'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'AutoScroll'
+            SourceRect.Right = 21.000000000000000000
+            SourceRect.Bottom = 21.000000000000000000
+          end>
+      end>
+    Left = 120
+    Top = 216
+  end
+end

@@ -1,0 +1,447 @@
+inherited frmParamsSLABase: TfrmParamsSLABase
+  ClientHeight = 153
+  ClientWidth = 570
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 570.000000000000000000
+    Size.Height = 153.000000000000000000
+    TabOrder = 2
+    inherited recCaption: TRectangle
+      Size.Width = 570.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 546.000000000000000000
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 546.000000000000000000
+        inherited imgClose: TImage
+          MultiResBitmap = <
+            item
+              Width = 9
+              Height = 9
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000009000000090806000000E09106
+                10000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00764944415428536D904B0E80200C443DA0DFA07732D1C40BAA87005C35A033
+                0AC60F6F53327DA5844C4416EF7D912540AED8E7A1D55A6F5F91B931C6A25677
+                10C432294462C3393706E11CF80161DA2FFA10BDE14D5C097148AEC264F77C3C
+                AAA288BC4E0A118AD65A83DAF09F561CF2D07B415144E603D3159DEA7D116EAF
+                0000000049454E44AE426082}
+              FileName = 'C:\Users\Gilberto\Desktop\Projects\IconClose.png'
+            end>
+        end
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 570.000000000000000000
+      Size.Height = 76.000000000000000000
+      TabOrder = 1
+      inherited rectFundo: TRectangle
+        Fill.Color = claWhite
+        Size.Width = 570.000000000000000000
+        Size.Height = 51.000000000000000000
+        Stroke.Kind = None
+      end
+      object btnSalvarPerfil: TButton
+        Hint = 'Salvar perfil de SLA'
+        Anchors = [akTop, akRight]
+        Images = ilIcones
+        ImageIndex = 5
+        Position.X = 537.000000000000000000
+        Position.Y = 37.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'actiontoolbutton'
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = btnSalvarPerfilClick
+      end
+      object btnExcluirPerfil: TButton
+        Hint = 'Excluir perfil de SLA'
+        Anchors = [akTop, akRight]
+        Images = ilIcones
+        ImageIndex = 4
+        Position.X = 507.000000000000000000
+        Position.Y = 36.000000000000000000
+        Size.Width = 22.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'actiontoolbutton'
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = btnExcluirPerfilClick
+      end
+      object btnCriarPerfil: TButton
+        Hint = 'Criar perfil de SLA'
+        Anchors = [akTop, akRight]
+        Images = ilIcones
+        ImageIndex = 0
+        Position.X = 476.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 23.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'actiontoolbutton'
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = btnCriarPerfilClick
+      end
+      object dblkpPerfis: TComboBox
+        Anchors = [akLeft, akTop, akRight]
+        DisableFocusEffect = False
+        Position.X = 8.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 457.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnChange = dblkpPerfisChange
+      end
+      object rect2: TRectangle
+        Align = Top
+        Fill.Color = claBlack
+        Size.Width = 570.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        object Label1: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, Style]
+          Margins.Left = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Size.Width = 79.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Carregar Perfil'
+        end
+      end
+    end
+    object Layout1: TLayout
+      Align = Bottom
+      Position.Y = 103.000000000000000000
+      Size.Width = 570.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object rect1: TRectangle
+        Align = Client
+        Fill.Color = xFFEFEFEF
+        Size.Width = 570.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFD7D7D7
+        object Layout2: TLayout
+          Align = Center
+          Size.Width = 207.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object btnCancela: TButton
+            Anchors = [akRight, akBottom]
+            Cancel = True
+            Images = ilIcones
+            ModalResult = 2
+            Position.X = 107.000000000000000000
+            Position.Y = 12.000000000000000000
+            Size.Width = 89.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'BtVermelho'
+            TabOrder = 0
+            Text = '&Cancelar'
+            OnClick = btnCancelaClick
+          end
+          object btnOk: TButton
+            Anchors = [akRight, akBottom]
+            Images = ilIcones
+            ModalResult = 1
+            Position.X = 11.000000000000000000
+            Position.Y = 12.000000000000000000
+            Size.Width = 89.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'BtVerde'
+            TabOrder = 1
+            Text = '&OK'
+            OnClick = btnOkClick
+          end
+        end
+      end
+    end
+  end
+  object cdsPerfis: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'nome'
+    Params = <>
+    AfterOpen = cdsPerfisAfterOpen
+    AfterPost = cdsPerfisAfterPost
+    AfterDelete = cdsPerfisAfterDelete
+    Left = 8
+    Top = 112
+    object cdsPerfisID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsPerfisNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object cdsPerfisINTCALC_ACABOU_CRIAR: TBooleanField
+      FieldName = 'INTCALC_ACABOU_CRIAR'
+    end
+  end
+  object dtsPerfis: TDataSource
+    DataSet = cdsPerfis
+    Left = 120
+    Top = 112
+  end
+  object cdsPerfisClone: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 56
+    Top = 112
+  end
+  object ilIcones: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 19
+        MultiResBitmap.Width = 19
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap = <
+          item
+            Width = 19
+            Height = 19
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000013000000130806000000725036
+              CC000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              02CD49444154384F95544D48554114FE66AEEFF9D355496A1366D10F086D5C54
+              422DA42889D6A951A8B8A988A0520AAB85B8482C138BA2BF8DA814A42D5A4525
+              48121994908B20A3A2927645E1EBA6CFF7BC339D73E6666A22F8C1CC39F7FCDD
+              3973CE198585507DB9086ABA0E50BB60B10E0A2B887E87B59FA0D10F9BD1899E
+              136391F50CE606AB6DCA82CD3B4FDC315A71910530F0314E349FA876B2200DDF
+              BF0A953887AEE6A4C8084EC9A8BBB212D67F465C3D10A600DB06ABB6C05B1D47
+              77438150FE66B99F3D25766CCF7E11DCC92A9AE2C8CC1D8056DBE96B0861BA0A
+              771ABF8A6E211C6C2D8417BB47DC3618FB1C53BF76A2AF39E54E969DDB22812C
+              5E21CBDFBD682006EBD9CE9897E2C7FE04E52E3B7C2FA9D9F8A6FF2EB6B6632D
+              FD7D03397D40D7C9CF91D4817DD3E11BBADD4C586FA37655E3CBD63716AA104C
+              B81FCAF60B9D0FB68FDB9BC4C5390EA549E56758DD2B74A998F153E519AE8F82
+              106366C409093517D703DE3EE1AD297375B265A869B72243781FDDA73F0A9B2C
+              7C8DECB7214CAC98D2A48634B1710C364F8B92A15431EDADB294DEE364422399
+              E81DFA2A39D03874668196CED6E97C943565446A3A841DA5BD5196358F9C4C68
+              2413BD4345AF27FE66EA07A54923A2FC55285225A41A160397C205E1AB2F718E
+              742A3548CDEB64B391335642CD4B01ED3B2DB3C650A652E852615115718F294D
+              1A5A9EB5943A227D331F1A0FC8A152E87CB03DFBB13FC571E354D3DE4E7BBD74
+              744EDE0EDC3E3C21F2C570E8560E92C10071A5F4B30EF434D4BB719A4C9CA17D
+              085A6F45323128B3B718583F193C25AE94F27C413E5C98594F104F7F987A4879
+              6DA63E0AA8CFAE53E7F762A26844CACF5593CB5674B7E151D2FB341EC3F0E27B
+              D179FC1B87F8178CC1EF99C96BC1EFE018BD573127A486963EA2F283AA2622BA
+              A365FE35E8C4D9D9EFD9DC607F71A06D0D3C5D47272B27136ED0E5B47E524AA3
+              74B227084D27EE9EFA22B63300FE00A7C214FF7A7DE6FC0000000049454E44AE
+              426082}
+            FileName = 'C:\Projetos\SICS\V5\trunk\Resources\Add3_20x20.png'
+          end>
+        Name = 'add'
+      end
+      item
+        MultiResBitmap.Height = 20
+        MultiResBitmap.Width = 20
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap.TransparentColor = 536870912
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 20
+            Height = 20
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+              0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              008349444154384FED90D10E80200845A12FF7CF2D101B01A98DDEEA6C79A7E2
+              5182EF8192AB5449E2E9598796117D6ED75390EC22B4CFD69BB396C25A7DA856
+              2EA10101C7BADB5D236CB22E8D12DB4D3C446C92422CB9E6185DE15E3869DBC2
+              D546C8717C4D560ACDC748CDE9312DE76484FB871919A117B8E18C8C70C24542
+              D9CF1B00ECF5E92C12C1CEE3630000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\SICS\V5\branches\Proj_16620\2. TGS\Resources\Carrega' +
+              'r.bmp'
+          end>
+        Name = 'Carregar'
+      end
+      item
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap = <
+          item
+            Width = 16
+            Height = 16
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+              61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              02C149444154384FA553CF4B1B41147E33BB310AB18A2655839AD8A45A72B067
+              3591D6A4B4D0A2A078126A3077D17FC0FFA3A078128A871E8AD0A249A926A814
+              94823F3054532A890926AEA649B326BBB3D39969D0B6A7423F989DD9F9E6BD7D
+              EFFB66E17F81AA33AC05020DA85C5EA194B6B2CD91402C7658A504D60606BC06
+              C6AF24C3F8AA13F2F2D9F6B6C2F7317F2C7B3C35A0AA6F9C1313DE07B3B36E40
+              E863D8EBF5708E8307138C577BE7E63CCE60F039369936D95E27E74405EC65B1
+              636C2C68D175308A45309C4E385E5CCC02A58F28C60D65555D7D383363919249
+              909B9BA188317C999FCFD41BC63D5101C278186532709D4840E9E000503C0EEE
+              A9291BAF0411F2AE777ADA42F7F64065DCF5D111E86CD634CD52369B25514164
+              707058A3F4755B7B7B5D7D632368171750E77643F3E424505695B2B4047A2A05
+              724B0B141505CEE2F10A4268DCBFB1F1F646C488CF37A401ACD8791256A69ECD
+              82C96A05200448A904A6D656F8C182BFC5E3AA44E9E89358EC3D8F132D70F8A3
+              D10F1242FEF3D3D3BCC1BE8A6419F4CB4B204C13D6225096E8EF608E9B041C14
+              A0081857989540350D68A5F26BB060830D99F1ACE4D3EA71819B04DC364C69C4
+              E670D8785FDA551E8C7285051A40D89A1FBCEB7209617FB7582488F4F7F710C3
+              88B88241DB9DA626A176ADD301A6CE0EC0362BD4383AE1FAE4041AED76708742
+              7F24112286FBFA12F742A12EB4BF2F6CACEDEA8262A10059A60745286BB5DBDD
+              4D4CC40AB3BA96B943BABBE17861214BCDE6FBA2022ACBCA55382CD436BB5C50
+              C8E7219B4C2A98892A4B92EF3C9D3ECCA5D350D3D606063B53DADA021DC0226B
+              5A9D4880346DE43C954A7D67FE179855B9B3338510E21F8AC5761EAFAF6798A0
+              3E2593D9C9B1BB90CFE520B1BB5B3401BCE0DCED3D603A6892149175BD42101A
+              7DBAB9F9B94A09889F4D5597584B3DEC124D04A2D14F55EA16CBE3E35275F98F
+              00F809D99359B4837C1A6A0000000049454E44AE426082}
+            FileName = 
+              'C:\Projetos\SICS\V5\branches\Proj_16620\2. TGS\Resources\Close.p' +
+              'ng'
+          end>
+        Name = 'Close'
+      end
+      item
+        MultiResBitmap.Height = 12
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap = <
+          item
+            Width = 16
+            Height = 12
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000100000000C08060000006BE73D
+              81000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              01E449444154384F63201518B719577BCEF65CC650CFC004E23383458904061D
+              06B541F641D592CC92066CFFD934EF19DF5B47B4017A1D7AB50E560E552C0C2C
+              1CFF38FE31CA30C8687DFAF0E915D8192020582CA8C39BC7AB0AE5A2009D169D
+              5A4775C72AD67FAC1CDF7E7F63F8FAFB2BC3CDCB37175FA8BA308D11A400A4D9
+              CFCA6F3DC33F867FEB0EAFF3F93CE9F36DB04E20D06AD1AAB5D3B6AB62E665E6
+              F8F7FF1FC3FFFFFF199E1D7FB67C53FDA668A0F47F669066772BF7F502FC022A
+              AC1CACC212A212EE4FA49EECFC75F2D73B8D668D3A731DF3AABF1C7F397EFDFD
+              C5F0EBDF2F8697A75FAED95CB73912A4196401B3B09DB0AD92BC52D83FC67F9C
+              BFFFFD6660656315161316736336655655D7522F606461E4F8FEE73BC3DB1F6F
+              195E9C7EB17E6FE3DE30986610007B41B64636CC54DB741A0B378B30C8996008
+              A4DF7C7BC3F0E2DB0B860F3F3E30FC3CF773D5E7799FA380CAFF82F4C000D800
+              1090AA940AD3D5D39DC6C8CA28FCE4F31386079F1E30FCF8F3032CF7F7F2DFF5
+              FF17FC07D9FC072C8004E006808074B574E827CE4F933E337F96800A3130DC60
+              D8C2B0902108C8FA0D11400528E9E0F3E1CFD77E69FCBAC3C0C2600FF4252FC3
+              75861D0C4BC09A7F41546002CC84749AE1268316C36DA07D1C0C731840CEFE09
+              91C0061818008610B212E2D0CB450000000049454E44AE426082}
+            FileName = 'C:\Projetos\SICS\V5\branches\Proj_16620\2. TGS\Resources\Ok.png'
+          end>
+        Name = 'Ok'
+      end
+      item
+        MultiResBitmap.Height = 28
+        MultiResBitmap.Width = 28
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap.TransparentColor = 536870912
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 16
+            Height = 19
+            PNG = {
+              89504E470D0A1A0A0000000D494844520000001000000013080600000099678D
+              CF000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              01EC49444154384FBD544148544118FE661EBEB7D25BBA79C9A0BD9B845D0B3C
+              1552D2C99BBAE8410A8CB28D4082162AA8585342A4BA045B07515404F5521EC5
+              835EA43C14649728BA84454F6D77DFBCE97BB3B361B46E52D007F3E6FBFE37F3
+              31FF3FEF7F02BB91CE9D8196F35655B084A7999396FF0681F4509FE54084A310
+              A29F6C96A3048516384A43C89C796FE0AC203FB066050DBAEF6BCBF707AD07F1
+              ECEA5DAB20EDFCD78853386EF93E117D40FEDA272BE213381BCCBDC30C85C37F
+              D4BB36C770D0DCD600A1A758BC133CD0266F61B5A67EF97CC1EE35F8E71AFC07
+              03592CF2390A119D65C63FAFAF82DA06426F9BA285C52C6BD100A85E740D9FE7
+              B773C8AEA865A0DE2211DEE28673ACFE3B069EF0D2B3347D08156CA06BE862BC
+              AA86811844C14B71C3243CF72B034B261CE13584BF0EB1F5009DC3ED7B196CE1
+              A03B071566C85D688C21E19F261F43E8B442EA9B802F385FAF6E10E13D462F15
+              788A26A345700785A08D5DD90F2F6C649B8D9BB80A8E553790F0CBB38E8F4E1C
+              5881575A447AE408B6BFBD429D287F4CD2FFBC570A8DE8CCA5A0C5B4D5CBD8A9
+              3B051DBD8197BCCC945E94C37A4622FA1E916D9A115F5B454B7101F5C9475CB4
+              C81C324C63827197F17BE48F4D3155E9C6AF7FA46AE8C8BA4824AFB0177A1004
+              29F8FE479AB2379CDBC80F7CF901D5CCAF1F3D00E8010000000049454E44AE42
+              6082}
+            FileName = 'C:\Projetos\SICS\V5\trunk\Resources\Exclude3_20x20.png'
+          end>
+        Name = 'Excluir'
+      end
+      item
+        MultiResBitmap.Height = 20
+        MultiResBitmap.Width = 20
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap.TransparentColor = 536870912
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 18
+            Height = 18
+            PNG = {
+              89504E470D0A1A0A0000000D494844520000001200000012080600000056CE8E
+              57000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              015949444154384FCD94314BC34014C7FF2F0A1534AB8B38F9011CC5CD417052
+              F40358D1511084285641425DD262FA0D5C4C765D3A085DDAC141A15F413F808B
+              20828B77BE77776A39526B8B833FB8BBF7DEE57E0997E40842B9A1CDF81BDED5
+              138852CCBDA4A85695AB62CC48B28830BFF2C6F9B22D3B14BA80CE39BA05A804
+              C20C026AB1680FCFA559AC2F36D1E9988708A4C3665A6159DDC4BD0468213FA8
+              98067D656A59B4018D98A31D3C84178863E3B0A261C9A3332323DAFE948D2612
+              7A658FE1E900919E700143A10BBE1199D2D73CB7EB8B5EDDE8A07DF332A4114E
+              B8E0CD33847BEEA77DD12AB44EB8D50B5A02A5D6DC7505C8DDE4AD8D8AAC65C7
+              E89BED31EE46CBD6F91274B0E0B29F217587CBC3B6CB3C910E9ADC4FDA64003A
+              908D9FB2892FB2921A7FBDC736ED83EC0B51E232C39FEDD1FF13D1D731526E1C
+              715EE3FFA7CDD51B3BDD073929641D604F0D8E873FD88AC822FA008FF67944C7
+              473EB90000000049454E44AE426082}
+            FileName = 'C:\Projetos\SICS\V5\trunk\Resources\save.png'
+          end>
+        Name = 'Salvar'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'add'
+            SourceRect.Right = 19.000000000000000000
+            SourceRect.Bottom = 19.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'Carregar'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'Close'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'Ok'
+            SourceRect.Bottom = 12.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'Excluir'
+            SourceRect.Bottom = 19.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'Salvar'
+            SourceRect.Right = 18.000000000000000000
+            SourceRect.Bottom = 18.000000000000000000
+          end>
+      end>
+    Left = 392
+    Top = 88
+  end
+end

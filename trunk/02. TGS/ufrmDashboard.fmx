@@ -1,0 +1,544 @@
+inherited fraDashboard: TfraDashboard
+  Size.Width = 832.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 812.000000000000000000
+    Size.Height = 430.000000000000000000
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 812.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 788.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Dashboard'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 788.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 812.000000000000000000
+      Size.Height = 393.000000000000000000
+      inherited rectFundo: TRectangle
+        Align = Contents
+        Margins.Bottom = 25.000000000000000000
+        Size.Width = 812.000000000000000000
+        Size.Height = 368.000000000000000000
+      end
+      object tcDashboard: TTabControl
+        Align = Client
+        Margins.Left = 1.000000000000000000
+        Margins.Top = 1.000000000000000000
+        Margins.Right = 1.000000000000000000
+        Margins.Bottom = 1.000000000000000000
+        Size.Width = 630.000000000000000000
+        Size.Height = 366.000000000000000000
+        Size.PlatformDefault = False
+        TabIndex = 0
+        TabOrder = 0
+        TabPosition = PlatformDefault
+        Sizes = (
+          630s
+          361s
+          630s
+          361s)
+        object tiDados: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          Size.Height = 5.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Dados'
+          ExplicitSize.cx = 54.000000000000000000
+          ExplicitSize.cy = 26.000000000000000000
+          object Grid1: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 630.000000000000000000
+            Size.Height = 361.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            RowCount = 0
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            OnDrawColumnCell = Grid1DrawColumnCell
+            Viewport.Width = 630.000000000000000000
+            Viewport.Height = 361.000000000000000000
+          end
+        end
+        object tiGrafico: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Height = 5.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Gr'#225'fico'
+          ExplicitSize.cx = 58.000000000000000000
+          ExplicitSize.cy = 26.000000000000000000
+          object Chart: TChart
+            BackWall.Visible = False
+            BottomWall.Color = claBlack
+            BottomWall.Visible = False
+            Foot.Font.StyleExt = {00040000000200000004000000}
+            LeftWall.Visible = False
+            Legend.Title.Font.StyleExt = {00070000000000000004000000}
+            Legend.Visible = False
+            PrintProportional = False
+            SubFoot.Font.StyleExt = {00040000000200000004000000}
+            Title.Text.Strings = (
+              'TChart')
+            Title.Visible = False
+            BottomAxis.Axis.Visible = False
+            BottomAxis.AxisValuesFormat = '0'
+            BottomAxis.Grid.Visible = False
+            BottomAxis.MinorTicks.Visible = False
+            BottomAxis.Ticks.Visible = False
+            LeftAxis.Axis.Visible = False
+            LeftAxis.AxisValuesFormat = '0'
+            LeftAxis.MinorTicks.Visible = False
+            LeftAxis.TickLength = 2
+            LeftAxis.Ticks.Visible = False
+            LeftAxis.TicksInner.Visible = False
+            Shadow.Visible = False
+            View3D = False
+            View3DOptions.Elevation = 315
+            View3DOptions.Orthogonal = False
+            View3DOptions.Perspective = 0
+            View3DOptions.Rotation = 360
+            Zoom.Brush.Kind = None
+            Zoom.Pen.Fill.Color = claSilver
+            OnGetAxisLabel = ChartGetAxisLabel
+            Align = Client
+            Color = claNull
+            TabOrder = 0
+            Size.Width = 630.000000000000000000
+            Size.Height = 361.000000000000000000
+            Size.PlatformDefault = False
+            ColorPaletteIndex = 13
+            object Series1: TBarSeries
+              HoverElement = []
+              Selected.Hover.Visible = False
+              BarPen.Visible = False
+              Depth = 1
+              Marks.Font.Shadow.Visible = False
+              Marks.Frame.Visible = False
+              Marks.Style = smsValue
+              Marks.Arrow.Visible = False
+              Marks.BackColor = claWhite
+              Marks.Callout.Arrow.Visible = False
+              Marks.Color = claWhite
+              SeriesColor = xFF79FF82
+              ValueFormat = '0'
+              OnGetMarkText = SeriesGetMarkText
+              BarRound = brNone
+              MarksLocation = mlStart
+              Shadow.Visible = False
+              Sides = 30
+              XValues.Name = 'X'
+              XValues.Order = loNone
+              YValues.Name = 'Bar'
+              YValues.Order = loNone
+            end
+            object Series2: TPieSeries
+              HoverElement = []
+              Legend.Visible = False
+              Marks.Frame.Visible = False
+              Marks.Style = smsLabelValue
+              Marks.AutoPosition = False
+              Marks.Tail.Margin = 2
+              ShowInLegend = False
+              ValueFormat = '0'
+              XValues.Order = loAscending
+              YValues.Name = 'Pie'
+              YValues.Order = loNone
+              OnGetMarkText = SeriesGetMarkText
+              Frame.InnerBrush.Kind = Gradient
+              Frame.InnerBrush.Gradient.EndColor = claGray
+              Frame.InnerBrush.Gradient.MidColor = claWhite
+              Frame.InnerBrush.Gradient.StartColor = xFF404040
+              Frame.InnerBrush.Gradient.Visible = True
+              Frame.InnerBrush.BackColor = claRed
+              Frame.MiddleBrush.Kind = Gradient
+              Frame.MiddleBrush.Gradient.EndColor = xFF828282
+              Frame.MiddleBrush.Gradient.MidColor = claWhite
+              Frame.MiddleBrush.Gradient.StartColor = claGray
+              Frame.MiddleBrush.Gradient.Visible = True
+              Frame.MiddleBrush.BackColor = claYellow
+              Frame.OuterBrush.Kind = Gradient
+              Frame.OuterBrush.Gradient.EndColor = xFF404040
+              Frame.OuterBrush.Gradient.MidColor = claWhite
+              Frame.OuterBrush.Gradient.StartColor = claSilver
+              Frame.OuterBrush.Gradient.Visible = True
+              Frame.OuterBrush.BackColor = claGreen
+              Frame.Width = 4
+              Shadow.Color = xFFA0A0A0
+              Shadow.Visible = False
+              OtherSlice.Legend.Title.Font.StyleExt = {00070000000000000004000000}
+              OtherSlice.Legend.Visible = False
+              PiePen.Color = claWhite
+              PiePen.Width = 2.000000000000000000
+              PiePen.Fill.Color = claWhite
+            end
+          end
+        end
+      end
+      object bAtualizar: TButton
+        Anchors = [akTop, akRight]
+        Position.X = 704.000000000000000000
+        Position.Y = 3.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btazulescuro'
+        TabOrder = 1
+        Text = 'Atualizar (30s)'
+        OnClick = bAtualizarClick
+      end
+      object Layout1: TLayout
+        Align = Left
+        Size.Width = 180.000000000000000000
+        Size.Height = 368.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object pnlUnidades: TRectangle
+          Align = Client
+          Fill.Color = claWhite
+          Size.Width = 180.000000000000000000
+          Size.Height = 368.000000000000000000
+          Size.PlatformDefault = False
+          object Rectangle8: TRectangle
+            Align = Top
+            Fill.Color = claBlack
+            Size.Width = 180.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            object Label18: TLabel
+              Align = Client
+              StyledSettings = [Family, Size, Style]
+              Margins.Left = 5.000000000000000000
+              Size.Width = 175.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.FontColor = claWhite
+              Text = 'Unidades'
+            end
+          end
+          object lbUnidades: TListBox
+            Align = Client
+            Margins.Left = 1.000000000000000000
+            Margins.Top = 1.000000000000000000
+            Margins.Right = 1.000000000000000000
+            Margins.Bottom = 1.000000000000000000
+            Size.Width = 178.000000000000000000
+            Size.Height = 341.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 8
+            AlternatingRowBackground = True
+            DisableFocusEffect = True
+            ItemHeight = 25.000000000000000000
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            ShowCheckboxes = True
+            OnChangeCheck = lbUnidadesChangeCheck
+            Viewport.Width = 178.000000000000000000
+            Viewport.Height = 341.000000000000000000
+            object ListBoxItem1: TListBoxItem
+              Size.Width = 174.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              Text = 'ListBoxItem1'
+            end
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 25.000000000000000000
+              Size.Width = 174.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = 'ListBoxItem2'
+            end
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 50.000000000000000000
+              Size.Width = 174.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              Text = 'ListBoxItem3'
+            end
+          end
+        end
+      end
+      object cmbIndicadores: TComboBox
+        Anchors = [akTop]
+        Position.X = 395.000000000000000000
+        Position.Y = 3.000000000000000000
+        Size.Width = 228.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        OnChange = cmbIndicadoresChange
+      end
+      object ToolBar1: TToolBar
+        Align = Bottom
+        Position.Y = 368.000000000000000000
+        Size.Width = 812.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object Rectangle1: TRectangle
+          Align = Contents
+          Fill.Kind = None
+          Margins.Top = -1.000000000000000000
+          Size.Width = 812.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label1: TLabel
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Position.X = 8.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 35.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'Soma:'
+        end
+        object lblSoma: TLabel
+          AutoSize = True
+          Position.X = 48.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 5.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = '-'
+        end
+        object Label2: TLabel
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Position.X = 184.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 42.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'M'#233'dia: '
+        end
+        object lblMedia: TLabel
+          AutoSize = True
+          Position.X = 228.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 5.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = '-'
+        end
+        object Label4: TLabel
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Position.X = 368.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'M'#237'nimo:'
+        end
+        object lblMinimo: TLabel
+          AutoSize = True
+          Position.X = 420.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 5.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = '-'
+        end
+        object Label6: TLabel
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Position.X = 552.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'M'#225'ximo:'
+        end
+        object lblMaximo: TLabel
+          AutoSize = True
+          Position.X = 606.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 5.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = '-'
+        end
+      end
+    end
+  end
+  object TimerAutoRefresh: TTimer [1]
+    Tag = 30
+    Enabled = False
+    OnTimer = TimerAutoRefreshTimer
+    Left = 736
+    Top = 67
+  end
+  inherited bndList: TBindingsList
+    Left = 259
+    Top = 150
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = Grid1
+      Columns = <
+        item
+          MemberName = 'UNIDADE'
+        end
+        item
+          MemberName = 'VALOR_NUMERICO'
+        end
+        item
+          MemberName = 'ESTADO'
+        end
+        item
+          MemberName = 'CREATEDAT'
+        end>
+    end
+  end
+  inherited ilPrincipal: TImageList
+    Left = 312
+    Top = 200
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = cdsPIs
+    ScopeMappings = <>
+    Left = 192
+    Top = 152
+  end
+  object memIndicadores: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 192
+    Top = 208
+    object memIndicadoresSelecionado: TBooleanField
+      FieldName = 'Selecionado'
+    end
+    object memIndicadoresNomeIndicador: TStringField
+      FieldName = 'NomeIndicador'
+      Size = 50
+    end
+    object memIndicadoresFlagValorEmSegundos: TBooleanField
+      FieldName = 'FlagValorEmSegundos'
+    end
+    object memIndicadoresTipoGrafico: TByteField
+      FieldName = 'TipoGrafico'
+    end
+  end
+  object cdsPIs: TClientDataSet
+    Aggregates = <>
+    AggregatesActive = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'UNIDADE'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PI'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'VALOR_NUMERICO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ESTADO'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'CREATEDAT'
+        DataType = ftFloat
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    AfterOpen = cdsPIsAfterOpen
+    AfterClose = cdsPIsAfterClose
+    Left = 264
+    Top = 208
+    object cdsPIsID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsPIsUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 50
+    end
+    object cdsPIsPI: TStringField
+      FieldName = 'PI'
+      Size = 40
+    end
+    object cdsPIsVALOR_NUMERICO: TIntegerField
+      FieldName = 'VALOR_NUMERICO'
+    end
+    object cdsPIsESTADO: TStringField
+      FieldName = 'ESTADO'
+    end
+    object cdsPIsCREATEDAT: TFloatField
+      FieldName = 'CREATEDAT'
+    end
+    object cdsPIsSOMA: TAggregateField
+      FieldName = 'SOMA'
+      Active = True
+      DisplayName = ''
+      Expression = 'SUM(VALOR_NUMERICO)'
+    end
+    object cdsPIsMEDIA: TAggregateField
+      FieldName = 'MEDIA'
+      Active = True
+      DisplayName = ''
+      Expression = 'AVG(VALOR_NUMERICO)'
+    end
+    object cdsPIsMINIMO: TAggregateField
+      FieldName = 'MINIMO'
+      Active = True
+      DisplayName = ''
+      Expression = 'MIN(VALOR_NUMERICO)'
+    end
+    object cdsPIsMAXIMO: TAggregateField
+      FieldName = 'MAXIMO'
+      Active = True
+      DisplayName = ''
+      Expression = 'MAX(VALOR_NUMERICO)'
+    end
+  end
+end

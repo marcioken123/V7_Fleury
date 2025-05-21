@@ -1,0 +1,327 @@
+inherited frmMensagemPainelEImpressora: TfrmMensagemPainelEImpressora
+  Size.Width = 849.000000000000000000
+  Size.Height = 426.000000000000000000
+  ParentShowHint = False
+  ShowHint = True
+  inherited layBase: TLayout
+    HitTest = True
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 829.000000000000000000
+    Size.Height = 406.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 829.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 805.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Mensagem Painel Impressora'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 805.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      HitTest = True
+      Size.Width = 829.000000000000000000
+      Size.Height = 323.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 829.000000000000000000
+        Size.Height = 323.000000000000000000
+      end
+      object dbMemo: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Size.Width = 829.000000000000000000
+        Size.Height = 323.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        ParentShowHint = False
+        ShowHint = True
+        Viewport.Width = 825.000000000000000000
+        Viewport.Height = 319.000000000000000000
+      end
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Position.Y = 360.000000000000000000
+      Size.Width = 829.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object cboComandosPaineis: TComboBox
+        Anchors = [akLeft, akBottom]
+        Position.X = 321.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 195.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        OnChange = cboOnChangeAddToMemo
+      end
+      object dblkpTotens: TComboBox
+        Anchors = [akLeft, akBottom]
+        Position.X = 519.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 101.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        OnChange = dblkpTotensChange
+      end
+      object dblkpPainel: TComboBox
+        Anchors = [akLeft, akBottom]
+        Position.X = 130.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        OnChange = dblkpPainelChange
+      end
+      object PainelLabel: TLabel
+        Anchors = [akLeft, akBottom]
+        AutoSize = True
+        Position.X = 77.000000000000000000
+        Position.Y = 18.000000000000000000
+        Size.Width = 34.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = '&Painel:'
+      end
+      object OpenBtn: TButton
+        Anchors = [akLeft, akBottom]
+        Images = MainForm.imgResources
+        ImageIndex = 26
+        Locked = True
+        Position.X = 9.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 27.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btAzulescuro'
+        TabOrder = 5
+        OnClick = OpenBtnClick
+      end
+      object SaveBtn: TButton
+        Anchors = [akLeft, akBottom]
+        Images = MainForm.imgResources
+        ImageIndex = 27
+        Position.X = 42.000000000000000000
+        Position.Y = 11.000000000000000000
+        Size.Width = 27.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btAzulescuro'
+        TabOrder = 9
+        OnClick = SaveBtnClick
+      end
+      object CancelBtn: TButton
+        Anchors = [akRight, akBottom]
+        Images = MainForm.imgResources
+        ImageIndex = 17
+        Position.X = 741.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVermelho'
+        TabOrder = 1
+        Text = 'Cancelar'
+        OnClick = CancelBtnClick
+      end
+      object OkBtn: TButton
+        Anchors = [akRight, akBottom]
+        Images = MainForm.imgResources
+        Position.X = 653.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'btVerde'
+        TabOrder = 0
+        Text = 'Confirmar'
+        OnClick = OkBtnClick
+      end
+      object cboPIs: TComboBox
+        Anchors = [akLeft, akBottom]
+        Position.X = 624.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 49.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        OnChange = cboOnChangeAddToMemo
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 129
+    Top = 92
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = dblkpTotens
+      Track = False
+      FillDataSource = bndTotens
+      FillDisplayFieldName = 'NOME'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkFillControlToField2: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = dblkpPainel
+      Track = True
+      FillDataSource = bndPaineis
+      FillDisplayFieldName = 'NOME'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object cdsPaineis: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspPaineis'
+    AfterOpen = cdsPaineisAfterOpen
+    BeforePost = cdsPaineisBeforePost
+    AfterScroll = cdsPaineisAfterScroll
+    OnReconcileError = cdsPaineisPrintersReconcileError
+    Left = 269
+    Top = 33
+    object cdsPaineisID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+    end
+    object cdsPaineisID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPaineisNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsPaineisMENSAGEM: TMemoField
+      FieldName = 'MENSAGEM'
+      BlobType = ftMemo
+      Size = 1
+    end
+  end
+  object dspPaineis: TDataSetProvider
+    DataSet = qryPaineis
+    Left = 336
+    Top = 30
+  end
+  object qryPaineis: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID_UNIDADE,'
+      '  ID,'
+      '  NOME,'
+      '  MENSAGEM'
+      'FROM'
+      '  PAINEIS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 391
+    Top = 38
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object dtsPaineis: TDataSource
+    DataSet = cdsPaineis
+    Left = 201
+    Top = 40
+  end
+  object cdsTotens: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspTotens'
+    AfterOpen = cdsTotensAfterOpen
+    BeforePost = cdsTotensBeforePost
+    AfterScroll = cdsTotensAfterScroll
+    OnReconcileError = cdsPaineisPrintersReconcileError
+    Left = 250
+    Top = 95
+    object cdsTotensID_UNIDADE: TIntegerField
+      FieldName = 'ID_UNIDADE'
+    end
+    object cdsTotensID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTotensNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTotensMENSAGEM: TMemoField
+      FieldName = 'MENSAGEM'
+      BlobType = ftMemo
+      Size = 1
+    end
+  end
+  object dspTotens: TDataSetProvider
+    DataSet = qryTotens
+    Left = 400
+    Top = 106
+  end
+  object qryTotens: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  ID_UNIDADE,'
+      '  ID,'
+      '  NOME,'
+      '  MENSAGEM'
+      'FROM'
+      '  TOTENS'
+      'WHERE'
+      '  ID_UNIDADE = :ID_UNIDADE')
+    Left = 134
+    Top = 153
+    ParamData = <
+      item
+        Name = 'ID_UNIDADE'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object dtsTotens: TDataSource
+    DataSet = cdsTotens
+    Left = 304
+    Top = 144
+  end
+  object HTTPRIO: THTTPRIO
+    HTTPWebNode.Agent = 'Borland SOAP 1.2'
+    Converter.Options = [soSendMultiRefObj, soTryAllSchema, soRootRefNodesToBody, soCacheMimeResponse, soUTF8EncodeXML]
+    Left = 464
+    Top = 16
+  end
+  object bndPaineis: TBindSourceDB
+    DataSet = cdsPaineis
+    ScopeMappings = <>
+    Left = 68
+    Top = 134
+  end
+  object bndTotens: TBindSourceDB
+    DataSet = cdsTotens
+    ScopeMappings = <>
+    Left = 194
+    Top = 192
+  end
+  object dtsMain: TDataSource
+    Left = 241
+    Top = 153
+  end
+end

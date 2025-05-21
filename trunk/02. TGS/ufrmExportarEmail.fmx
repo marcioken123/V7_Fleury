@@ -1,0 +1,560 @@
+object frmExportarEmail: TfrmExportarEmail
+  Left = 0
+  Top = 0
+  BorderStyle = None
+  Caption = 'Envio de E-mail'
+  ClientHeight = 320
+  ClientWidth = 737
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 737.000000000000000000
+    Size.Height = 320.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object rectBackground: TRectangle
+      Align = Client
+      Fill.Color = claBlack
+      Padding.Left = 10.000000000000000000
+      Padding.Right = 10.000000000000000000
+      Padding.Bottom = 10.000000000000000000
+      Size.Width = 737.000000000000000000
+      Size.Height = 320.000000000000000000
+      Size.PlatformDefault = False
+      object rectFundo: TRectangle
+        Align = Client
+        Fill.Color = xFFF4F4F4
+        Size.Width = 717.000000000000000000
+        Size.Height = 285.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object rectMain: TRectangle
+          Align = Contents
+          Corners = []
+          CornerType = InnerRound
+          Fill.Color = claWhite
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 707.000000000000000000
+          Size.Height = 275.000000000000000000
+          Size.PlatformDefault = False
+          object rectTitulo: TRectangle
+            Align = Top
+            Fill.Color = claBlack
+            Size.Width = 707.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            object lblTitulo: TLabel
+              Align = Top
+              StyledSettings = [Family, Size, Style]
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 701.000000000000000000
+              Size.Height = 17.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.FontColor = claWhite
+              Text = 'Envio de E-mail'
+              TabOrder = 0
+            end
+          end
+          object edRemetente: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 0
+            ReadOnly = True
+            Position.X = 88.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 614.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object edDestinatario: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 1
+            Position.X = 88.000000000000000000
+            Position.Y = 56.000000000000000000
+            Size.Width = 614.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object edAssunto: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Anchors = [akLeft, akTop, akRight]
+            TabOrder = 2
+            Position.X = 88.000000000000000000
+            Position.Y = 80.000000000000000000
+            Size.Width = 614.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object Label1: TLabel
+            AutoSize = True
+            Enabled = False
+            Position.X = 16.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 69.000000000000000000
+            Size.Height = 16.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Remetente:'
+            TabOrder = 3
+          end
+          object Label2: TLabel
+            AutoSize = True
+            Enabled = False
+            Position.X = 16.000000000000000000
+            Position.Y = 56.000000000000000000
+            Size.Width = 69.000000000000000000
+            Size.Height = 16.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Destinat'#225'rio:'
+            TabOrder = 4
+          end
+          object Label3: TLabel
+            AutoSize = True
+            Enabled = False
+            Position.X = 16.000000000000000000
+            Position.Y = 80.000000000000000000
+            Size.Width = 53.000000000000000000
+            Size.Height = 16.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Assunto:'
+            TabOrder = 5
+          end
+          object Label4: TLabel
+            AutoSize = True
+            Enabled = False
+            Position.X = 16.000000000000000000
+            Position.Y = 104.000000000000000000
+            Size.Width = 69.000000000000000000
+            Size.Height = 16.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Mensagem:'
+            TabOrder = 6
+          end
+          object edMensagem: TMemo
+            Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+            DataDetectorTypes = []
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Position.X = 88.000000000000000000
+            Position.Y = 104.000000000000000000
+            Size.Width = 614.000000000000000000
+            Size.Height = 126.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 7
+            Viewport.Width = 610.000000000000000000
+            Viewport.Height = 122.000000000000000000
+          end
+          object rectRodape: TRectangle
+            Align = MostBottom
+            Fill.Color = claWhite
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 248.000000000000000000
+            Sides = []
+            Size.Width = 699.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            object rectCancelar: TRectangle
+              Align = Right
+              Corners = []
+              Fill.Color = xFFD2322D
+              Margins.Left = 5.000000000000000000
+              Position.X = 561.000000000000000000
+              Sides = []
+              Size.Width = 138.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              XRadius = 2.000000000000000000
+              YRadius = 2.000000000000000000
+              OnClick = rectCancelarClick
+              object Label10: TLabel
+                Align = Client
+                StyledSettings = [Family, Size, Style]
+                Margins.Left = 5.000000000000000000
+                Size.Width = 133.000000000000000000
+                Size.Height = 23.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claWhite
+                TextSettings.HorzAlign = Center
+                Text = 'Cancelar'
+                TabOrder = 0
+                OnClick = rectCancelarClick
+              end
+            end
+            object rectEmail: TRectangle
+              Align = Left
+              Corners = []
+              CornerType = InnerLine
+              Fill.Color = xFF0088CC
+              Margins.Left = 5.000000000000000000
+              Position.X = 5.000000000000000000
+              Sides = []
+              Size.Width = 138.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              XRadius = 2.000000000000000000
+              YRadius = 2.000000000000000000
+              OnClick = rectEmailClick
+              object rectImgEmail: TRectangle
+                Align = Left
+                Corners = []
+                Fill.Color = xFF005E8D
+                Sides = []
+                Size.Width = 33.000000000000000000
+                Size.Height = 23.000000000000000000
+                Size.PlatformDefault = False
+                XRadius = 2.000000000000000000
+                YRadius = 2.000000000000000000
+                OnClick = rectEmailClick
+                object Image3: TImage
+                  MultiResBitmap.Height = 16
+                  MultiResBitmap.Width = 32
+                  MultiResBitmap = <
+                    item
+                      Width = 32
+                      Height = 16
+                      PNG = {
+                        89504E470D0A1A0A0000000D494844520000002000000010080600000077007D
+                        59000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                        00DD49444154484B63642004E27AFF4359E48145C578ED20CA010672A20CE79B
+                        63A102F801637C1F940505041CC004A509820DE7EE800DC7862901443B001F90
+                        29980565910EA8E280A7EFBF30A894CE83F2480354710008DC7DF501CA220D50
+                        CD01E482E1E980FF0B8BA02CC2806A0E009515C834B18EA08A0340966E2B0E02
+                        B3EB032DC16546FFCE734439826A2170F2DE73301D38711318172D3B40542145
+                        3507E8CA8880E9FE6807302EF532A15F085C78F49AA164F92130FBE0F5270C05
+                        6E460C5DE1761417D31000AA8C6A16FD271680D4C368626AD201AE8E191800AD
+                        FC781F218D3A6D0000000049454E44AE426082}
+                      FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\Enviar.png'
+                    end>
+                  Align = Client
+                  Size.Width = 33.000000000000000000
+                  Size.Height = 23.000000000000000000
+                  Size.PlatformDefault = False
+                  OnClick = rectEmailClick
+                end
+              end
+              object Label9: TLabel
+                Align = Client
+                StyledSettings = [Family, Size, Style]
+                Margins.Left = 5.000000000000000000
+                Size.Width = 100.000000000000000000
+                Size.Height = 23.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.FontColor = claWhite
+                TextSettings.HorzAlign = Center
+                Text = 'Enviar'
+                TabOrder = 0
+                OnClick = rectEmailClick
+              end
+            end
+          end
+        end
+      end
+      object recCaption: TRectangle
+        Align = Top
+        Fill.Color = claBlack
+        Padding.Top = 3.000000000000000000
+        Position.X = 10.000000000000000000
+        Size.Width = 717.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        object lblCaption: TLabel
+          Align = Client
+          StyledSettings = []
+          Margins.Left = 10.000000000000000000
+          Size.Width = 609.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = '<Caption>'
+        end
+        object rectMin: TRectangle
+          Align = Right
+          Fill.Color = claBlack
+          Position.X = 652.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 20.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          object imgMin: TImage
+            MultiResBitmap.Height = 50
+            MultiResBitmap.Width = 50
+            MultiResBitmap = <
+              item
+                Width = 50
+                Height = 50
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                  B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  006A494441546843EDD8410A80300C00C1D4FFFFB92A78F303A3EC40E9350BBD
+                  A46B66F6753EEF78EECF2B445388A6104D219A423485680AD114A22944F3DAD9
+                  F7B657F8B5EE91DF7A5A9ABE833485680AD114A229445388A6104D219A423485
+                  680AD114A22944F393909913C3FD065F9F7E3B610000000049454E44AE426082}
+                FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\icon_min.png'
+              end>
+            Align = Center
+            Cursor = crHandPoint
+            Enabled = False
+            HitTest = False
+            Size.Width = 15.000000000000000000
+            Size.Height = 15.000000000000000000
+            Size.PlatformDefault = False
+            object GlowEffect3: TGlowEffect
+              Softness = 0.100000001490116100
+              GlowColor = xFF02A7FF
+              Opacity = 1.000000000000000000
+              Trigger = 'IsMouseOver=true'
+              Enabled = False
+            end
+          end
+        end
+        object rectMax: TRectangle
+          Align = Right
+          Fill.Color = claBlack
+          Position.X = 672.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 20.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = rectMaxClick
+          object imgMax: TImage
+            MultiResBitmap.Height = 50
+            MultiResBitmap.Width = 50
+            MultiResBitmap = <
+              item
+                Width = 50
+                Height = 50
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                  B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0076494441546843EDD9310A80401004C159FFFFE755C150E512A157BA404CAF
+                  712EB292F4F18CB75DEFF10CA179BC23DDBCAB53751EF79ED3A2599AD6DB27FD
+                  DAEA399C168D213486D0184263088D213486D0184263088D213486D018426308
+                  8D213486D0F8C78AE6FFD39AC669D1184263088D212CC90E01F7115BA2A07626
+                  0000000049454E44AE426082}
+                FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\icon_max.png'
+              end>
+            Align = Center
+            Cursor = crHandPoint
+            HitTest = False
+            Size.Width = 15.000000000000000000
+            Size.Height = 15.000000000000000000
+            Size.PlatformDefault = False
+            OnClick = imgMaxClick
+            object GlowEffect4: TGlowEffect
+              Softness = 0.100000001490116100
+              GlowColor = xFF02A7FF
+              Opacity = 1.000000000000000000
+              Trigger = 'IsMouseOver=true'
+              Enabled = False
+            end
+          end
+          object imgRes: TImage
+            MultiResBitmap.Height = 50
+            MultiResBitmap.Width = 50
+            MultiResBitmap = <
+              item
+                Width = 50
+                Height = 50
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                  B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0099494441546843EDD8490A80301044D18EF7BF73340E1B278228FE86FF40CC
+                  CE145D71911211757AD21BD6777A06A1B93C23B5F28E4E296DBBE7AC164D57B5
+                  EE46FAB5DE7D582D9AB95AC43F54D3AA64B5B23A546B1B5FEF48DFB6FFAED5CA
+                  CA203406A131088D41680C4263101A83D01884C6203406A131084DD7051D8517
+                  74995C56EB2F4FF762B5680ED522B15A99CDD55A96B9592D9688110C3233532E
+                  DD2B2E0000000049454E44AE426082}
+                FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\icon_res.png'
+              end>
+            Align = Center
+            Cursor = crHandPoint
+            HitTest = False
+            Size.Width = 15.000000000000000000
+            Size.Height = 15.000000000000000000
+            Size.PlatformDefault = False
+            OnClick = imgResClick
+            object GlowEffect1: TGlowEffect
+              Softness = 0.100000001490116100
+              GlowColor = xFF02A7FF
+              Opacity = 1.000000000000000000
+              Trigger = 'IsMouseOver=true'
+              Enabled = False
+            end
+          end
+        end
+        object rectClose: TRectangle
+          Align = MostRight
+          Fill.Color = claBlack
+          Margins.Right = 5.000000000000000000
+          Position.X = 692.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 20.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = rectCloseClick
+          object imgClose: TImage
+            MultiResBitmap.Height = 50
+            MultiResBitmap.Width = 50
+            MultiResBitmap = <
+              item
+                Width = 50
+                Height = 50
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                  B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  0177494441546843DDD3D16E84300C44D1D0FFFF67DA91EA164AE238F6184CAF
+                  B4DA07D0AE8FE26CADB5FDEBF3FA3EBEBF5FDFBF819C566BDF7FB76CDBF0A866
+                  BD398727727CB952A3B9D4D5AA86D1E639417AEB5405D39BE338EFE5442A6266
+                  08D45DAD4A180B020DEF48058C1581D4CBFE2466058154087A02B38A405308BA
+                  13E341201304DD81F122901982323111045A82A00C4C1481962188896120900B
+                  8218181602B921288261225008823C183602852168059381401408B260B21088
+                  06411A261381F04BD77F08D61BFA6F4C04A29E88341B928D402910341A360381
+                  D220A3F5B2AC9DA714C86CD80C0C1DD21BB2B74E6C0C15A221B2313488E52432
+                  31148805216561C2901584948109413C08898D71432208898971411808898559
+                  8630111203B304C94048518C19928990221813E40E84E4C54C217722240F4685
+                  3C8190563143C893086905D38554404856CC05520921593027484584349B43BD
+                  EC551092360F9EFC1CC3F144AA21669D206F4E5DADF7D4DA27A1A6F855A9BEFB
+                  330000000049454E44AE426082}
+                FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\icon_close.png'
+              end>
+            Align = Center
+            Cursor = crHandPoint
+            HitTest = False
+            Size.Width = 15.000000000000000000
+            Size.Height = 15.000000000000000000
+            Size.PlatformDefault = False
+            OnClick = imgCloseClick
+            object GlowEffect2: TGlowEffect
+              Softness = 0.100000001490116100
+              GlowColor = xFF02A7FF
+              Opacity = 1.000000000000000000
+              Trigger = 'IsMouseOver=true'
+              Enabled = False
+            end
+          end
+        end
+        object Image4: TImage
+          MultiResBitmap.Height = 50
+          MultiResBitmap.Width = 50
+          MultiResBitmap.TransparentColor = -16777210
+          MultiResBitmap = <
+            item
+              Width = 50
+              Height = 50
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+                B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0945494441546843ED980B5055C71980FF3DF709DC8B5CB1F581D5684D44F3A0
+                89B63E06354533E313D111109FA1F84A5AAA49A753DB98214E43321D6B3236D5
+                988822C6404DD24ED3181F556BD568A2124D2082C8FBA2020A97FB7E70EF39A7
+                FFEE5D2E189E2A509DE19BD9BBFFEE39FBF877FFFFDF3D17FAE8A38F0E51F0FC
+                A163C182DDC5A186E98E11A3E67D64AC38F40EE1F50F15894BB3F20C61AA86AA
+                2A5B832E48FE8DD94CFEFD7F51A47EFB941F69838539200BD120498341001F91
+                85429FE4FD3874F51767F96BED121DBD6DE6A38FF5FFADC7232B40B62F888A1A
+                3CB7D714B1EF9EB655A1105E96655ED10174525E515A10BAEAD43FFD3577F2EC
+                8CEDE71E1D1526EDDAB9347AC2E4BF243E1D15F65A8F2A52B77DEA186D30C915
+                40086E1AC80BBE4A05519648B2EC1424A2270446110186B6A520C187B526EF90
+                475E3E53CDAB18F1F1F18A1B35D34ECD9E13F14763A533FDFD77978EEF11454C
+                199386AB415B4E64B04882F4A23EE5540E7FD421963D53262B89F2084E4ACFAB
+                181E514C31AC3ABD8717DBA4DB157167C6547925F92D7DCAC9B779D55D73E3BD
+                6903FA6B14B7E516DB946F75FD7AC2FAAFDEE1C556749B22F6DD5367015110DD
+                2F4E1EE255F78D272BA65094E4485E841AB32D72E44BB945BC7807DDA248CDCE
+                29EB06AD3BB39317BB15CBFE19D7555E3182CA824040BBF23F6DCEB9DB4DAB27
+                7067C5C8921430B36DC1C92737703980C0F3079A9B26C7442ED248B69E8B77F0
+                502832F2A5F3E70585DF7868003899364DC90A2DB82745B0232D177B0D875B5C
+                C245888A10677231C05D29F25DDA58F5E77FF8E9F89F6F3EE5E655BD46F89AE6
+                B348AD543ECEC5005D56247674B83E64D0901973DEB898CBAB7A1F1E9A70D203
+                FD52336D2A827648D2D26481262AA7A6A66A325E897A75C40BC7BBED8CB81794
+                A2C3A8060FA889D5C8AB02301DB76CF964B8C3ABAEA8A9AA6B0EC818ED58C043
+                E7A2076CCB5396D26006B056570F8B897DBAA0B2FCB6CE8CE59CEC64D67AE3C6
+                0F0D21E161A6DBD7EBF1722BB1F7DBA2B45484C38752589BF4AD4756DBCCF6F7
+                CD75562CF9278123FB733E07361756C3A2179497B9E0F8B15FB197D98FD5E690
+                8DC64AFFCB9D42B0139C445911FC7973FEB0BD079619DD1E37E4E5E741526222
+                EBAFC2582BFBBC0EF0783C7436015A76AF542AE162EEB7B07CE922B27E53CE98
+                F48DF30A2A2AABF8D3F6F1AB885F84D8FE9B6F0B6071C27C5625D86C96774B4B
+                4B71E564A665E70940144550AB7193059F2CE28A8BA204784567035454545F6E
+                30D582CB45E301BE4C1BF0F4FDBED06A1B699BF4DFCDBE54564E17B2F395A46F
+                D0643299E89822AB4494D8D93A854201376EDE049FE83B8C439CA57726510811
+                236DC7DE280999B819278E615C2012C804DF47D077702A172E6CBE0EB08277E5
+                47AD819FD0FEF2F2F351D67C40956C0F8D96D868DE60B16BA962C6AAEBA020D2
+                365CA746C0116559C26A49902520547AC499BBDE2AE92F99B48FB18FAF208DCA
+                4E738AD24DB71F090E0E826D6FE5CE9AF4EC583452491CACBE12735AFAF179BC
+                870F015C740C0B3E49166C2E87F36CDAEFE33E678D1877AEA2D3E162392A0CF1
+                0BE3EED4B20D701784AB45D7986C30E8203BBB64D9C8C888CFBC5EAF28C8820F
+                15F2A19F89325179755A114E39C767D96F951DDFFAE6F202D688432C168B5C69
+                C48545F47A2D0405E998993107C3C5C40F20BF8CC9E5F0C1D973C5F0DFD32570
+                F99BFA9957F2361DBD565C22BBDD1EB85A5400098BE249494999EC74B97047AE
+                C0B22509CC7E3BA3A2D2285BAD363646683F3D9AAD06249FC4C766CAE2D26242
+                336E6870C147072E80365407AFA72DA4273C332F011F2E6A8A2C369B1B6EDDAA
+                83BABA7AA8AF3781A9C104667303582C66B05A2DF8F9E9809F4D1802AF6E9A0E
+                FD42C38EB0469CCEADBB7D7E30203C9FE6D4BC6C563BD4E3F80D8171CD382F0B
+                389C5670B9EDA00D1261D98A6760CEAC813071F25F9DAC034430180C7F1F3B66
+                F486E292526C6483C6C6C6E6E4F1E734FAD0446D9F82BB0EA9A98361DCB8F754
+                ACE23E090909796AE488E15F145E2D026AEA5E9F0FC7A0C91B488D8DFE9C5EE5
+                690A090A83F1E3F56ADE05B0CB1746A06D98D104AE5DD133352ACD61E1F913AD
+                CC624746C6F2E80993F6D11DD4E26D4BA7BB897BCF1F7E6F4B54EA56F7BA0ED1
+                E97453B8D80A6FE6335E55F225B668391F7F72F9F1C8312CA08C1B17C29E53C8
+                BA17F6FC03555CC08BE043DD2474540D46468C4C4DD54C0AD5A961C99227D9CE
+                949416415C6C1CB9760D7D0457B1F06A0124C637FB4844C42058BB663F0C18D8
+                CFDF471B586D3264EF4B26A91BF6372F039A17734E3E281DD72D6B713E6E10F0
+                D9C2B8A73028F843FDC50B85C6949445C3A94CAE1517535F0A346A0F6ABF4EA7
+                9BE52E9C283A684662FCC2D50145D0D913D1D92D162B060F7AB0C9CC69850E6E
+                73E7BEFA1A9E5FBE9894949676EC6281B911B0DB9D6C0EA565E56075DA46AF4C
+                4A62214FF078BC68FFE807EE46707792E869EC72BBA1B6B6A68A2AC1FAE6342D
+                427579D9C8218307B24392FA575BFD34253C26581BBA401D26871B1C98A8AC52
+                29A1F6D62D7A4BDCD9A40485ECCFFE5B15DD4D8A28A9885A6864DFC75E497343
+                80A6DBBA0A04253D94E4DB3E9798B4726552217F0059FB0ED4800A4D111D7071
+                62FC205E0DE7CF5FF8D3D5F28A65B46BBADC4A3A6BBEF3781DC05F15FA91A22E
+                3161E1931FE6E4E025CF0F7D45002D84687CE1768FAF5EF4A19D53F0971035A8
+                94244F20E2BC848484C061D826AEACF9324DF519CF3DC1AB7A9DEBBBA6DCF52D
+                BB5D0B0E52046770B157B9BC75C2EAA1ABCFCCE6C52EE3DFB616B8F7C5A1F3FB
+                7D2F68E5A7AD9E3FA8B4DA1149F6E297851F5BE6BCD7B8F8C0D34A1193CB17D8
+                56954248E3E2034F2B4586AE3BFAA5C0833FB53047669C85157A08E38EEE092A
+                6D3A7B766E99818B78A0C9A1E6BDF3BFE6C56EC3963977BA35736EE4B0178F7D
+                C7ABEE8B769DB9E8ED98B5C30CFA9D81377C627D50CAC101BC74CF5833664FD5
+                A815BB342B3E1BCDABBA850EA392F383D857F0147C9D1719B224EF084EFED72F
+                79B14B546F792EA4DF0F83F72A08592489AE1141C9472BF8A36EA3D3F06AC99C
+                375123085FFA03723322885E5956EC96255FB64894F986E44FCDF80E7164CE1E
+                885FC4510251CC2592984454AA70FABEB7D13743BFEAE009D6B807E8F239E1D8
+                1B7B026F9F31BCD825F043B3C8D5E8993160CD11FF27680FD265459A70EC9D13
+                4B64453A7EDC3CD17297E87D0DEF893622C9396EAF94DE7FEDC1567FA2F5D147
+                1F7DDC2700FF03A96965F22EC0D4C20000000049454E44AE426082}
+              FileName = 'C:\Projetos\SICS\V6\trunk\02. TGS\RESOURCES\sics_logo c'#243'pia.png'
+            end>
+          Align = MostLeft
+          Cursor = crHandPoint
+          HitTest = False
+          Position.Y = 3.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = imgResClick
+          object GlowEffect5: TGlowEffect
+            Softness = 0.100000001490116100
+            GlowColor = xFF02A7FF
+            Opacity = 1.000000000000000000
+            Trigger = 'IsMouseOver=true'
+            Enabled = False
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,185 @@
+inherited frmGraphicsBase: TfrmGraphicsBase
+  Size.Width = 1107.000000000000000000
+  Size.Height = 660.000000000000000000
+  inherited layBase: TLayout
+    Size.Width = 1107.000000000000000000
+    Size.Height = 660.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 1107.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1083.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Gr'#225'ficos'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1083.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Align = Contents
+      Margins.Left = 400.000000000000000000
+      Margins.Top = 27.000000000000000000
+      Margins.Bottom = 51.000000000000000000
+      Size.Width = 707.000000000000000000
+      Size.Height = 582.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 707.000000000000000000
+        Size.Height = 582.000000000000000000
+      end
+    end
+    object lytLateral: TLayout
+      Align = Left
+      Position.Y = 27.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 433.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object btnExibirFiltro: TButton
+      Hint = 'Exibir Filtro'
+      Images = MainForm.imgResources
+      ImageIndex = 13
+      Position.X = 6.000000000000000000
+      Position.Y = 78.000000000000000000
+      Size.Width = 23.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Visible = False
+      OnClick = btnExibirFiltroClick
+    end
+    object btnOcultarFiltro: TButton
+      Hint = 'Ocultar Filtro'
+      Images = MainForm.imgResources
+      ImageIndex = 14
+      Position.X = 6.000000000000000000
+      Position.Y = 51.000000000000000000
+      Size.Width = 23.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Visible = False
+      OnClick = btnOcultarFiltroClick
+    end
+    object lytRodape: TLayout
+      Align = Bottom
+      Position.Y = 460.000000000000000000
+      Size.Width = 1107.000000000000000000
+      Size.Height = 200.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object ToolBarPrincipal: TPanel
+        Align = Bottom
+        Padding.Left = 10.000000000000000000
+        Padding.Top = 10.000000000000000000
+        Padding.Right = 10.000000000000000000
+        Padding.Bottom = 10.000000000000000000
+        Position.Y = 149.000000000000000000
+        Size.Width = 1107.000000000000000000
+        Size.Height = 51.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object btnImprimir: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Right = 4.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btImprimir'
+          TabOrder = 0
+          Text = 'Imprimir'
+          OnClick = btnImprimirClick
+        end
+        object btnFechar: TButton
+          Align = Right
+          Images = MainForm.imgResources
+          Margins.Right = 4.000000000000000000
+          Position.X = 982.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 111.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btVermelho'
+          TabOrder = 1
+          Text = 'Fechar'
+          OnClick = btnFecharClick
+        end
+        object btnExportarExcel: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Right = 4.000000000000000000
+          Position.X = 124.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btExportar'
+          TabOrder = 5
+          Text = 'Exportar Excel'
+          OnClick = btnExportarExcelClick
+        end
+        object btnCopiarGrafico: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          ImageIndex = 0
+          Margins.Right = 4.000000000000000000
+          Position.X = 268.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btCopiar'
+          TabOrder = 4
+          Text = 'Copiar gr'#225'fico'
+          OnClick = btnExportarExcelClick
+        end
+        object btnSalvarGrafico: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Right = 4.000000000000000000
+          Position.X = 412.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 31.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'btSalvar'
+          TabOrder = 3
+          Text = 'Salvar gr'#225'fico'
+          OnClick = btnExportarExcelClick
+        end
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 201
+    Top = 124
+  end
+  object actlstMain: TActionList
+    Left = 445
+    Top = 176
+    object actImprimir: TAction
+      Category = 'Graficos'
+      Text = '&Imprimir'
+      OnExecute = actImprimirExecute
+    end
+    object actFechar: TAction
+      Category = 'Geral'
+      Text = '&Fechar'
+      OnExecute = actFecharExecute
+    end
+  end
+  object qryEstatisticas: TFDQuery
+    Left = 109
+    Top = 56
+  end
+  object qryEstatisticasSla: TFDQuery
+    Left = 16
+    Top = 16
+  end
+end

@@ -1,0 +1,298 @@
+inherited frmSicsReportTotem: TfrmSicsReportTotem
+  Size.Height = 568.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 1261.000000000000000000
+    Size.Height = 548.000000000000000000
+    inherited recCaption: TRectangle
+      Size.Width = 1261.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1237.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Relat'#243'rio de Tempo de Atendimento de Totens'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1237.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Margins.Top = 10.000000000000000000
+      Size.Width = 1261.000000000000000000
+      Size.Height = 434.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 1261.000000000000000000
+        Size.Height = 434.000000000000000000
+      end
+      inherited MainGrid: TGrid
+        Size.Width = 1261.000000000000000000
+        Size.Height = 434.000000000000000000
+        Viewport.Width = 1261.000000000000000000
+        Viewport.Height = 434.000000000000000000
+      end
+    end
+    inherited lytRodape: TLayout
+      Position.Y = 471.000000000000000000
+      Size.Width = 1261.000000000000000000
+      inherited FecharButton: TButton
+        Position.X = 298.000000000000000000
+      end
+      inherited ExportBtn: TButton
+        Position.X = 155.000000000000000000
+        Size.Width = 137.000000000000000000
+      end
+      inherited RecordsLabel: TLabel
+        Position.X = 1121.000000000000000000
+      end
+      inherited Label1: TLabel
+        Position.X = 1203.000000000000000000
+      end
+      inherited chkMostrarTipoSenha: TCheckBox
+        Position.X = 1016.000000000000000000
+        Visible = False
+      end
+      inherited chkMostrarNomeDosClientes: TCheckBox
+        Position.X = 1016.000000000000000000
+        Visible = False
+      end
+      inherited chkMostrarTags: TCheckBox
+        Position.X = 1016.000000000000000000
+        Visible = False
+      end
+      inherited ProgressBar1: TProgressBar
+        Position.X = 895.000000000000000000
+      end
+    end
+  end
+  inherited MainMenu1: TMenuBar
+    Visible = False
+  end
+  inherited bndList: TBindingsList
+    Left = 686
+    inherited LinkGridEventos: TLinkGridToDataSource
+      Columns = <
+        item
+          MemberName = 'ID_UNIDADE'
+        end
+        item
+          MemberName = 'LKP_NOME_UNIDADE'
+        end
+        item
+          MemberName = 'NUMEROTICKET'
+        end
+        item
+          MemberName = 'NOMETOTEM'
+        end
+        item
+          MemberName = 'NOMETIPOFLUXO'
+        end
+        item
+          MemberName = 'NOMERESULTADO'
+        end
+        item
+          MemberName = 'CALC_CustNomeCliente'
+          Visible = False
+        end
+        item
+          MemberName = 'NOMEFILAESPERA'
+          Visible = False
+        end
+        item
+          MemberName = 'NOMEPA'
+          Visible = False
+        end
+        item
+          MemberName = 'NOMEATD'
+          Visible = False
+        end
+        item
+          MemberName = 'NOMECLIENTE'
+          Visible = False
+        end
+        item
+          MemberName = 'INICIO'
+        end
+        item
+          MemberName = 'FIM'
+        end
+        item
+          MemberName = 'DURACAO_SEGUNDOS'
+        end
+        item
+          MemberName = 'INTCALC_TAGS'
+          Visible = False
+        end>
+    end
+  end
+  inherited ilPrincipal: TImageList
+    Left = 688
+    Top = 296
+  end
+  inherited dsEventos: TDataSource
+    Left = 208
+    Top = 119
+  end
+  inherited qryEventos: TFDQuery
+    SQL.Strings = (
+      'select'
+      '   1'#9#9#9'        AS ID_UNIDADE,'
+      '   E.*,'
+      '   S.NUMEROTICKET'#9'AS NUMEROTICKET,'
+      '   T.NOME'#9#9'      AS NOMETIPOEVENTO,'
+      '   F1.NOME'#9#9'    AS NOMEFILAESPERA,'
+      '   F2.NOME'#9#9'    AS TIPOTICKET,'
+      '   P.NOME'#9#9'      AS NOMEPA,'
+      '   A.NOME'#9#9'      AS NOMEATD,'
+      '   C.NOME         AS NOMECLIENTE'
+      'from'
+      '   EVENTOS E'
+      '   left join TICKETS'#9#9'    S'#9' on  E.ID_TICKET'#9#9' = S.ID'
+      '   left join TIPOS_EVENTOS'#9'T'#9' on  E.ID_TIPOEVENTO'#9' = T.ID'
+      '   left join FILAS'#9#9'      F1 on  E.ID_FILAESPERA'#9' = F1.ID'
+      '   left join FILAS'#9#9'      F2 on  E.ID_FILATIPOTICKET'#9' = F2.ID'
+      '   left join PAS'#9#9'        P'#9' on  E.ID_PA'#9#9' = P.ID'
+      '   left join ATENDENTES'#9'    A'#9' on  E.ID_ATENDENTE'#9' = A.ID'
+      '   left join CLIENTES  '#9'    C'#9' on  S.ID_CLIENTE'#9' = C.ID'
+      'order by E.ID_TICKET, E.INICIO')
+    Left = 448
+    Top = 113
+  end
+  inherited cdsEventos: TClientDataSet
+    Left = 273
+    Top = 116
+    object cdsEventosID_UNIDADE: TIntegerField
+      DisplayLabel = 'Id Unid.'
+      DisplayWidth = 70
+      FieldName = 'ID_UNIDADE'
+      Required = True
+      Visible = False
+    end
+    object cdsEventosLKP_NOME_UNIDADE: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 70
+      FieldKind = fkLookup
+      FieldName = 'LKP_NOME_UNIDADE'
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_UNIDADE'
+      Size = 40
+      Lookup = True
+    end
+    object cdsEventosNUMEROTICKET: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Senha'
+      DisplayWidth = 70
+      FieldName = 'NUMEROTICKET'
+    end
+    object cdsEventosNOMETOTEM: TStringField
+      DisplayLabel = 'Totem'
+      FieldName = 'NOMETOTEM'
+      Size = 30
+    end
+    object cdsEventosNOMETIPOFLUXO: TStringField
+      DisplayLabel = 'Fluxo'
+      FieldName = 'NOMETIPOFLUXO'
+      Size = 30
+    end
+    object cdsEventosCALC_CustNomeCliente: TStringField
+      DisplayLabel = 'Nome Cliente'
+      DisplayWidth = 120
+      FieldKind = fkInternalCalc
+      FieldName = 'CALC_CustNomeCliente'
+      ReadOnly = True
+      Visible = False
+      Size = 30
+    end
+    object cdsEventosNOMEFILAESPERA: TStringField
+      DisplayLabel = 'Fila'
+      DisplayWidth = 1
+      FieldName = 'NOMEFILAESPERA'
+      Visible = False
+      Size = 30
+    end
+    object cdsEventosNOMEPA: TStringField
+      DisplayLabel = 'PA'
+      DisplayWidth = 1
+      FieldName = 'NOMEPA'
+      Visible = False
+      Size = 30
+    end
+    object cdsEventosNOMEATD: TStringField
+      DisplayLabel = 'Atendente'
+      DisplayWidth = 1
+      FieldName = 'NOMEATD'
+      Visible = False
+      Size = 60
+    end
+    object cdsEventosNOMECLIENTE: TStringField
+      DisplayLabel = 'Nome cliente'
+      DisplayWidth = 1
+      FieldName = 'NOMECLIENTE'
+      Visible = False
+      Size = 60
+    end
+    object cdsEventosINICIO: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'In'#237'cio'
+      DisplayWidth = 120
+      FieldName = 'INICIO'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosFIM: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Fim'
+      DisplayWidth = 120
+      FieldName = 'FIM'
+      DisplayFormat = 'dd/mm  hh:nn:ss'
+    end
+    object cdsEventosDURACAO_SEGUNDOS: TIntegerField
+      DisplayLabel = 'Dura'#231#227'o'
+      DisplayWidth = 70
+      FieldName = 'DURACAO_SEGUNDOS'
+      OnGetText = cdsEventosDURACAO_SEGUNDOSGetText
+    end
+    object cdsEventosINTCALC_TAGS: TStringField
+      DisplayLabel = 'Tags'
+      DisplayWidth = 1
+      FieldKind = fkInternalCalc
+      FieldName = 'INTCALC_TAGS'
+      Visible = False
+      Size = 50
+    end
+    object cdsEventosID_TICKET: TIntegerField
+      DisplayWidth = 1
+      FieldName = 'ID_TICKET'
+      Visible = False
+    end
+    object cdsEventosNOMERESULTADO: TStringField
+      DisplayLabel = 'Resultado'
+      FieldName = 'NOMERESULTADO'
+    end
+  end
+  inherited qryTabelasUnidades: TFDQuery
+    Left = 208
+    Top = 344
+  end
+  inherited cdsEventosTmp: TClientDataSet
+    Left = 424
+    Top = 327
+  end
+  inherited dspEventosTmp: TDataSetProvider
+    Left = 359
+    Top = 113
+  end
+  inherited qryGetTagsTicket: TFDQuery
+    Left = 205
+    Top = 399
+  end
+  inherited bndEventos: TBindSourceDB
+    Left = 690
+    Top = 360
+  end
+  inherited dtsMain: TDataSource
+    Left = 684
+    Top = 177
+  end
+end

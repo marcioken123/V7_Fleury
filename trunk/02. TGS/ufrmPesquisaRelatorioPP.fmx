@@ -1,0 +1,1113 @@
+inherited frmPesquisaRelatorioPP: TfrmPesquisaRelatorioPP
+  Left = 462
+  Top = 122
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Filtrar base de dados (Relat'#243'rio de Processos Paralelos)'
+  ClientHeight = 593
+  ClientWidth = 784
+  OnKeyDown = nil
+  Left = 462
+  Top = 122
+  DesignerMasterStyle = 0
+  inherited layBase: TLayout
+    Size.Width = 784.000000000000000000
+    Size.Height = 593.000000000000000000
+    TabOrder = 7
+    inherited recCaption: TRectangle
+      Size.Width = 784.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 760.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+      inherited btnCloseForm: TButton
+        Position.X = 760.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Size.Width = 784.000000000000000000
+      Size.Height = 510.000000000000000000
+      inherited rectFundo: TRectangle
+        Fill.Color = xFFF4F4F4
+        Size.Width = 784.000000000000000000
+        Size.Height = 510.000000000000000000
+        Stroke.Kind = None
+      end
+      inherited TagsPanel: TPanel
+        ClipChildren = True
+        Position.X = 638.000000000000000000
+        Position.Y = 331.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        TabOrder = 5
+        inherited TagsTreeView: TTreeView
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        inherited rect5: TRectangle
+          Size.Width = 130.000000000000000000
+          inherited TagsLabel: TLabel
+            Size.Width = 130.000000000000000000
+          end
+        end
+      end
+      inherited pnlUnidades: TRectangle
+        inherited lbUnidades: TListBox
+          AlternatingRowBackground = True
+          Viewport.Width = 335.000000000000000000
+          Viewport.Height = 100.000000000000000000
+        end
+      end
+      object AtendsFinPanel: TPanel
+        ClipChildren = True
+        Position.X = 355.000000000000000000
+        Position.Y = 331.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object AtendsFimTreeView: TTreeView
+          Align = Client
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        object Rectangle6: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object AtendsFinLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = '&Atendentes (Fim):'
+          end
+        end
+      end
+      object AtendsPanel: TPanel
+        Position.X = 355.000000000000000000
+        Position.Y = 127.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object AtendsTreeView: TTreeView
+          Align = Client
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          OnKeyDown = AtendsTreeViewKeyDown
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        object Rectangle5: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object AtendsLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = '&Atendentes (In'#237'cio):'
+          end
+        end
+      end
+      object PAsFinPanel: TPanel
+        ClipChildren = True
+        Position.X = 495.000000000000000000
+        Position.Y = 331.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object PAsFimTreeView: TTreeView
+          Align = Client
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        object Rectangle2: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object PAsFinLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            TextSettings.WordWrap = False
+            Text = '&PAs (Fim):'
+          end
+        end
+      end
+      object PAsPanel: TPanel
+        Position.X = 495.000000000000000000
+        Position.Y = 127.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object PAsTreeView: TTreeView
+          Align = Client
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        object Rectangle3: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object PAsLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            TextSettings.WordWrap = False
+            Text = '&PAs (In'#237'cio):'
+          end
+        end
+      end
+      object pnlTipo: TPanel
+        Position.X = 638.000000000000000000
+        Position.Y = 127.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 190.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object PPsTreeView: TTreeView
+          Align = Client
+          Size.Width = 130.000000000000000000
+          Size.Height = 165.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 130.000000000000000000
+          Viewport.Height = 165.000000000000000000
+        end
+        object Rectangle4: TRectangle
+          Align = Top
+          Fill.Color = xFF005E8C
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object PPsLabel: TLabel
+            Align = Client
+            AutoSize = True
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 130.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            TextSettings.WordWrap = False
+            Text = 'Tip&os de PPs:'
+          end
+        end
+      end
+      object rectDuracao: TRectangle
+        Fill.Color = claWhite
+        Position.X = 8.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 329.000000000000000000
+        Size.Height = 145.000000000000000000
+        Size.PlatformDefault = False
+        object edDuracaoAteHoras: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 0
+          MaxLength = 2
+          Text = '88'
+          Position.X = 209.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoAteMinutos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          MaxLength = 2
+          Text = '88'
+          Position.X = 247.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoAteSegundos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 2
+          MaxLength = 2
+          Text = '88'
+          Position.X = 285.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoDesdeHoras: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          MaxLength = 2
+          Text = '88'
+          Position.X = 65.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoDesdeMinutos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 4
+          MaxLength = 2
+          Text = '88'
+          Position.X = 103.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoDesdeSegundos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 5
+          MaxLength = 2
+          Text = '88'
+          Position.X = 141.000000000000000000
+          Position.Y = 100.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoDesdeHorasChange
+        end
+        object edDuracaoMaiorMenorHoras: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 6
+          MaxLength = 2
+          Text = '88'
+          Position.X = 65.000000000000000000
+          Position.Y = 61.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoMaiorMenorHorasChange
+        end
+        object edDuracaoMaiorMenorMinutos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 7
+          MaxLength = 2
+          Text = '88'
+          Position.X = 103.000000000000000000
+          Position.Y = 61.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoMaiorMenorHorasChange
+        end
+        object edDuracaoMaiorMenorSegundos: TEdit
+          Tag = 1
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 8
+          MaxLength = 2
+          Text = '88'
+          Position.X = 141.000000000000000000
+          Position.Y = 61.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          OnChangeTracking = edDuracaoMaiorMenorHorasChange
+        end
+        object lblTipo1Ate: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 176.000000000000000000
+          Position.Y = 105.000000000000000000
+          Size.Width = 25.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'At'#233':'
+        end
+        object lblTipo1DoisPontos1: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 96.000000000000000000
+          Position.Y = 65.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object lblTipo1DoisPontos2: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 134.000000000000000000
+          Position.Y = 65.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object lblTipo1DoisPontos3: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 96.000000000000000000
+          Position.Y = 104.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object lblTipo1DoisPontos4: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 134.000000000000000000
+          Position.Y = 104.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object lblTipo1DoisPontos5: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 240.000000000000000000
+          Position.Y = 108.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object lblTipo1DoisPontos6: TLabel
+          Tag = 1
+          AutoSize = True
+          Enabled = False
+          Position.X = 278.000000000000000000
+          Position.Y = 108.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object rbDuracaoEntre: TRadioButton
+          Tag = 1
+          Enabled = False
+          GroupName = 'Duracao'
+          Position.X = 15.000000000000000000
+          Position.Y = 105.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 16
+          Text = 'De:'
+          OnMouseUp = rbDuracaoEntreMouseUp
+        end
+        object rbDuracaoMaiorIgual: TRadioButton
+          Tag = 1
+          Enabled = False
+          GroupName = 'Duracao'
+          Position.X = 15.000000000000000000
+          Position.Y = 79.000000000000000000
+          Size.Width = 49.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 17
+          Text = '>='
+        end
+        object rbDuracaoMenor: TRadioButton
+          Tag = 1
+          Enabled = False
+          GroupName = 'Duracao'
+          Position.X = 15.000000000000000000
+          Position.Y = 57.000000000000000000
+          Size.Width = 37.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 18
+          Text = '<'
+          OnMouseUp = rbDuracaoMenorMouseUp
+        end
+        object rbDuracaoTodos: TRadioButton
+          Tag = 1
+          Enabled = False
+          GroupName = 'Duracao'
+          Position.X = 15.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 75.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 19
+          Text = 'Todos'
+          OnChange = rbDuracaoTodosChange
+        end
+        object rectTituloDuracao: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 329.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          object chkDuracao: TCheckBox
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 323.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Dura'#231#227'o'
+            TextSettings.FontColor = claWhite
+            OnChange = chkDuracaoChange
+          end
+        end
+      end
+      object IniPeriodPanel: TRectangle
+        Fill.Color = claWhite
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 177.000000000000000000
+        Size.Height = 105.000000000000000000
+        Size.PlatformDefault = False
+        object rectTituloPeriodoInicio: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 177.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          object IniPeriodCheckBox: TCheckBox
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 171.000000000000000000
+            Size.Height = 14.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Per'#237'odo (de in'#237'cio)'
+            TextSettings.FontColor = claWhite
+            OnChange = IniPeriodCheckBoxChange
+          end
+        end
+        object IniSinceDayEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          MaxLength = 2
+          Text = '88'
+          Position.X = 47.000000000000000000
+          Position.Y = 28.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object IniSinceMonthEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 2
+          MaxLength = 2
+          Text = '88'
+          Position.X = 85.000000000000000000
+          Position.Y = 28.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object IniSinceYearEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          MaxLength = 2
+          Text = '88'
+          Position.X = 123.000000000000000000
+          Position.Y = 28.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object IniUntilDayEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 4
+          MaxLength = 2
+          Text = '88'
+          Position.X = 47.000000000000000000
+          Position.Y = 64.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object IniUntilMonthEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 5
+          MaxLength = 2
+          Text = '88'
+          Position.X = 86.000000000000000000
+          Position.Y = 64.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object IniUntilYearEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 6
+          MaxLength = 2
+          Text = '88'
+          Position.X = 123.000000000000000000
+          Position.Y = 64.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label1: TLabel
+          Enabled = False
+          Position.X = 13.000000000000000000
+          Position.Y = 31.000000000000000000
+          Size.Width = 31.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'De:'
+        end
+        object Label2: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 78.000000000000000000
+          Position.Y = 31.000000000000000000
+          Size.Width = 9.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '/'
+        end
+        object Label3: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 116.000000000000000000
+          Position.Y = 31.000000000000000000
+          Size.Width = 9.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '/'
+        end
+        object Label4: TLabel
+          Enabled = False
+          Position.X = 12.000000000000000000
+          Position.Y = 69.000000000000000000
+          Size.Width = 37.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'At'#233':'
+        end
+        object Label5: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 78.000000000000000000
+          Position.Y = 68.000000000000000000
+          Size.Width = 9.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '/'
+        end
+        object Label6: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 116.000000000000000000
+          Position.Y = 68.000000000000000000
+          Size.Width = 9.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '/'
+        end
+      end
+      object IniDayPeriodPanel: TRectangle
+        Fill.Color = claWhite
+        Position.X = 192.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 105.000000000000000000
+        Size.PlatformDefault = False
+        object rect2: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 145.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          object DayPeriodCheckBox: TCheckBox
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Position.X = 4.000000000000000000
+            Position.Y = 4.000000000000000000
+            Size.Width = 139.000000000000000000
+            Size.Height = 14.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Hor'#225'rio'
+            TextSettings.FontColor = claWhite
+            OnChange = DayPeriodCheckBoxChange
+          end
+        end
+        object DayPeriodIniHourEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          MaxLength = 2
+          Text = '88'
+          Position.X = 55.000000000000000000
+          Position.Y = 33.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object DayPeriodIniMinuteEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 2
+          MaxLength = 2
+          Text = '88'
+          Position.X = 93.000000000000000000
+          Position.Y = 33.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object DayPeriodUntilHourEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          MaxLength = 2
+          Text = '88'
+          Position.X = 55.000000000000000000
+          Position.Y = 68.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object DayPeriodUntilMinuteEdit: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 4
+          MaxLength = 2
+          Text = '88'
+          Position.X = 93.000000000000000000
+          Position.Y = 68.000000000000000000
+          Enabled = False
+          Size.Width = 28.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label7: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 84.000000000000000000
+          Position.Y = 75.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+        object Label8: TLabel
+          Enabled = False
+          Position.X = 11.000000000000000000
+          Position.Y = 37.000000000000000000
+          Size.Width = 41.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Das:'
+        end
+        object Label10: TLabel
+          Enabled = False
+          Position.X = 11.000000000000000000
+          Position.Y = 72.000000000000000000
+          Size.Width = 37.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'At'#233':'
+        end
+        object Label9: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 86.000000000000000000
+          Position.Y = 42.000000000000000000
+          Size.Width = 6.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = ':'
+        end
+      end
+      object PswdPanel: TRectangle
+        Fill.Color = claWhite
+        Position.X = 346.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 130.000000000000000000
+        Size.Height = 105.000000000000000000
+        Size.PlatformDefault = False
+        object Rectangle1: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 130.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          object PasswordCheckBox: TCheckBox
+            Align = Client
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Size.Width = 124.000000000000000000
+            Size.Height = 19.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Senhas'
+            TextSettings.FontColor = claWhite
+            OnChange = PasswordCheckBoxChange
+          end
+        end
+        object Label29: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 15.000000000000000000
+          Position.Y = 36.000000000000000000
+          Size.Width = 21.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'De:'
+        end
+        object Label30: TLabel
+          AutoSize = True
+          Enabled = False
+          Position.X = 13.000000000000000000
+          Position.Y = 74.000000000000000000
+          Size.Width = 25.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'At'#233':'
+        end
+        object PswdSinceSpin: TSpinBox
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          Cursor = crIBeam
+          Max = 99999.000000000000000000
+          Position.X = 48.000000000000000000
+          Position.Y = 29.000000000000000000
+          Enabled = False
+          Size.Width = 69.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object PswdUntilSpin: TSpinBox
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 4
+          Cursor = crIBeam
+          Max = 99999.000000000000000000
+          Value = 100.000000000000000000
+          Position.X = 48.000000000000000000
+          Position.Y = 67.000000000000000000
+          Enabled = False
+          Size.Width = 69.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+    end
+    object pnlBotoes: TPanel
+      Align = Bottom
+      Position.Y = 537.000000000000000000
+      Size.Width = 784.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object rect1: TRectangle
+        Align = Client
+        Fill.Color = xFFEFEFEF
+        Size.Width = 784.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFD7D7D7
+        object BitBtn1: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Left = 15.000000000000000000
+          Margins.Top = 12.000000000000000000
+          Margins.Bottom = 12.000000000000000000
+          Position.X = 329.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 142.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtGrafico'
+          TabOrder = 0
+          Text = 'Gr'#225'ficos S&LA'
+          OnClick = BitBtn1Click
+        end
+        object btnExibirGraficosTMETMA: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Left = 15.000000000000000000
+          Margins.Top = 12.000000000000000000
+          Margins.Bottom = 12.000000000000000000
+          Position.X = 172.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 142.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtGrafico'
+          TabOrder = 1
+          Text = '&Gr'#225'ficos TMPP'
+          OnClick = btnExibirGraficosTMETMAClick
+        end
+        object btnExibirTabela: TButton
+          Align = Left
+          StyledSettings = [Family, Size, Style, FontColor, Other]
+          Images = MainForm.imgResources
+          Margins.Left = 15.000000000000000000
+          Margins.Top = 12.000000000000000000
+          Margins.Bottom = 12.000000000000000000
+          Position.X = 15.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 142.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtTabela'
+          TabOrder = 2
+          Text = 'Ta&bela'
+          OnClick = btnExibirTabelaClick
+        end
+        object CancelButton: TButton
+          Align = Right
+          Images = MainForm.imgResources
+          Margins.Top = 12.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Margins.Bottom = 12.000000000000000000
+          Position.X = 635.000000000000000000
+          Position.Y = 12.000000000000000000
+          Size.Width = 129.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'BtVermelho'
+          TabOrder = 3
+          Text = '&Cancelar'
+          OnClick = CancelButtonClick
+        end
+      end
+    end
+  end
+  inherited imgsTags: TImageList
+    Left = 96
+    Top = 296
+  end
+  inherited cdsUnidades: TClientDataSet
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'ATENDENTES'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'PAS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'ATDS_FIM'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'PAS_FIM'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'PPS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'FILAS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'TAGS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'GRUPOS_ATENDENTES'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'GRUPOS_PAS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'GRUPOS_PPS'
+        DataType = ftDataSet
+      end
+      item
+        Name = 'SELECIONADO'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'ATENDENTES_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PAS_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'ATDS_FIM_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PAS_FIM_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PPS_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'FILAS_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'TAGS_STR'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'CONECTADA'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'CARREGOU_DADOS'
+        DataType = ftBoolean
+      end>
+    StoreDefs = True
+    BeforeInsert = cdsUnidadesBeforeInsert
+    AfterScroll = cdsUnidadesAfterScroll
+    Left = 210
+    Top = 53
+  end
+  object dtsUnidades: TDataSource
+    DataSet = cdsUnidades
+    Left = 176
+    Top = 272
+  end
+  object qryAux: TFDQuery
+    Left = 232
+    Top = 256
+  end
+  object imgsCheckBox: TImageList
+    Source = <>
+    Destination = <>
+    Left = 155
+    Top = 329
+  end
+  object bnd1: TBindSourceDB
+    DataSource = dtsUnidades
+    ScopeMappings = <>
+    Left = 378
+    Top = 282
+  end
+end

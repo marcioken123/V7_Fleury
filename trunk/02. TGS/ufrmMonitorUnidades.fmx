@@ -1,0 +1,70 @@
+object frmMonitorUnidades: TfrmMonitorUnidades
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = Single
+  Caption = 'Monitor de Unidades'
+  ClientHeight = 91
+  ClientWidth = 384
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object GridBindSourceDB1: TGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    Size.Width = 384.000000000000000000
+    Size.Height = 91.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    RowHeight = 21.000000000000000000
+    Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick]
+    Viewport.Width = 384.000000000000000000
+    Viewport.Height = 91.000000000000000000
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = dmUnidades.cdsUnidades
+    ScopeMappings = <>
+    Left = 136
+    Top = 24
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 220
+    Top = 29
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = GridBindSourceDB1
+      Columns = <
+        item
+          MemberName = 'ID'
+          Width = 25
+        end
+        item
+          MemberName = 'NOME'
+          Width = 90
+        end
+        item
+          MemberName = 'IP_ENDERECO'
+          Width = 70
+        end
+        item
+          MemberName = 'IP_PORTA'
+          Width = 40
+        end
+        item
+          MemberName = 'CONECTADA'
+          Width = 65
+        end
+        item
+          MemberName = 'IDMODULO'
+          Header = 'IdModulo'
+        end>
+    end
+  end
+end

@@ -1,0 +1,5073 @@
+inherited frmGraphicsPP: TfrmGraphicsPP
+  Size.Width = 1289.000000000000000000
+  Size.Height = 905.000000000000000000
+  inherited layBase: TLayout
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 1269.000000000000000000
+    Size.Height = 885.000000000000000000
+    TabOrder = 0
+    inherited recCaption: TRectangle
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 1269.000000000000000000
+      inherited lblCaption: TLabel
+        Size.Width = 1245.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Gr'#225'ficos PP'
+      end
+      inherited btnCloseFrame: TButton
+        Position.X = 1245.000000000000000000
+      end
+    end
+    inherited lytFundo: TLayout
+      Margins.Left = 410.000000000000000000
+      Margins.Top = 37.000000000000000000
+      Margins.Bottom = 61.000000000000000000
+      Size.Width = 859.000000000000000000
+      Size.Height = 787.000000000000000000
+      inherited rectFundo: TRectangle
+        Size.Width = 859.000000000000000000
+        Size.Height = 787.000000000000000000
+      end
+      object pnlChartSla: TPanel
+        Align = Client
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 839.000000000000000000
+        Size.Height = 767.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        object dbChartSla: TDBChart
+          BackWall.Color = claWhite
+          BackWall.Pen.Visible = False
+          BackWall.Transparent = False
+          BottomWall.Pen.Visible = False
+          Foot.Font.StyleExt = {00040000000200000004000000}
+          LeftWall.Pen.Visible = False
+          MarginBottom = 10
+          MarginTop = 5
+          RightWall.Pen.Visible = False
+          SubFoot.Font.StyleExt = {00040000000200000004000000}
+          Title.Text.Strings = (
+            'TDBChart')
+          Title.Visible = False
+          BottomAxis.Axis.Visible = False
+          BottomAxis.Grid.Visible = False
+          BottomAxis.LogarithmicBase = 4.000000000000000000
+          DepthAxis.Axis.Visible = False
+          DepthTopAxis.Axis.Visible = False
+          Frame.Visible = False
+          LeftAxis.Automatic = False
+          LeftAxis.AutomaticMinimum = False
+          LeftAxis.Axis.Visible = False
+          LeftAxis.ExactDateTime = False
+          LeftAxis.Grid.SmallDots = True
+          LeftAxis.Increment = 10.000000000000000000
+          LeftAxis.LabelsSeparation = 20
+          LeftAxis.MinorGrid.Style = psDashDot
+          LeftAxis.MinorTickCount = 1
+          LeftAxis.MinorTickLength = 4
+          Legend.Frame.Visible = False
+          Legend.Shadow.Visible = False
+          Legend.Title.Font.StyleExt = {00070000000000000004000000}
+          Legend.Visible = False
+          RightAxis.Axis.Visible = False
+          TopAxis.Axis.Visible = False
+          TopAxis.Labels = False
+          TopAxis.LabelsAngle = 90
+          TopAxis.LabelsFormat.Visible = False
+          View3D = False
+          Zoom.Brush.Kind = None
+          Zoom.Pen.Fill.Color = claSilver
+          Align = Client
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          Size.Width = 839.000000000000000000
+          Size.Height = 731.000000000000000000
+          Size.PlatformDefault = False
+          OnMouseMove = dbChartSlaMouseMove
+          Left = 1
+          Top = 1
+          ColorPaletteIndex = 13
+          object BarSeries31: TBarSeries
+            HoverElement = []
+            BarBrush.Kind = Gradient
+            BarBrush.Gradient.Direction = gdRightLeft
+            BarBrush.Gradient.EndColor = x0080FF80
+            BarBrush.Gradient.StartColor = x0040BF40
+            BarBrush.Gradient.Visible = True
+            BarPen.Visible = False
+            HorizAxis = aTopAxis
+            Marks.Visible = False
+            DataSource = cdsDiaSmSla
+            SeriesColor = x0080FF80
+            Title = 'PP Verde'
+            XLabelsSource = 'TIPO_ATD_PP_DCR'
+            BarStyle = bsRectGradient
+            Emboss.Color = x00888888
+            Gradient.Direction = gdRightLeft
+            Gradient.EndColor = x0080FF80
+            Gradient.StartColor = x0040BF40
+            Gradient.Visible = True
+            MultiBar = mbStacked
+            OffsetPercent = -6
+            Shadow.Color = x00888888
+            StackGroup = 1
+            YOrigin = 35.000000000000000000
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'RECNO'
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+            YValues.ValueSource = 'PP_PERC_VERDE'
+          end
+          object BarSeries32: TBarSeries
+            HoverElement = []
+            BarBrush.Kind = Gradient
+            BarBrush.Gradient.Direction = gdRightLeft
+            BarBrush.Gradient.EndColor = x0080FF80
+            BarBrush.Gradient.StartColor = x0040FFFF
+            BarBrush.Gradient.Visible = True
+            BarPen.Visible = False
+            Marks.Visible = False
+            DataSource = cdsDiaSmSla
+            SeriesColor = x0080FF80
+            Title = 'PP Amarelo'
+            XLabelsSource = 'DESCRICAO'
+            BarStyle = bsRectGradient
+            Emboss.Color = x00888888
+            Gradient.Direction = gdRightLeft
+            Gradient.EndColor = x0080FF80
+            Gradient.StartColor = x0040FFFF
+            Gradient.Visible = True
+            MultiBar = mbStacked
+            OffsetPercent = -6
+            Shadow.Color = x00888888
+            StackGroup = 1
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'RECNO'
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+            YValues.ValueSource = 'PP_PERC_AMARELO'
+          end
+          object BarSeries33: TBarSeries
+            HoverElement = []
+            BarBrush.Kind = Gradient
+            BarBrush.Gradient.Direction = gdRightLeft
+            BarBrush.Gradient.EndColor = x0080FF80
+            BarBrush.Gradient.StartColor = x004040FF
+            BarBrush.Gradient.Visible = True
+            BarPen.Visible = False
+            Marks.Visible = False
+            DataSource = cdsDiaSmSla
+            SeriesColor = x0080FF80
+            Title = 'PP Vermelho'
+            BarStyle = bsRectGradient
+            Emboss.Color = x00888888
+            Gradient.Direction = gdRightLeft
+            Gradient.EndColor = x0080FF80
+            Gradient.StartColor = x004040FF
+            Gradient.Visible = True
+            MultiBar = mbStacked
+            OffsetPercent = -6
+            Shadow.Color = x00888888
+            StackGroup = 1
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'RECNO'
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+            YValues.ValueSource = 'PP_PERC_VERMELHO'
+          end
+          object Series7: TBarSeries
+            HoverElement = []
+            BarBrush.Kind = Gradient
+            BarBrush.Gradient.Direction = gdLeftRight
+            BarBrush.Gradient.EndColor = claSilver
+            BarBrush.Gradient.StartColor = claGray
+            BarBrush.Gradient.Visible = True
+            BarPen.Visible = False
+            Marks.Visible = False
+            DataSource = cdsDiaSmSla
+            SeriesColor = claSilver
+            Title = 'PP Cinza'
+            BarStyle = bsRectGradient
+            Emboss.Color = x00888888
+            Gradient.Direction = gdLeftRight
+            Gradient.EndColor = claSilver
+            Gradient.StartColor = claGray
+            Gradient.Visible = True
+            MultiBar = mbStacked
+            OffsetPercent = -6
+            Shadow.Color = x00888888
+            StackGroup = 1
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'RECNO'
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+            YValues.ValueSource = 'PP_PERC_CINZA'
+          end
+        end
+        object rectLegenda: TRectangle
+          Align = Bottom
+          Fill.Color = claNull
+          Position.Y = 731.000000000000000000
+          Size.Width = 839.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = claNull
+          object rectVermelho: TRectangle
+            Fill.Color = xFFFF8282
+            Position.X = 368.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 25.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Color = xFFFF8282
+          end
+          object lblProcessos: TLabel
+            Position.X = 400.000000000000000000
+            Position.Y = 9.000000000000000000
+            Text = 'Processos Paralelos'
+          end
+        end
+      end
+      object pnlChart: TPanel
+        Align = Client
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 839.000000000000000000
+        Size.Height = 767.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+        TabOrder = 9
+        object dbChart: TDBChart
+          BackWall.Color = claWhite
+          BackWall.Pen.Visible = False
+          BottomWall.Pen.Visible = False
+          Foot.Font.Size = 9.750000000000000000
+          Foot.Font.StyleExt = {00040000000200000004000000}
+          LeftWall.Color = claSilver
+          LeftWall.Pen.Visible = False
+          MarginBottom = 0
+          MarginLeft = 0
+          MarginRight = 0
+          MarginTop = 0
+          RightWall.Pen.Visible = False
+          SubFoot.Font.StyleExt = {00040000000200000004000000}
+          Title.Text.Strings = (
+            'TDBChart')
+          Title.Visible = False
+          BottomAxis.Axis.Visible = False
+          BottomAxis.DateTimeFormat = 'hh:mm'
+          BottomAxis.ExactDateTime = False
+          BottomAxis.Grid.Visible = False
+          BottomAxis.Increment = 1.000000000000000000
+          BottomAxis.LabelsAngle = 90
+          BottomAxis.LabelsOnAxis = False
+          BottomAxis.LabelsSeparation = 0
+          BottomAxis.LabelStyle = talText
+          BottomAxis.MinorTickLength = 0
+          BottomAxis.TickLength = 5
+          BottomAxis.Title.Caption = 'Tipo de Atendimento'
+          DepthAxis.Axis.Visible = False
+          DepthTopAxis.Axis.Visible = False
+          Frame.Visible = False
+          LeftAxis.Axis.Visible = False
+          LeftAxis.DateTimeFormat = 'hh:mm'
+          LeftAxis.Increment = 0.000347222222222222
+          LeftAxis.LabelsOnAxis = False
+          LeftAxis.LabelsSeparation = 50
+          LeftAxis.LabelStyle = talValue
+          LeftAxis.MinorTickCount = 1
+          LeftAxis.TickInnerLength = 4
+          LeftAxis.Title.Caption = 'Tempo'
+          Legend.Alignment = laBottom
+          Legend.ColorWidth = 50
+          Legend.Frame.Visible = False
+          Legend.LegendStyle = lsSeries
+          Legend.Shadow.Visible = False
+          Legend.Symbol.Width = 50
+          Legend.Title.Font.StyleExt = {00070000000000000004000000}
+          Legend.TopPos = 0
+          Legend.VertMargin = 5
+          RightAxis.Axis.Visible = False
+          RightAxis.ExactDateTime = False
+          RightAxis.Grid.Visible = False
+          RightAxis.Increment = 1.000000000000000000
+          RightAxis.MinimumRound = True
+          RightAxis.MinorTickCount = 0
+          RightAxis.TickInnerLength = 4
+          RightAxis.Title.Angle = 90
+          RightAxis.Title.Caption = 'Quantidade'
+          TopAxis.Axis.Visible = False
+          View3D = False
+          Zoom.Animated = True
+          Zoom.Brush.Kind = None
+          Zoom.Pen.Fill.Color = claSilver
+          Align = Client
+          BevelOuter = bvNone
+          Color = claWhite
+          TabOrder = 1
+          Size.Width = 839.000000000000000000
+          Size.Height = 767.000000000000000000
+          Size.PlatformDefault = False
+          Left = 6
+          Top = 6
+          ColorPaletteIndex = 13
+          object BarSeries13: TBarSeries
+            HoverElement = []
+            BarPen.Visible = False
+            Marks.Visible = False
+            Marks.Style = smsValue
+            DataSource = cdsFaixaDeSenha
+            SeriesColor = claLime
+            Title = 'TMPP'
+            XLabelsSource = 'FaixaDeSenhaNome'
+            Emboss.Color = x00828282
+            Shadow.Color = x00828282
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'FaixaDeSenhaRecNo'
+            YValues.DateTime = True
+            YValues.Name = 'Bar'
+            YValues.Order = loNone
+            YValues.ValueSource = 'TMPP'
+          end
+          object LineSeries6: TLineSeries
+            HoverElement = [heCurrent]
+            Marks.Style = smsValue
+            DataSource = cdsFaixaDeSenha
+            SeriesColor = claBlue
+            Title = 'QTD'
+            VertAxis = aRightAxis
+            XLabelsSource = 'FaixaDeSenhaNome'
+            Brush.BackColor = x00FFFFFF
+            LinePen.Visible = False
+            Pointer.Brush.Gradient.EndColor = claBlue
+            Pointer.Gradient.EndColor = claBlue
+            Pointer.InflateMargins = True
+            Pointer.Style = psCircle
+            Pointer.Visible = True
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'FaixaDeSenhaRecNo'
+            YValues.Name = 'Y'
+            YValues.Order = loNone
+            YValues.ValueSource = 'QtdPP'
+          end
+          object Series1: TBarSeries
+            HoverElement = []
+            Active = False
+            BarPen.Visible = False
+            Marks.Visible = False
+            Marks.Style = smsValue
+            DataSource = cdsFaixaDeSenha
+            SeriesColor = claBlue
+            Title = 'QTD'
+            VertAxis = aRightAxis
+            XLabelsSource = 'FaixaDeSenhaNome'
+            Emboss.Color = x00838383
+            Shadow.Color = x00838383
+            XValues.Name = 'X'
+            XValues.Order = loNone
+            XValues.ValueSource = 'FaixaDeSenhaRecNo'
+            YValues.Name = 'Y'
+            YValues.Order = loNone
+            YValues.ValueSource = 'QtdPP'
+          end
+        end
+        object dbPieChart: TDBChart
+          AllowPanning = pmNone
+          BackWall.Pen.Visible = False
+          Foot.Font.StyleExt = {00040000000200000004000000}
+          MarginBottom = 0
+          MarginLeft = 0
+          MarginRight = 0
+          MarginTop = 0
+          SubFoot.Font.StyleExt = {00040000000200000004000000}
+          Title.Alignment = taRightJustify
+          Title.Text.Strings = (
+            'Quantidade de Atendimentos por Tipo')
+          Title.Visible = False
+          Title.AdjustFrame = False
+          AxisVisible = False
+          Chart3DPercent = 20
+          ClipPoints = False
+          Frame.Visible = False
+          LeftAxis.Visible = False
+          Legend.Title.Font.StyleExt = {00070000000000000004000000}
+          Legend.Visible = False
+          RightAxis.Visible = False
+          TopAxis.Visible = False
+          View3DOptions.Elevation = 315
+          View3DOptions.Orthogonal = False
+          View3DOptions.Perspective = 0
+          View3DOptions.Rotation = 360
+          View3DOptions.VertOffset = -20
+          View3DWalls = False
+          Zoom.Allow = False
+          Zoom.Brush.Kind = None
+          Zoom.Pen.Fill.Color = claSilver
+          Align = Client
+          BevelOuter = bvNone
+          TabOrder = 0
+          Visible = False
+          Size.Width = 488.000000000000000000
+          Size.Height = 488.000000000000000000
+          Size.PlatformDefault = False
+          Left = 6
+          Top = 6
+          ColorPaletteIndex = 13
+          object PieSeries1: TPieSeries
+            HoverElement = []
+            Marks.Style = smsLabelPercent
+            Marks.Callout.Length = 0
+            Marks.Tail.Margin = 2
+            DataSource = cdsFaixaDeSenha
+            SeriesColor = claRed
+            Title = 'Qtd'
+            XLabelsSource = 'FaixaDeSenhaNome'
+            XValues.Order = loNone
+            YValues.Name = 'Pie'
+            YValues.Order = loNone
+            YValues.ValueSource = 'QtdPP'
+            Frame.InnerBrush.Kind = Gradient
+            Frame.InnerBrush.Gradient.EndColor = claGray
+            Frame.InnerBrush.Gradient.MidColor = claWhite
+            Frame.InnerBrush.Gradient.StartColor = x00404040
+            Frame.InnerBrush.Gradient.Visible = True
+            Frame.InnerBrush.BackColor = claRed
+            Frame.MiddleBrush.Kind = Gradient
+            Frame.MiddleBrush.Gradient.EndColor = x00828282
+            Frame.MiddleBrush.Gradient.MidColor = claWhite
+            Frame.MiddleBrush.Gradient.StartColor = claGray
+            Frame.MiddleBrush.Gradient.Visible = True
+            Frame.MiddleBrush.BackColor = claYellow
+            Frame.OuterBrush.Kind = Gradient
+            Frame.OuterBrush.Gradient.EndColor = x00404040
+            Frame.OuterBrush.Gradient.MidColor = claWhite
+            Frame.OuterBrush.Gradient.StartColor = claSilver
+            Frame.OuterBrush.Gradient.Visible = True
+            Frame.OuterBrush.BackColor = claGreen
+            Frame.Width = 4
+            OtherSlice.Legend.Title.Font.StyleExt = {00070000000000000004000000}
+            OtherSlice.Legend.Visible = False
+            OtherSlice.Text = 'Other'
+          end
+        end
+      end
+      object RotateCCWBtn: TButton
+        Tag = 1
+        Anchors = [akTop, akRight]
+        Images = MainForm.imgResources
+        ImageIndex = 20
+        Position.X = 822.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        OnClick = RotateCCWBtnClick
+      end
+      object RotateCWBtn: TButton
+        Tag = -1
+        Anchors = [akTop, akRight]
+        Images = MainForm.imgResources
+        ImageIndex = 19
+        Position.X = 822.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        OnClick = RotateCWBtnClick
+      end
+    end
+    inherited lytLateral: TLayout
+      Margins.Bottom = 10.000000000000000000
+      Position.Y = 37.000000000000000000
+      Size.Height = 649.000000000000000000
+      object PageControlGrids: TTabControl
+        Align = Client
+        Size.Width = 400.000000000000000000
+        Size.Height = 443.000000000000000000
+        Size.PlatformDefault = False
+        TabHeight = 25.000000000000000000
+        TabIndex = 6
+        TabOrder = 0
+        TabPosition = Top
+        OnChange = PageControlGridsChange
+        Sizes = (
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s
+          400s
+          418s)
+        object tbsMes: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 43.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'M'#234's'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object MesGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, Editing, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+            DefaultDrawing = False
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsDia: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 1
+          Size.Width = 38.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Dia'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object DiaGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsDiaSM: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 2
+          Size.Width = 67.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Dia Sem.'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object DiaSmGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            RowCount = 0
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsHora: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 3
+          Size.Width = 46.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Hora'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object HoraGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsPP: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 4
+          Size.Width = 34.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'PP'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object PPGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsAtendentes: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 4
+          Size.Width = 76.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Atendente'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object AtendGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsAtendentesFim: TTabItem
+          AutoTranslate = False
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          ImageIndex = 11
+          Size.Width = 98.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Atendente Fim'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object AtendFimGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [AlternatingRowBackground, ColumnResize, ColumnMove, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsGrupoAtendente: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 129.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Grupo de Atendente'
+          ExplicitSize.cx = 129.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object GrAtendGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsGrupoAtendenteFim: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 134.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Grupo de Atend. Fim '
+          ExplicitSize.cx = 130.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object GrAtendFimGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsPA: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 34.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'PA'
+          ExplicitSize.cx = 35.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object PAGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsPAFim: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 57.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'PA Fim'
+          ExplicitSize.cx = 57.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object PAFimGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsGrupoPA: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 87.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Grupo de PA'
+          ExplicitSize.cx = 88.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object GrPAGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsGrupoPAFim: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 110.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Grupo de PA Fim'
+          ExplicitSize.cx = 110.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object GrPAFimGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsFaixaSenha: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 99.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Faixa de Senha'
+          ExplicitSize.cx = 98.000000000000000000
+          ExplicitSize.cy = 25.000000000000000000
+          object FaixaDeSenhaGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsTag: TTabItem
+          AutoSize = False
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 50.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Tag'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object TagGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+        object tbsUnidades: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          ImageIndex = 10
+          Size.Width = 65.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'tabitemazul'
+          TabOrder = 0
+          Text = 'Unidade'
+          ExplicitSize.cx = 50.000000000000000000
+          ExplicitSize.cy = 50.000000000000000000
+          object UnidadeGrid: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 400.000000000000000000
+            Size.Height = 418.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowHeight = 21.000000000000000000
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+            Viewport.Width = 400.000000000000000000
+            Viewport.Height = 418.000000000000000000
+          end
+        end
+      end
+      object rectDadosDestaPesquisa: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 400.000000000000000000
+        Size.Height = 196.000000000000000000
+        Size.PlatformDefault = False
+        object rectTituloDados: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 400.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object lblTituloDados: TLabel
+            Align = Left
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Dados desta pesquisa'
+          end
+        end
+        object AtendentesFimLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 115.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object AtendentesInicioLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 86.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object DuracaoLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 56.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object Label10: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 114.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Atendentes fim:'
+        end
+        object Label11: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 100.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'PAs in'#237'cio:'
+        end
+        object Label12: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 128.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'PAs fim:'
+        end
+        object Label14: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 157.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Tipos PP:'
+        end
+        object Label4: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 143.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Tags:'
+        end
+        object Label5: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 28.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Per'#237'odo:'
+        end
+        object Label6: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 56.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Dura'#231#227'o:'
+        end
+        object Label7: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 71.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Senhas:'
+        end
+        object Label8: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 85.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Atendentes in'#237'cio:'
+        end
+        object Label9: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 42.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Per'#237'odo do dia:'
+        end
+        object lblUnidades: TLabel
+          Position.X = 8.000000000000000000
+          Position.Y = 172.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'Unidades:'
+        end
+        object lblUnidadesVal: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 172.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object PAsFimLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 130.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object PAsInicioLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 100.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object PeriododoDiaLabel: TLabel
+          Position.X = 118.000000000000000000
+          Position.Y = 42.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object PeriododoRelatorioLabel: TLabel
+          Position.X = 118.000000000000000000
+          Position.Y = 29.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object SenhasLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 71.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object TagsLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 144.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+        object TiposPPLabel: TLabel
+          Position.X = 119.000000000000000000
+          Position.Y = 158.000000000000000000
+          Size.Width = 280.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = '---'
+        end
+      end
+    end
+    inherited btnExibirFiltro: TButton
+      TabOrder = 5
+    end
+    inherited btnOcultarFiltro: TButton
+      TabOrder = 4
+    end
+    inherited lytRodape: TLayout
+      Position.Y = 696.000000000000000000
+      Size.Width = 1269.000000000000000000
+      Size.Height = 189.000000000000000000
+      inherited ToolBarPrincipal: TPanel
+        Position.Y = 138.000000000000000000
+        Size.Width = 1269.000000000000000000
+        TabOrder = 3
+        inherited btnImprimir: TButton
+          Size.Width = 142.000000000000000000
+        end
+        inherited btnFechar: TButton
+          ImageIndex = 17
+          Position.X = 1144.000000000000000000
+        end
+        inherited btnExportarExcel: TButton
+          Position.X = 156.000000000000000000
+          Size.Width = 142.000000000000000000
+        end
+        inherited btnCopiarGrafico: TButton
+          Position.X = 302.000000000000000000
+          Size.Width = 142.000000000000000000
+        end
+        inherited btnSalvarGrafico: TButton
+          Position.X = 448.000000000000000000
+          Size.Width = 142.000000000000000000
+        end
+      end
+      object rectApresentar: TRectangle
+        Align = Left
+        Fill.Color = claWhite
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 156.000000000000000000
+        Size.Width = 244.000000000000000000
+        Size.Height = 128.000000000000000000
+        Size.PlatformDefault = False
+        object Rectangle1: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 244.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object Label3: TLabel
+            Align = Left
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Apresentar'
+          end
+        end
+        object QtdChartTypeCombo: TComboBox
+          Anchors = [akLeft, akTop, akRight]
+          Enabled = False
+          Items.Strings = (
+            'Histogr.'
+            'Pizza')
+          Position.X = 72.000000000000000000
+          Position.Y = 30.000000000000000000
+          Size.Width = 113.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnChange = QtdChartTypeComboChange
+        end
+        object QtdCheckBox: TCheckBox
+          IsChecked = True
+          Position.X = 6.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 70.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = '&QTD'
+          OnChange = QtdCheckBoxChange
+        end
+        object TMPPCheckBox: TCheckBox
+          IsChecked = True
+          Position.X = 6.000000000000000000
+          Position.Y = 60.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'TM&PP'
+          OnChange = QtdCheckBoxChange
+        end
+      end
+      object rectParametrosSLA: TRectangle
+        Align = Left
+        Fill.Color = claWhite
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 410.000000000000000000
+        Size.Width = 146.000000000000000000
+        Size.Height = 128.000000000000000000
+        Size.PlatformDefault = False
+        object Rectangle2: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 146.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object Label17: TLabel
+            Align = Left
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Par'#226'metros SLA'
+          end
+        end
+        object Label13: TLabel
+          AutoSize = True
+          Margins.Top = 20.000000000000000000
+          Position.X = 6.000000000000000000
+          Position.Y = 36.000000000000000000
+          Size.Width = 103.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Processos paralelos'
+        end
+        object Label15: TLabel
+          AutoSize = True
+          Position.X = 6.000000000000000000
+          Position.Y = 68.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label16: TLabel
+          AutoSize = True
+          Position.X = 6.000000000000000000
+          Position.Y = 88.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object Label18: TLabel
+          AutoSize = True
+          Position.X = 6.000000000000000000
+          Position.Y = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object lblParamsSLAPPAmarelo: TLabel
+          AutoSize = True
+          Position.X = 36.000000000000000000
+          Position.Y = 75.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '00:00:00'
+        end
+        object lblParamsSLAPPVerde: TLabel
+          AutoSize = True
+          Position.X = 36.000000000000000000
+          Position.Y = 94.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '00:00:00'
+        end
+        object lblParamsSLAPPVermelho: TLabel
+          AutoSize = True
+          Position.X = 36.000000000000000000
+          Position.Y = 55.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Text = '00:00:00'
+        end
+        object Shape1: TShape
+        end
+        object Shape2: TShape
+        end
+        object Shape3: TShape
+        end
+        object Rectangle3: TRectangle
+          Fill.Color = claYellow
+          Position.X = 15.000000000000000000
+          Position.Y = 75.000000000000000000
+          Size.Width = 17.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+        end
+        object Rectangle4: TRectangle
+          Fill.Color = claRed
+          Position.X = 15.000000000000000000
+          Position.Y = 55.000000000000000000
+          Size.Width = 17.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+        end
+        object Rectangle5: TRectangle
+          Fill.Color = claGreen
+          Position.X = 15.000000000000000000
+          Position.Y = 93.000000000000000000
+          Size.Width = 17.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+        end
+      end
+      object rectTotais: TRectangle
+        Align = Left
+        Fill.Color = claWhite
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 146.000000000000000000
+        Size.Height = 128.000000000000000000
+        Size.PlatformDefault = False
+        object rectTituloTotais: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 146.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object lblTituloTotais: TLabel
+            Align = Left
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Totais'
+          end
+        end
+        object Label1: TLabel
+          AutoSize = True
+          Position.X = 8.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 43.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'Qtd. PP:'
+        end
+        object Label2: TLabel
+          AutoSize = True
+          Position.X = 17.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 34.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.WordWrap = False
+          Text = 'TMPP:'
+        end
+        object QtdEspLabel: TLabel
+          AutoSize = True
+          Position.X = 54.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 7.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.WordWrap = False
+          TextSettings.Trimming = None
+          Text = '0'
+        end
+        object TMELabel: TLabel
+          AutoSize = True
+          Position.X = 55.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 16.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Text = '00:00:00'
+        end
+      end
+      object rectApresentarSLA: TRectangle
+        Align = Left
+        Fill.Color = claWhite
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 566.000000000000000000
+        Size.Width = 244.000000000000000000
+        Size.Height = 128.000000000000000000
+        Size.PlatformDefault = False
+        object rect2: TRectangle
+          Align = Top
+          Fill.Color = claBlack
+          Size.Width = 244.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object lbl1: TLabel
+            Align = Left
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Size.Width = 120.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            Text = 'Apresentar'
+          end
+        end
+        object chkSlaCinza: TCheckBox
+          IsChecked = True
+          Position.X = 6.000000000000000000
+          Position.Y = 33.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Filtrados (Cinza)'
+          OnChange = chkSlaCinzaChange
+        end
+      end
+    end
+  end
+  inherited bndList: TBindingsList
+    Left = 1179
+    Top = 166
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd1
+      GridControl = MesGrid
+      Columns = <
+        item
+          MemberName = 'Mes'
+        end
+        item
+          MemberName = 'MesStr'
+        end
+        item
+          MemberName = 'QtdPP'
+        end
+        item
+          MemberName = 'TMPP'
+        end
+        item
+          MemberName = 'MaxPP'
+          Visible = False
+        end>
+    end
+    object LinkGridToDataSource2: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd2
+      GridControl = DiaGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource3: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = bnd3
+      GridControl = DiaSmGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource4: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = HoraGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource5: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      GridControl = PPGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource6: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      GridControl = AtendGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource7: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB4
+      GridControl = AtendFimGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource8: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB5
+      GridControl = GrAtendGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource9: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB6
+      GridControl = GrAtendFimGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource10: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB7
+      GridControl = PAGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource11: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB8
+      GridControl = PAFimGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource12: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB9
+      GridControl = GrPAGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource13: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB10
+      GridControl = GrPAFimGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource14: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB11
+      GridControl = FaixaDeSenhaGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource15: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB12
+      GridControl = TagGrid
+      Columns = <>
+    end
+    object LinkGridToDataSource16: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB13
+      GridControl = UnidadeGrid
+      Columns = <>
+    end
+  end
+  inherited actlstMain: TActionList
+    Left = 1179
+    Top = 212
+  end
+  inherited qryEstatisticas: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  1 AS AGRUPADOR,'
+      '  CAST({EXTRACT(MONTH, EPP.INICIO)} AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST({EXTRACT(MONTH, EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  2 AS AGRUPADOR,'
+      '  CAST({EXTRACT(DAY, EPP.INICIO)} AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST({EXTRACT(DAY, EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  3 AS AGRUPADOR,'
+      '  CAST({DAYOFWEEK(EPP.INICIO)} AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST({DAYOFWEEK(EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  4 AS AGRUPADOR,'
+      '  CAST({EXTRACT(HOUR, EPP.INICIO)} AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST({EXTRACT(HOUR, EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  5 AS AGRUPADOR,'
+      '  CAST(EPP.ID_ATD_INICIO AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_ATD_INICIO AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  6 AS AGRUPADOR,'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN ATENDENTES ON ATENDENTES.ID = EPP.ID_ATD_INICIO AND' +
+        ' EPP.ID_UNIDADE = ATENDENTES.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  7 AS AGRUPADOR,'
+      '  CAST(EPP.ID_PA_INICIO AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_PA_INICIO AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  8 AS AGRUPADOR,'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN PAS ON PAS.ID = EPP.ID_PA_INICIO AND EPP.ID_UNIDADE' +
+        ' = PAS.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(PAS.ID_GRUPOPA AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  9 AS AGRUPADOR,'
+      '  CAST(EPP.ID_FILATIPOTICKET AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_FILATIPOTICKET AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  10 AS AGRUPADOR,'
+      '  CAST(TT.ID_TAG AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  LEFT JOIN NN_TICKETS_TAGS TT ON TT.ID_TICKET = EPP.ID_TICKET A' +
+        'ND EPP.ID_UNIDADE = TT.ID_UNIDADE/* JOIN_TICKETS_TAGS_ON */'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(TT.ID_TAG AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  11 AS AGRUPADOR,'
+      '  CAST(EPP.ID_ATD_FIM AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_ATD_FIM AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  12 AS AGRUPADOR,'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN ATENDENTES ON ATENDENTES.ID = EPP.ID_ATD_FIM AND EP' +
+        'P.ID_UNIDADE = ATENDENTES.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  13 AS AGRUPADOR,'
+      '  CAST(EPP.ID_PA_FIM AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_PA_FIM AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  14 AS AGRUPADOR,'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN PAS ON PAS.ID = EPP.ID_PA_FIM AND EPP.ID_UNIDADE = ' +
+        'PAS.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(PAS.ID_GRUPOPA AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  15 AS AGRUPADOR,'
+      '  CAST(EPP.ID_TIPOPP AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  INNER JOIN PAS ON PAS.ID = EPP.ID_PA_FIM'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '   CAST(EPP.ID_TIPOPP AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  99 AS AGRUPADOR,'
+      '  CAST(NULL AS INTEGER) AS ID,'
+      '  COALESCE(AVG(EPP.DURACAO_SEGUNDOS), 0) AS TMPP,'
+      '  /* MAX_TE_TA */'
+      '  COALESCE(COUNT(*), 0) AS QTDPP'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      ''
+      ')ORDER BY'
+      '  1, 2')
+    Left = 884
+    Top = 440
+  end
+  inherited qryEstatisticasSla: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  1 AS AGRUPADOR,'
+      '  CAST({EXTRACT(MONTH, EPP.INICIO)} AS INTEGER) AS ID,'
+      ''
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST({EXTRACT(MONTH, EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  2 AS AGRUPADOR,'
+      '  CAST({EXTRACT(DAY, EPP.INICIO)} AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST({EXTRACT(DAY, EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  3 AS AGRUPADOR,'
+      '  CAST({DAYOFWEEK(EPP.INICIO)} AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST({DAYOFWEEK(EPP.INICIO)} AS INTEGER)'
+      ''
+      'UNION'
+      '  '
+      'SELECT'
+      '  4 AS AGRUPADOR,'
+      '  CAST({EXTRACT(HOUR, EPP.INICIO)} AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */  '
+      'GROUP BY'
+      '  CAST({EXTRACT(HOUR, EPP.INICIO)} AS INTEGER)'
+      '  '
+      'UNION'
+      '  '
+      'SELECT'
+      '  5 AS AGRUPADOR,'
+      '  CAST(EPP.ID_ATD_INICIO AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_ATD_INICIO AS INTEGER)'
+      ' '
+      'UNION'
+      '  '
+      'SELECT'
+      '  6 AS AGRUPADOR,'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN ATENDENTES ON ATENDENTES.ID = EPP.ID_ATD_INICIO AND' +
+        ' EPP.ID_UNIDADE = ATENDENTES.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER)'
+      '  '
+      'UNION'
+      '  '
+      'SELECT'
+      '  7 AS AGRUPADOR,'
+      '  CAST(EPP.ID_PA_INICIO AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_PA_INICIO AS INTEGER)'
+      ''
+      'UNION'
+      '  '
+      'SELECT'
+      '  8 AS AGRUPADOR,'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN PAS ON PAS.ID = EPP.ID_PA_INICIO AND EPP.ID_UNIDADE' +
+        ' = PAS.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER)'
+      '  '
+      'UNION'
+      '  '
+      'SELECT'
+      '  9 AS AGRUPADOR,'
+      '  CAST(EPP.ID_FILATIPOTICKET AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_FILATIPOTICKET AS INTEGER)'
+      '  '
+      'UNION'
+      '  '
+      'SELECT'
+      '  10 AS AGRUPADOR,'
+      '  CAST(TT.ID_TAG AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  LEFT JOIN NN_TICKETS_TAGS TT ON TT.ID_TICKET = EPP.ID_TICKET A' +
+        'ND EPP.ID_UNIDADE = TT.ID_UNIDADE /* JOIN_TICKETS_TAGS_ON */'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(TT.ID_TAG AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  11 AS AGRUPADOR,'
+      '  CAST(EPP.ID_ATD_FIM AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_ATD_FIM AS INTEGER)'
+      ''
+      'UNION'
+      '  '
+      'SELECT'
+      '  12 AS AGRUPADOR,'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN ATENDENTES ON ATENDENTES.ID = EPP.ID_ATD_FIM AND EP' +
+        'P.ID_UNIDADE = ATENDENTES.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */  '
+      'GROUP BY'
+      '  CAST(ATENDENTES.ID_GRUPOATENDENTE AS INTEGER)'
+      ''
+      'UNION'
+      '  '
+      'SELECT'
+      '  13 AS AGRUPADOR,'
+      '  CAST(EPP.ID_PA_FIM AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_PA_FIM AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  14 AS AGRUPADOR,'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      
+        '  INNER JOIN PAS ON PAS.ID = EPP.ID_PA_FIM AND EPP.ID_UNIDADE = ' +
+        'PAS.ID_UNIDADE'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(PAS.ID_GRUPOPA AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  15 AS AGRUPADOR,'
+      '  CAST(EPP.ID_TIPOPP AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */'
+      'GROUP BY'
+      '  CAST(EPP.ID_TIPOPP AS INTEGER)'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '  99 AS AGRUPADOR,'
+      '  CAST(NULL AS INTEGER) AS ID,'
+      ''
+      '  /* ESPERA */'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERDE */ THEN 1 END) AS PP_QTDE' +
+        '_VERDE,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_AMARELO */ THEN 1 END) AS PP_QT' +
+        'DE_AMARELO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_VERMELHO */ THEN 1 END) AS PP_Q' +
+        'TDE_VERMELHO,'
+      
+        '  COUNT(CASE WHEN /* CONDICAO_PP_CINZA */ THEN 1 END) AS PP_QTDE' +
+        '_CINZA,'
+      '  COUNT(*) AS PP_QTDE_TOTAL'
+      ''
+      ''
+      'FROM'
+      '  EVENTOS_PPS EPP'
+      '  /* JOINS */'
+      '/* WHERE */  '
+      '   '
+      ''
+      ''
+      ')ORDER BY'
+      '  1,2')
+    Left = 884
+    Top = 508
+  end
+  object qryMes: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      '  MES,'
+      
+        '  COALESCE( AVG( (CASE WHEN IDATTYPE = 0 THEN TOTAL_SEGUNDOS END' +
+        ') ), 0) AS TME_MSECS,'
+      
+        '  COALESCE( AVG( (CASE WHEN IDATTYPE = 2 THEN TOTAL_SEGUNDOS END' +
+        ') ), 0) AS TMA_MSECS,'
+      ''
+      
+        '  COALESCE( COUNT( (CASE WHEN IDATTYPE = 0 THEN ID END) ), 0) AS' +
+        ' QTDE,'
+      
+        '  COALESCE( COUNT( (CASE WHEN IDATTYPE = 2 THEN ID END) ), 0) AS' +
+        ' QTDA'
+      ''
+      'FROM'
+      '('
+      'SELECT'
+      '  ID,'
+      '  EXTRACT(MONTH FROM INITIME) AS MES,'
+      '  IDATTYPE,'
+      '  (EXTRACT(HOUR FROM DURATION) * 60 * 60) +'
+      '  (EXTRACT(MINUTE FROM DURATION) * 60) +'
+      '  EXTRACT(SECOND FROM DURATION)  AS TOTAL_SEGUNDOS'
+      'FROM'
+      '  NSICSBAS'
+      'WHERE'
+      '  INITIME BETWEEN '#39'2005-01-01'#39' AND '#39'2005-12-31'#39
+      ') AS X'
+      'GROUP BY'
+      '  MES')
+    Left = 586
+    Top = 40
+  end
+  object dspMes: TDataSetProvider
+    DataSet = qryMes
+    Left = 641
+    Top = 40
+  end
+  object cdsMesTestes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMes'
+    OnCalcFields = cdsMesTestesCalcFields
+    Left = 1179
+    Top = 258
+    object SmallintField1: TSmallintField
+      Alignment = taCenter
+      FieldName = 'Mes'
+      Visible = False
+    end
+    object StringField1: TStringField
+      DisplayLabel = 'M'#234's'
+      DisplayWidth = 13
+      FieldKind = fkCalculated
+      FieldName = 'MesStr'
+      Size = 12
+      Calculated = True
+    end
+    object IntegerField1: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 7
+      FieldName = 'QtdE'
+    end
+    object IntegerField2: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd Atd'
+      DisplayWidth = 7
+      FieldName = 'QtdA'
+      Visible = False
+    end
+    object cdsMesTestesTME_MSECS: TFMTBCDField
+      FieldName = 'TME_MSECS'
+      Precision = 15
+    end
+    object cdsMesTestesTMA_MSECS: TFMTBCDField
+      FieldName = 'TMA_MSECS'
+      Precision = 15
+    end
+    object cdsMesTestesTME: TDateTimeField
+      FieldKind = fkCalculated
+      FieldName = 'TME'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+      Calculated = True
+    end
+    object cdsMesTestesTMA: TDateTimeField
+      FieldKind = fkCalculated
+      FieldName = 'TMA'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+      Calculated = True
+    end
+  end
+  object dspEstatisticas: TDataSetProvider
+    DataSet = qryEstatisticas
+    Left = 992
+    Top = 440
+  end
+  object cdsEstatisticas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEstatisticas'
+    Left = 1100
+    Top = 440
+  end
+  object cdsDiaSmSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 169
+    Top = 231
+    object cdsDiaSmSlaID: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object cdsDiaSmSlaDESCRICAO: TStringField
+      DisplayLabel = 'DiaSm'
+      DisplayWidth = 7
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      Size = 40
+    end
+    object cdsDiaSmSlaPP_PERC_VERDE: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object cdsDiaSmSlaPP_PERC_AMARELO: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object cdsDiaSmSlaPP_PERC_VERMELHO: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object cdsDiaSmSlaPP_PERC_CINZA: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object cdsDiaSmSlaRECNO: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object cdsDiaSmSlaTIPO_ATD_PP_DCR: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsDiaSmSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsDiaSmSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsDiaSmSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsDiaSmSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsDiaSmSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsDiaSmSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsDiaSmSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dspEstatisticasSla: TDataSetProvider
+    DataSet = qryEstatisticasSla
+    Left = 992
+    Top = 508
+  end
+  object dtsDiaSmSla: TDataSource
+    DataSet = cdsDiaSmSla
+    Left = 169
+    Top = 280
+  end
+  object cdsEstatisticasSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEstatisticasSla'
+    Left = 1100
+    Top = 508
+  end
+  object dtsDiaSla: TDataSource
+    DataSet = cdsDiaSla
+    Left = 100
+    Top = 280
+  end
+  object cdsDiaSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 100
+    Top = 231
+    object IntegerField3: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField2: TStringField
+      DisplayLabel = 'Dia'
+      DisplayWidth = 7
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      Size = 40
+    end
+    object FloatField1: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField2: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField3: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField4: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField4: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField3: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsDiaSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsDiaSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsDiaSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsDiaSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsDiaSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsDiaSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsDiaSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsMesSla: TDataSource
+    DataSet = cdsMesSla
+    Left = 32
+    Top = 280
+  end
+  object cdsMesSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 32
+    Top = 231
+    object IntegerField5: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField4: TStringField
+      DisplayLabel = 'M'#234's'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      Size = 40
+    end
+    object FloatField9: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField10: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField11: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField12: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField6: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField5: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsMesSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsMesSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsMesSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsMesSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsMesSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsMesSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsMesSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsHoraSla: TDataSource
+    DataSet = cdsHoraSla
+    Left = 238
+    Top = 280
+  end
+  object cdsHoraSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 238
+    Top = 231
+    object IntegerField7: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField6: TStringField
+      DisplayLabel = 'Hora'
+      DisplayWidth = 7
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      Size = 40
+    end
+    object FloatField17: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField18: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField19: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField20: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField8: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField7: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsHoraSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsHoraSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsHoraSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsHoraSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsHoraSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+    end
+    object cdsHoraSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldHoraSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsAtendSla: TDataSource
+    DataSet = cdsAtendSla
+    Left = 307
+    Top = 280
+  end
+  object cdsAtendSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 307
+    Top = 231
+    object IntegerField9: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField8: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 60
+    end
+    object FloatField25: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField26: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField27: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField28: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField10: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField9: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsAtendSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsAtendSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsAtendSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsAtendSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsAtendSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsAtendSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldAtendSlaNomeUnidade: TStringField
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsGrAtendSla: TDataSource
+    DataSet = cdsGrAtendSla
+    Left = 376
+    Top = 280
+  end
+  object cdsGrAtendSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 376
+    Top = 231
+    object IntegerField11: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField10: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField33: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField34: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField35: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField36: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField12: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField11: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsGrAtendSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsGrAtendSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsGrAtendSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsGrAtendSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsGrAtendSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsGrAtendSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldGrAtendSlaNomeUnidade: TStringField
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsPASla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 444
+    Top = 231
+    object IntegerField13: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField12: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField41: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField42: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField43: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField44: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField14: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField13: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsPASlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsPASlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsPASlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsPASlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsPASlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsPASlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldPASlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsPASla: TDataSource
+    DataSet = cdsPASla
+    Left = 444
+    Top = 280
+  end
+  object cdsGrPASla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 513
+    Top = 231
+    object IntegerField15: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField14: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField49: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField50: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField51: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField52: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField16: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField15: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsGrPASlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsGrPASlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsGrPASlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsGrPASlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsGrPASlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsGrPASlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+    end
+    object strngfldGrPASlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsGrPASla: TDataSource
+    DataSet = cdsGrPASla
+    Left = 513
+    Top = 280
+  end
+  object cdsUnidadeSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 1064
+    Top = 231
+    object IntegerField19: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField18: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      Size = 40
+    end
+    object FloatField65: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField66: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField67: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField68: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField20: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField19: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsUnidadeSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsUnidadeSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsUnidadeSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsUnidadeSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsUnidadeSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+  end
+  object dtsUnidadeSla: TDataSource
+    DataSet = cdsUnidadeSla
+    Left = 1064
+    Top = 280
+  end
+  object cdsTagSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 995
+    Top = 231
+    object IntegerField21: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField20: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = StringField20GetText
+      Size = 40
+    end
+    object FloatField73: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField74: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField75: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField76: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField22: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField21: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsTagSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsTagSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsTagSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsTagSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsTagSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsTagSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldTagSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsTagSla: TDataSource
+    DataSet = cdsTagSla
+    Left = 995
+    Top = 280
+  end
+  object cdsLkpAtendentes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 106
+    Top = 440
+    object cdsLkpAtendentesID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpAtendentesNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object cdsLkpGruposAtendentes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 209
+    Top = 440
+    object cdsLkpGruposAtendentesID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpGruposAtendentesNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object cdsLkpFaixaDeSenhas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 543
+    Top = 440
+    object cdsLkpFaixaDeSenhasID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpFaixaDeSenhasNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object cdsLkpPAS: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 312
+    Top = 440
+    object cdsLkpPASID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpPASNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object cdsLkpGruposPAs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 456
+    Top = 448
+    object cdsLkpGruposPAsID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpGruposPAsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object cdsLkpTags: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 726
+    Top = 440
+    object cdsLkpTagsID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpTagsNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object dtsFaixaDeSenhaSla: TDataSource
+    DataSet = cdsFaixaDeSenhaSla
+    Left = 926
+    Top = 280
+  end
+  object cdsFaixaDeSenhaSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 926
+    Top = 231
+    object IntegerField17: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField16: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField57: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField58: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField59: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField60: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField18: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField17: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsFaixaDeSenhaSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldFaixaDeSenhaSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsMes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsMesCalcFields
+    Left = 32
+    Top = 112
+    object cdsMesMes: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Mes'
+    end
+    object cdsMesMesStr: TStringField
+      DisplayLabel = 'M'#234's'
+      DisplayWidth = 13
+      FieldKind = fkCalculated
+      FieldName = 'MesStr'
+      Size = 12
+      Calculated = True
+    end
+    object cdsMesQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 7
+      FieldName = 'QtdPP'
+    end
+    object cdsMesTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsMesMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      Visible = False
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsMesidUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsMesNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object MesDS: TDataSource
+    DataSet = cdsMes
+    Left = 32
+    Top = 159
+  end
+  object DiaDS: TDataSource
+    DataSet = cdsDia
+    Left = 100
+    Top = 159
+  end
+  object cdsDia: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    Left = 100
+    Top = 112
+    object cdsDiaDia: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Dia'
+    end
+    object cdsDiaQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsDiaTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsDiaMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsDiaidUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsDiaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object DiaSmDS: TDataSource
+    DataSet = cdsDiaSm
+    Left = 169
+    Top = 159
+  end
+  object cdsDiaSm: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsDiaSmCalcFields
+    Left = 169
+    Top = 112
+    object cdsDiaSmDiaSm: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'DiaSm'
+      Visible = False
+    end
+    object cdsDiaSmDiaSmStr: TStringField
+      DisplayLabel = 'Dia'
+      DisplayWidth = 7
+      FieldKind = fkCalculated
+      FieldName = 'DiaSmStr'
+      Size = 15
+      Calculated = True
+    end
+    object cdsDiaSmQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsDiaSmTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsDiaSmMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsDiaSmidUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsDiaSmNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsHora: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    Left = 238
+    Top = 112
+    object cdsHoraHora: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Hora'
+    end
+    object cdsHoraQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsHoraTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsHoraMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsHoraidUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object cdsHoraNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object HoraDS: TDataSource
+    DataSet = cdsHora
+    Left = 238
+    Top = 159
+  end
+  object AtendDS: TDataSource
+    DataSet = cdsAtend
+    Left = 307
+    Top = 159
+  end
+  object cdsAtend: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsAtendCalcFields
+    Left = 307
+    Top = 112
+    object cdsAtendAtend: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Atend'
+      Visible = False
+    end
+    object cdsAtendAtdRecNo: TIntegerField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'AtdRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsAtendAtdNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'AtdNome'
+      OnGetText = PreencheNDOnField
+      Size = 60
+    end
+    object cdsAtendQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsAtendTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsAtendMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsAtendidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsAtendNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsGrAtend: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsGrAtendCalcFields
+    Left = 376
+    Top = 112
+    object cdsGrAtendGrAtend: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'GrAtend'
+      Visible = False
+    end
+    object cdsGrAtendGrAtendRecNo: TSmallintField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'GrAtendRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsGrAtendGrAtendNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'GrAtendNome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsGrAtendQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsGrAtendTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrAtendMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrAtendidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsGrAtendNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object GrAtendDS: TDataSource
+    DataSet = cdsGrAtend
+    Left = 376
+    Top = 159
+  end
+  object PADS: TDataSource
+    DataSet = cdsPA
+    Left = 444
+    Top = 159
+  end
+  object cdsPA: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsPACalcFields
+    Left = 444
+    Top = 112
+    object cdsPAPA: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'PA'
+      Visible = False
+    end
+    object cdsPAPARecNo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'PARecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsPAPANome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'PANome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsPAQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsPATMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPAMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPAidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsPANomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsGrPA: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsGrPACalcFields
+    Left = 513
+    Top = 112
+    object cdsGrPAGrPA: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'GrPA'
+      Visible = False
+    end
+    object cdsGrPAGrPARecNo: TSmallintField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'GrPARecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsGrPAGrPANome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'GrPANome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsGrPAQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsGrPATMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrPAMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrPAidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsGrPANomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object GrPADS: TDataSource
+    DataSet = cdsGrPA
+    Left = 513
+    Top = 159
+  end
+  object FaixaDeSenhaDS: TDataSource
+    DataSet = cdsFaixaDeSenha
+    Left = 926
+    Top = 159
+  end
+  object cdsFaixaDeSenha: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'FaixaDeSenha'
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsFaixaDeSenhaCalcFields
+    Left = 926
+    Top = 112
+    object cdsFaixaDeSenhaFaixaDeSenha: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'FaixaDeSenha'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaFaixaDeSenhaRecNo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'FaixaDeSenhaRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsFaixaDeSenhaFaixaDeSenhaNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'FaixaDeSenhaNome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsFaixaDeSenhaQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsFaixaDeSenhaTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsFaixaDeSenhaMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsFaixaDeSenhaidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsFaixaDeSenhaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsUnidade: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsUnidadeCalcFields
+    Left = 1064
+    Top = 112
+    object cdsUnidadeUnidade: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Unidade'
+      Visible = False
+    end
+    object cdsUnidadeUnidadeRecNo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'UnidadeRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsUnidadeUnidadeNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkCalculated
+      FieldName = 'UnidadeNome'
+      OnGetText = cdsUnidadeUnidadeNomeGetText
+      Size = 50
+      Calculated = True
+    end
+    object cdsUnidadeQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsUnidadeTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsUnidadeMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+  end
+  object UnidadeDS: TDataSource
+    DataSet = cdsUnidade
+    Left = 1064
+    Top = 159
+  end
+  object TagDS: TDataSource
+    DataSet = cdsTag
+    Left = 995
+    Top = 159
+  end
+  object cdsTag: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsTagCalcFields
+    Left = 995
+    Top = 112
+    object cdsTagTag: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'TAG'
+      Visible = False
+    end
+    object cdsTagTagRecNo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'TAGRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsTagTagNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'TagNome'
+      OnGetText = cdsTagTagNomeGetText
+      Size = 50
+    end
+    object cdsTagQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsTagTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsTagMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsTagidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsTagNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsAtendFim: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsAtendFimCalcFields
+    Left = 582
+    Top = 112
+    object cdsAtendFimAtend: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'Atend'
+      Visible = False
+    end
+    object cdsAtendFimAtdRecNo: TIntegerField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'AtdRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsAtendFimAtdNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'AtdNome'
+      OnGetText = PreencheNDOnField
+      Size = 60
+    end
+    object cdsAtendFimQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsAtendFimTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsAtendFimMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsAtendFimidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsAtendFimNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object AtendFimDS: TDataSource
+    DataSet = cdsAtendFim
+    Left = 582
+    Top = 159
+  end
+  object GrAtendFimDS: TDataSource
+    DataSet = cdsGrAtendFim
+    Left = 651
+    Top = 159
+  end
+  object cdsGrAtendFim: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsGrAtendFimCalcFields
+    Left = 651
+    Top = 112
+    object cdsGrAtendFimGrAtend: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'GrAtend'
+      Visible = False
+    end
+    object cdsGrAtendFimGrAtendRecNo: TSmallintField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'GrAtendRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsGrAtendFimGrAtendNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'GrAtendNome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsGrAtendFimQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsGrAtendFimTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrAtendFimMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrAtendFimidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsGrAtendFimNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsPAFim: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsPAFimCalcFields
+    Left = 720
+    Top = 112
+    object cdsPAFimPA: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'PA'
+      Visible = False
+    end
+    object cdsPAFimPARecNo: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'PARecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsPAFimPANome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'PANome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsPAFimQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsPAFimTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPAFimMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayLabel = 'Max PP'
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPAFimidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsPAFimNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object PAFimDS: TDataSource
+    DataSet = cdsPAFim
+    Left = 720
+    Top = 159
+  end
+  object GrPAFimDS: TDataSource
+    DataSet = cdsGrPAFim
+    Left = 788
+    Top = 159
+  end
+  object cdsGrPAFim: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsGrPAFimCalcFields
+    Left = 788
+    Top = 112
+    object cdsGrPAFimGrPA: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'GrPA'
+      Visible = False
+    end
+    object cdsGrPAFimGrPARecNo: TSmallintField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'GrPARecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsGrPAFimGrPANome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'GrPANome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsGrPAFimQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsGrPAFimTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrPAFimMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsGrPAFimidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+      Visible = False
+    end
+    object cdsGrPAFimNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object cdsAtendFimSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 582
+    Top = 231
+    object IntegerField23: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField22: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 60
+    end
+    object FloatField81: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField82: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField83: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField84: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField24: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField23: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsAtendFimSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsAtendFimSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsAtendFimSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsAtendFimSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsAtendFimSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsAtendFimSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldAtendFimSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsAtendFimSla: TDataSource
+    DataSet = cdsAtendFimSla
+    Left = 582
+    Top = 280
+  end
+  object cdsGrAtendFimSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 651
+    Top = 231
+    object IntegerField25: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField24: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField89: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField90: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField91: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField92: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField26: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField25: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsGrAtendFimSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsGrAtendFimSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsGrAtendFimSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsGrAtendFimSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsGrAtendFimSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsGrAtendFimSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+    end
+    object strngfldGrAtendFimSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsGrAtendFimSla: TDataSource
+    DataSet = cdsGrAtendFimSla
+    Left = 651
+    Top = 280
+  end
+  object cdsPAFimSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 720
+    Top = 231
+    object IntegerField27: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField26: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField97: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField98: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField99: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField100: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField28: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField27: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsPAFimSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsPAFimSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsPAFimSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsPAFimSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsPAFimSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsPAFimSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldPAFimSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsPAFimSla: TDataSource
+    DataSet = cdsPAFimSla
+    Left = 720
+    Top = 280
+  end
+  object cdsGrPAFimSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 788
+    Top = 231
+    object IntegerField29: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField28: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField105: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField106: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField107: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField108: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField30: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField29: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsGrPAFimSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsGrPAFimSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsGrPAFimSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsGrPAFimSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsGrPAFimSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsGrPAFimSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldGrPAFimSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsGrPAFimSla: TDataSource
+    DataSet = cdsGrPAFimSla
+    Left = 788
+    Top = 280
+  end
+  object cdsPP: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMesAfterOpen
+    OnCalcFields = cdsPPCalcFields
+    Left = 857
+    Top = 112
+    object cdsPPPP: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 7
+      FieldName = 'PP'
+      Visible = False
+    end
+    object cdsPPPPRecNo: TSmallintField
+      Alignment = taCenter
+      FieldKind = fkCalculated
+      FieldName = 'PPRecNo'
+      Visible = False
+      Calculated = True
+    end
+    object cdsPPPPNome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldName = 'PPNome'
+      OnGetText = PreencheNDOnField
+      Size = 50
+    end
+    object cdsPPQtdPP: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd PP'
+      DisplayWidth = 8
+      FieldName = 'QtdPP'
+    end
+    object cdsPPTMPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'TMPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPPMaxPP: TDateTimeField
+      Alignment = taCenter
+      DisplayWidth = 11
+      FieldName = 'MaxPP'
+      OnGetText = cdsMesTMPPGetText
+      DisplayFormat = 'hh:nn:ss'
+    end
+    object cdsPPidUnidade: TIntegerField
+      FieldName = 'idUnidade'
+    end
+    object cdsPPNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object PPDS: TDataSource
+    DataSet = cdsPP
+    Left = 857
+    Top = 159
+  end
+  object cdsPPSla: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 857
+    Top = 231
+    object IntegerField33: TIntegerField
+      FieldName = 'ID'
+      Visible = False
+    end
+    object StringField31: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 13
+      FieldKind = fkInternalCalc
+      FieldName = 'DESCRICAO'
+      OnGetText = PreencheNDOnField
+      Size = 40
+    end
+    object FloatField5: TFloatField
+      DisplayLabel = 'PP. %Verde'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERDE'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField6: TFloatField
+      DisplayLabel = 'PP. %Amarelo'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_AMARELO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField7: TFloatField
+      DisplayLabel = 'PP. %Verm.'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_VERMELHO'
+      DisplayFormat = '#,#0.0'
+    end
+    object FloatField8: TFloatField
+      DisplayLabel = 'PP. %Cinza'
+      DisplayWidth = 9
+      FieldName = 'PP_PERC_CINZA'
+      DisplayFormat = '#,#0.0'
+    end
+    object IntegerField34: TIntegerField
+      FieldKind = fkInternalCalc
+      FieldName = 'RECNO'
+      Visible = False
+    end
+    object StringField32: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'TIPO_ATD_PP_DCR'
+      Visible = False
+      Size = 10
+    end
+    object cdsPPSlaPP_QTDE_CINZA: TIntegerField
+      FieldName = 'PP_QTDE_CINZA'
+      Visible = False
+    end
+    object cdsPPSlaPP_QTDE_VERMELHO: TIntegerField
+      FieldName = 'PP_QTDE_VERMELHO'
+      Visible = False
+    end
+    object cdsPPSlaPP_QTDE_AMARELO: TIntegerField
+      FieldName = 'PP_QTDE_AMARELO'
+      Visible = False
+    end
+    object cdsPPSlaPP_QTDE_VERDE: TIntegerField
+      FieldName = 'PP_QTDE_VERDE'
+      Visible = False
+    end
+    object cdsPPSlaPP_QTDE_TOTAL: TIntegerField
+      FieldName = 'PP_QTDE_TOTAL'
+      Visible = False
+    end
+    object cdsPPSlaIdUnidade: TIntegerField
+      FieldName = 'IdUnidade'
+      Visible = False
+    end
+    object strngfldPPSlaNomeUnidade: TStringField
+      DisplayLabel = 'Unidade'
+      DisplayWidth = 20
+      FieldName = 'NomeUnidade'
+      Size = 50
+    end
+  end
+  object dtsPPSla: TDataSource
+    DataSet = cdsPPSla
+    Left = 857
+    Top = 280
+  end
+  object cdsLkpPPs: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 654
+    Top = 440
+    object cdsLkpPPsId: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsLkpPPsNome: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object bnd1: TBindSourceDB
+    DataSource = MesDS
+    ScopeMappings = <>
+    Left = 31
+    Top = 360
+  end
+  object bnd2: TBindSourceDB
+    DataSource = DiaDS
+    ScopeMappings = <>
+    Left = 99
+    Top = 360
+  end
+  object bnd3: TBindSourceDB
+    DataSource = DiaSmDS
+    ScopeMappings = <>
+    Left = 168
+    Top = 360
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSource = HoraDS
+    ScopeMappings = <>
+    Left = 237
+    Top = 360
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSource = PPDS
+    ScopeMappings = <>
+    Left = 306
+    Top = 360
+  end
+  object BindSourceDB3: TBindSourceDB
+    DataSource = AtendDS
+    ScopeMappings = <>
+    Left = 375
+    Top = 360
+  end
+  object BindSourceDB4: TBindSourceDB
+    DataSource = AtendFimDS
+    ScopeMappings = <>
+    Left = 444
+    Top = 360
+  end
+  object BindSourceDB5: TBindSourceDB
+    DataSource = GrAtendDS
+    ScopeMappings = <>
+    Left = 513
+    Top = 360
+  end
+  object BindSourceDB6: TBindSourceDB
+    DataSource = GrAtendDS
+    ScopeMappings = <>
+    Left = 581
+    Top = 360
+  end
+  object BindSourceDB7: TBindSourceDB
+    DataSource = PADS
+    ScopeMappings = <>
+    Left = 650
+    Top = 360
+  end
+  object BindSourceDB8: TBindSourceDB
+    DataSource = PAFimDS
+    ScopeMappings = <>
+    Left = 719
+    Top = 360
+  end
+  object BindSourceDB9: TBindSourceDB
+    DataSource = GrPADS
+    ScopeMappings = <>
+    Left = 788
+    Top = 360
+  end
+  object BindSourceDB10: TBindSourceDB
+    DataSource = GrPAFimDS
+    ScopeMappings = <>
+    Left = 857
+    Top = 360
+  end
+  object BindSourceDB11: TBindSourceDB
+    DataSource = FaixaDeSenhaDS
+    ScopeMappings = <>
+    Left = 926
+    Top = 360
+  end
+  object BindSourceDB12: TBindSourceDB
+    DataSource = TagDS
+    ScopeMappings = <>
+    Left = 995
+    Top = 360
+  end
+  object BindSourceDB13: TBindSourceDB
+    DataSource = UnidadeDS
+    ScopeMappings = <>
+    Left = 1064
+    Top = 360
+  end
+end

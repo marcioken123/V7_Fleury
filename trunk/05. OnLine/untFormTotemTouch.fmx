@@ -1,0 +1,170 @@
+object FrmTotemTouch: TFrmTotemTouch
+  Left = 0
+  Top = 0
+  Caption = 'Totem Touch'
+  ClientHeight = 619
+  ClientWidth = 915
+  StyleBook = StyleBook1
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  FullScreen = True
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnResize = FormResize
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object pnlBotoes: TRectangle
+    Align = Client
+    Size.Width = 915.000000000000000000
+    Size.Height = 596.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    object imgBackground: TImage
+      MultiResBitmap.Height = 768
+      MultiResBitmap.Width = 1024
+      MultiResBitmap = <
+        item
+        end>
+      Align = Client
+      Size.Width = 915.000000000000000000
+      Size.Height = 596.000000000000000000
+      Size.PlatformDefault = False
+      Left = 1
+      Top = 1
+    end
+  end
+  object recSemConexao: TRectangle
+    Align = Client
+    Fill.Color = claBlack
+    Size.Width = 915.000000000000000000
+    Size.Height = 619.000000000000000000
+    Size.PlatformDefault = False
+    object lytRodape: TLayout
+      Align = Bottom
+      Position.Y = 584.000000000000000000
+      Size.Width = 915.000000000000000000
+      Size.Height = 35.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object lblAguardandoConexao: TLabel
+        Align = Client
+        AutoSize = True
+        StyledSettings = []
+        Margins.Right = 5.000000000000000000
+        Size.Width = 910.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Segoe UI Semibold'
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Trailing
+        TextSettings.WordWrap = False
+        Text = 'Aguardando conex'#227'o do servidor'
+      end
+      object AniConectando: TAniIndicator
+        Align = Right
+        StyleLookup = 'AniConectandoStyle1'
+        HitTest = False
+        Margins.Right = 5.000000000000000000
+        Position.X = 870.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+      end
+    end
+  end
+  object btnFechar: TSpeedButton
+    Anchors = [akTop, akRight]
+    Cursor = -1
+    ImageIndex = 0
+    Position.X = 893.000000000000000000
+    Position.Y = 1.000000000000000000
+    Size.Width = 20.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = btnFecharClick
+    Left = 723
+    object imgFechar: TImage
+      MultiResBitmap = <
+        item
+          Width = 16
+          Height = 16
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            028049444154384FAD534B4B1B51183D132731D1464292FA4293688C589FC408
+            11FD19DD74E7A288AF5545C16D2D2EA445DA9551A1506896D974ABEB2AB552F0
+            4DAB3534BEA88D891AA32693F9FADD6B915ABB2A3D709361BEEF9C7BBE73E7E2
+            BFE2654B0BBD696B23774101FD7A7583C6A2229A090468ACBE9EACAA7AA78EE7
+            8D8DB4150A512C12A1487BFB2D11417ED7D94907B3B3B4353343AF7993E2FC7C
+            5957C4CFB0CF478FFBFA704FD3A0A752D03D1E2C4D4F6370791985AA8A519F0F
+            C1C141E4EDEE427538903218F06172128F161715550874389D500E0F71797A0A
+            EDE80896AB2B047A7A30313505D1E01F1800ADACE0627F1FC6E262684450755D
+            50AF1D74381C34525707B7CB05ABCD866C3C0E4B4D0D1C5D5D2076751C0E43DB
+            DB835A5282D4F131BE6D6E62746303EFE371450A08F86D367ADAD0008F10619B
+            C289919D2197432E9D86B1B414E74CFEC2C467EBEB584C2424D720D98C4FC9A4
+            32C236777676A0F3AE0ACFAE2512C871260ACF4C2CF42759E04640E0829B34FE
+            279E91B259502673BDF8BDCE2BCBEB3BE7F33B6E04C4B1BD686A420DCF2EE4B3
+            C913E8571926EAC8F1B368F4714E13CDCDB257921852A0D262A1719EBFB5BB1B
+            45763B2ED6D660F6B8617455C270DF0993DB85CBED6DD8CACB11E8EDBD252267
+            79DBDA4A1DFDFD5056579116E4AA2AA4CECE10E53C929C47737535EC1C62868F
+            DACC0E73B5B5580A85F0706141910E4E79E6E4DC9C4C3BDFEBC5D9C909BE46A3
+            1866C127FC317DE4DD7F1C1CC05456069D7BD2F3F330E6E5C16E329174E0E487
+            577E3F1E545440E1423416C31013B7CFCF655D7CFBE39C4F90C58D66333EF369
+            8CB1A838395197103984834112E3780B0BEF5E1686B848E2B2D559AD7FADFF03
+            809FF2972AC591BAD42D0000000049454E44AE426082}
+        end>
+      HitTest = False
+      MarginWrapMode = Center
+      Size.Width = 20.000000000000000000
+      Size.Height = 20.000000000000000000
+      Size.PlatformDefault = False
+      WrapMode = Center
+      OnClick = imgFecharClick
+    end
+  end
+  object recSemPapel: TRectangle
+    Fill.Color = claBlack
+    Position.X = 232.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 529.000000000000000000
+    Size.Height = 369.000000000000000000
+    Size.PlatformDefault = False
+    object lblSemPapel: TLabel
+      Align = Center
+      AutoSize = True
+      StyledSettings = []
+      Size.Width = 424.000000000000000000
+      Size.Height = 42.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.Font.Size = 36.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claWhitesmoke
+      TextSettings.WordWrap = False
+      Text = 'Equipamento sem papel'
+    end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+      end
+      item
+        Platform = 'Windows 7'
+        ResourcesBin = {
+          464D585F5354594C4520322E35010613416E69436F6E656374616E646F537479
+          6C653103D100005450463007544C61796F757400095374796C654E616D650613
+          416E69436F6E656374616E646F5374796C65310A506F736974696F6E2E580500
+          000000000000CF07400A506F736974696F6E2E5905000000000000009207400A
+          53697A652E57696474680500000000000000A004400B53697A652E4865696768
+          7405000000000000008C04401453697A652E506C6174666F726D44656661756C
+          74080756697369626C6508085461624F726465720200000C5442727573684F62
+          6A65637400095374796C654E616D65060466696C6C000000}
+      end>
+    Left = 872
+    Top = 544
+  end
+end
