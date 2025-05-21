@@ -1262,15 +1262,13 @@ var
     ObjJSon, lConexaoBDJSon: TJSONObject;
   begin
     LPAsComChamadaAutomaticaStr := '';
-    IntArrayToStr(dmSicsServidor.PAsComChamadaAutomatica,
-      LPAsComChamadaAutomaticaStr);
+    IntArrayToStr(dmSicsServidor.PAsComChamadaAutomatica, LPAsComChamadaAutomaticaStr);
     ArrayJSon := TJSONArray.Create;
     try
       ObjJSon := TJSONObject.Create;
       try
         TAspJson.DataSetRegToJsonObj(ObjJSon, aDataSetModulo);
-        ObjJSon.AddPair('PAsComChamadaAutomatica',
-          TJSONString.Create(LPAsComChamadaAutomaticaStr));
+        ObjJSon.AddPair('PAsComChamadaAutomatica', TJSONString.Create(LPAsComChamadaAutomaticaStr));
 
         if (aDataSetModulo.FieldByName('CONECTAR_VIA_DB').AsString = 'T') then
         begin
@@ -1899,27 +1897,19 @@ begin
 
             case vTipoModulo of
               msPA:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_PA, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_PA, false);
               msMPA:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_MULTIPA, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_MULTIPA, false);
               msOnLine:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_ONLINE, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_ONLINE, false);
               msTGS:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_TGS, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_TGS, false);
               msTV:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_TV, false);
-
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_TV, false);
               msCallCenter:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_CALLCENTER, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_CALLCENTER, false);
               msTotemTouch:
-                frmSicsMain.GetSendConfiguracoesGeraisText(Result,
-                  CONFIG_KEY_PATHUPDATE_TOTEMTOUCH, false);
+                frmSicsMain.GetSendConfiguracoesGeraisText(Result, CONFIG_KEY_PATHUPDATE_TOTEMTOUCH, false);
             else
               Exit;
             end;
@@ -2002,13 +1992,11 @@ begin
         Chr($25):
           begin
             Senha := frmSicsMain.Finaliza(Adr);
+
             case Senha of
-              - 1:
-                Result := AdrStr + Chr($24) + '0'; { Nao chamou ninguem }
-              -2:
-                Result := ''; { Esta na fila para chamar alguem }
-              -5:
-                Result := AdrStr + Chr($24) + 'L';
+              -1: Result := AdrStr + Chr($24) + '0'; { Nao chamou ninguem }
+              -2: Result := ''; { Esta na fila para chamar alguem }
+              -5: Result := AdrStr + Chr($24) + 'L';
             else
               Result := AdrStr + Chr($23) + IntToStr(Senha);
               { Chamou uma senha }
@@ -2029,6 +2017,7 @@ begin
         Chr($28):
           begin
             Result := EmptyStr;
+
             if ProtData = '----' then
             begin
               if frmSicsMain.FinalizarPausa(Adr) then
@@ -2044,8 +2033,10 @@ begin
               begin
                 Fx := StrToInt('$' + Copy(ProtData, 5, 4));
                 frmSicsMain.Redireciona(Adr, Fx);
+
                 if frmSicsMain.IniciarPausa(Adr, MotivoPausa) then
                   Result := 'ok';
+
                 SomenteRedirecionar := false;
               end;
             end;
@@ -2098,18 +2089,14 @@ begin
         Chr($2E):
           begin
             if Length(ProtData) = 4 then
-              NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] +
-                ProtData[4])
+              NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] + ProtData[4])
             else
               NF := 0;
             Senha := frmSicsMain.Redireciona(Adr, NF);
             case Senha of
-              - 1:
-                Result := AdrStr + Chr($24) + '0'; { Nao chamou ninguem }
-              -2:
-                Result := ''; { Esta na fila para chamar alguem }
-              -5:
-                Result := AdrStr + Chr($24) + 'L';
+              -1: Result := AdrStr + Chr($24) + '0'; { Nao chamou ninguem }
+              -2: Result := ''; { Esta na fila para chamar alguem }
+              -5: Result := AdrStr + Chr($24) + 'L';
             else
               Result := AdrStr + Chr($23) + IntToStr(Senha);
               { Chamou uma senha }
@@ -2118,8 +2105,7 @@ begin
         Chr($2F):
           begin
             if Length(ProtData) = 4 then
-              NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] +
-                ProtData[4])
+              NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] + ProtData[4])
             else
               NF := 0;
             Senha := frmSicsMain.RedirecionaEProximo(Adr, NF);
@@ -2142,43 +2128,27 @@ begin
 
             Senha := frmSicsMain.ForcaChamada(Adr, StrToInt(ProtData), IniTime, IdFila, NomeFila);
             case Senha of
-              - 1:
-                Result := AdrStr + Chr($50) + ProtData;
-              -2:
-                Result := ''; { Esta na fila para chamar alguem }
-              -3:
-                Result := AdrStr + Chr($51) + ProtData;
-              -4:
-                Result := AdrStr + Chr($24) + 'M';
-              -5:
-                Result := AdrStr + Chr($24) + 'L';
-              -6:
-                Result := AdrStr + Chr($24) + 'I';
+              -1: Result := AdrStr + Chr($50) + ProtData;
+              -2: Result := ''; { Esta na fila para chamar alguem }
+              -3: Result := AdrStr + Chr($51) + ProtData;
+              -4: Result := AdrStr + Chr($24) + 'M';
+              -5: Result := AdrStr + Chr($24) + 'L';
+              -6: Result := AdrStr + Chr($24) + 'I';
               else
                 Result := AdrStr + Chr($23) + IntToStr(Senha) + TAB + IntToStr(IdFila) + TAB + NomeFila + TAB + DateTimeToStr(IniTime);
             end; { case }
           end; { case Chr($30) }
         Chr($31):
           begin
-            NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] +
-              ProtData[4]);
-            Senha := frmSicsMain.RedirecionaEEspecifica(Adr, NF,
-              StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)));
+            NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] + ProtData[4]);
+            Senha := frmSicsMain.RedirecionaEEspecifica(Adr, NF, StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)));
             case Senha of
-              - 1:
-                Result := AdrStr + Chr($50) + Copy(ProtData, 5,
-                  Length(ProtData) - 4);
-              -2:
-                Result := ''; { Esta na fila para chamar alguem }
-              -3:
-                Result := AdrStr + Chr($51) + Copy(ProtData, 5,
-                  Length(ProtData) - 4);
-              -4:
-                Result := AdrStr + Chr($24) + 'M';
-              -5:
-                Result := AdrStr + Chr($24) + 'L';
-              -6:
-                Result := AdrStr + Chr($24) + 'I';
+              -1: Result := AdrStr + Chr($50) + Copy(ProtData, 5, Length(ProtData) - 4);
+              -2: Result := ''; { Esta na fila para chamar alguem }
+              -3: Result := AdrStr + Chr($51) + Copy(ProtData, 5, Length(ProtData) - 4);
+              -4: Result := AdrStr + Chr($24) + 'M';
+              -5: Result := AdrStr + Chr($24) + 'L';
+              -6: Result := AdrStr + Chr($24) + 'I';
             else
               Result := AdrStr + Chr($23) + IntToStr(Senha);
               { Chamou uma senha }
@@ -2186,10 +2156,9 @@ begin
           end; { case Chr($31) }
         Chr($32):
           begin
-            NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] +
-              ProtData[4]);
-            Senha := frmSicsMain.RedirecionaEForca(Adr, NF,
-              StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)));
+            NF := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] + ProtData[4]);
+            Senha := frmSicsMain.RedirecionaEForca(Adr, NF, StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)));
+
             case Senha of
               - 1:
                 Result := AdrStr + Chr($50) + Copy(ProtData, 5,
@@ -2235,8 +2204,7 @@ begin
             else
               begin
                 if IniTime <> EncodeDate(1, 1, 1) then
-                  Result := AdrStr + Chr($39) + IntToStr(Senha) +
-                    FormatDateTime('ddmmyyyyhhnnss', IniTime)
+                  Result := AdrStr + Chr($39) + IntToStr(Senha) + FormatDateTime('ddmmyyyyhhnnss', IniTime)
                   { Chamou uma senha }
                 else
                   Result := AdrStr + Chr($23) + IntToStr(Senha);
@@ -2256,16 +2224,14 @@ begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             frmSicsMain.GetSendPAsListText(vIdModulo, Aux);
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($3E) +
-              TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($3E) + TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
           end; { case Chr($3D) }
         Chr($3F):
           begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             frmSicsMain.GetSendPPsTableText(vIdModulo, Aux);
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($40) +
-              TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($40) + TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
           end;
         Chr($41):
           begin
@@ -2488,20 +2454,13 @@ begin
           begin
             if ProtData[5] = 'P' then
             begin
-              if frmSicsMain.FindComponent('PrioritaryList' +
-                IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) <> nil then
-                (frmSicsMain.FindComponent('PrioritaryList' +
-                  IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) as TCheckBox)
-                  .checked := (ProtData[6] = '1');
+              if frmSicsMain.FindComponent('PrioritaryList' + IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) <> nil then
+                (frmSicsMain.FindComponent('PrioritaryList' + IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) as TCheckBox).Checked := (ProtData[6] = '1');
             end
             else
             begin
-              if frmSicsMain.FindComponent
-                ('ListBlocked' + IntToStr(StrToInt('$' + Copy(ProtData, 1, 4))))
-                <> nil then
-                (frmSicsMain.FindComponent('ListBlocked' +
-                  IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) as TCheckBox)
-                  .checked := (ProtData[6] = '1');
+              if frmSicsMain.FindComponent('ListBlocked' + IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) <> nil then
+                (frmSicsMain.FindComponent('ListBlocked' + IntToStr(StrToInt('$' + Copy(ProtData, 1, 4)))) as TCheckBox).Checked := (ProtData[6] = '1');
             end;
             Result := '';
           end; { case Chr($69) }
@@ -2544,10 +2503,8 @@ begin
         Chr($6B):
           begin
             Fx := StrToInt('$' + Copy(ProtData, 1, 4));
-            if frmSicsMain.FindComponent('SenhasList' + IntToStr(Fx)) <> nil
-            then
-              frmSicsMain.InsertPswd(Fx,
-                StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)), now, -1);
+            if frmSicsMain.FindComponent('SenhasList' + IntToStr(Fx)) <> nil then
+              frmSicsMain.InsertPswd(Fx, StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)), now, -1);
           end; { case Chr($6B) }
         Chr($6C):
           begin
@@ -2594,8 +2551,10 @@ begin
 
             ATD := StrToInt('$' + Copy(Aux, 1, 4));
             Aux := Copy(Aux, 5, Length(Aux) - 4);
+
             while Aux[Length(Aux)] = TAB do
               Aux := Copy(Aux, 1, Length(Aux) - 1);
+
             SeparaStrings(Aux, ';', AtdNome, Aux);
             SeparaStrings(Aux, ';', AtdRegFunc, Aux);
             SeparaStrings(Aux, ';', Aux2, Aux);
@@ -2608,11 +2567,8 @@ begin
             // AtdSenhaLogin := DecriptLegivel(AtdSenhaLogin);
 
             case StrToIntDef(AtdTipoAlteracao, 0) of
-              0:
-                frmSicsMain.AtualizaAtendente(ATD, AtdAtivo, AtdNome, AtdLogin,
-                  AtdSenhaLogin, AtdRegFunc, IdGrupoAtd);
-              1:
-                frmSicsMain.AtualizaSenhaAtendente(ATD, AtdSenhaLogin);
+              0: frmSicsMain.AtualizaAtendente(ATD, AtdAtivo, AtdNome, AtdLogin, AtdSenhaLogin, AtdRegFunc, IdGrupoAtd);
+              1: frmSicsMain.AtualizaSenhaAtendente(ATD, AtdSenhaLogin);
             end;
 
             Result := '';
@@ -2629,8 +2585,8 @@ begin
             IdGrupoAtd := StrToInt(Aux2);
             SeparaStrings(Aux, ';', AtdSenhaLogin, Aux2);
 
-            ATD := frmSicsMain.InsereAtendente(AtdNome, AtdLogin, AtdSenhaLogin,
-              IdGrupoAtd);
+            ATD := frmSicsMain.InsereAtendente(AtdNome, AtdLogin, AtdSenhaLogin, IdGrupoAtd);
+
             if ATD <> -1 then
               Result := AdrStr + Chr($75) + TAspEncode.AspIntToHex(ATD, 4);
           end; { case Chr($74) }
@@ -2643,8 +2599,7 @@ begin
               'A':
                 begin
                   Nome := NGetAtdName(Id);
-                  Aux := 'SICS - ATENDENTE ' + IntToStr(Id) + ' (' + Nome +
-                    '){{Quebra de Linha}}';
+                  Aux := 'SICS - ATENDENTE ' + IntToStr(Id) + ' (' + Nome + '){{Quebra de Linha}}';
                   Aux2 := '{{CDB Code39}}' + FormatLeftString(10,
                     '%ATD' + IntToStr(Id) + '$') +
                     '{{Fim de Bloco CDB Code39}}{{Quebra de Linha}}{{Quebra de Linha}}{{Corte Total}}';
@@ -2661,10 +2616,8 @@ begin
               'F':
                 begin
                   Nome := NGetFilaName(Id);
-                  Aux := 'SICS - FILA ' + IntToStr(Id) + ' (' + Nome +
-                    '){{Quebra de Linha}}';
-                  Aux2 := '{{CDB Code39}}' + FormatLeftString(10,
-                    '%FILA' + IntToStr(Id) + '$') +
+                  Aux := 'SICS - FILA ' + IntToStr(Id) + ' (' + Nome + '){{Quebra de Linha}}';
+                  Aux2 := '{{CDB Code39}}' + FormatLeftString(10,'%FILA' + IntToStr(Id) + '$') +
                     '{{Fim de Bloco CDB Code39}}{{Quebra de Linha}}{{Quebra de Linha}}{{Corte Total}}';
                 end;
             end;
@@ -2675,12 +2628,10 @@ begin
               Delay(250);
             end;
 
-            ConverteProtocoloImpressora(Aux3, Aux,
-              frmSicsMain.GetModeloImpressoraZero);
+            ConverteProtocoloImpressora(Aux3, Aux, frmSicsMain.GetModeloImpressoraZero);
             frmSicsMain.Imprime(0, Aux3);
             Delay(500);
-            ConverteProtocoloImpressora(Aux3, Aux2,
-              frmSicsMain.GetModeloImpressoraZero);
+            ConverteProtocoloImpressora(Aux3, Aux2, frmSicsMain.GetModeloImpressoraZero);
             frmSicsMain.Imprime(0, Aux3);
 
             Result := ACK;
@@ -2688,8 +2639,7 @@ begin
         Chr($77):
           begin
             Fx := StrToInt('$' + Copy(ProtData, 1, 4));
-            if frmSicsMain.FindComponent('SenhasList' + IntToStr(Fx)) <> nil
-            then
+            if frmSicsMain.FindComponent('SenhasList' + IntToStr(Fx)) <> nil then
             begin
               frmSicsMain.InserirSenhaNaFila(Fx, StrToInt(Copy(ProtData, 5, Length(ProtData) - 4)), -2, isNova);
 
@@ -2703,23 +2653,21 @@ begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             vTipoGroupoPorModulo.IdModulo := vIdModulo;
-            vTipoGroupoPorModulo.FModuloSics :=
-              GetModuleTypeByID(dmSicsMain.connOnLine, vIdModulo);
+            vTipoGroupoPorModulo.FModuloSics := GetModuleTypeByID(dmSicsMain.connOnLine, vIdModulo);
             vTipoGroupoPorModulo.TipoDeGrupo := GetTipoDeGrupo(ProtData[1]);
             frmSicsMain.GetSendGruposNamesText(vTipoGroupoPorModulo, Aux);
 
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($79) +
-              ProtData[1] + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($79) + ProtData[1] + Aux;
           end;
         Chr($7A):
           begin
             vCharTipoGrupo := ProtData[1];
+
             case vCharTipoGrupo of
               'A':
                 begin
                   dmSicsMain.CarregaTabelaAtendentes;
-                  frmSicsSituacaoAtendimento.AtualizarCdsAtendentes
-                    (dmSicsMain.cdsAtendentes);
+                  frmSicsSituacaoAtendimento.AtualizarCdsAtendentes(dmSicsMain.cdsAtendentes);
                   frmSicsMain.SalvaSituacao_Atendimento;
                   frmSicsMain.BroadcastListaDeAtendentes;
                 end;
@@ -2777,8 +2725,6 @@ begin
                 begin
                   dmSicsMain.CarregaCategoriaFilas;
                 end;
-
-
             else
               vCharTipoGrupo := ' ';
             end;
@@ -2788,14 +2734,11 @@ begin
             else
             begin
               vTipoGroupoPorModulo.IdModulo := 0;
-              vTipoGroupoPorModulo.FModuloSics :=
-                GetModuleTypeByID(dmSicsMain.connOnLine, 0);
-              vTipoGroupoPorModulo.TipoDeGrupo :=
-                GetTipoDeGrupo(vCharTipoGrupo);
+              vTipoGroupoPorModulo.FModuloSics := GetModuleTypeByID(dmSicsMain.connOnLine, 0);
+              vTipoGroupoPorModulo.TipoDeGrupo := GetTipoDeGrupo(vCharTipoGrupo);
               frmSicsMain.GetSendGruposNamesText(vTipoGroupoPorModulo, Aux);
 
-              Result := TAspEncode.AspIntToHex(0, 4) + Chr($79) +
-                vCharTipoGrupo + Aux;
+              Result := TAspEncode.AspIntToHex(0, 4) + Chr($79) + vCharTipoGrupo + Aux;
             end;
           end;
 
@@ -2816,9 +2759,7 @@ begin
 
             Tags := frmSicsMain.GetTagsTicket(Senha);
             IntArrayToStr(Tags, Aux);
-            frmSicsMain.EnviaParaTodosOsClients
-              (frmSicsMain.ServerSocket1.Socket,
-              AdrStr + Chr($82) + IntToStr(Senha) + ';' + Aux);
+            frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.ServerSocket1.Socket, AdrStr + Chr($82) + IntToStr(Senha) + ';' + Aux);
           end; { case Chr($7D) }
         // comando alterado a partir daqui
         Chr($7F):
@@ -2826,8 +2767,7 @@ begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             frmSicsMain.GetSendTagsNamesText(vIdModulo, Aux);
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($AA) +
-              TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($AA) + TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
           end;
         Chr($A0):
           begin
@@ -2840,14 +2780,12 @@ begin
                   'E':
                     begin
                       IniFile.ReadSectionValues('SMTP', MyStringList);
-                      Result := AdrStr + Chr($A1) + vTipoConfiguracao + 'SMTP' +
-                        CR + LF + MyStringList.Text;
+                      Result := AdrStr + Chr($A1) + vTipoConfiguracao + 'SMTP' + CR + LF + MyStringList.Text;
                     end;
                   'S':
                     begin
                       IniFile.ReadSectionValues('SMS', MyStringList);
-                      Result := AdrStr + Chr($A1) + vTipoConfiguracao + 'SMS' +
-                        CR + LF + MyStringList.Text;
+                      Result := AdrStr + Chr($A1) + vTipoConfiguracao + 'SMS' + CR + LF + MyStringList.Text;
                     end;
                 end;
 
@@ -2874,8 +2812,7 @@ begin
                   IniFile.EraseSection(vSecaoIni);
 
                   for I := 1 to MyStringList.Count - 1 do
-                    IniFile.WriteString(vSecaoIni, MyStringList.Names[I],
-                      MyStringList.ValueFromIndex[I]);
+                    IniFile.WriteString(vSecaoIni, MyStringList.Names[I], MyStringList.ValueFromIndex[I]);
 
                   Result := ACK;
                 end;
@@ -2934,17 +2871,14 @@ begin
 
             Tags := frmSicsMain.GetTagsTicket(Senha);
             IntArrayToStr(Tags, Aux);
-            frmSicsMain.EnviaParaTodosOsClients
-              (frmSicsMain.ServerSocket1.Socket,
-              AdrStr + Chr($82) + IntToStr(Senha) + ';' + Aux);
+            frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.ServerSocket1.Socket, AdrStr + Chr($82) + IntToStr(Senha) + ';' + Aux);
           end; { case 83) }
         Chr($AF):
           begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             frmSicsMain.GetSendFilasNamesText(vIdModulo, Aux);
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($86) +
-              TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($86) + TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
           end;
         Chr($C1):
           begin
@@ -2952,8 +2886,8 @@ begin
             SeparaStrings(AtdNome, ';', AtdNome, AtdGrupoIdStr);
             SeparaStrings(AtdGrupoIdStr, ';', AtdGrupoIdStr, AtdGrupoNome);
             IdGrupoAtd := StrToIntDef(AtdGrupoIdStr, -1);
-            if frmSicsMain.ForcaLogin(Adr, AtdLogin, AtdNome, IdGrupoAtd,
-              AtdGrupoNome) then
+
+            if frmSicsMain.ForcaLogin(Adr, AtdLogin, AtdNome, IdGrupoAtd, AtdGrupoNome) then
               Result := AdrStr + Chr($B4) + '1'
             else
               Result := AdrStr + Chr($B4) + '0';
@@ -2968,6 +2902,7 @@ begin
           begin
             Senha := StrToIntDef(Copy(ProtData, 1, Pos(';', ProtData) - 1), -1);
             IdTicket := frmSicsMain.GetIdTicket(Senha);
+
             if IdTicket <> -1 then
             begin
               DesRegistraTicketAgendamentosFilas(IdTicket);
@@ -2983,6 +2918,7 @@ begin
                 begin
                   Fx := StrToIntDef('$' + Copy(Aux2, 1, 4), -1);
                   Aux2 := Copy(Aux2, 5, Length(Aux2) - 4);
+
                   if Length(Aux2) = 4 then
                   begin
                     hh := StrToInt(Copy(Aux2, 1, 2));
@@ -2996,8 +2932,7 @@ begin
                     yy := StrToInt(Copy(Aux2, 5, 4));
                     hh := StrToInt(Copy(Aux2, 9, 2));
                     nn := StrToInt(Copy(Aux2, 11, 2));
-                    DataHora := EncodeDate(dd, mm, yy) +
-                      EncodeTime(hh, nn, 0, 0);
+                    DataHora := EncodeDate(dd, mm, yy) + EncodeTime(hh, nn, 0, 0);
                   end
                   else
                     DataHora := 0;
@@ -3039,16 +2974,15 @@ begin
 
             if not TryStrToInt(SenhaStr, Senha) then
             begin
-              Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' +
-                'Senha inválida';
+              Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' + 'Senha inválida';
               Exit;
             end;
 
             Id := frmSicsMain.GetIdTicketIfPwdExists(Senha);
+
             if Id < 0 then
             begin
-              Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' +
-                'Senha inexistente';
+              Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' + 'Senha inexistente';
               Exit;
             end;
 
@@ -3056,8 +2990,7 @@ begin
             try
               if not Assigned(JSONObj) then
               begin
-                Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' +
-                  'Formato de dados inválido';
+                Result := AdrStr + Chr($CC) + SenhaStr + TAB + '0' + 'Formato de dados inválido';
                 Exit;
               end;
 
@@ -3075,24 +3008,21 @@ begin
 
             if not TryStrToInt(SenhaStr, Senha) then
             begin
-              Result := AdrStr + Chr($CE) + SenhaStr + TAB + '0' +
-                'Senha inválida';
+              Result := AdrStr + Chr($CE) + SenhaStr + TAB + '0' + 'Senha inválida';
               Exit;
             end;
 
             Id := frmSicsMain.GetIdTicketIfPwdExists(Senha);
             if Id < 0 then
             begin
-              Result := AdrStr + Chr($CE) + SenhaStr + TAB + '0' +
-                'Senha inexistente';
+              Result := AdrStr + Chr($CE) + SenhaStr + TAB + '0' + 'Senha inexistente';
               Exit;
             end;
 
             JSONObj := dmSicsMain.GetDadosAdicionais(Id);
             try
               if Assigned(JSONObj) then
-                Result := AdrStr + Chr($CE) + SenhaStr + TAB + '2' +
-                  JSONObj.ToJSON
+                Result := AdrStr + Chr($CE) + SenhaStr + TAB + '2' + JSONObj.ToJSON
               else
                 Result := AdrStr + Chr($CE) + SenhaStr + TAB + '1';
             finally
@@ -3251,9 +3181,7 @@ begin
                 [Integer(TDadosSolicitarChamado.dscPosicao)]),
                 LProtDataSeparado[Integer(TDadosSolicitarChamado.dscNome)]);
 
-              frmSicsMain.SetIdClienteSenha(LTicketCallCenter,
-                StrToInt(LProtDataSeparado
-                [Integer(TDadosSolicitarChamado.dscID)]));
+              frmSicsMain.SetIdClienteSenha(LTicketCallCenter, StrToInt(LProtDataSeparado[Integer(TDadosSolicitarChamado.dscID)]));
 
               ProtData := LProtDataSeparado
                 [Integer(TDadosSolicitarChamado.dscPosicao)] + TAB +
@@ -3261,13 +3189,9 @@ begin
                 + LProtDataSeparado[Integer(TDadosSolicitarChamado.dscID)] + TAB
                 + LProtDataSeparado[Integer(TDadosSolicitarChamado.dscNome)];
 
-              frmSicsMain.EnviaParaTodosOsClients
-                (frmSicsMain.ServerSocket1.Socket,
-                '0000' + Chr($D9) + ProtData);
+              frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.ServerSocket1.Socket, '0000' + Chr($D9) + ProtData);
 
-              frmSicsMain.EnviaParaTodosOsClients
-                (frmSicsMain.TGSServerSocket.Socket,
-                '0000' + Chr($D9) + ProtData);
+              frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.TGSServerSocket.Socket, '0000' + Chr($D9) + ProtData);
 
               Result := AdrStr + Chr($D6) + 'T';
             except
@@ -3317,16 +3241,12 @@ begin
             LAtribuiTag := Copy(ProtData, 9);
             Senha   := -1;
 
-            frmSicsMain.GeraSenhaEImprime(LFila,
-                                          LTotem,
-                                          LAtribuiTag,
-                                          Senha,
-                                          IniTime);
+            frmSicsMain.GeraSenhaEImprime(LFila, LTotem, LAtribuiTag, Senha, IniTime);
 
             with FormatSettings.Invariant do
               Aux := ShortDateFormat + ' ' + LongTimeFormat;
-            Result := AdrStr + Chr($DF) + IntToHex(LFila, 4) + IntToStr(Senha) +
-              TAB + FormatDateTime(Aux, IniTime);
+
+            Result := AdrStr + Chr($DF) + IntToHex(LFila, 4) + IntToStr(Senha) + TAB + FormatDateTime(Aux, IniTime);
 
             TfrmDebugParameters.Debugar (tbProtocoloSics, Format('Sai do Comando %s | Horario Final: %s',[TAspEncode.AspIntToHex(Ord(Comando), 4), DateTimeToStr(Now)]));
           end; { case Chr($DE) }
@@ -3436,10 +3356,12 @@ begin
 
             LManterCabecalho := ((Length(ProtData) > 0) and (ProtData[1] = 'S'));
             LManterRodape    := ((Length(ProtData) > 1) and (ProtData[2] = 'S'));
+
             if length(ProtData) >= 6 then
               LIdTotem := strtoint('$' + Copy(ProtData, 3, 4))
             else
               LIdTotem := 0;
+
             LMensagem := Copy(ProtData, 7);
 
             LTipoDaImpressora := frmSicsMain.vlTotens[LIdTotem].TipoImpressora;
@@ -3508,20 +3430,19 @@ begin
 
         Chr($FA):
           begin // Busca resposta da pesquisa de atendimento por prontuario e fluxo
-            TLog.MyLog(Format('Entrei no Comando | Hexa: %s | Str: %s.',
-              [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
+            TLog.MyLog(Format('Entrei no Comando | Hexa: %s | Str: %s.', [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
+
             JSONObj := TJSONObject(TJSONObject.ParseJSONValue(ProtData));
             Result    := AdrStr + Chr($FB) + frmSicsMain.BuscaRespostaPesquisaSatisfacaoFluxo(JSONObj).ToJson;
+
             TLog.MyLog(Format('Retorno: %s .', [Result]), nil);
-            TLog.MyLog(Format('Sai do Comando | Hexa: %s | Str: %s.',
-              [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
+            TLog.MyLog(Format('Sai do Comando | Hexa: %s | Str: %s.', [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
           end;
 
       else
         begin
           Result := AdrStr + Chr($33);
-          TLog.MyLog(Format('Comando inválido %s | Hexa: %s | Str: %s.',
-            [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
+          TLog.MyLog(Format('Comando inválido %s | Hexa: %s | Str: %s.', [Comando, TAspEncode.AspIntToHex(Ord(Comando), 4), Comando]), nil);
         end;
       end; { case }
 {$ENDREGION}
@@ -3535,19 +3456,14 @@ begin
         begin
           try
             Result := '';
-            MyLogException
-              (Exception.Create
-              ('KB DBEXPINT - Erro ao decifrar endereço no protocolo TCP/IP: "'
-              + s + '" / ' + E.Message));
+            MyLogException(Exception.Create('KB DBEXPINT - Erro ao decifrar endereço no protocolo TCP/IP: "' + s + '" / ' + E.Message));
             dmSicsMain.connOnLine.Close;
             dmSicsMain.connOnLine.Open;
           except
             on E2: Exception do
             begin
               Result := '';
-              MyLogException
-                (Exception.Create('KB DBEXPINT - Erro ao reabrir conexão - ' +
-                E2.Message));
+              MyLogException(Exception.Create('KB DBEXPINT - Erro ao reabrir conexão - ' + E2.Message));
             end;
           end;
         end
