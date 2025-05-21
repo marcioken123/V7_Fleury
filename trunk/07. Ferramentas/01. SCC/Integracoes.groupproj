@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{99B1D988-B91C-44F8-BDA5-56C5F77BBF10}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SCC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\1. Servidor\Sics.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketServer\Project1.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketClient\Project2.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SCC">
+        <MSBuild Projects="SCC.dproj"/>
+    </Target>
+    <Target Name="SCC:Clean">
+        <MSBuild Projects="SCC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCC:Make">
+        <MSBuild Projects="SCC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sics">
+        <MSBuild Projects="..\..\1. Servidor\Sics.dproj"/>
+    </Target>
+    <Target Name="Sics:Clean">
+        <MSBuild Projects="..\..\1. Servidor\Sics.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sics:Make">
+        <MSBuild Projects="..\..\1. Servidor\Sics.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Project1">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketServer\Project1.dproj"/>
+    </Target>
+    <Target Name="Project1:Clean">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketServer\Project1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Project1:Make">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketServer\Project1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Project2">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketClient\Project2.dproj"/>
+    </Target>
+    <Target Name="Project2:Clean">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketClient\Project2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Project2:Make">
+        <MSBuild Projects="..\..\..\..\..\Testes\Kelver\SicsIntegracaoREST\SocketClient\Project2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SCC;Sics;Project1;Project2"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SCC:Clean;Sics:Clean;Project1:Clean;Project2:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SCC:Make;Sics:Make;Project1:Make;Project2:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
