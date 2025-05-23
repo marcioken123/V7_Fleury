@@ -69,29 +69,21 @@ type
     cdsAddQtdEsperaPA: TClientDataSet;
     dspAddQtdEsperaPA: TDataSetProvider;
     qryAddQtdEsperaPA: TFDQuery;
-    procedure cdsInicializaBaseReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
+    procedure cdsInicializaBaseReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
     procedure DataModuleCreate(Sender: TObject);
-    procedure cdsAddTicketReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
+    procedure cdsAddTicketReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
-    procedure cdsAddTicketTagReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
+    procedure cdsAddTicketTagReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
-    procedure cdsAddEventoReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
+    procedure cdsAddEventoReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
-    procedure cdsAddEventoPPReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
+    procedure cdsAddEventoPPReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
-    procedure cdsAddTicketAgendamentosFilasReconcileError
-      (DataSet: TCustomClientDataSet; E: EReconcileError;
+    procedure cdsAddTicketAgendamentosFilasReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError;
       UpdateKind: TUpdateKind; var Action: TReconcileAction);
-    procedure dspIdsTicketsGetTableName(Sender: TObject; DataSet: TDataSet;
-      var TableName: string);
-    procedure dspIdsTicketsTagsGetTableName(Sender: TObject; DataSet: TDataSet;
-      var TableName: string);
+    procedure dspIdsTicketsGetTableName(Sender: TObject; DataSet: TDataSet; var TableName: string);
+    procedure dspIdsTicketsTagsGetTableName(Sender: TObject; DataSet: TDataSet; var TableName: string);
   private
     FThreadCalculoPISRodando: Boolean;
     // function GetThreadCalculoPISRodando: Boolean;
@@ -103,14 +95,9 @@ type
     procedure CarregarFilasComChamadaAutomatica;
   end;
 
-function RegistraEvento(ID_AtType, ID_Atd, ID_PA, ID_FilaEspera,
-  ID_MotivoPausa: integer; NumeroTicket: integer;
-  IniTime, EndTime: TDateTime): Boolean;
-function RegistraEventoPP(ID_EventoPP, ID_TipoPP, ID_PA_Inicio, ID_PA_Fim,
-  ID_Atd_Inicio, ID_ATD_Fim: integer; NumeroTicket: integer;
-  IniTime, EndTime: TDateTime): boolean;
-function RegistraTicket(ID_Ticket, NumeroTicket, ID_Fila, Ordem: integer;
-  PswdDateTime: TDateTime): Boolean;
+function RegistraEvento(ID_AtType, ID_Atd, ID_PA, ID_FilaEspera, ID_MotivoPausa: integer; NumeroTicket: integer; IniTime, EndTime: TDateTime): Boolean;
+function RegistraEventoPP(ID_EventoPP, ID_TipoPP, ID_PA_Inicio, ID_PA_Fim, ID_Atd_Inicio, ID_ATD_Fim: integer; NumeroTicket: integer; IniTime, EndTime: TDateTime): boolean;
+function RegistraTicket(ID_Ticket, NumeroTicket, ID_Fila, Ordem: integer; PswdDateTime: TDateTime): Boolean;
 function RecuperaTicket(AID_Ticket, AID_Fila, AOrdem: Integer; ADataHora: TDateTime): Boolean;
 function OrdemTicketNaFila(AID_Fila, AOrdem: Integer; AIDTicket: Integer = 0): Integer;
 function RegistraTicketNome(ID_Ticket: integer; NomeCliente: string): boolean;
@@ -123,11 +110,8 @@ function RegistraParametrosDeCalculoTEE(Fila : integer; ParametrosCalculo : stri
 // RA
 function RemoverFilaTicketBD(pFila: Integer): Boolean; overload;
 function RemoverFilaTicketBD(pFila, pIDTicket: Integer): Boolean; overload;
-function DirecionarTicketParaFilaBD(pIDTicket, pFilaAnterior, pNovaFila,
-  pOrdem: integer): Boolean;
-function LocalizarTicket(pNumeroTicket: integer;
-  var pIDTicket, pIDFila: integer; var pNomeCliente: String;
-  var pCreatedAt: TDateTime): Boolean;
+function DirecionarTicketParaFilaBD(pIDTicket, pFilaAnterior, pNovaFila, pOrdem: integer): Boolean;
+function LocalizarTicket(pNumeroTicket: integer; var pIDTicket, pIDFila: integer; var pNomeCliente: String; var pCreatedAt: TDateTime): Boolean;
 
 function LimparFilaTicket(IDTicket, Fila: Integer): Boolean;
 
@@ -146,9 +130,15 @@ var
 
 implementation
 
-uses sics_94, Sics_91, sics_m, udmContingencia, uFuncoes, System.Math,
-
-  UConexaoBD, ASPGenerator;
+uses
+  sics_94,
+  Sics_91,
+  sics_m,
+  udmContingencia,
+  uFuncoes,
+  System.Math,
+  UConexaoBD,
+  ASPGenerator;
 
 {$R *.dfm}
 
@@ -162,10 +152,8 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from TIPOS_EVENTOS WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from TIPOS_EVENTOS WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
       with cdsInicializaBase do
       begin
         Open;
@@ -218,10 +206,8 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from STATUS_PAS WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from STATUS_PAS WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
       with cdsInicializaBase do
       begin
         Open;
@@ -237,8 +223,7 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
               FieldByName('ID').AsInteger := Rec.ID;
             end;
 
@@ -274,10 +259,9 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from MODELOS_PAINEIS WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from MODELOS_PAINEIS WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+
       with cdsInicializaBase do
       begin
         Open;
@@ -293,8 +277,7 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
               FieldByName('ID').AsInteger := Rec.ID;
             end;
 
@@ -330,10 +313,9 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from PIS_TIPOS WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from PIS_TIPOS WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+
       with cdsInicializaBase do
       begin
         Open;
@@ -349,8 +331,7 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
               FieldByName('ID_PITIPO').AsInteger := Rec.ID;
             end;
 
@@ -388,10 +369,9 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from PIS_POSICAO WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from PIS_POSICAO WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+
       with cdsInicializaBase do
       begin
         Open;
@@ -407,8 +387,7 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
               FieldByName('ID_PIPOS').AsInteger := Rec.ID;
             end;
 
@@ -461,15 +440,13 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger          := vgParametrosModulo.IdUnidade;
               FieldByName('ID_PINIVEL').AsInteger          := Rec.ID;
               FieldByName('NOME').AsString                 := Rec.Nome;
               FieldByName('COR').AsString                  := Rec.Cor;
               FieldByName('CODIGOCOR').AsInteger           := Rec.CodigoCor;
               FieldByName('POSICAO').AsInteger             := Rec.Posicao;
-              FieldByName('COR_PAINELELETRONICO').AsString :=
-                Rec.CorPainelEletronico;
+              FieldByName('COR_PAINELELETRONICO').AsString := Rec.CorPainelEletronico;
               Post;
             end;
 
@@ -492,10 +469,9 @@ procedure TdmSicsServidor.InicializaBase;
   begin
     StrListIds := TStringList.Create;
     try
-      qryInicializaBase.Sql.Text :=
-        'select * from PIS_FUNCOES WHERE ID_UNIDADE = :ID_UNIDADE';
-      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger :=
-        vgParametrosModulo.IdUnidade;
+      qryInicializaBase.Sql.Text := 'select * from PIS_FUNCOES WHERE ID_UNIDADE = :ID_UNIDADE';
+      qryInicializaBase.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+
       with cdsInicializaBase do
       begin
         Open;
@@ -511,8 +487,7 @@ procedure TdmSicsServidor.InicializaBase;
             else
             begin
               Append;
-              FieldByName('ID_UNIDADE').AsInteger :=
-                vgParametrosModulo.IdUnidade;
+              FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
               FieldByName('ID_PIFUNCAO').AsInteger := Rec.ID;
             end;
 
@@ -617,8 +592,7 @@ begin
   end;
 end;
 
-procedure TdmSicsServidor.cdsInicializaBaseReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsInicializaBaseReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 begin
   Raise Exception.Create(E.Message);
@@ -639,23 +613,18 @@ begin
     on E: Exception do
     begin
       MyLogException(E);
-      Application.MessageBox('Erro ao inicializar base de dados!!', 'ERRO',
-        MB_ICONSTOP);
+      Application.MessageBox('Erro ao inicializar base de dados!!', 'ERRO', MB_ICONSTOP);
       Halt;
     end;
   end;
 
   with TIniFile.Create(GetIniFileName) do
     try
-      PAsComChamadaAutomaticaStr := ReadString('Settings',
-        'PAsComChamadaAutomatica', '');
-      FilasComOrdenacaoAutomaticaStr :=
-        ReadString('Settings', 'FilasComOrdenacaoAutomatica', '');
+      PAsComChamadaAutomaticaStr := ReadString('Settings', 'PAsComChamadaAutomatica', '');
+      FilasComOrdenacaoAutomaticaStr := ReadString('Settings', 'FilasComOrdenacaoAutomatica', '');
 
-      WriteString('Settings', 'PAsComChamadaAutomatica',
-        PAsComChamadaAutomaticaStr);
-      WriteString('Settings', 'FilasComOrdenacaoAutomatica',
-        FilasComOrdenacaoAutomaticaStr);
+      WriteString('Settings', 'PAsComChamadaAutomatica', PAsComChamadaAutomaticaStr);
+      WriteString('Settings', 'FilasComOrdenacaoAutomatica', FilasComOrdenacaoAutomaticaStr);
     finally
       Free;
     end;
@@ -666,14 +635,12 @@ begin
   CarregarFilasComChamadaAutomatica;
 end;
 
-procedure TdmSicsServidor.dspIdsTicketsGetTableName(Sender: TObject;
-  DataSet: TDataSet; var TableName: string);
+procedure TdmSicsServidor.dspIdsTicketsGetTableName(Sender: TObject; DataSet: TDataSet; var TableName: string);
 begin
   TableName := 'TICKETS';
 end;
 
-procedure TdmSicsServidor.dspIdsTicketsTagsGetTableName(Sender: TObject;
-  DataSet: TDataSet; var TableName: string);
+procedure TdmSicsServidor.dspIdsTicketsTagsGetTableName(Sender: TObject; DataSet: TDataSet; var TableName: string);
 begin
   TableName := 'TICKETS_TAGS';
 end;
@@ -690,9 +657,7 @@ end;
   end;
 }
 
-function RegistraEvento(ID_AtType, ID_Atd, ID_PA, ID_FilaEspera,
-  ID_MotivoPausa: integer; NumeroTicket: integer;
-  IniTime, EndTime: TDateTime): Boolean;
+function RegistraEvento(ID_AtType, ID_Atd, ID_PA, ID_FilaEspera, ID_MotivoPausa: integer; NumeroTicket: integer; IniTime, EndTime: TDateTime): Boolean;
 var
   ID_Ticket, Id_FilaTipoTicket: integer;
   bLocalizouTicket: Boolean;
@@ -739,31 +704,34 @@ begin
 
       try
         Append;
-        FieldByName('ID').AsInteger := TGenerator.NGetNextGenerator
-          ('GEN_ID_EVENTO', dmSicsMain.connOnLine);
+        FieldByName('ID').AsInteger := TGenerator.NGetNextGenerator('GEN_ID_EVENTO', dmSicsMain.connOnLine);
         FieldByName('ID_TIPOEVENTO').AsInteger := ID_AtType;
         FieldByName('ID_PA').AsInteger         := ID_PA;
         FieldByName('ID_ATENDENTE').AsInteger  := ID_Atd;
+
         if not bLocalizouTicket then
           FieldByName('ID_TICKET').Clear
         else
           FieldByName('ID_TICKET').AsInteger := ID_Ticket;
+
         if ID_FilaEspera = -1 then
           FieldByName('ID_FILAESPERA').Clear
         else
           FieldByName('ID_FILAESPERA').AsInteger := ID_FilaEspera;
+
         if ID_MotivoPausa = -1 then
           FieldByName('ID_MOTIVOPAUSA').Clear
         else
           FieldByName('ID_MOTIVOPAUSA').AsInteger := ID_MotivoPausa;
+
         if Id_FilaTipoTicket = -1 then
           FieldByName('ID_FILATIPOTICKET').Clear
         else
           FieldByName('ID_FILATIPOTICKET').AsInteger := Id_FilaTipoTicket;
+
         FieldByName('INICIO').AsDateTime             := IniTime;
         FieldByName('FIM').AsDateTime                := EndTime;
-        FieldByName('DURACAO_SEGUNDOS').AsInteger :=
-          SecondsBetween(IniTime, EndTime);
+        FieldByName('DURACAO_SEGUNDOS').AsInteger    := SecondsBetween(IniTime, EndTime);
 
         Post;
 
@@ -811,11 +779,9 @@ begin
       // contigencia no ar, portanto eh necessario registra-lo para nao dar erro de FK
       // e soh eh verificado se for > 0, pois se for negativo eh pq ja inseriu no
       // contigencia, ja que somente contigencia insere com id negativo
-      if (dmSicsContingencia.TipoFuncionamento = tfContingente) and
-        (ID_Ticket > 0) then
+      if (dmSicsContingencia.TipoFuncionamento = tfContingente) and (ID_Ticket > 0) then
       begin
-        dmSicsServidor.qryCheckExisteTicket.ParamByName('ID').AsInteger :=
-          ID_Ticket;
+        dmSicsServidor.qryCheckExisteTicket.ParamByName('ID').AsInteger := ID_Ticket;
         dmSicsServidor.qryCheckExisteTicket.Open;
         try
           if dmSicsServidor.qryCheckExisteTicket.IsEmpty then
@@ -864,8 +830,7 @@ begin
         FieldByName('ID_FILATIPOTICKET').AsInteger := Id_FilaTipoTicket;
         FieldByName('INICIO').AsDateTime           := IniTime;
         FieldByName('FIM').AsDateTime              := EndTime;
-        FieldByName('DURACAO_SEGUNDOS').AsInteger :=
-          SecondsBetween(IniTime, EndTime);
+        FieldByName('DURACAO_SEGUNDOS').AsInteger  := SecondsBetween(IniTime, EndTime);
 
         Post;
         Result := (ApplyUpdates(0) = 0);
@@ -886,8 +851,7 @@ begin
   end;   { if EndTime > IniTime }
 end; { func RegistraPP }
 
-function RegistraTicket(ID_Ticket, NumeroTicket, ID_Fila, Ordem: integer;
-  PswdDateTime: TDateTime): Boolean;
+function RegistraTicket(ID_Ticket, NumeroTicket, ID_Fila, Ordem: integer; PswdDateTime: TDateTime): Boolean;
 var
   lOrdemTicket: Integer;
 begin
@@ -907,7 +871,7 @@ begin
 
     try
       Append;
-      FieldByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+      FieldByName('ID_UNIDADE').AsInteger   := vgParametrosModulo.IdUnidade;
       FieldByName('ID').AsInteger           := ID_Ticket;
       FieldByName('NUMEROTICKET').AsInteger := NumeroTicket;
       FieldByName('CREATEDAT').AsDateTime   := PswdDateTime;
@@ -950,8 +914,7 @@ begin
 
   LOrdemTicket := OrdemTicketNaFila(AID_Fila, AOrdem);
 
-  dmSicsMain.connOnLine.ExecSQL(UPDATE_TICKET,
-    [AID_Fila, LOrdemTicket, ADataHora, vgParametrosModulo.IdUnidade, AID_Ticket]);
+  dmSicsMain.connOnLine.ExecSQL(UPDATE_TICKET, [AID_Fila, LOrdemTicket, ADataHora, vgParametrosModulo.IdUnidade, AID_Ticket]);
 
   TfrmDebugParameters.Debugar(tbRegistrosBD, 'Saiu     RecuperaTicket');
 end;
@@ -1052,8 +1015,7 @@ function DesRegistraTicketTag(ID_Ticket, Id_Tag: integer): boolean;
 begin
   with dmSicsServidor.qryDeleteTicketTag do
   begin
-    if frmSicsMain.cdsIdsTicketsTags.Locate('Ticket_Id;Tag_Id',
-      VarArrayOf([ID_Ticket, Id_Tag]), []) then
+    if frmSicsMain.cdsIdsTicketsTags.Locate('Ticket_Id;Tag_Id', VarArrayOf([ID_Ticket, Id_Tag]), []) then
       frmSicsMain.cdsIdsTicketsTags.Delete;
 
     if frmSicsMain.cdsIdsTicketsTags.ChangeCount > 0 then
@@ -1075,8 +1037,7 @@ function RegistraTicketAgendamentosFilas(ID_Ticket: integer): Boolean;
 begin
   // Result := False;
 
-  dmSicsServidor.qryAddTicketAgendamentosFilas.ParamByName('ID_TICKET')
-    .AsInteger := ID_Ticket;
+  dmSicsServidor.qryAddTicketAgendamentosFilas.ParamByName('ID_TICKET').AsInteger := ID_Ticket;
   dmSicsServidor.cdsAddTicketAgendamentosFilas.Open;
   try
     if not dmSicsServidor.cdsAddTicketAgendamentosFilas.IsEmpty then
@@ -1094,12 +1055,9 @@ begin
         while not Eof do
         begin
           dmSicsServidor.cdsAddTicketAgendamentosFilas.Append;
-          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('ID_TICKET')
-            .AsInteger := FieldByName('ID_TICKET').AsInteger;
-          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('ID_FILA')
-            .AsInteger := FieldByName('ID_FILA').AsInteger;
-          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('DATAHORA')
-            .AsDateTime := FieldByName('DATAHORA').AsDateTime;
+          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('ID_TICKET').AsInteger := FieldByName('ID_TICKET').AsInteger;
+          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('ID_FILA').AsInteger := FieldByName('ID_FILA').AsInteger;
+          dmSicsServidor.cdsAddTicketAgendamentosFilas.FieldByName('DATAHORA').AsDateTime := FieldByName('DATAHORA').AsDateTime;
           dmSicsServidor.cdsAddTicketAgendamentosFilas.Post;
 
           Next;
@@ -1120,20 +1078,18 @@ end;
 
 function DesRegistraTicketAgendamentosFilas(ID_Ticket: integer): Boolean;
 begin
-  frmSicsMain.cdsIdsTicketsAgendamentosFilas.Filter := 'IdTicket=' +
-    IntToStr(ID_Ticket);
+  frmSicsMain.cdsIdsTicketsAgendamentosFilas.Filter := 'IdTicket=' + IntToStr(ID_Ticket);
   frmSicsMain.cdsIdsTicketsAgendamentosFilas.Filtered := True;
-    try
+
+  try
     while not frmSicsMain.cdsIdsTicketsAgendamentosFilas.IsEmpty do
       frmSicsMain.cdsIdsTicketsAgendamentosFilas.Delete;
-    finally
+  finally
     frmSicsMain.cdsIdsTicketsAgendamentosFilas.Filtered := False;
   end;
 
-  dmSicsServidor.qryDeleteTicketsAgendamentosFilas.ParamByName('ID_UNIDADE')
-    .AsInteger := vgParametrosModulo.IdUnidade;
-  dmSicsServidor.qryDeleteTicketsAgendamentosFilas.ParamByName('ID_TICKET')
-    .AsInteger := ID_Ticket;
+  dmSicsServidor.qryDeleteTicketsAgendamentosFilas.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
+  dmSicsServidor.qryDeleteTicketsAgendamentosFilas.ParamByName('ID_TICKET').AsInteger := ID_Ticket;
   dmSicsServidor.qryDeleteTicketsAgendamentosFilas.ExecSQL;
 
   Result := True;
@@ -1208,8 +1164,7 @@ end;
 
 function RemoverFilaTicketBD(pFila, pIDTicket: Integer): Boolean;
 const
-  UPDATE_TICKET =
-    'UPDATE TICKETS SET FILA_ID = NULL WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID = %d';
+  UPDATE_TICKET = 'UPDATE TICKETS SET FILA_ID = NULL WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID = %d';
 
 var
   lRows: Integer;
@@ -1219,8 +1174,7 @@ begin
   dmSicsMain.connOnLine.StartTransaction;
 
   try
-    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET,
-      [vgParametrosModulo.IdUnidade, pIDTicket, pFila]));
+    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET, [vgParametrosModulo.IdUnidade, pIDTicket, pFila]));
 
     if lRows > 1 then
     begin
@@ -1241,15 +1195,11 @@ begin
   TfrmDebugParameters.Debugar(tbRegistrosBD, 'Saiu   RemoverFilaTicketBD Fila: ' + pFila.ToString + ' Ticket: ' + pIDTicket.ToString);
 end;
 
-function DirecionarTicketParaFilaBD(pIDTicket, pFilaAnterior, pNovaFila,
-  pOrdem: integer): Boolean;
+function DirecionarTicketParaFilaBD(pIDTicket, pFilaAnterior, pNovaFila, pOrdem: integer): Boolean;
 const
-  UPDATE_TICKET =
-    'UPDATE TICKETS SET FILA_ID = %d, ORDEM = %d WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID = %d';
-  SELECT_MAX =
-    'SELECT COALESCE(MAX(ORDEM), 0) + 1 FROM TICKETS WHERE ID_UNIDADE = %d AND FILA_ID = %d';
-  SELECT_MIN =
-    'SELECT COALESCE(MIN(ORDEM), 0) - 1 FROM TICKETS WHERE ID_UNIDADE = %d AND FILA_ID = %d';
+  UPDATE_TICKET = 'UPDATE TICKETS SET FILA_ID = %d, ORDEM = %d WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID = %d';
+  SELECT_MAX    = 'SELECT COALESCE(MAX(ORDEM), 0) + 1 FROM TICKETS WHERE ID_UNIDADE = %d AND FILA_ID = %d';
+  SELECT_MIN    = 'SELECT COALESCE(MIN(ORDEM), 0) - 1 FROM TICKETS WHERE ID_UNIDADE = %d AND FILA_ID = %d';
 
 var
   lRows: Integer;
@@ -1264,19 +1214,13 @@ begin
 
   try
     case pOrdem of
-      - 1:
-        lOrdemTicket := dmSicsMain.connOnLine.ExecSQLScalar
-          (Format(SELECT_MIN, [vgParametrosModulo.IdUnidade, pNovaFila]));
-      -2:
-        lOrdemTicket := dmSicsMain.connOnLine.ExecSQLScalar
-          (Format(SELECT_MAX, [vgParametrosModulo.IdUnidade, pNovaFila]));
+      -1: lOrdemTicket := dmSicsMain.connOnLine.ExecSQLScalar(Format(SELECT_MIN, [vgParametrosModulo.IdUnidade, pNovaFila]));
+      -2: lOrdemTicket := dmSicsMain.connOnLine.ExecSQLScalar(Format(SELECT_MAX, [vgParametrosModulo.IdUnidade, pNovaFila]));
     else
       lOrdemTicket := 0;
     end;
 
-    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET,
-      [pNovaFila, lOrdemTicket, vgParametrosModulo.IdUnidade, pIDTicket,
-      pFilaAnterior]));
+    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET, [pNovaFila, lOrdemTicket, vgParametrosModulo.IdUnidade, pIDTicket, pFilaAnterior]));
 
     if lRows > 1 then
     begin
@@ -1299,15 +1243,12 @@ begin
                                                                                      ' Ticket: ' + pIDTicket.ToString);
 end;
 
-function LocalizarTicket(pNumeroTicket: integer;
-  var pIDTicket, pIDFila: integer; var pNomeCliente: String;
-  var pCreatedAt: TDateTime): Boolean;
+function LocalizarTicket(pNumeroTicket: integer; var pIDTicket, pIDFila: integer; var pNomeCliente: String; var pCreatedAt: TDateTime): Boolean;
 begin
   Result := False;
 
   dmSicsServidor.qryIDTicket.Close;
-  dmSicsServidor.qryIDTicket.ParamByName('NUMEROTICKET').AsInteger :=
-    pNumeroTicket;
+  dmSicsServidor.qryIDTicket.ParamByName('NUMEROTICKET').AsInteger := pNumeroTicket;
   dmSicsServidor.qryIDTicket.Open;
 
   if not dmSicsServidor.qryIDTicket.IsEmpty then
@@ -1324,22 +1265,19 @@ end;
 
 function LimparFilaTicket(IDTicket, Fila: Integer): Boolean;
 const
-  UPDATE_TICKET_FILA =
-    'UPDATE TICKETS SET FILA_ID = NULL WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID IS NOT NULL';
+  UPDATE_TICKET_FILA = 'UPDATE TICKETS SET FILA_ID = NULL WHERE ID_UNIDADE = %d AND NUMEROTICKET = %d AND FILA_ID IS NOT NULL';
 
 var
   lRows: Integer;
 
   // lOrdemTicket: Integer;
 begin
-  TfrmDebugParameters.Debugar(tbRegistrosBD, 'Entrou   LimparFilaTicket Fila: ' + Fila.ToString +
-                                                                    ' Ticket: ' + IDTicket.ToString);
+  TfrmDebugParameters.Debugar(tbRegistrosBD, 'Entrou   LimparFilaTicket Fila: ' + Fila.ToString + ' Ticket: ' + IDTicket.ToString);
 
   dmSicsMain.connOnLine.StartTransaction;
 
   try
-    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET_FILA,
-      [vgParametrosModulo.IdUnidade, IDTicket]));
+    lRows := dmSicsMain.connOnLine.ExecSQL(Format(UPDATE_TICKET_FILA, [vgParametrosModulo.IdUnidade, IDTicket]));
 
     if lRows > 1 then
     begin
@@ -1357,8 +1295,7 @@ begin
     end;
   end;
 
-  TfrmDebugParameters.Debugar (tbRegistrosBD, 'Saiu LimparFilaTicket Fila: ' + Fila.ToString +
-                                                                ' Ticket: ' + IDTicket.ToString);
+  TfrmDebugParameters.Debugar (tbRegistrosBD, 'Saiu LimparFilaTicket Fila: ' + Fila.ToString + ' Ticket: ' + IDTicket.ToString);
 end;
 
 function LimpaTodosAlarmesAtivoPAs : boolean;
@@ -1442,8 +1379,7 @@ end;
 
 function VerificaChamadaAutomatica(IdPA: integer): Boolean;
 begin
-  Result := (not SomenteRedirecionar) and
-    ExisteNoIntArray(IdPA, dmSicsServidor.PAsComChamadaAutomatica);
+  Result := (not SomenteRedirecionar) and ExisteNoIntArray(IdPA, dmSicsServidor.PAsComChamadaAutomatica);
 end;
 
 function VerificaChamadaAutomaticaSemFlag(IdPA: integer): boolean;
@@ -1453,34 +1389,28 @@ end;
 
 function VerificaFilaChamadaAutomatica(Fila: Integer): Boolean;
 begin
-  Result := (Fila >= 0) and
-    (Fila <= Length(dmSicsServidor.FilasComChamadaAutomatica) - 1) and
-    (Length(dmSicsServidor.FilasComChamadaAutomatica[Fila].PAs) > 0);
+  Result := (Fila >= 0) and (Fila <= Length(dmSicsServidor.FilasComChamadaAutomatica) - 1) and (Length(dmSicsServidor.FilasComChamadaAutomatica[Fila].PAs) > 0);
 end;
 
-procedure TdmSicsServidor.cdsAddTicketReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsAddTicketReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 begin
   MyLogException(E);
 end;
 
-procedure TdmSicsServidor.cdsAddTicketTagReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsAddTicketTagReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 begin
   MyLogException(E);
 end;
 
-procedure TdmSicsServidor.cdsAddTicketAgendamentosFilasReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsAddTicketAgendamentosFilasReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 begin
   MyLogException(E);
 end;
 
-procedure TdmSicsServidor.cdsAddEventoReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsAddEventoReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 var
   I: integer;
@@ -1491,15 +1421,13 @@ begin
   begin
     if sDados <> '' then
       sDados := sDados + #13 + #10;
-    sDados := sDados + cdsAddEvento.Fields[I].FieldName + '=' +
-      cdsAddEvento.Fields[I].AsString;
+    sDados := sDados + cdsAddEvento.Fields[I].FieldName + '=' + cdsAddEvento.Fields[I].AsString;
   end;
   E.Message := E.Message + #13 + #10 + 'Dados:' + #13 + #10 + sDados;
   MyLogException(E);
 end;
 
-procedure TdmSicsServidor.cdsAddEventoPPReconcileError
-  (DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
+procedure TdmSicsServidor.cdsAddEventoPPReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind;
   var Action: TReconcileAction);
 var
   I: integer;
@@ -1510,13 +1438,11 @@ begin
   begin
     if sDados <> '' then
       sDados := sDados + #13 + #10;
-    sDados := sDados + cdsAddEventoPP.Fields[I].FieldName + '=' +
-      cdsAddEventoPP.Fields[I].AsString;
+    sDados := sDados + cdsAddEventoPP.Fields[I].FieldName + '=' + cdsAddEventoPP.Fields[I].AsString;
   end;
   E.Message := E.Message + #13 + #10 + 'Dados:' + #13 + #10 + sDados;
   MyLogException(E);
 end;
-
 
 procedure TdmSicsServidor.CarregarFilasComChamadaAutomatica;
 var
@@ -1537,11 +1463,9 @@ begin
     sWhere := '(' + Copy(sWhere, 1, Length(sWhere) - 1) + ')';
 
     cdsFilasChamadaAutomatica.Active    := False;
-    qryFilasChamadaAutomatica.Sql.Text :=
-      'SELECT ID_FILA, ID_PA FROM NN_PAS_FILAS WHERE ID_UNIDADE = :ID_UNIDADE AND ID_PA IN '
+    qryFilasChamadaAutomatica.Sql.Text := 'SELECT ID_FILA, ID_PA FROM NN_PAS_FILAS WHERE ID_UNIDADE = :ID_UNIDADE AND ID_PA IN '
       + sWhere + ' ORDER BY ID_FILA, ID_PA';
-    qryFilasChamadaAutomatica.ParamByName('ID_UNIDADE').AsInteger :=
-      vgParametrosModulo.IdUnidade;
+    qryFilasChamadaAutomatica.ParamByName('ID_UNIDADE').AsInteger := vgParametrosModulo.IdUnidade;
     cdsFilasChamadaAutomatica.Active    := True;
 
     if not cdsFilasChamadaAutomatica.IsEmpty then
@@ -1550,6 +1474,7 @@ begin
       C := cdsFilasChamadaAutomatica.FieldByName('ID_FILA').AsInteger + 1;
       SetLength(FilasComChamadaAutomatica, C);
       cdsFilasChamadaAutomatica.First;
+
       while not cdsFilasChamadaAutomatica.Eof do
       begin
         F := cdsFilasChamadaAutomatica.FieldByName('ID_FILA').AsInteger;
@@ -1558,14 +1483,11 @@ begin
           PA  := Length(FilasComChamadaAutomatica[F].PAs);
           SetLength(FilasComChamadaAutomatica[F].PAs, PA + 1);
 
-          FilasComChamadaAutomatica[F].PAs[PA] :=
-            cdsFilasChamadaAutomatica.FieldByName('ID_PA').AsInteger;
+          FilasComChamadaAutomatica[F].PAs[PA] := cdsFilasChamadaAutomatica.FieldByName('ID_PA').AsInteger;
           cdsFilasChamadaAutomatica.Next;
-
         end;
       end;
     end;
-
   end;
 end;
 

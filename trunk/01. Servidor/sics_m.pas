@@ -4804,15 +4804,23 @@ var
 begin
   dmSicsMain.cdsFiltroPAs.CloneCursor(dmSicsMain.cdsPAs, True);
   LColuna := 'ID';
-  FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroPAs, IdModulo, tgNomesPAs, LColuna,
-    function (aModuloSics: TModuloSics): string
-    begin
-      case aModuloSics of
-        msOnLine, msTGS, msTV: Result := 'ID_GRUPOPA';
-      else
-        Result := LColuna;
-      end;
-    end);
+
+  try
+     FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroPAs, IdModulo, tgNomesPAs, LColuna);
+
+//    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroPAs, IdModulo, tgNomesPAs, LColuna,
+//      function (aModuloSics: TModuloSics): string
+//      begin
+//        case aModuloSics of
+//          msOnLine, msTGS, msTV: Result := 'ID_GRUPOPA';
+//        else
+//          Result := LColuna;
+//        end;
+//      end);
+  except
+    on E: Exception do
+      MyLogException(ERegistroDeOperacao.Create('GetSendPAsListText'), True);
+  end;
 
   with dmSicsMain.cdsFiltroPAs do
   begin
@@ -4834,6 +4842,7 @@ begin
           end;
           Next;
         end;
+
         S := TAspEncode.AspIntToHex(NPA, 4) + S;
       finally
         if BookmarkValid(BM) then
@@ -11788,6 +11797,7 @@ begin
       SelectedIndex := IMG_OK;
       MakeVisible;
     end;
+
   frmSicsConexoes.NodePasMultiPas.Text := NODE_TEXT_PAS_MULTIPAS + ' (' + IntToStr(frmSicsConexoes.NodePasMultiPas.Count) + ')';
 
   for I := 0 to TGSServerSocket.Socket.ActiveConnections - 1 do
@@ -11797,6 +11807,7 @@ begin
       SelectedIndex := IMG_OK;
       MakeVisible;
     end;
+
   frmSicsConexoes.NodeOnLineTGS.Text := NODE_TEXT_ONLINE_TGS + ' (' + IntToStr(frmSicsConexoes.NodeOnLineTGS.Count) + ')';
 
   iActiveCount   := 0;
@@ -11826,6 +11837,7 @@ begin
         end;
       end;
     end;
+
   frmSicsConexoes.NodePaineis.Text := NODE_TEXT_PAINEIS + ' (ON: ' + IntToStr(iActiveCount) + ' - OFF: ' + IntToStr(iInactiveCount) + ')';
 
   iActiveCount   := 0;
@@ -11850,10 +11862,12 @@ begin
 
           MakeVisible;
         end;
+
   frmSicsConexoes.NodeTotens.Text := NODE_TEXT_TOTENS + ' (ON: ' + IntToStr(iActiveCount) + ' - OFF: ' + IntToStr(iInactiveCount) + ')';
 
   iActiveCount   := 0;
   iInactiveCount := 0;
+
   for I          := 1 to vlNumeroDeTecladoClientSockets do
     if FindComponent('TecladoClientSocket' + IntToStr(I)) <> nil then
       with FindComponent('TecladoClientSocket' + IntToStr(I)) as TClientSocket do
@@ -11874,6 +11888,7 @@ begin
 
           MakeVisible;
         end;
+
   frmSicsConexoes.NodeTeclados.Text := NODE_TEXT_TECLADOS + ' (ON: ' + IntToStr(iActiveCount) + ' - OFF: ' + IntToStr(iInactiveCount) + ')';
 end;
 
@@ -11986,9 +12001,10 @@ begin
 end;
 
 function TfrmSicsMain.GetTempoEsperaUltimosN: String;
-var LIDFila:   Integer;
-    LNomeFila: String;
-    LTempo: TDateTime;
+var
+  LIDFila:   Integer;
+  LNomeFila: String;
+  LTempo: TDateTime;
 begin
   SysUtils.FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
   SysUtils.FormatSettings.LongTimeFormat  := 'hh:nn:ss';
@@ -12014,9 +12030,10 @@ begin
 end;
 
 function TfrmSicsMain.GetTMAFilas: String;
-var LIDFila:  Integer;
-    LTMAFila: TDateTime;
-    LNomeFila: String;
+var
+  LIDFila:  Integer;
+  LTMAFila: TDateTime;
+  LNomeFila: String;
 begin
   dmSicsMain.cdsFilasClone.CloneCursor(dmSicsMain.cdsFilas, false, True);
   dmSicsMain.cdsFilasClone.First;
@@ -12067,56 +12084,62 @@ begin
   end;
 end;
 
-
-procedure TfrmSicsMain.FiltraDataSetComPermitidas (AConexao: TFDConnection;
-  const aDataSet: TClientDataSet; const AIdModulo: Integer;
-  const aNomeCampo: TTipoDeGrupo; aColunaFiltrarCDS: String = 'ID';
-  const aGetNomeColunaPorModulo: TGetNomeColunaPorModulo = nil);
+procedure TfrmSicsMain.FiltraDataSetComPermitidas (AConexao: TFDConnection; const aDataSet: TClientDataSet; const AIdModulo: Integer;
+  const aNomeCampo: TTipoDeGrupo; aColunaFiltrarCDS: String = 'ID'; const aGetNomeColunaPorModulo: TGetNomeColunaPorModulo = nil);
 var
   vRangeIDs               : TIntArray;
   vRangePermitido         : string;
   vTipoModulo             : TModuloSics;
   vNomeTabela, vNomeColuna: string;
 begin
+  //Exit;
   vRangePermitido := EmptyStr;
   try
-    vTipoModulo := GetModuleTypeByID(AConexao, AIdModulo);
-    if (vTipoModulo = msNone) then
-      Exit;
-    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
-    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, aNomeCampo);
-    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
-      Exit;
-
-    if Assigned(aGetNomeColunaPorModulo) then
-      aColunaFiltrarCDS := aGetNomeColunaPorModulo(vTipoModulo);
-
-    if (aColunaFiltrarCDS = '') then
-      Exit;
-
-    if((aNomeCampo = tgPA) or (aNomeCampo = tgNomesPAs))then
-    begin
-      if(vTipoModulo = msPA)then
-        vNomeTabela := '(SELECT '+
-                       '   ID_UNIDADE, ' +
-                       '   ID, '+
-                       '   (CASE WHEN MODO_TERMINAL_SERVER = '+QuotedStr('T')+' THEN PAS_PERMITIDAS ELSE ID_PA END) PAS_PERMITIDAS ' +
-                       ' FROM ' +
-                       '   MODULOS_PAS' +
-                       ' WHERE '+
-                       '   ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString + ')';
-
-      if((aNomeCampo = tgNomesPAs) or ((aNomeCampo = tgPA) and ((vTipoModulo = msTGS) or (vTipoModulo = msOnLine))))then
-        vRangeIDs := GetListaIDPermitidosDoGrupo(AConexao, vNomeTabela, vNomeColuna, AIdModulo)
-      else
-        vRangeIDs := GetListaIDPermitidosDoGrupoPA(AConexao, vNomeTabela, vNomeColuna, AIdModulo)
-    end
-    else
-      vRangeIDs := GetListaIDPermitidosDoGrupo(AConexao, vNomeTabela, vNomeColuna, AIdModulo);
     try
-      vRangePermitido := GetFilterPorRangerID(vRangeIDs, aColunaFiltrarCDS);
-    finally
-      Finalize(vRangeIDs);
+      vTipoModulo := GetModuleTypeByID(AConexao, AIdModulo);
+
+      if (vTipoModulo = msNone) then
+        Exit;
+
+      vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+      vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, aNomeCampo);
+
+      if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+        Exit;
+
+      if Assigned(aGetNomeColunaPorModulo) then
+        aColunaFiltrarCDS := aGetNomeColunaPorModulo(vTipoModulo);
+
+      if (aColunaFiltrarCDS = '') then
+        Exit;
+
+      if((aNomeCampo = tgPA) or (aNomeCampo = tgNomesPAs))then
+      begin
+        if(vTipoModulo = msPA)then
+          vNomeTabela := '(SELECT '+
+                         '   ID_UNIDADE, ' +
+                         '   ID, '+
+                         '   (CASE WHEN MODO_TERMINAL_SERVER = '+QuotedStr('T')+' THEN PAS_PERMITIDAS ELSE ID_PA END) PAS_PERMITIDAS ' +
+                         ' FROM ' +
+                         '   MODULOS_PAS' +
+                         ' WHERE '+
+                         '   ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString + ')';
+
+        if((aNomeCampo = tgNomesPAs) or ((aNomeCampo = tgPA) and ((vTipoModulo = msTGS) or (vTipoModulo = msOnLine))))then
+          vRangeIDs := GetListaIDPermitidosDoGrupo(AConexao, vNomeTabela, vNomeColuna, AIdModulo)
+        else
+          vRangeIDs := GetListaIDPermitidosDoGrupoPA(AConexao, vNomeTabela, vNomeColuna, AIdModulo)
+      end
+      else
+        vRangeIDs := GetListaIDPermitidosDoGrupo(AConexao, vNomeTabela, vNomeColuna, AIdModulo);
+      try
+        vRangePermitido := GetFilterPorRangerID(vRangeIDs, aColunaFiltrarCDS);
+      finally
+        Finalize(vRangeIDs);
+      end;
+    except
+      on E: Exception do
+        MyLogException(E, True);
     end;
   finally
     aDataSet.Filtered := False;
@@ -12124,7 +12147,6 @@ begin
     aDataSet.Filtered := vRangePermitido <> '';
   end;
 end;
-
 
 function TfrmSicsMain.GetNomeFilas(const IdModulo: Integer): String;
 var
@@ -12372,15 +12394,17 @@ begin
       for LCount := LGrupoPASINI.Count - 1 downto 0 do
       begin
         LPosDados := Pos('_', LGrupoPASINI[LCount]) + 1;
+
         if LPosDados <> 0 then
         begin
           LDados       := Copy(LGrupoPASINI[LCount], LPosDados);
           LPosDados    := Pos('_', LDados) + 1;
-          LTotemStatus  := Copy(LDados,1 ,(LPosDados -2 ));
+          LTotemStatus := Copy(LDados,1 ,(LPosDados -2 ));
           LDados       := Copy(LDados, LPosDados);
           LPosDados    := Pos('_', LDados) + 1;
-          LTotemID      := StrToIntDef(Copy(LDados, LPosDados),0);
+          LTotemID     := StrToIntDef(Copy(LDados, LPosDados),0);
         end;
+
         LDadosGrupoPAS := LIni.ReadString('AlarmesFaltaDePapel', LGrupoPASINI[LCount], EmptyStr);
 
         if LTotemID <> 0 then
@@ -12429,7 +12453,6 @@ begin
         exit;
       end;
     end;
-
   finally
     FreeAndNil(LSQL);
     FreeAndNil(LDataProvider);
@@ -12444,7 +12467,6 @@ begin
   else
     Result := vlTotens[IdsTotens[1]].TipoImpressora;
 end;
-
 
 function TfrmSicsMain.ObtemColunaDaTag(ID_GrupoTag: Integer): Integer; // RAP
 begin // RAP
@@ -12669,8 +12691,9 @@ begin
     finally
 
     end;
-  except on e: exception do
-    Result:=False;
+  except
+    on E: Exception do
+      Result := False;
   end;
 end;
 
@@ -12723,10 +12746,10 @@ begin
     finally
       dmSicsMain.qryAux.Close;
     end;
-  except on e: exception do
+  except
+    on E: Exception do
+
   end;
-
 end;
-
 
 end.

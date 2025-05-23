@@ -3,10 +3,9 @@ unit uFuncoes;
 interface
 
 {$INCLUDE ..\AspDefineDiretivas.inc}
+
 uses
-  SysUtils, MyDlls_DR,  ClassLibraryVCL,
-  uServico,
-  Forms, Classes, IniFiles, Dialogs;
+  SysUtils, MyDlls_DR,  ClassLibraryVCL, uServico, Forms, Classes, IniFiles, Dialogs, Winapi.Windows;
 
 type
   TLog = class(TComponent)
@@ -32,11 +31,18 @@ procedure CriarForm(IsDesktopMode: Boolean; AClass: TComponentClass; var Form);
 var
   vIsDesktopMode: Boolean;
 
-
 implementation
 
 uses
-sics_94, sics_dm, sics_m, sics_2, sics_3, sics_5, NBackup, SvcMgr, Sics_Common_Splash;
+  sics_94,
+  sics_dm,
+  sics_m,
+  sics_2,
+  sics_3,
+  sics_5,
+  NBackup,
+  SvcMgr,
+  Sics_Common_Splash;
 
 function GetServiceIniFileName: string;
 begin
@@ -101,7 +107,8 @@ begin
       if Splash then
         TfrmSicsSplash.Hide;
     end;
-  end else
+  end
+  else
   begin
     // fomos obrigados a criar uma thread no caso de servico, pois por padrao
     // o windows tem um timeout de 30 segundos para iniciar um servico, portanto,
@@ -164,7 +171,8 @@ end;
 
 procedure TLog.ExceptionHandler(Sender: TObject; E: Exception);
 begin
-  MyLogException(E);
+  Winapi.Windows.Beep(1400, 1700);
+  MyLogException(ERegistroDeOperacao.Create('ExceptionHandler'), True);
   ErrorMessage(E.Message);
 end;
 

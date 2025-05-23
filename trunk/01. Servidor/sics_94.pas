@@ -909,7 +909,7 @@ uses
 {$ENDIF}
 {$IF (not Defined(CompilarPara_CONFIG)) and (not Defined(CompilarPara_SCC)) )}
     , udmContingencia, uFuncoes, sics_dm, sics_m,
-  ufrmDebugParameters, uTempoUnidade
+  ufrmDebugParameters, uTempoUnidade, System.Win.ScktComp
 {$ENDIF}
   ;
 
@@ -2354,25 +2354,30 @@ begin
   end;
 end;
 
-function GetFilterPorRangerID(const aRangeIDs: TIntArray;
-const aColuna: String = 'ID'): string;
+function GetFilterPorRangerID(const aRangeIDs: TIntArray; const aColuna: String = 'ID'): string;
 var
   i: integer;
 begin
-  if length(aRangeIDs) = 0 then
-  begin
-    result := '1 = 2';
-  end
-  else
-  begin
-    result := EmptyStr;
-
-    for i := 0 to High(aRangeIDs) do
+  try
+    if length(aRangeIDs) = 0 then
     begin
-      if result <> '' then
-        result := result + ' OR ';
-      result := result + '(' + aColuna + ' = ' + inttostr(aRangeIDs[i]) + ')';
+      result := '1 = 2';
+    end
+    else
+    begin
+      result := EmptyStr;
+
+      for i := 0 to High(aRangeIDs) do
+      begin
+        if result <> '' then
+          result := result + ' OR ';
+
+        result := result + '(' + aColuna + ' = ' + inttostr(aRangeIDs[i]) + ')';
+      end;
     end;
+  except
+    on E: Exception do
+      MyLogException(ERegistroDeOperacao.Create('GetFilterPorRangerID'), True);
   end;
 end;
 
