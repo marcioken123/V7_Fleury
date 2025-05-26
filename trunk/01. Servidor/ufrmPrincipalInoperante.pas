@@ -59,8 +59,7 @@ end;
 
 procedure TfrmSicsPrincipalInoperante.Sair1Click(Sender: TObject);
 begin
-  if Application.MessageBox('Deseja fechar o SICS?',
-    'Confirmação', MB_ICONQUESTION or MB_YESNOCANCEL) = mrYes then
+  if Application.MessageBox('Deseja fechar o SICS?', 'Confirmação', MB_ICONQUESTION or MB_YESNOCANCEL) = mrYes then
   try
     Close;
   finally
@@ -75,8 +74,7 @@ begin
 {$ENDIF IS_MOBILE}, 'S I C S', MB_ICONINFORMATION);
 end;
 
-procedure TfrmSicsPrincipalInoperante.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmSicsPrincipalInoperante.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if not GetIsService then
     MyLogException(ERegistroDeOperacao.Create('Término do programa.'));

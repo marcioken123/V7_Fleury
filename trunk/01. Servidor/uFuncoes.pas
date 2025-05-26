@@ -171,11 +171,9 @@ end;
 
 procedure TLog.ExceptionHandler(Sender: TObject; E: Exception);
 begin
-  Winapi.Windows.Beep(1400, 1700);
-  MyLogException(ERegistroDeOperacao.Create('ExceptionHandler'), True);
+  MyLogException(E, True);
   ErrorMessage(E.Message);
 end;
-
 
 { TCreateFormsService }
 

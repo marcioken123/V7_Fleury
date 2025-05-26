@@ -2319,22 +2319,14 @@ begin
               if frmSicsMain.DefinirNomeParaSenha(StrToInt(SenhaStr), NomeCli)
               then
               begin
-                frmSicsMain.EnviaParaTodosOsClients
-                  (frmSicsMain.ServerSocket1.Socket,
-                  '0000' + Chr($57) + ProtData);
-                frmSicsMain.EnviaParaTodosOsClients
-                  (frmSicsMain.TGSServerSocket.Socket,
-                  '0000' + Chr($57) + ProtData);
+                frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.ServerSocket1.Socket, '0000' + Chr($57) + ProtData);
+                frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.TGSServerSocket.Socket, '0000' + Chr($57) + ProtData);
               end
               else
               begin
                 Aux := frmSicsMain.GetNomeParaSenha(StrToInt(SenhaStr));
-                frmSicsMain.EnviaParaTodosOsClients
-                  (frmSicsMain.ServerSocket1.Socket,
-                  '0000' + Chr($57) + SenhaStr + TAB + Aux);
-                frmSicsMain.EnviaParaTodosOsClients
-                  (frmSicsMain.TGSServerSocket.Socket,
-                  '0000' + Chr($57) + SenhaStr + TAB + Aux);
+                frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.ServerSocket1.Socket, '0000' + Chr($57) + SenhaStr + TAB + Aux);
+                frmSicsMain.EnviaParaTodosOsClients(frmSicsMain.TGSServerSocket.Socket, '0000' + Chr($57) + SenhaStr + TAB + Aux);
               end;
             end;
           end; { case 57 }
@@ -2364,8 +2356,7 @@ begin
 
             Senha := StrToInt(Copy(ProtData, 5, Pos(',', ProtData) - 5));
 
-            Aux := Copy(ProtData, Pos(',', ProtData) + 1,
-              Length(ProtData) - Pos(',', ProtData));
+            Aux := Copy(ProtData, Pos(',', ProtData) + 1, Length(ProtData) - Pos(',', ProtData));
             while Aux <> '' do
             begin
               SeparaStrings(Aux, ';', Aux2, Aux);
@@ -2377,15 +2368,14 @@ begin
           end;
         Chr($5B):
           begin
-            ATD := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] +
-              ProtData[4]);
+            ATD := StrToInt('$' + ProtData[1] + ProtData[2] + ProtData[3] + ProtData[4]);
             PA := Adr;
             AtdSenhaLogin := TextHash(Copy(ProtData, 5, Length(ProtData) - 4));
 
             frmSicsMain.Login(0, PA, IntToStr(ATD), AtdSenhaLogin);
 
-            frmSicsSituacaoAtendimento.GetPASituation(PA, StatusPA, ATD, Aux,
-              FilaProveniente, MotivoPausa, IniTime);
+            frmSicsSituacaoAtendimento.GetPASituation(PA, StatusPA, ATD, Aux, FilaProveniente, MotivoPausa, IniTime);
+
             if ATD = -1 then
               Result := AdrStr + Chr($5C)
             else
@@ -2422,8 +2412,7 @@ begin
             vIdModulo := GetIDModuloPorAdr;
             vIdPA := GetIDPAInternal(vIdModulo);
             frmSicsMain.GetSendPIsNamesText(vIdModulo, Aux);
-            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($65) +
-              TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
+            Result := TAspEncode.AspIntToHex(vIdPA, 4) + Chr($65) + TAspEncode.AspIntToHex(vIdModulo, 4) + Aux;
           end;
         Chr($66):
           begin

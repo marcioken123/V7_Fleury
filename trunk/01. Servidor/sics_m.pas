@@ -4798,15 +4798,19 @@ end;   { proc GetSendAtdListText }
 
 procedure TfrmSicsMain.GetSendPAsListText(const IdModulo: Integer; var S: string);
 var
-  IdPA, NPA  : Integer;
-  LColuna, Nome, Grupo: string;
-  BM         : TBookmark;
+  IdPA, NPA    : Integer;
+  Nome, Grupo  : string;
+  BM           : TBookmark;
+  vNomeTabela  : string;
+  vNomeColuna  : string;
+  vTipoModulo  : TModuloSics;
+  vRangeIDs    : TIntArray;
+  vStrRangeIDs : string;
+  LQuery       : TFDQuery;
 begin
-  dmSicsMain.cdsFiltroPAs.CloneCursor(dmSicsMain.cdsPAs, True);
-  LColuna := 'ID';
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendPAsListText. IdModulo: ' + IntToStr(IdModulo));
 
-  try
-     FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroPAs, IdModulo, tgNomesPAs, LColuna);
+  //dmSicsMain.cdsFiltroPAs.CloneCursor(dmSicsMain.cdsPAs, True);
 
 //    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroPAs, IdModulo, tgNomesPAs, LColuna,
 //      function (aModuloSics: TModuloSics): string
@@ -4817,41 +4821,69 @@ begin
 //          Result := LColuna;
 //        end;
 //      end);
-  except
-    on E: Exception do
-      MyLogException(ERegistroDeOperacao.Create('GetSendPAsListText'), True);
-  end;
 
-  with dmSicsMain.cdsFiltroPAs do
-  begin
-    BM := GetBookmark;
+  try
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgNomesPAs);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    if(vTipoModulo = msPA)then
+      vNomeTabela := '(SELECT '+
+                     '   ID_UNIDADE, ' +
+                     '   ID, '+
+                     '   (CASE WHEN MODO_TERMINAL_SERVER = '+QuotedStr('T')+' THEN PAS_PERMITIDAS ELSE ID_PA END) PAS_PERMITIDAS ' +
+                     ' FROM ' +
+                     '   MODULOS_PAS' +
+                     ' WHERE '+
+                     '   ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString + ')';
+
+    vRangeIDs := GetListaIDPermitidosDoGrupoPA(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendPAsListText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                    ' NomeTabela: ' + vNomeTabela +
+                                                                    ' NomeColuna: ' + vNomeColuna +
+                                                                    ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
     try
-      try
-        NPA := 0;
-        S   := '';
-        First;
-        while not Eof do
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, NOME, ID_GRUPOPA, ATIVO FROM PAS A WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
+      NPA := 0;
+      S   := '';
+      LQuery.First;
+      while not LQuery.Eof do
+      begin
+        if (LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOPA').AsInteger, vRangeIDs)) then
         begin
-          if FieldByName('Ativo').AsBoolean then
-          begin
-            IdPA  := FieldByName('ID').AsInteger;
-            Nome  := FieldByName('NOME').AsString;
-            Grupo := FieldByName('ID_GRUPOPA').AsString;
-            NPA   := NPA + 1;
-            S     := S + TAspEncode.AspIntToHex(IdPA, 4) + Nome + ';' + Grupo + TAB;
-          end;
-          Next;
+          IdPA  := LQuery.FieldByName('ID').AsInteger;
+          Nome  := LQuery.FieldByName('NOME').AsString;
+          Grupo := LQuery.FieldByName('ID_GRUPOPA').AsString;
+          NPA   := NPA + 1;
+          S     := S + TAspEncode.AspIntToHex(IdPA, 4) + Nome + ';' + Grupo + TAB;
         end;
 
-        S := TAspEncode.AspIntToHex(NPA, 4) + S;
-      finally
-        if BookmarkValid(BM) then
-          GotoBookmark(BM);
+        LQuery.Next;
       end;
+
+      S := TAspEncode.AspIntToHex(NPA, 4) + S;
     finally
-      FreeBookmark(BM);
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
     end;
-  end; { with cds }
+  except
+    on E: Exception do
+      MyLogException(E, True);
+  end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendPAsListText. IdModulo: ' + IntToStr(IdModulo));
 end;   { proc GetSendAtdListText }
 
 procedure TfrmSicsMain.GetSendFilasComRange(var s: string);
@@ -4914,13 +4946,10 @@ begin
     Id            := dmSicsMain.cdsGrupoFila.FieldByName('ID').AsInteger;
     Nome          := dmSicsMain.cdsGrupoFila.FieldByName('NOME').AsString;
 
-    S := S + TAspEncode.AspIntToHex(Id, 4) +
-             Nome +
-             TAB;
+    S := S + TAspEncode.AspIntToHex(Id, 4) + Nome + TAB;
 
     dmSicsMain.cdsGrupoFila.Next;
   end;
-
 end;
 
 procedure TfrmSicsMain.GetCategoriaFilas(var s: string);
@@ -4929,7 +4958,6 @@ var
   Id:integer;
   Nome:string;
 begin
-
   dmSicsMain.cdsCategoriaFilas.Close;
   dmSicsMain.cdsCategoriaFilas.Open;
 
@@ -4942,80 +4970,106 @@ begin
     Id            := dmSicsMain.cdsCategoriaFilas.FieldByName('ID').AsInteger;
     Nome          := dmSicsMain.cdsCategoriaFilas.FieldByName('NOME').AsString;
 
-    S := S + TAspEncode.AspIntToHex(Id, 4) +
-             Nome +
-             TAB;
+    S := S + TAspEncode.AspIntToHex(Id, 4) + Nome + TAB;
 
     dmSicsMain.cdsCategoriaFilas.Next;
   end;
-
 end;
 
 procedure TfrmSicsMain.GetSendFilasNamesText(const IdModulo: Integer; var S: string);
 var
-  IdFila         : Integer;
-  Cor            : Integer;
-  Nome           : string;
-  BM             : TBookmark;
-  I              : Integer;
-  NomeTotem      : string;
-  LimiarAmarelo  : TTime;
-  LimiarVermelho  : TTime;
-  LimiarLaranja  : TTime;
-  NegritoNomeFila,ItalicoNomeFila,SublinhadoNomeFila : string;
-  TamanhoNomeFila,CorNomeFila : integer;
-  LTipoModulo    : TModuloSics;
+  IdFila, Cor, I     : Integer;
+  Nome, NomeTotem    : string;
+  LimiarAmarelo      : TTime;
+  LimiarVermelho     : TTime;
+  LimiarLaranja      : TTime;
+  NegritoNomeFila    : string;
+  ItalicoNomeFila    : string;
+  SublinhadoNomeFila : string;
+  TamanhoNomeFila    : Integer;
+  CorNomeFila        : Integer;
+  vTipoModulo        : TModuloSics;
+  LQuery             : TFDQuery;
+  vNomeTabela        : string;
+  vNomeColuna        : string;
+  vRangeIDs          : TIntArray;
+  vStrRangeIDs       : string;
 begin
   // GOT
-  dmSicsMain.cdsFiltroFilas.CloneCursor(dmSicsMain.cdsFilas, false, True);
+//  dmSicsMain.cdsFiltroFilas.CloneCursor(dmSicsMain.cdsFilas, false, True);
 
-  LTipoModulo  := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
+  vTipoModulo  := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
-  if LTipoModulo <> msCallCenter then
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroFilas, IdModulo, tgFila);
+//  if LTipoModulo <> msCallCenter then
+//    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroFilas, IdModulo, tgFila);
+  try
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
-  // with dmSicsMain.cdsFilas do
-  with dmSicsMain.cdsFiltroFilas do
-  begin
-    BM := GetBookmark;
-    I  := 0;
-    S  := '';
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgFila);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendFilasNamesText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                       ' NomeTabela: ' + vNomeTabela +
+                                                                       ' NomeColuna: ' + vNomeColuna +
+                                                                       ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
     try
-      try
-        First;
-        while not Eof do
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, NOMENOTOTEM, ATIVO, '+
+                                'LIMIAR_AMARELO, LIMIAR_VERMELHO, LIMIAR_LARANJA, ' +
+                                'TAMANHO_NOME_FILA, NEGRITO_NOME_FILA, ITALICO_NOME_FILA, ' +
+                                'SUBLINHADO_NOME_FILA, COR_NOME_FILA ' +
+                                'FROM FILAS WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
+      I  := 0;
+      S  := '';
+
+      LQuery.First;
+      while not LQuery.Eof do
+      begin
+        if (LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID').AsInteger, vRangeIDs)) then
         begin
-          if FieldByName('Ativo').AsBoolean then
-          begin
-            I         := I + 1;
-            IdFila    := FieldByName('ID').AsInteger;
-            Cor       := FieldByName('CODIGOCOR').AsInteger;
-            Nome      := FieldByName('NOME').AsString + ';';
-            NomeTotem := FieldByName('NOMENOTOTEM').AsString;
-            LimiarAmarelo  := TimeOf(FieldByName('LIMIAR_AMARELO').AsDateTime);
-            LimiarVermelho := TimeOf(FieldByName('LIMIAR_VERMELHO').AsDateTime);
-            LimiarLaranja  := TimeOf(FieldByName('LIMIAR_LARANJA').AsDateTime);
-            TamanhoNomeFila  := FieldByName('TAMANHO_NOME_FILA').AsInteger;
-            NegritoNomeFila  := FieldByName('NEGRITO_NOME_FILA').AsString;
-            ItalicoNomeFila  := FieldByName('ITALICO_NOME_FILA').AsString;
-            SublinhadoNomeFila := FieldByName('SUBLINHADO_NOME_FILA').AsString;
-            CorNomeFila := FieldByName('COR_NOME_FILA').AsInteger;
-            S := S + TAspEncode.AspIntToHex(IdFila, 4) + TAspEncode.AspIntToHex(Cor, 6) +
-                    TimeToStr(LimiarAmarelo) + TimeToStr(LimiarVermelho) +
-                    TimeToStr(LimiarLaranja) + TAspEncode.AspIntToHex(TamanhoNomeFila, 4) + NegritoNomeFila +
-                    ItalicoNomeFila + SublinhadoNomeFila+ TAspEncode.AspIntToHex(CorNomeFila,6) + Nome + NomeTotem + TAB;
-          end;
-          Next;
+          I                  := I + 1;
+          IdFila             := LQuery.FieldByName('ID').AsInteger;
+          Cor                := LQuery.FieldByName('CODIGOCOR').AsInteger;
+          Nome               := LQuery.FieldByName('NOME').AsString + ';';
+          NomeTotem          := LQuery.FieldByName('NOMENOTOTEM').AsString;
+          LimiarAmarelo      := TimeOf(LQuery.FieldByName('LIMIAR_AMARELO').AsDateTime);
+          LimiarVermelho     := TimeOf(LQuery.FieldByName('LIMIAR_VERMELHO').AsDateTime);
+          LimiarLaranja      := TimeOf(LQuery.FieldByName('LIMIAR_LARANJA').AsDateTime);
+          TamanhoNomeFila    := LQuery.FieldByName('TAMANHO_NOME_FILA').AsInteger;
+          NegritoNomeFila    := LQuery.FieldByName('NEGRITO_NOME_FILA').AsString;
+          ItalicoNomeFila    := LQuery.FieldByName('ITALICO_NOME_FILA').AsString;
+          SublinhadoNomeFila := LQuery.FieldByName('SUBLINHADO_NOME_FILA').AsString;
+          CorNomeFila        := LQuery.FieldByName('COR_NOME_FILA').AsInteger;
+
+          S := S + TAspEncode.AspIntToHex(IdFila, 4) + TAspEncode.AspIntToHex(Cor, 6) +
+                  TimeToStr(LimiarAmarelo) + TimeToStr(LimiarVermelho) +
+                  TimeToStr(LimiarLaranja) + TAspEncode.AspIntToHex(TamanhoNomeFila, 4) + NegritoNomeFila +
+                  ItalicoNomeFila + SublinhadoNomeFila + TAspEncode.AspIntToHex(CorNomeFila, 6) + Nome + NomeTotem + TAB;
         end;
-        S := TAspEncode.AspIntToHex(I, 4) + S;
-      finally
-        if BookmarkValid(BM) then
-          GotoBookmark(BM);
+
+        LQuery.Next;
       end;
+
+      S := TAspEncode.AspIntToHex(I, 4) + S;
     finally
-      FreeBookmark(BM);
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
     end;
-  end; { with cds }
+  except
+    on E: Exception do
+      MyLogException(E, True);
+  end;
 end;   { proc GetSendFilasNamesText }
 
 procedure TfrmSicsMain.GetSendTagsNamesText(const aIdModulo: Integer; var S: string);
@@ -12092,7 +12146,6 @@ var
   vTipoModulo             : TModuloSics;
   vNomeTabela, vNomeColuna: string;
 begin
-  //Exit;
   vRangePermitido := EmptyStr;
   try
     try
@@ -12142,6 +12195,12 @@ begin
         MyLogException(E, True);
     end;
   finally
+    TfrmDebugParameters.Debugar(tbRegistrosBD, 'Entrou FiltraDataSetComPermitidas. ' +
+                                               ' Tabela: ' + vNomeTabela +
+                                               ' Coluna: ' + vNomeColuna +
+                                               ' Coluna Filtro: ' + aColunaFiltrarCDS +
+                                               ' Filter: ' + vRangePermitido);
+
     aDataSet.Filtered := False;
     aDataSet.Filter   := vRangePermitido;
     aDataSet.Filtered := vRangePermitido <> '';

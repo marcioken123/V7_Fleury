@@ -64,8 +64,7 @@ type
   // TTipoBanco = (tbFireBird, tbSqlServer);
 
   TOpcoesDoTotem = record
-    PicoteEntreVias, CorteParcialAoFinal, ImprimirCodigoDeBarrasSenha,
-      ImprimirDataEHoraNaSegundaVia, ImprimirNomeDaFilaNaSegundaVia: boolean;
+    PicoteEntreVias, CorteParcialAoFinal, ImprimirCodigoDeBarrasSenha, ImprimirDataEHoraNaSegundaVia, ImprimirNomeDaFilaNaSegundaVia: boolean;
   end;
 
   TStatusSocket = (ssIdle, ssLookingUp, ssConnecting, ssConnected);
@@ -103,8 +102,7 @@ type
     ConexaoEquipamentos, FaltaPapel: string;
   end;
 
-  TFormatoHorarioNoJornalEletronico = (fhHoraHMinutos, fhHoraDoisPontosMinutos,
-    fhExtenso);
+  TFormatoHorarioNoJornalEletronico = (fhHoraHMinutos, fhHoraDoisPontosMinutos, fhExtenso);
 
   TArrConnsRelatorios = array of TFDConnection;
 
@@ -719,18 +717,13 @@ type
     cdsAddPaineisWIDTH: TIntegerField;
     connPIS: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
-    procedure cdsAtendentesReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
-      var Action: TReconcileAction);
+    procedure cdsAtendentesReconcileError(DataSet: TCustomClientDataSet; E: EReconcileError; UpdateKind: TUpdateKind; var Action: TReconcileAction);
     procedure cdsUnidadesAfterOpen(DataSet: TDataSet);
     procedure cdsGruposDeTagsAfterOpen(DataSet: TDataSet);
     procedure cdsPaineisAfterOpen(DataSet: TDataSet);
-    procedure IntegerField4GetText(Sender: TField; var Text: string;
-      DisplayText: boolean);
-    procedure connOnLineRecover(ASender, AInitiator: TObject;
-      AException: Exception; var AAction: TFDPhysConnectionRecoverAction);
-    procedure connOnLineError(ASender, AInitiator: TObject;
-      var AException: Exception);
+    procedure IntegerField4GetText(Sender: TField; var Text: string; DisplayText: boolean);
+    procedure connOnLineRecover(ASender, AInitiator: TObject; AException: Exception; var AAction: TFDPhysConnectionRecoverAction);
+    procedure connOnLineError(ASender, AInitiator: TObject; var AException: Exception);
     procedure connOnLineLost(Sender: TObject);
     procedure connOnLineRestored(Sender: TObject);
     procedure tmrAtualizaJornalTVsTimer(Sender: TObject);
@@ -750,18 +743,15 @@ type
   public
     { Public declarations }
     procedure CheckVersionBD;
-    procedure InsereUnidade(AId: integer; const ANome, APathBaseOnLine,
-      APathBaseRelatorios, AEnderecoIP: string; const APortaIP: integer);
+    procedure InsereUnidade(AId: integer; const ANome, APathBaseOnLine, APathBaseRelatorios, AEnderecoIP: string; const APortaIP: integer);
     function GetID_MODULOS(AModuloSICS: TModuloSics): Integer;
     procedure SetSelectedItems(var LB: TListBox; s: string);
     function GetSelectedItems(LB: TListBox): string;
     function GetConnRelatorio(IdUnidade: integer): TFDConnection;
 
     function CheckPromptUnidade: integer;
-    function CreateSqlConnUnidade(AOwner: TComponent; IdUnidade: integer)
-      : TFDConnection;
-    procedure SetNewSqlConnectionForSQLDataSet(AOwner: TComponent;
-      ANewSqlConnection: TFDConnection);
+    function CreateSqlConnUnidade(AOwner: TComponent; IdUnidade: integer): TFDConnection;
+    procedure SetNewSqlConnectionForSQLDataSet(AOwner: TComponent; ANewSqlConnection: TFDConnection);
 
     procedure CarregaTabelasDM;
     procedure CarregaTabelasPAsEFilas;
@@ -795,17 +785,12 @@ type
     procedure AtualizarJornalTV(Sender: TObject); overload;
     procedure AtualizarJornalTV(APainel: integer); overload;
 
-    function PICompostoSomentePorIndicadoresComFormatoHorario
-      (AIdPI: integer): boolean;
-    function SalvarDadosAdicionais(const ATicketId: integer;
-      const AObj: TJSONObject;
-      const ExcluirDadosAtuais: boolean = True): boolean;
+    function PICompostoSomentePorIndicadoresComFormatoHorario(AIdPI: integer): boolean;
+    function SalvarDadosAdicionais(const ATicketId: integer; const AObj: TJSONObject; const ExcluirDadosAtuais: boolean = True): boolean;
     function GetDadosAdicionais(const ATicketId: integer): TJSONObject;
-    function GetDataHoraEmissaoSenhaNoBD(const ATicketId: integer;
-      const ADataHoraUltimaInteracao: TDateTime): TDateTime;
+    function GetDataHoraEmissaoSenhaNoBD(const ATicketId: integer; const ADataHoraUltimaInteracao: TDateTime): TDateTime;
     function GetDeviceIdSenha(const ATicketId: integer): String;
-    function SetDeviceIdSenha(const ATicketId: integer;
-      const ADeviceId: String): boolean;
+    function SetDeviceIdSenha(const ATicketId: integer; const ADeviceId: String): boolean;
   end;
 
 const
@@ -816,15 +801,12 @@ var
   vgParametrosModulo: TParametrosModulo_Servidor;
   dmSicsMain: TdmSicsMain;
 
-function NGetPAData(IdPA: integer; var Ativo: boolean; var IdGrupoPA: integer;
-  var PANome: string; var IdPainel: integer;
+function NGetPAData(IdPA: integer; var Ativo: boolean; var IdGrupoPA: integer; var PANome: string; var IdPainel: integer;
   var PANomeNoPainel, PANomePorVoz: string;
   var PAMagazine, PAAutoRedir: integer): boolean;
-function NGetAtdData(IdAtd: integer; var Ativo: boolean;
-  var IdGrupoAtend: integer; var AtdNome, AtdLogin, AtdSenhaLogin,
+function NGetAtdData(IdAtd: integer; var Ativo: boolean; var IdGrupoAtend: integer; var AtdNome, AtdLogin, AtdSenhaLogin,
   AtdRegFunc: string): boolean;
-function NGetPainelData(IdPainel: integer; var Nome, Endereco: string;
-  var IdModelo: integer; var EnderecoIP: string;
+function NGetPainelData(IdPainel: integer; var Nome, Endereco: string; var IdModelo: integer; var EnderecoIP: string;
   var ManterUltimaSenha, Monitoramento: boolean): boolean;
 function NGetFilaData(IdFila: integer; var Ativo: boolean; var FilaNome: string;
   var IdGrupoFila: integer; var MostrarBotaoImprimeSenha, MostrarBloquear,
@@ -832,8 +814,7 @@ function NGetFilaData(IdFila: integer; var Ativo: boolean; var FilaNome: string;
 
 function NGetPAName(IdPA: integer): string;
 function NGetPAWhatsApp(IdPA: integer): Boolean;
-function NGetAtdName(IdAtd: integer;
-  const ParaRelatorio: boolean = False): string;
+function NGetAtdName(IdAtd: integer; const ParaRelatorio: boolean = False): string;
 function NGetFilaName(IdFila: integer): string;
 function NGetGrAtendName(IdGrAtend: integer): string;
 function NGetGrPAName(IdGrPA: integer): string;
@@ -843,25 +824,19 @@ function NGetTagName(IdTag: integer): string;
 function NGetPAId(NomePA: string): integer;
 function NGetFilaId(NomeFila: string): integer;
 
-function NGetIdGrAtend(IdAtend: integer;
-  const DataSet: TClientDataSet = nil): integer;
-function NGetIdGrPA(IdPA: integer; const DataSet: TClientDataSet = nil)
-  : integer;
+function NGetIdGrAtend(IdAtend: integer; const DataSet: TClientDataSet = nil): integer;
+function NGetIdGrPA(IdPA: integer; const DataSet: TClientDataSet = nil): integer;
 
 function NGetRangeMaximo(IdFila: integer): integer;
 function NGetRangeMinimo(IdFila: integer): integer;
-function NGetFilaFromRange(TicketNo: integer;
-  const DataSet: TClientDataSet = nil): integer;
+function NGetFilaFromRange(TicketNo: integer; const DataSet: TClientDataSet = nil): integer;
 
 function NGetMotivoDePausaName(IDMotivo: integer): string;
 function NGetAtdLogin(IdAtd: integer): string;
 function NGetAtdId(LoginAtd: string): integer;
 
-function NGetCurrentGenerator(GeneratorName: string): integer;
-  deprecated 'Use TGenerator.NGetCurrentGenerator';
-function NGetNextGenerator(GeneratorName: string;
-  ANewSqlConnection: TFDConnection = nil): integer;
-  deprecated 'Use TGenerator.NGetNextGenerator';
+function NGetCurrentGenerator(GeneratorName: string): integer; deprecated 'Use TGenerator.NGetCurrentGenerator';
+function NGetNextGenerator(GeneratorName: string; ANewSqlConnection: TFDConnection = nil): integer; deprecated 'Use TGenerator.NGetNextGenerator';
 
 function NGetEmailAddressesList(IdsList: string): string;
 
@@ -875,46 +850,42 @@ function NGetGerarSenhaAutomaticamente(IdFila: integer): boolean;
 
 function OrdemDasFilasToStr(PA: integer): string;
 
-function GetModuleTypeByID(AConexao: TFDConnection; AIdModulo: integer)
-  : TModuloSics;
+function GetModuleTypeByID(AConexao: TFDConnection; AIdModulo: integer): TModuloSics;
 function GetNomeTabelaDoModulo(const aTipoModulo: TModuloSics): String;
-function GetNomeColunaTipoGrupoPorModulo(Const aTipoModulo: TModuloSics;
-  const aTipoDeGrupo: TTipoDeGrupo): string;
+function GetNomeColunaTipoGrupoPorModulo(Const aTipoModulo: TModuloSics; const aTipoDeGrupo: TTipoDeGrupo): string;
 function GetNomeColunaTipoGrupoPA(Const aTipoDeGrupoPA: TTipoDeGrupoPA): string;
-function GetNomeColunaTipoGrupoMPA(Const aTipoDeGrupoMPA
-  : TTipoDeGrupoMPA): string;
-function GetNomeColunaTipoGrupoOnLine(Const aTipoDeGrupoOnLine
-  : TTipoDeGrupoOnLine): string;
+function GetNomeColunaTipoGrupoMPA(Const aTipoDeGrupoMPA: TTipoDeGrupoMPA): string;
+function GetNomeColunaTipoGrupoOnLine(Const aTipoDeGrupoOnLine: TTipoDeGrupoOnLine): string;
 function GetNomeColunaTipoGrupoTGS(Const aTipoDeGrupoTGS: TTipoDeGrupo): string;
-function GetListaIDPermitidosDoGrupo(AConexao: TFDConnection;
-  const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
-function GetListaIDPermitidosDoGrupoPA(AConexao: TFDConnection;
-  const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
-function GetFilterPorRangerID(const aRangeIDs: TIntArray;
-  const aColuna: String = 'ID'): string;
+function GetListaIDPermitidosDoGrupo(AConexao: TFDConnection; const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
+function GetListaIDPermitidosDoGrupoPA(AConexao: TFDConnection; const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
+function GetFilterPorRangerID(const aRangeIDs: TIntArray; const aColuna: String = 'ID'): string;
 
 function GetIdPA(AConexao: TFDConnection; AIdModulo: integer): integer;
 function GetIdModulo(AConexao: TFDConnection; PA: integer): integer; // LM
 
 implementation
 
-
 {$R *.dfm}
 
-
 uses
-  ASPGenerator, System.Math
+  ASPGenerator,
+  System.Math
 {$IF Defined(CompilarPara_CONFIG) }
     , untMainForm
 {$ENDIF}
 {$IF (not Defined(CompilarPara_CONFIG)) and (not Defined(CompilarPara_SCC)) )}
-    , udmContingencia, uFuncoes, sics_dm, sics_m,
-  ufrmDebugParameters, uTempoUnidade, System.Win.ScktComp
+  , udmContingencia,
+  uFuncoes,
+  sics_dm,
+  sics_m,
+  ufrmDebugParameters,
+  uTempoUnidade,
+  System.Win.ScktComp
 {$ENDIF}
   ;
 
-function TdmSicsMain.PICompostoSomentePorIndicadoresComFormatoHorario
-  (AIdPI: integer): boolean;
+function TdmSicsMain.PICompostoSomentePorIndicadoresComFormatoHorario(AIdPI: integer): boolean;
 begin
   try
     qryQtdePIsSemFormatoHorario.Close;
@@ -940,6 +911,7 @@ begin
   begin
     LB.Selected[j] := False;
   end;
+
   for i            := 1 to length(s) do
   begin
     if s[i] = ';' then
@@ -951,15 +923,16 @@ begin
       end
       else
         for j := strtoint(Copy(aux, 1, Pos('-', aux) - 1))
-          to strtoint(Copy(aux, Pos('-', aux) + 1, length(aux) - Pos('-',
-          aux))) do
+          to strtoint(Copy(aux, Pos('-', aux) + 1, length(aux) - Pos('-', aux))) do
           if j < LB.Items.Count then
             LB.Selected[j] := True;
-      aux                  := '';
+
+      aux := '';
     end
     else
       aux := aux + s[i];
   end;
+
   if aux <> '' then
   begin
     if (Pos('-', aux) <= 0) then
@@ -969,8 +942,7 @@ begin
     end
     else
       for j := strtoint(Copy(aux, 1, Pos('-', aux) - 1))
-        to strtoint(Copy(aux, Pos('-', aux) + 1, length(aux) - Pos('-',
-        aux))) do
+        to strtoint(Copy(aux, Pos('-', aux) + 1, length(aux) - Pos('-', aux))) do
         if j < LB.Items.Count then
           LB.Selected[j] := True;
   end;
@@ -993,8 +965,7 @@ var
 {$ENDIF}
 begin
 {$IF (not Defined(CompilarPara_CONFIG)) and (not Defined(CompilarPara_SCC))}
-  if (vgParametrosModulo.UrlApi.Trim.IsEmpty) or
-     (vgParametrosModulo.NomeUnidadeApi.Trim.IsEmpty) then
+  if (vgParametrosModulo.UrlApi.Trim.IsEmpty) or (vgParametrosModulo.NomeUnidadeApi.Trim.IsEmpty) then
   begin
     Exit;
   end;
@@ -1008,8 +979,7 @@ begin
           TfrmDebugParameters.Debugar(tbJornalEletronico, 'Início Get API ' + vgParametrosModulo.UrlApi);
         end);
 
-      LSucesso := TTempoUnidadeManager.UpdateTags(vgParametrosModulo.UrlApi,
-        vgParametrosModulo.NomeUnidadeApi, vgParametrosModulo.Especialidades);
+      LSucesso := TTempoUnidadeManager.UpdateTags(vgParametrosModulo.UrlApi, vgParametrosModulo.NomeUnidadeApi, vgParametrosModulo.Especialidades);
 
       TThread.Synchronize(nil,
         procedure
@@ -1067,13 +1037,10 @@ end;
 function TdmSicsMain.GetConnRelatorio(IdUnidade: integer): TFDConnection;
 begin
   if not cdsUnidadesClone.Locate('ID', IdUnidade, []) then
-    raise Exception.Create('Unidade ' + inttostr(IdUnidade) +
-      ' nao localizada');
+    raise Exception.Create('Unidade ' + inttostr(IdUnidade) + ' nao localizada');
 
-  result := FConnsRelatorios[cdsUnidadesClone.FieldByName('IDX_CONN_RELATORIO')
-    .AsInteger];
+  result := FConnsRelatorios[cdsUnidadesClone.FieldByName('IDX_CONN_RELATORIO').AsInteger];
 end;
-
 
 procedure TdmSicsMain.CarregaTabelasDM;
 begin
@@ -1110,7 +1077,6 @@ begin
   AbrirCDS(cdsTVsCanais, True);
   // ** Configurações Módulos - GOT 14.10.2014 *****************************************************
   AbrirCDS(cdsModulos, True);
-
 end;
 
 procedure TdmSicsMain.CarregaTabelasPAsEFilas;
@@ -1263,8 +1229,7 @@ begin
 
       while not LcdsPaineisClone.Eof do
       begin
-        if (APainel = TODOS_OS_PAINEIS) or
-           (APainel = LcdsPaineisClone.FieldByName('ID').AsInteger) then
+        if (APainel = TODOS_OS_PAINEIS) or (APainel = LcdsPaineisClone.FieldByName('ID').AsInteger) then
         begin
           LIdPainel := LcdsPaineisClone.FieldByName('ID').AsInteger;
 
@@ -1277,9 +1242,7 @@ begin
           begin
             TfrmDebugParameters.Debugar(tbJornalEletronico, 'Texto enviado para Painel ' + LIdPainel.ToString + ': ' + LTextoJornal);
 
-            frmSicsMain.WriteToDisplay(LIdPainel,
-              TAspEncode.AspIntToHex(LIdPainel, 4) + Chr($2B) +
-              TAspEncode.AspIntToHex(LIdPainel, 4) + LTextoJornal);
+            frmSicsMain.WriteToDisplay(LIdPainel, TAspEncode.AspIntToHex(LIdPainel, 4) + Chr($2B) + TAspEncode.AspIntToHex(LIdPainel, 4) + LTextoJornal);
           end;
         end;
 
@@ -1349,9 +1312,7 @@ begin
   end; { with cds }
 end;   { func GetPAData }
 
-function NGetAtdData(IdAtd: integer; var Ativo: boolean;
-var IdGrupoAtend: integer; var AtdNome, AtdLogin, AtdSenhaLogin,
-  AtdRegFunc: string): boolean;
+function NGetAtdData(IdAtd: integer; var Ativo: boolean; var IdGrupoAtend: integer; var AtdNome, AtdLogin, AtdSenhaLogin, AtdRegFunc: string): boolean;
 var
   BM: TBookMark;
 begin
@@ -1519,8 +1480,7 @@ begin
   end; { with cds }
 end;
 
-function NGetAtdName(IdAtd: integer;
-const ParaRelatorio: boolean = False): string;
+function NGetAtdName(IdAtd: integer; const ParaRelatorio: boolean = False): string;
 var
   BM: TBookMark;
 begin
@@ -1532,8 +1492,7 @@ begin
       try
         if Locate('ID', IdAtd, []) then
           result := FieldByName('NOME').AsString;
-        if (ParaRelatorio) and (FieldByName('NOMERELATORIO').AsString <> '')
-        then
+        if (ParaRelatorio) and (FieldByName('NOMERELATORIO').AsString <> '') then
           result := FieldByName('NOMERELATORIO').AsString;
       except
         result := '';
@@ -1699,8 +1658,7 @@ begin
   end; { with cds }
 end;
 
-function NGetIdGrAtend(IdAtend: integer;
-const DataSet: TClientDataSet = nil): integer;
+function NGetIdGrAtend(IdAtend: integer; const DataSet: TClientDataSet = nil): integer;
 var
   BM: TBookMark;
   DsLocal: TClientDataSet;
@@ -1728,8 +1686,7 @@ begin
   end; { with cds }
 end;
 
-function NGetIdGrPA(IdPA: integer; const DataSet: TClientDataSet = nil)
-  : integer;
+function NGetIdGrPA(IdPA: integer; const DataSet: TClientDataSet = nil): integer;
 var
   BM: TBookMark;
   DsLocal: TClientDataSet;
@@ -1801,8 +1758,7 @@ begin
   end; { with cds }
 end;
 
-function NGetFilaFromRange(TicketNo: integer;
-const DataSet: TClientDataSet = nil): integer;
+function NGetFilaFromRange(TicketNo: integer; const DataSet: TClientDataSet = nil): integer;
 var
   BM: TBookMark;
   DsLocal: TClientDataSet;
@@ -1821,8 +1777,7 @@ begin
         First;
         while not Eof do
         begin
-          if ((TicketNo >= FieldByName('RANGEMINIMO').AsInteger) and
-            (TicketNo <= FieldByName('RANGEMAXIMO').AsInteger)) then
+          if ((TicketNo >= FieldByName('RANGEMINIMO').AsInteger) and (TicketNo <= FieldByName('RANGEMAXIMO').AsInteger)) then
           begin
             result := FieldByName('ID').AsInteger;
             break;
@@ -1850,8 +1805,7 @@ begin
   LSQLQuery := TFDQuery.Create(nil);
   try
     LSQLQuery.Connection := dmSicsMain.connOnLine;
-    LSQLQuery.SQL.Text := Format('SELECT NOME FROM %s WHERE ID_UNIDADE = %d AND ID = %d',
-      [vNomeTabela, vgParametrosModulo.IdUnidade, IDMotivo]);
+    LSQLQuery.SQL.Text := Format('SELECT NOME FROM %s WHERE ID_UNIDADE = %d AND ID = %d', [vNomeTabela, vgParametrosModulo.IdUnidade, IDMotivo]);
     LSQLQuery.Open;
     result := LSQLQuery.Fields[0].AsString;
   finally
@@ -1886,8 +1840,7 @@ begin
   try
     result := -1;
     try
-      if dmSicsMain.cdsAtendentes.Locate('LOGIN', LoginAtd, [loCaseInsensitive])
-      then
+      if dmSicsMain.cdsAtendentes.Locate('LOGIN', LoginAtd, [loCaseInsensitive]) then
         result := dmSicsMain.cdsAtendentes.FieldByName('ID').AsInteger;
     except
       result := -1;
@@ -1912,12 +1865,10 @@ begin
   end;
   }
 
-  result := TGenerator.NGetCurrentGenerator(GeneratorName,
-    dmSicsMain.connOnLine);
+  result := TGenerator.NGetCurrentGenerator(GeneratorName, dmSicsMain.connOnLine);
 end;
 
-function NGetNextGenerator(GeneratorName: string;
-ANewSqlConnection: TFDConnection = nil): integer;
+function NGetNextGenerator(GeneratorName: string; ANewSqlConnection: TFDConnection = nil): integer;
 begin
   (* RA
   // edu - tive que criar o objeto ao inves de aproveitar o qryGeneratorGenerico
@@ -2148,8 +2099,7 @@ begin
   end;
 end;
 
-function GetModuleTypeByID(AConexao: TFDConnection; AIdModulo: integer)
-  : TModuloSics;
+function GetModuleTypeByID(AConexao: TFDConnection; AIdModulo: integer): TModuloSics;
 var
   LSQLQuery: TFDQuery;
 begin
@@ -2170,7 +2120,6 @@ begin
   end;
 end;
 
-
 function GetNomeTabelaDoModulo(const aTipoModulo: TModuloSics): String;
 begin
   case aTipoModulo of
@@ -2187,8 +2136,7 @@ begin
   end;
 end;
 
-function GetNomeColunaTipoGrupoPorModulo(Const aTipoModulo: TModuloSics;
-const aTipoDeGrupo: TTipoDeGrupo): string;
+function GetNomeColunaTipoGrupoPorModulo(Const aTipoModulo: TModuloSics; const aTipoDeGrupo: TTipoDeGrupo): string;
 begin
   case aTipoModulo of
     msPA:
@@ -2203,7 +2151,6 @@ begin
     result := '';
   end;
 end;
-
 
 function GetNomeColunaTipoGrupoPA(Const aTipoDeGrupoPA: TTipoDeGrupoPA): string;
 begin
@@ -2227,8 +2174,7 @@ begin
   end;
 end;
 
-function GetNomeColunaTipoGrupoMPA(Const aTipoDeGrupoMPA
-  : TTipoDeGrupoMPA): string;
+function GetNomeColunaTipoGrupoMPA(Const aTipoDeGrupoMPA: TTipoDeGrupoMPA): string;
 begin
   case aTipoDeGrupoMPA of
     tgPA:
@@ -2250,8 +2196,7 @@ begin
   end;
 end;
 
-function GetNomeColunaTipoGrupoOnLine(Const aTipoDeGrupoOnLine
-  : TTipoDeGrupoOnLine): string;
+function GetNomeColunaTipoGrupoOnLine(Const aTipoDeGrupoOnLine: TTipoDeGrupoOnLine): string;
 begin
   case aTipoDeGrupoOnLine of
     tgMtrBotao:
@@ -2330,15 +2275,14 @@ begin
   aQuery := TFDQuery.Create(nil);
   try
     aQuery.Connection := AConexao;
-    aQuery.SQL.Text := Format('SELECT %s FROM %s A WHERE ID = %d',
-      [aNomeCampo, aNomeTabela, AIdModulo]);
+    aQuery.SQL.Text := Format('SELECT %s FROM %s A WHERE ID = %d AND ID_UNIDADE=%d', [aNomeCampo, aNomeTabela, AIdModulo, vgParametrosModulo.IdUnidade]);
     aQuery.Open;
+
     StrToIntArray(aQuery.Fields[0].AsString, vPasPermitidas);
     vFilter :=  GetFilterPorRangerID(vPasPermitidas);
 
     aQuery.Close;
-    aQuery.SQL.Text := 'SELECT ID_GRUPOPA FROM PAS WHERE ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString +
-      ' AND ' + vFilter;
+    aQuery.SQL.Text := 'SELECT ID_GRUPOPA FROM PAS WHERE ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString + ' AND ' + vFilter;
     aQuery.Open;
     
     SetLength(result, aQuery.RecordCount);
@@ -2377,7 +2321,7 @@ begin
     end;
   except
     on E: Exception do
-      MyLogException(ERegistroDeOperacao.Create('GetFilterPorRangerID'), True);
+      MyLogException(E, True);
   end;
 end;
 
@@ -2423,7 +2367,6 @@ begin
     FreeAndNil(LSQLQuery);
   end;
 end;
-
 
 procedure TdmSicsMain.CheckVersionBD;
 
