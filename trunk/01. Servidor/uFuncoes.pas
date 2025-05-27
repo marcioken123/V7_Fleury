@@ -42,7 +42,7 @@ uses
   sics_5,
   NBackup,
   SvcMgr,
-  Sics_Common_Splash;
+  Sics_Common_Splash, ufrmDebugParameters;
 
 function GetServiceIniFileName: string;
 begin
@@ -76,6 +76,8 @@ end;
 
 procedure CriarFormsDmsInicializacao(Splash: Boolean);
 begin
+  TfrmDebugParameters.Debugar(tbGeral, 'Entrou CriarFormsDmsInicializacao.');
+
   if not GetIsService then
   begin
     if Splash then
@@ -99,8 +101,8 @@ begin
       TfrmSicsSplash.ShowStatus('Inicializando os Dados...');
 
       dmSicsMain.UpdateDadosJornalAPI;
-
       frmSicsMain.InicializarDados;
+
       if Splash then
         frmSicsMain.Show;
     finally
@@ -126,6 +128,8 @@ begin
         Resume;
       end;
   end;
+
+  TfrmDebugParameters.Debugar(tbGeral, 'Saiu CriarFormsDmsInicializacao.');
 end;
 
 procedure DestruirFormsDmsInicializacao;

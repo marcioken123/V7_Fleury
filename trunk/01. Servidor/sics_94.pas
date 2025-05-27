@@ -2079,9 +2079,7 @@ begin
             dmSicsMain.cdsNN_PAs_Filas.First;
             while not dmSicsMain.cdsNN_PAs_Filas.Eof do
             begin
-              result := result + TAspEncode.AspIntToHex
-                (dmSicsMain.cdsNN_PAs_Filas.FieldByName('ID_FILA')
-                .AsInteger, 4);
+              result := result + TAspEncode.AspIntToHex(dmSicsMain.cdsNN_PAs_Filas.FieldByName('ID_FILA').AsInteger, 4);
               dmSicsMain.cdsNN_PAs_Filas.Next;
             end;
           finally
@@ -2244,8 +2242,7 @@ begin
   end;
 end;
 
-function GetListaIDPermitidosDoGrupo(AConexao: TFDConnection;
-const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
+function GetListaIDPermitidosDoGrupo(AConexao: TFDConnection; const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
 var
   aQuery: TFDQuery;
 begin
@@ -2263,8 +2260,7 @@ begin
   end;
 end;
 
-function GetListaIDPermitidosDoGrupoPA(AConexao: TFDConnection;
-const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
+function GetListaIDPermitidosDoGrupoPA(AConexao: TFDConnection; const aNomeTabela, aNomeCampo: String; const AIdModulo: integer): TIntArray;
 var
   aQuery: TFDQuery;
   vPasPermitidas: TIntArray;
@@ -2321,7 +2317,7 @@ begin
     end;
   except
     on E: Exception do
-      MyLogException(E, True);
+      MyLogException(ERegistroDeOperacao.Create('GetFilterPorRangerID'), True);
   end;
 end;
 
@@ -2338,10 +2334,10 @@ begin
     LSQLQuery := TFDQuery.Create(nil);
     try
       LSQLQuery.Connection := AConexao;
-      LSQLQuery.SQL.Text := Format('SELECT ID_PA FROM %s WHERE ID_UNIDADE = %d AND ID = %d',
-        [vNomeTabela, vgParametrosModulo.IdUnidade, AIdModulo]);
+      LSQLQuery.SQL.Text := Format('SELECT ID_PA FROM %s WHERE ID_UNIDADE = %d AND ID = %d', [vNomeTabela, vgParametrosModulo.IdUnidade, AIdModulo]);
       LSQLQuery.Open;
-      result := LSQLQuery.Fields[0].AsInteger;
+
+      Result := LSQLQuery.Fields[0].AsInteger;
     finally
       FreeAndNil(LSQLQuery);
     end;
@@ -2359,8 +2355,7 @@ begin
   LSQLQuery := TFDQuery.Create(nil);
   try
     LSQLQuery.Connection := AConexao;
-    LSQLQuery.SQL.Text := Format('SELECT ID FROM %s WHERE ID_UNIDADE = %d AND ID_PA = %d',
-      [vNomeTabela, vgParametrosModulo.IdUnidade, PA]);
+    LSQLQuery.SQL.Text := Format('SELECT ID FROM %s WHERE ID_UNIDADE = %d AND ID_PA = %d', [vNomeTabela, vgParametrosModulo.IdUnidade, PA]);
     LSQLQuery.Open;
     result := LSQLQuery.Fields[0].AsInteger;
   finally
@@ -2395,10 +2390,9 @@ var
   LCurrentVersion: integer;
 begin
   LCurrentVersion := GetCurrentVersion;
+
   if (LCurrentVersion <> High(ScriptsBdUnidades)) then
-    raise Exception.CreateFmt
-      ('Versão da base de dados "%d" difere da versão deste EXE "%d".',
-      [LCurrentVersion, High(ScriptsBdUnidades)]);
+    raise Exception.CreateFmt('Versão da base de dados "%d" difere da versão deste EXE "%d".', [LCurrentVersion, High(ScriptsBdUnidades)]);
 end;
 
 procedure TdmSicsMain.ExecutarScriptsBDUnidades;

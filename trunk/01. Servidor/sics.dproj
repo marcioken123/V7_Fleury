@@ -107,7 +107,7 @@
         <DCC_ExeOutput>..\bin\release</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=ASPECT Midia;FileVersion=7.2.3.236;InternalName=;LegalCopyright=©ASPECT Mídia;LegalTrademarks=SICS is trademark of ASPECT Midia / ASPECT Midia is trademark of ASPECT Midia;OriginalFilename=;ProductName=SICS - Sistema Inteligente de Chamada de Senhas;ProductVersion=7.2;Comments=;CFBundleName=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=ASPECT Midia;FileVersion=7.2.4.236;InternalName=;LegalCopyright=©ASPECT Mídia;LegalTrademarks=SICS is trademark of ASPECT Midia / ASPECT Midia is trademark of ASPECT Midia;OriginalFilename=;ProductName=SICS - Sistema Inteligente de Chamada de Senhas;ProductVersion=7.2;Comments=;CFBundleName=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Build>236</VerInfo_Build>
         <DCC_N>false</DCC_N>
         <DCC_K>false</DCC_K>
@@ -120,7 +120,7 @@
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
         <VerInfo_MinorVer>2</VerInfo_MinorVer>
         <VerInfo_AutoIncVersion>false</VerInfo_AutoIncVersion>
-        <VerInfo_Release>3</VerInfo_Release>
+        <VerInfo_Release>4</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

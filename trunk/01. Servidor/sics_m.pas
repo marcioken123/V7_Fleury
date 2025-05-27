@@ -4735,6 +4735,7 @@ function TfrmSicsMain.VerificaSeAtendenteEPermitidoNoModulo (IdAtd, IdModulo : i
 var
   aCDSAtdeFiltro: TClientDataSet;
 begin
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou VerificaSeAtendenteEPermitidoNoModulo. IdModulo: ' + IntToStr(IdModulo) + ' IdAtd: ' + IntToStr(IdAtd));
   if IdModulo = 0 then
   begin
     Result := true;
@@ -4749,58 +4750,97 @@ begin
   finally
     FreeAndNil(aCDSAtdeFiltro);
   end;
-end;
 
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu VerificaSeAtendenteEPermitidoNoModulo. IdModulo: ' + IntToStr(IdModulo) + ' IdAtd: ' + IntToStr(IdAtd));
+end;
 
 procedure TfrmSicsMain.GetSendAtdsListText(const aIdModulo: Integer; var S: string);
 var
-  IdAtd, NoAtds              : Integer;
-  LLogin, Nome, RegFunc, Grupo, Senha: string;
-  aCDSAtdeFiltro: TClientDataSet;
+  IdAtd, NoAtds  : Integer;
+  LLogin, Nome   : string;
+  RegFunc, Grupo : string;
+  Senha          : string;
+  vNomeTabela    : string;
+  vNomeColuna    : string;
+  vTipoModulo    : TModuloSics;
+  vRangeIDs      : TIntArray;
+  vStrRangeIDs   : string;
+  LQuery         : TFDQuery;
 begin
-  aCDSAtdeFiltro := GetNewCDSFilter(dmSicsMain.cdsAtendentes);
-  try
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSAtdeFiltro, AIdModulo, tgAtd, 'ID_GRUPOATENDENTE');
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendAtdsListText. IdModulo: ' + IntToStr(aIdModulo));
 
-    with aCDSAtdeFiltro do
-    begin
+//  aCDSAtdeFiltro := GetNewCDSFilter(dmSicsMain.cdsAtendentes);
+  try
+//    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSAtdeFiltro, AIdModulo, tgAtd, 'ID_GRUPOATENDENTE');
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aIdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgAtd);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, aIdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendAtdsListText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                     ' NomeTabela: ' + vNomeTabela +
+                                                                     ' NomeColuna: ' + vNomeColuna +
+                                                                     ' Range IDs: '  + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, NOME, REGISTROFUNCIONAL, ATIVO, '+
+                                'ID_GRUPOATENDENTE, LOGIN, SENHALOGIN ' +
+                                'FROM ATENDENTES WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
       S      := '';
       NoAtds := 0;
-      First;
-      while not Eof do
+      LQuery.First;
+      while not LQuery.Eof do
       begin
-        if FieldByName('ATIVO').AsBoolean then
+        if ((LQuery.FieldByName('ATIVO').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOATENDENTE').AsInteger, vRangeIDs))) then
         begin
-          IdAtd   := FieldByName('ID').AsInteger;
-          Nome    := FieldByName('NOME').AsString;
-          RegFunc := FieldByName('REGISTROFUNCIONAL').AsString;
-          Grupo   := FieldByName('ID_GRUPOATENDENTE').AsString;
-          LLogin   := FieldByName('LOGIN').AsString;
+          IdAtd   := LQuery.FieldByName('ID').AsInteger;
+          Nome    := LQuery.FieldByName('NOME').AsString;
+          RegFunc := LQuery.FieldByName('REGISTROFUNCIONAL').AsString;
+          Grupo   := LQuery.FieldByName('ID_GRUPOATENDENTE').AsString;
+          LLogin  := LQuery.FieldByName('LOGIN').AsString;
           // ********************************************************************************
           // A senha não mais será enviada aos clients
           // Os clients enviarão usuário e senha ao servidor para login
           // ********************************************************************************
           // Senha  := FieldByName('SENHALOGIN').AsString;
 
-          Senha   := FieldByName('SENHALOGIN').AsString; // Está enviando ainda para uso nos módulos Client na tela de alteração de senha do usuário (conferir a senha atual para deixar colocar próxima). Alterar isto no futuro
+          Senha   := LQuery.FieldByName('SENHALOGIN').AsString; // Está enviando ainda para uso nos módulos Client na tela de alteração de senha do usuário (conferir a senha atual para deixar colocar próxima). Alterar isto no futuro
           NoAtds := NoAtds + 1;
 
           S := S + TAspEncode.AspIntToHex(IdAtd, 4) + Nome + ';' + RegFunc + ';' + Grupo + ';' + Senha + ';' + LLogin + TAB;
         end;
-        Next;
+
+        LQuery.Next;
       end;
+
       S := TAspEncode.AspIntToHex(NoAtds, 4) + S;
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
     end; { with cds }
-  finally
-    FreeAndNil(aCDSAtdeFiltro);
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendAtdsListText. IdModulo: ' + IntToStr(aIdModulo));
 end;   { proc GetSendAtdListText }
 
 procedure TfrmSicsMain.GetSendPAsListText(const IdModulo: Integer; var S: string);
 var
   IdPA, NPA    : Integer;
   Nome, Grupo  : string;
-  BM           : TBookmark;
   vNomeTabela  : string;
   vNomeColuna  : string;
   vTipoModulo  : TModuloSics;
@@ -4933,7 +4973,6 @@ var
   Id:integer;
   Nome:string;
 begin
-
   dmSicsMain.cdsGrupoFila.Close;
   dmSicsMain.cdsGrupoFila.Open;
 
@@ -4995,10 +5034,10 @@ var
   vRangeIDs          : TIntArray;
   vStrRangeIDs       : string;
 begin
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendFilasNamesText. IdModulo: ' + IntToStr(IdModulo));
   // GOT
 //  dmSicsMain.cdsFiltroFilas.CloneCursor(dmSicsMain.cdsFilas, false, True);
 
-  vTipoModulo  := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
 //  if LTipoModulo <> msCallCenter then
 //    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroFilas, IdModulo, tgFila);
@@ -5070,43 +5109,80 @@ begin
     on E: Exception do
       MyLogException(E, True);
   end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendFilasNamesText. IdModulo: ' + IntToStr(IdModulo));
 end;   { proc GetSendFilasNamesText }
 
 procedure TfrmSicsMain.GetSendTagsNamesText(const aIdModulo: Integer; var S: string);
 var
-  IdTag: Integer;
-  Cor  : Integer;
-  Nome : string;
-  I    : Integer;
-  Grupo: Integer;
-  aCDSTagsFiltro: TClientDataSet;
+  IdTag, Cor, I : Integer;
+  Nome          : string;
+  Grupo         : Integer;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
-  aCDSTagsFiltro := GetNewCDSFilter(dmSicsMain.cdsTags);
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendTagsNamesText. IdModulo: ' + IntToStr(aIdModulo));
+//  aCDSTagsFiltro := GetNewCDSFilter(dmSicsMain.cdsTags);
   try
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSTagsFiltro, AIdModulo, tgTAG, 'ID_GRUPOTAG');
-    with aCDSTagsFiltro do
-    begin
+//    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSTagsFiltro, AIdModulo, tgTAG, 'ID_GRUPOTAG');
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aIdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgTAG);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, aIdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendTagsNamesText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                      ' NomeTabela: ' + vNomeTabela +
+                                                                      ' NomeColuna: ' + vNomeColuna +
+                                                                      ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, ID_GRUPOTAG, ATIVO '+
+                                'FROM TAGS WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
       I  := 0;
       S  := '';
-      First;
-      while not Eof do
+      LQuery.First;
+      while not LQuery.Eof do
       begin
-        if FieldByName('Ativo').AsBoolean then
+        if ((LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOTAG').AsInteger, vRangeIDs))) then
         begin
           I     := I + 1;
-          IdTag := FieldByName('ID').AsInteger;
-          Cor   := FieldByName('CODIGOCOR').AsInteger;
-          Grupo := FieldByName('ID_GRUPOTAG').AsInteger;
-          Nome  := FieldByName('NOME').AsString;
+          IdTag := LQuery.FieldByName('ID').AsInteger;
+          Cor   := LQuery.FieldByName('CODIGOCOR').AsInteger;
+          Grupo := LQuery.FieldByName('ID_GRUPOTAG').AsInteger;
+          Nome  := LQuery.FieldByName('NOME').AsString;
+
           S     := S + TAspEncode.AspIntToHex(IdTag, 4) + TAspEncode.AspIntToHex(Cor, 6) + IntToStr(Grupo) + ';' + Nome + TAB;
         end;
-        Next;
+
+        LQuery.Next;
       end;
+
       S := TAspEncode.AspIntToHex(I, 4) + S;
-    end; { with cds }
-  finally
-    FreeAndNil(aCDSTagsFiltro);
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
+    end;
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendTagsNamesText. IdModulo: ' + IntToStr(aIdModulo));
 end;   { proc GetSendFilasNamesText }
 
 procedure TfrmSicsMain.GetSendPPsTableText(const AIdModulo: Integer; var S: string);
@@ -5138,8 +5214,8 @@ begin
           Nome  := FieldByName('NOME').AsString;
           S     := S + TAspEncode.AspIntToHex(IdPP, 4) + TAspEncode.AspIntToHex(Cor, 6) + IntToStr(Grupo) + ';' + Nome + TAB;
         end;
-        Next;
 
+        Next;
       end;
       S := TAspEncode.AspIntToHex(I, 4) + S;
     end; { with cds }
@@ -5157,6 +5233,8 @@ var
   Grupo: Integer;
   aCDSPausaFiltro: TClientDataSet;
 begin
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendMotivosDePausaTableText. IdModulo: ' + IntToStr(AIDModulo));
+
   aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
   try
     FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, AIdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
@@ -5176,6 +5254,7 @@ begin
           Nome  := FieldByName('NOME').AsString;
           S     := S + TAspEncode.AspIntToHex(IdMP, 4) + TAspEncode.AspIntToHex(Cor, 6) + IntToStr(Grupo) + ';' + Nome + TAB;
         end;
+
         Next;
       end;
       S := TAspEncode.AspIntToHex(I, 4) + S;
@@ -5183,6 +5262,8 @@ begin
   finally
     FreeAndNil(aCDSPausaFiltro);
   end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendMotivosDePausaTableText. IdModulo: ' + IntToStr(AIDModulo));
 end; { proc GetSendMotivosDePausaTableText }
 
 
@@ -5215,15 +5296,16 @@ begin
           Nome   := FieldByName('NOME').AsString;
           Result := Result + TAspEncode.AspIntToHex(IdMP, 4) + Nome + TAB;
         end;
+
         Next;
       end;
+
       Result := TAspEncode.AspIntToHex(I, 4) + Result;
     end; { with cds }
   finally
     FreeAndNil(aCDSPausaFiltro);
   end;
 end;
-
 
 procedure TfrmSicsMain.GetSendStatusDasPAsTableText(var S: string);
 var
@@ -5249,7 +5331,9 @@ begin
 
         Next;
       end;
+
       S := TAspEncode.AspIntToHex(I, 4) + S;
+
       finally
         if BookmarkValid(BM) then
           GotoBookmark(BM);
@@ -5262,36 +5346,21 @@ end;   { proc GetSendStatusDasPAsTableText }
 
 procedure TfrmSicsMain.GetSendGruposNamesText(const aTipoGroupoPorModulo: TTipoGrupoPorModulo; var S: string);
 var
-  IdGrupo        : Integer;
-  Nome: string;
-  BM             : TBookmark;
-  cds            : TClientDataSet;
+  IdGrupo : Integer;
+  Nome    : string;
+  BM      : TBookmark;
+  cds     : TClientDataSet;
 begin
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendGruposNamesText. IdModulo: ' + IntToStr(Ord(aTipoGroupoPorModulo.TipoDeGrupo)));
   S := '';
 
   case aTipoGroupoPorModulo.TipoDeGrupo of
-    tgPA:
-              cds := dmSicsMain.cdsGruposDePAs;
-    tgAtd:
-              begin
-                cds          := dmSicsMain.cdsGruposDeAtendentes;
-              end;
-    tgTAG:
-              begin
-                cds          := dmSicsMain.cdsGruposDeTags;
-              end;
-    tgPP:
-              begin
-                cds          := dmSicsMain.cdsGruposDePPs;
-              end;
-    tgPausa:
-              begin
-                cds          := dmSicsMain.cdsGruposDeMotivosPausa;
-              end;
-    tgFila:
-              begin
-                cds          := dmSicsMain.cdsFilas;
-              end;
+    tgPA    : cds := dmSicsMain.cdsGruposDePAs;
+    tgAtd   : cds := dmSicsMain.cdsGruposDeAtendentes;
+    tgTAG   : cds := dmSicsMain.cdsGruposDeTags;
+    tgPP    : cds := dmSicsMain.cdsGruposDePPs;
+    tgPausa : cds := dmSicsMain.cdsGruposDeMotivosPausa;
+    tgFila  : cds := dmSicsMain.cdsFilas;
   else
     Exit;
   end;
@@ -5314,6 +5383,7 @@ begin
             Nome    := FieldByName('NOME').AsString;
             S       := S + TAspEncode.AspIntToHex(IdGrupo, 4) + Nome + TAB;
           end;
+
           Next;
         end;
 
@@ -5326,6 +5396,8 @@ begin
       FreeBookmark(BM);
     end;
   end; { with cds }
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendGruposNamesText. IdModulo: ' + IntToStr(Ord(aTipoGroupoPorModulo.TipoDeGrupo)));
 end;   { proc GetSendGruposNamesText }
 
 procedure TfrmSicsMain.AtualizaLEDsDasBotoeiras3B2L(PAsString, ESPString: string);
@@ -9038,6 +9110,8 @@ begin
     Exit;
   end;
 
+  TfrmDebugParameters.Debugar (tbGeral, 'Encerrando servidor SICS...');
+
   TfrmSicsSplash.ShowStatus('Encerrando...');
   try
     //Aguarda a Thread de Calculo de PIs finalizar, caso esteja em execução
@@ -9637,7 +9711,11 @@ var
   {$ENDIF SuportaPing}
   LSolicitaStatusTV: String;
 begin
+  if fFecharPrograma then
+    Exit;
+
   TfrmDebugParameters.Debugar(tbTimers, 'Entrou   CheckConnectionsTimerTimer');
+
   if DebugContaChecaConexoes = 2000000000 then
     DebugContaChecaConexoes := 0
   else
@@ -9676,7 +9754,6 @@ begin
   end
   else
     TfrmDebugParameters.Debugar(tbTimers, '   TGSServerSocket is active');
-
 
 {$REGION 'Impressoras e Totens'}
     //conta quantos sockets de totens foram criados em tempo de execução
@@ -9895,6 +9972,8 @@ begin
         vlTVs[I].IP := (FindComponent('PainelClientSocket' + IntToStr(I)) as TClientSocket).Host;
       end;
 {$ENDREGION}
+
+  TfrmDebugParameters.Debugar(tbTimers, 'Saiu  CheckConnectionsTimerTimer');
 end;
 
 //JLS
@@ -9908,6 +9987,7 @@ begin
   try
     IdModulo := GetIdModulo(dmSicsMain.connOnLine, PA);
     FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, IdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
+
     if (aCDSPausaFiltro.Locate('ID', MotivoPausaRequisitado, [])) then
     begin
       Result := aCDSPausaFiltro.FieldByName('Ativo').AsBoolean;
@@ -10182,8 +10262,7 @@ begin
   end; { if Sender is TStringGrid }
 end;   { proc SenhasList1KeyUp }
 
-procedure TfrmSicsMain.ProcessarTelas(AIdTela, AIdTelaPrincipal: integer;
-  AArray: TJSONArray; AProcessadas: TList<integer>);
+procedure TfrmSicsMain.ProcessarTelas(AIdTela, AIdTelaPrincipal: integer; AArray: TJSONArray; AProcessadas: TList<integer>);
 var
     LJSONTela             : TJSONObject;
     LArrayBotao           : TJSONArray;
@@ -11073,15 +11152,14 @@ begin
 
     if (lStringGrid.Cells[0,1] <> EmptyStr) then
     begin
-    ExcluirSenhasPelaFila(ManagePswdPopMenu.Tag);
-  end;
+      ExcluirSenhasPelaFila(ManagePswdPopMenu.Tag);
+    end;
   end;
 end;
 
 { proc subMenuProcessosParalelosClick }
 
 procedure TfrmSicsMain.SubMenuDesabilitarBotoesDaImpressoraClick(Sender: TObject);
-
 begin
 
 end;
@@ -11089,6 +11167,7 @@ end;
 
 procedure TfrmSicsMain.SubMenuHabilitarBotoesDaImpressoraClick(Sender: TObject);
 begin
+
 end; { proc SubMenuHabilitarBotoesDaImpressora }
 
 procedure TfrmSicsMain.SubMenuFilasClick(Sender: TObject);
@@ -11104,7 +11183,9 @@ var
   IdUnidade: Integer;
 begin
   TfrmSicsConfiguraTabela.ExibeForm(ctGruposDePaineis, IdUnidade);
-end; procedure TfrmSicsMain.MenuModuloSicsCallCenterClick(Sender: TObject);
+end;
+
+procedure TfrmSicsMain.MenuModuloSicsCallCenterClick(Sender: TObject);
 begin
   ExibirConfigModuloCallCenter(Self, FTentativasAcessoMenuProtegido, FDataUltimaTentativasAcessoMenuProtegido);
 end;
@@ -11634,19 +11715,13 @@ begin
 end;
 
 procedure TfrmSicsMain.ServerSocket1ClientConnect(Sender: TObject; Socket: TCustomWinSocket);
-
 {$IFDEF USEKEY}
-
 var
   S        : string;
   Terminals: Integer;
-
 {$ENDIF}
-
 begin
-
 {$IFDEF USEKEY}
-
   try
     S         := ReadStringFromKey(16, 2);
     Terminals := StrToInt('$' + S);
@@ -11655,9 +11730,7 @@ begin
   except
     Socket.Close;
   end;
-
 {$ENDIF}
-
 end;
 
 procedure TfrmSicsMain.ServerSocket1ClientError(Sender: TObject; Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
@@ -12141,11 +12214,15 @@ end;
 procedure TfrmSicsMain.FiltraDataSetComPermitidas (AConexao: TFDConnection; const aDataSet: TClientDataSet; const AIdModulo: Integer;
   const aNomeCampo: TTipoDeGrupo; aColunaFiltrarCDS: String = 'ID'; const aGetNomeColunaPorModulo: TGetNomeColunaPorModulo = nil);
 var
-  vRangeIDs               : TIntArray;
-  vRangePermitido         : string;
-  vTipoModulo             : TModuloSics;
-  vNomeTabela, vNomeColuna: string;
+  vRangeIDs       : TIntArray;
+  vRangePermitido : string;
+  vTipoModulo     : TModuloSics;
+  vNomeTabela     : string;
+  vNomeColuna     : string;
 begin
+  TfrmDebugParameters.Debugar (tbAtividadeConexaoBD, 'Entrou FiltraDataSetComPermitidas. Dataset: ' + aDataSet.Name +
+                                                                                       ' Módulo: ' + IntToStr(AIdModulo));
+
   vRangePermitido := EmptyStr;
   try
     try
@@ -12195,12 +12272,6 @@ begin
         MyLogException(E, True);
     end;
   finally
-    TfrmDebugParameters.Debugar(tbRegistrosBD, 'Entrou FiltraDataSetComPermitidas. ' +
-                                               ' Tabela: ' + vNomeTabela +
-                                               ' Coluna: ' + vNomeColuna +
-                                               ' Coluna Filtro: ' + aColunaFiltrarCDS +
-                                               ' Filter: ' + vRangePermitido);
-
     aDataSet.Filtered := False;
     aDataSet.Filter   := vRangePermitido;
     aDataSet.Filtered := vRangePermitido <> '';
@@ -12252,11 +12323,11 @@ begin
               LQtdSenhas := 0;
             end;
 
-            Result := Result + TAspEncode.AspIntToHex(IdFila, 4) +
-                      TAspEncode.AspIntToHex(Cor, 6) + TAspEncode.AspIntToHex(LQtdSenhas, 4) + Nome + TAB;
+            Result := Result + TAspEncode.AspIntToHex(IdFila, 4) + TAspEncode.AspIntToHex(Cor, 6) + TAspEncode.AspIntToHex(LQtdSenhas, 4) + Nome + TAB;
           end;
           Next;
         end;
+
         Result := TAspEncode.AspIntToHex(I, 4) + Result;
       finally
         if BookmarkValid(BM) then
