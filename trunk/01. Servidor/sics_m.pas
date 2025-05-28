@@ -4733,22 +4733,57 @@ end;
 
 function TfrmSicsMain.VerificaSeAtendenteEPermitidoNoModulo (IdAtd, IdModulo : integer) : boolean;
 var
-  aCDSAtdeFiltro: TClientDataSet;
+  vNomeTabela    : string;
+  vNomeColuna    : string;
+  vTipoModulo    : TModuloSics;
+  vRangeIDs      : TIntArray;
+  vStrRangeIDs   : string;
+  LQuery         : TFDQuery;
 begin
   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou VerificaSeAtendenteEPermitidoNoModulo. IdModulo: ' + IntToStr(IdModulo) + ' IdAtd: ' + IntToStr(IdAtd));
+
   if IdModulo = 0 then
   begin
-    Result := true;
+    Result := True;
     Exit;
   end;
 
-  aCDSAtdeFiltro := GetNewCDSFilter(dmSicsMain.cdsAtendentes);
   try
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSAtdeFiltro, IdModulo, tgAtd, 'ID_GRUPOATENDENTE');
+    //5 FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSAtdeFiltro, IdModulo, tgAtd, 'ID_GRUPOATENDENTE');
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
-    Result := aCDSAtdeFiltro.Locate('ID', IdAtd, []);
-  finally
-    FreeAndNil(aCDSAtdeFiltro);
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgAtd);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'VerificaSeAtendenteEPermitidoNoModulo. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                                       ' NomeTabela: ' + vNomeTabela +
+                                                                                       ' NomeColuna: ' + vNomeColuna +
+                                                                                       ' Range IDs: '  + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, NOME, REGISTROFUNCIONAL, ATIVO, '+
+                                'ID_GRUPOATENDENTE, LOGIN, SENHALOGIN ' +
+                                'FROM ATENDENTES WHERE ID=%d AND ID_UNIDADE=%d', [IdAtd, vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
+      if not LQuery.IsEmpty then
+        Result := ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOATENDENTE').AsInteger, vRangeIDs);
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
+    end;
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
 
   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu VerificaSeAtendenteEPermitidoNoModulo. IdModulo: ' + IntToStr(IdModulo) + ' IdAtd: ' + IntToStr(IdAtd));
@@ -5187,40 +5222,74 @@ end;   { proc GetSendFilasNamesText }
 
 procedure TfrmSicsMain.GetSendPPsTableText(const AIdModulo: Integer; var S: string);
 var
-  IdPP : Integer;
-  Cor  : Integer;
-  Nome : string;
-  I    : Integer;
-  Grupo: Integer;
-  aCDSPPSFiltro: TClientDataSet;
+  IdPP, Cor, I  : Integer;
+  Grupo         : Integer;
+  Nome          : string;
+  //aCDSPPSFiltro : TClientDataSet;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
-  aCDSPPSFiltro := GetNewCDSFilter(dmSicsMain.cdsPPs);
-  try
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPPSFiltro, AIdModulo, tgPP, 'ID_GRUPOPP');
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendPPsTableText. IdModulo: ' + IntToStr(aIdModulo));
 
-    with aCDSPPSFiltro do
-    begin
+  //aCDSPPSFiltro := GetNewCDSFilter(dmSicsMain.cdsPPs);
+  try
+    //FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPPSFiltro, AIdModulo, tgPP, 'ID_GRUPOPP');
+
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aIdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgPP);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, aIdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendPPsTableText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                     ' NomeTabela: ' + vNomeTabela +
+                                                                     ' NomeColuna: ' + vNomeColuna +
+                                                                     ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, ID_GRUPOPP, ATIVO '+
+                                'FROM PPS WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
       I  := 0;
       S  := '';
-      First;
-      while not Eof do
+      LQuery.First;
+      while not LQuery.Eof do
       begin
-        if FieldByName('Ativo').AsBoolean then
+        if ((LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOPP').AsInteger, vRangeIDs))) then
         begin
           I     := I + 1;
-          IdPP  := FieldByName('ID').AsInteger;
-          Cor   := FieldByName('CODIGOCOR').AsInteger;
-          Grupo := FieldByName('ID_GRUPOPP').AsInteger;
-          Nome  := FieldByName('NOME').AsString;
+          IdPP  := LQuery.FieldByName('ID').AsInteger;
+          Cor   := LQuery.FieldByName('CODIGOCOR').AsInteger;
+          Grupo := LQuery.FieldByName('ID_GRUPOPP').AsInteger;
+          Nome  := LQuery.FieldByName('NOME').AsString;
+
           S     := S + TAspEncode.AspIntToHex(IdPP, 4) + TAspEncode.AspIntToHex(Cor, 6) + IntToStr(Grupo) + ';' + Nome + TAB;
         end;
 
-        Next;
+        LQuery.Next;
       end;
+
       S := TAspEncode.AspIntToHex(I, 4) + S;
-    end; { with cds }
-  finally
-    FreeAndNil(aCDSPPSFiltro);
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
+    end;
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
 end;   { proc GetSendPPsTableText }
 
@@ -5231,80 +5300,151 @@ var
   Nome : string;
   I    : Integer;
   Grupo: Integer;
-  aCDSPausaFiltro: TClientDataSet;
+  //aCDSPausaFiltro: TClientDataSet;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
-  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendMotivosDePausaTableText. IdModulo: ' + IntToStr(AIDModulo));
+   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendMotivosDePausaTableText. IdModulo: ' + IntToStr(AIDModulo));
 
-  aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
+//  aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
   try
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, AIdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
-    with aCDSPausaFiltro do
-    begin
+//    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, AIdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
+
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aIdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgPausa);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, aIdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendPPsTableText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                     ' NomeTabela: ' + vNomeTabela +
+                                                                     ' NomeColuna: ' + vNomeColuna +
+                                                                     ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, ID_GRUPOMOTIVOSPAUSA, ATIVO '+
+                                'FROM MOTIVOS_PAUSA WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
       I  := 0;
       S  := '';
-      First;
-      while not Eof do
+      LQuery.First;
+      while not LQuery.Eof do
       begin
-        if FieldByName('Ativo').AsBoolean then
+        if ((LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOMOTIVOSPAUSA').AsInteger, vRangeIDs)))  then
         begin
           I     := I + 1;
-          IdMP  := FieldByName('ID').AsInteger;
-          Cor   := FieldByName('CODIGOCOR').AsInteger;
-          Grupo := FieldByName('ID_GRUPOMOTIVOSPAUSA').AsInteger;
-          Nome  := FieldByName('NOME').AsString;
+          IdMP  := LQuery.FieldByName('ID').AsInteger;
+          Cor   := LQuery.FieldByName('CODIGOCOR').AsInteger;
+          Grupo := LQuery.FieldByName('ID_GRUPOMOTIVOSPAUSA').AsInteger;
+          Nome  := LQuery.FieldByName('NOME').AsString;
+
           S     := S + TAspEncode.AspIntToHex(IdMP, 4) + TAspEncode.AspIntToHex(Cor, 6) + IntToStr(Grupo) + ';' + Nome + TAB;
         end;
 
-        Next;
+        LQuery.Next;
       end;
+
       S := TAspEncode.AspIntToHex(I, 4) + S;
-    end; { with cds }
-  finally
-    FreeAndNil(aCDSPausaFiltro);
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
+    end;
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
 
   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendMotivosDePausaTableText. IdModulo: ' + IntToStr(AIDModulo));
 end; { proc GetSendMotivosDePausaTableText }
-
 
 function TfrmSicsMain.GetSendMotivosDePausaTableTextPA(const PA: Integer): String;
 var
   IdMP : Integer;
   Nome : string;
   I    : Integer;
-  aCDSPausaFiltro: TClientDataSet;
-  IdModulo: Integer;
+//  aCDSPausaFiltro: TClientDataSet;
+  IdModulo      : Integer;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendMotivosDePausaTableTextPA. PA: ' + IntToStr(PA));
+
   Result := EmptyStr;
 
-  aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
+  //aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
   try
     IdModulo := GetIdModulo(dmSicsMain.connOnLine, PA);
 
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, IdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
-    with aCDSPausaFiltro do
-    begin
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgPausa);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendMotivosDePausaTableTextPA. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                                  ' NomeTabela: ' + vNomeTabela +
+                                                                                  ' NomeColuna: ' + vNomeColuna +
+                                                                                  ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, ID_GRUPOMOTIVOSPAUSA, ATIVO '+
+                                'FROM MOTIVOS_PAUSA WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+    //FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, IdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
+
       I  := 0;
       Result := '';
-      First;
-      while not Eof do
+      LQuery.First;
+      while not LQuery.Eof do
       begin
-        if FieldByName('Ativo').AsBoolean then
+        if ((LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOMOTIVOSPAUSA').AsInteger, vRangeIDs)))  then
         begin
           I      := I + 1;
-          IdMP   := FieldByName('ID').AsInteger;
-          Nome   := FieldByName('NOME').AsString;
+          IdMP   := LQuery.FieldByName('ID').AsInteger;
+          Nome   := LQuery.FieldByName('NOME').AsString;
+
           Result := Result + TAspEncode.AspIntToHex(IdMP, 4) + Nome + TAB;
         end;
 
-        Next;
+        LQuery.Next;
       end;
 
       Result := TAspEncode.AspIntToHex(I, 4) + Result;
-    end; { with cds }
-  finally
-    FreeAndNil(aCDSPausaFiltro);
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
+    end;
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
+
+  TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendMotivosDePausaTableTextPA. PA: ' + IntToStr(PA));
 end;
 
 procedure TfrmSicsMain.GetSendStatusDasPAsTableText(var S: string);
@@ -5348,54 +5488,82 @@ procedure TfrmSicsMain.GetSendGruposNamesText(const aTipoGroupoPorModulo: TTipoG
 var
   IdGrupo : Integer;
   Nome    : string;
-  BM      : TBookmark;
-  cds     : TClientDataSet;
+//  BM      : TBookmark;
+//  cds     : TClientDataSet;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Entrou GetSendGruposNamesText. IdModulo: ' + IntToStr(Ord(aTipoGroupoPorModulo.TipoDeGrupo)));
   S := '';
 
-  case aTipoGroupoPorModulo.TipoDeGrupo of
-    tgPA    : cds := dmSicsMain.cdsGruposDePAs;
-    tgAtd   : cds := dmSicsMain.cdsGruposDeAtendentes;
-    tgTAG   : cds := dmSicsMain.cdsGruposDeTags;
-    tgPP    : cds := dmSicsMain.cdsGruposDePPs;
-    tgPausa : cds := dmSicsMain.cdsGruposDeMotivosPausa;
-    tgFila  : cds := dmSicsMain.cdsFilas;
-  else
+  if not (aTipoGroupoPorModulo.TipoDeGrupo in [tgPA, tgAtd, tgTAG, tgPP, tgPausa, tgFila]) then
     Exit;
-  end;
+ 
+//  dmSicsMain.cdsFiltroGrupos.CloneCursor(cds, false, True);
+//  FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroGrupos, aTipoGroupoPorModulo.IdModulo, aTipoGroupoPorModulo.TipoDeGrupo);
+//  cds := dmSicsMain.cdsFiltroGrupos;
+  try
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aTipoGroupoPorModulo.IdModulo);
 
-  dmSicsMain.cdsFiltroGrupos.CloneCursor(cds, false, True);
-  FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroGrupos, aTipoGroupoPorModulo.IdModulo, aTipoGroupoPorModulo.TipoDeGrupo);
-  cds := dmSicsMain.cdsFiltroGrupos;
+    if (vTipoModulo = msNone) then
+      Exit;
 
-  with cds do
-  begin
-    BM := GetBookmark;
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, aTipoGroupoPorModulo.TipoDeGrupo);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, aTipoGroupoPorModulo.IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendGruposNamesText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                        ' NomeTabela: ' + vNomeTabela +
+                                                                        ' NomeColuna: ' + vNomeColuna +
+                                                                        ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
     try
-      try
-        First;
-        while not Eof do
-        begin
-          if (aTipoGroupoPorModulo.TipoDeGrupo <> tgTAG) or (FieldByName('ATIVO').AsBoolean) then
-          begin
-            IdGrupo := FieldByName('ID').AsInteger;
-            Nome    := FieldByName('NOME').AsString;
-            S       := S + TAspEncode.AspIntToHex(IdGrupo, 4) + Nome + TAB;
-          end;
+      LQuery.Connection := dmSicsMain.connOnLine;
 
-          Next;
+      case aTipoGroupoPorModulo.TipoDeGrupo of
+        tgPA    : LQuery.SQL.Text := Format('SELECT ID, NOME FROM GRUPOS_PAS WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsGruposDePAs;
+        tgAtd   : LQuery.SQL.Text := Format('SELECT ID, NOME FROM GRUPOS_ATENDENTES WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsGruposDeAtendentes;
+        tgTAG   : LQuery.SQL.Text := Format('SELECT ATIVO, ID, NOME FROM GRUPOS_TAGS WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsGruposDeTags;
+        tgPP    : LQuery.SQL.Text := Format('SELECT ID, NOME FROM GRUPOS_PPS WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsGruposDePPs;
+        tgPausa : LQuery.SQL.Text := Format('SELECT ID, NOME FROM GRUPOS_MOTIVOS_PAUSA WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsGruposDeMotivosPausa;
+        tgFila  : LQuery.SQL.Text := Format('SELECT ID, NOME FROM GRUPOS_FILAS WHERE ID_UNIDADE = %d', [vgParametrosModulo.IdUnidade]); //cds := dmSicsMain.cdsFilas;
+      else
+        Exit;
+      end;
+
+      LQuery.Open;
+
+      LQuery.First;
+      while not LQuery.Eof do
+      begin
+        if (aTipoGroupoPorModulo.TipoDeGrupo <> tgTAG) or (LQuery.FieldByName('ATIVO').AsBoolean) then
+        begin
+          IdGrupo := LQuery.FieldByName('ID').AsInteger;
+          Nome    := LQuery.FieldByName('NOME').AsString;
+
+          S       := S + TAspEncode.AspIntToHex(IdGrupo, 4) + Nome + TAB;
         end;
 
-        S := TAspEncode.AspIntToHex(RecordCount, 4) + S;
-      finally
-        if BookmarkValid(BM) then
-          GotoBookmark(BM)
+        LQuery.Next;
       end;
-    finally;
-      FreeBookmark(BM);
+
+      S := TAspEncode.AspIntToHex(LQuery.RecordCount, 4) + S;
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
     end;
-  end; { with cds }
+  except
+    on E: Exception do
+      MyLogException(E, True);
+  end;
 
   TfrmDebugParameters.Debugar(tbProtocoloSics, 'Saiu GetSendGruposNamesText. IdModulo: ' + IntToStr(Ord(aTipoGroupoPorModulo.TipoDeGrupo)));
 end;   { proc GetSendGruposNamesText }
@@ -9977,23 +10145,60 @@ begin
 end;
 
 //JLS
-function TfrmSicsMain.CheckMotivoPausaPermitidoNaPA(const PA: Integer;MotivoPausaRequisitado: Integer): boolean;
+function TfrmSicsMain.CheckMotivoPausaPermitidoNaPA(const PA: Integer; MotivoPausaRequisitado: Integer): boolean;
 var
   IdModulo: Integer;
-  aCDSPausaFiltro: TClientDataSet;
+  //aCDSPausaFiltro: TClientDataSet;
+  vTipoModulo   : TModuloSics;
+  LQuery        : TFDQuery;
+  vNomeTabela   : string;
+  vNomeColuna   : string;
+  vRangeIDs     : TIntArray;
+  vStrRangeIDs  : string;
 begin
   Result := False;
-  aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
+  //aCDSPausaFiltro := GetNewCDSFilter(dmSicsMain.cdsMotivosDePausa);
   try
-    IdModulo := GetIdModulo(dmSicsMain.connOnLine, PA);
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, IdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
+    //IdModulo := GetIdModulo(dmSicsMain.connOnLine, PA);
+      //FiltraDataSetComPermitidas(dmSicsMain.connOnLine, aCDSPausaFiltro, IdModulo, tgPausa, 'ID_GRUPOMOTIVOSPAUSA');
 
-    if (aCDSPausaFiltro.Locate('ID', MotivoPausaRequisitado, [])) then
-    begin
-      Result := aCDSPausaFiltro.FieldByName('Ativo').AsBoolean;
+    IdModulo := GetIdModulo(dmSicsMain.connOnLine, PA);
+
+    vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
+
+    if (vTipoModulo = msNone) then
+      Exit;
+
+    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgPausa);
+
+    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+      Exit;
+
+    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+
+    TfrmDebugParameters.Debugar(tbProtocoloSics, 'CheckMotivoPausaPermitidoNaPA. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
+                                                                               ' NomeTabela: ' + vNomeTabela +
+                                                                               ' NomeColuna: ' + vNomeColuna +
+                                                                               ' Range IDs: ' + vStrRangeIDs);
+    LQuery := TFDQuery.Create(nil);
+    try
+      LQuery.Connection := dmSicsMain.connOnLine;
+      LQuery.SQL.Text := Format('SELECT ID, CODIGOCOR, NOME, ID_GRUPOMOTIVOSPAUSA, ATIVO '+
+                                'FROM MOTIVOS_PAUSA WHERE ID_UNIDADE=%d', [vgParametrosModulo.IdUnidade]);
+      LQuery.Open;
+
+      if (LQuery.Locate('ID', MotivoPausaRequisitado, [])) and (ExisteNoIntArray(LQuery.FieldByName('ID_GRUPOMOTIVOSPAUSA').AsInteger, vRangeIDs)) then
+      begin
+        Result := LQuery.FieldByName('Ativo').AsBoolean;
+      end;
+    finally
+      Finalize(vRangeIDs);
+      FreeAndNil(LQuery);
     end;
-  finally
-    FreeAndNil(aCDSPausaFiltro);
+  except
+    on E: Exception do
+      MyLogException(E, True);
   end;
 end;
 
@@ -11836,7 +12041,6 @@ begin
   end;
 end;
 
-
 procedure TfrmSicsMain.Debug1Click(Sender: TObject);
 begin
   TfrmDebugParameters.ShowForm;
@@ -12023,6 +12227,7 @@ procedure TfrmSicsMain.SubMenuStatusDasConexoesTcpIpClick(Sender: TObject);
 begin
   if not Assigned(frmSicsConexoes) then
     frmSicsConexoes := TfrmSicsConexoes.Create(Application);
+
   CriarItemsFormConexoes;
   frmSicsConexoes.Show;
 end;
@@ -12141,7 +12346,6 @@ begin
 
   while not dmSicsMain.cdsFilasClone.Eof do
   begin
-
     if dmSicsMain.cdsFilasClone.FieldByName('Ativo').AsBoolean then
     begin
       LIDFila   := dmSicsMain.cdsFilasClone.FieldByName('ID').AsInteger;
@@ -12149,7 +12353,7 @@ begin
 
       LTempo := GetTempoEsperaUltimosN(LIDFila);
 
-    Result := Result + TAspEncode.AspIntToHex(LIDFila, 4) + LNomeFila + '|' + FormatDateTime('hh:nn:ss',LTempo) + TAB;
+      Result := Result + TAspEncode.AspIntToHex(LIDFila, 4) + LNomeFila + '|' + FormatDateTime('hh:nn:ss',LTempo) + TAB;
     end;
 
     dmSicsMain.cdsFilasClone.Next;
@@ -12183,8 +12387,10 @@ begin
             (frmSicsMain.FindComponent('AtendimentoUltimos10' + inttostr(LIDFila)) as TLabel).Caption));
         end;
       end;
+
       Result := Result + TAspEncode.AspIntToHex(LIDFila, 4) + LNomeFila + '|' + FormatDateTime('hh:nn:ss',LTMAFila) + TAB;
     end;
+
     dmSicsMain.cdsFilasClone.Next;
   end;
 end;
@@ -12195,8 +12401,9 @@ begin
     SysUtils.FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
     SysUtils.FormatSettings.LongTimeFormat  := 'hh:nn:ss';
     Result := strtodatetime((FindComponent('EsperaUltimosN' + IntToStr(fila)) as TLabel).Caption);
-  except on E: Exception do
-    Result := EncodeTime(23, 59, 59, 999);
+  except
+    on E: Exception do
+      Result := EncodeTime(23, 59, 59, 999);
   end;
 end;
 
@@ -12294,7 +12501,9 @@ begin
   LTipoModulo  := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
   if LTipoModulo <> msCallCenter then
-    FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroFilas, IdModulo, tgFila);
+  begin
+    //FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroFilas, IdModulo, tgFila);
+  end;
 
   // with dmSicsMain.cdsFilas do
   with dmSicsMain.cdsFiltroFilas do
@@ -12347,7 +12556,6 @@ begin
     Result := cdsIdsTickets.FieldByName('NomeCliente').AsString;
 end;
 
-
 procedure TfrmSicsMain.InsereAgendamentoFila(IdTicket, IdFila : integer; DataHora : TDateTime);
 begin
   if (IdTicket <= 0) or (IdFila <= 0) or (DataHora <= 0) then
@@ -12365,7 +12573,6 @@ begin
     ApplyUpdates(0);
   end;
 end;
-
 
 procedure TfrmSicsMain.CarregarConexoes(var S: string);
 

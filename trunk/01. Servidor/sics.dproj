@@ -3,7 +3,7 @@
         <ProjectGuid>{CF3E66B7-421E-4E05-86A0-B3455A4DE547}</ProjectGuid>
         <MainSource>Sics.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>

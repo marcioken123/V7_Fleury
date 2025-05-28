@@ -437,7 +437,7 @@ procedure TFrmSicsMultiPA.ClienteConfigurado;
 begin
   inherited;
   Application.ProcessMessages;
-  OrganizaPAs;
+  //OrganizaPAs;
   //btnGrupoPAClick(nil);
   Beep;
 end;
@@ -495,6 +495,8 @@ begin
   Result := True;
 
   try
+    if Assigned(Self.FindComponent(cBtnGrupoPA + IntToStr(GrupoPANo))) then Exit;
+
     btnGrupoPA := TButton.Create(Self);
 
     with btnGrupoPA do
@@ -1718,7 +1720,7 @@ begin
     LockWindowUpdate(0);
 {$ENDIF IS_MOBILE}
   end;
-  OrganizaPAs;
+  //OrganizaPAs;
 end;
 
 procedure TFrmSicsMultiPA.DefinirCor(const aIdUnidade: Integer;
@@ -1942,6 +1944,7 @@ var
   LcdsPAs: TClientDataSet;
   FMaxPanelHeight, FMaxTAGsHeight: Integer;
 begin
+  TLog.MyLog('Entrou OrganizaPAs.', Self, 0, False, tlDEBUG);
   try
     ScreenWidth := Self.Width;
     rectFundo.Visible := False;
@@ -1981,8 +1984,8 @@ begin
             if AlturaPainel < ComponentePA.pnl.Height then
               AlturaPainel := ComponentePA.pnl.Height;
 
-            ComponentePA.pnl.Position.X := OFF + (OFF + LarguraPainel) * (Alinhados mod vgParametrosModulo.ColunasPAs);
-            ComponentePA.pnl.Position.Y := OFF + (OFF + AlturaPainel) * (Alinhados div vgParametrosModulo.ColunasPAs);
+//            ComponentePA.pnl.Position.X := OFF + (OFF + LarguraPainel) * (Alinhados mod vgParametrosModulo.ColunasPAs);
+//            ComponentePA.pnl.Position.Y := OFF + (OFF + AlturaPainel) * (Alinhados div vgParametrosModulo.ColunasPAs);
 
             Alinhados := Alinhados + 1;
 
@@ -1996,6 +1999,7 @@ begin
 
     FMaxPanelHeight := 0;
     FMaxTAGsHeight  := 0;
+    Alinhados := 0;
 
     for var iCont := Low(FMultiPAComponentes) to High(FMultiPAComponentes) do
     begin
@@ -2011,14 +2015,18 @@ begin
 
     for var iCont := Low(FMultiPAComponentes) to High(FMultiPAComponentes) do
     begin
-      if (Assigned(FMultiPAComponentes[iCont]))  then
+      if (Assigned(FMultiPAComponentes[iCont])) and (FMultiPAComponentes[iCont].pnl.Visible)  then
       begin
         FMultiPAComponentes[iCont].pnl.Height := FMaxPanelHeight;
         FMultiPAComponentes[iCont].pnlTAGs.Height := FMaxTAGsHeight;
+        FMultiPAComponentes[iCont].pnl.Position.X := OFF + (OFF + LarguraPainel) * (Alinhados mod vgParametrosModulo.ColunasPAs);
+        FMultiPAComponentes[iCont].pnl.Position.Y := OFF + (OFF + FMaxPanelHeight) * (Alinhados div vgParametrosModulo.ColunasPAs);
+        Inc(Alinhados);
       end;
     end;
   finally
     rectFundo.Visible := True;
+    TLog.MyLog('Entrou OrganizaPAs. MaxPanelHeight: ' + IntToStr(FMaxPanelHeight) + ' MaxTAGsHeight: ' + IntToStr(FMaxTAGsHeight), Self, 0, False, tlDEBUG);
   end;
 end;
 
@@ -2269,7 +2277,6 @@ begin
 
   tmrAtualizaForm.Enabled := False;
 
-  OrganizaPAs;
 
   if (Self.Width < 240) then
   begin
@@ -2280,6 +2287,7 @@ begin
     Self.Height := FAlturaMinima + 100;
   end;
 
+  //OrganizaPAs;
   inherited;
 end;
 

@@ -123,9 +123,9 @@
         <DCC_ExeOutput>..\bin\debug</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>136</VerInfo_Build>
+        <VerInfo_Build>137</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <VerInfo_Keys>CompanyName=ASPECT Midia;FileVersion=7.3.0.136;InternalName=;LegalCopyright=©ASPECT Mídia;LegalTrademarks=SICS is trademark of ASPECT Midia / ASPECT Midia is trademark of ASPECT Midia;OriginalFilename=;ProductName=SICS - Sistema Inteligente de Chamada de Senhas;ProductVersion=7.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=ASPECT Midia;FileVersion=7.3.0.137;InternalName=;LegalCopyright=©ASPECT Mídia;LegalTrademarks=SICS is trademark of ASPECT Midia / ASPECT Midia is trademark of ASPECT Midia;OriginalFilename=;ProductName=SICS - Sistema Inteligente de Chamada de Senhas;ProductVersion=7.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName)</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_MajorVer>7</VerInfo_MajorVer>
         <VerInfo_MinorVer>3</VerInfo_MinorVer>
