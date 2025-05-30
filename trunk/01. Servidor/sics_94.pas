@@ -2227,6 +2227,8 @@ end;
 function GetNomeColunaTipoGrupoTGS(Const aTipoDeGrupoTGS: TTipoDeGrupo): string;
 begin
   case aTipoDeGrupoTGS of
+    tgNomesPAs:
+      result := 'GRUPOS_DE_PAS_PERMITIDAS';
     tgTAG:
       result := 'GRUPOS_DE_TAGS_PERMITIDOS';
     tgPA:

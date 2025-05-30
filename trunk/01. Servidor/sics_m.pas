@@ -5085,10 +5085,11 @@ begin
     vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
     vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgFila);
 
-    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
-      Exit;
+//    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+//      Exit;
 
-    vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+    if (vNomeTabela <> EmptyStr) and (vNomeColuna <> EmptyStr) then
+      vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
 
     TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendFilasNamesText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
                                                                        ' NomeTabela: ' + vNomeTabela +
@@ -5110,7 +5111,7 @@ begin
       LQuery.First;
       while not LQuery.Eof do
       begin
-        if (LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID').AsInteger, vRangeIDs)) then
+        if (LQuery.FieldByName('Ativo').AsBoolean) and (ExisteNoIntArray(LQuery.FieldByName('ID').AsInteger, vRangeIDs) or (vNomeColuna = EmptyStr)) then
         begin
           I                  := I + 1;
           IdFila             := LQuery.FieldByName('ID').AsInteger;
