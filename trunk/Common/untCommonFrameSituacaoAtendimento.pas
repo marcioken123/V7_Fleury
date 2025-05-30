@@ -143,7 +143,11 @@ function FraSituacaoAtendimento(const aIDUnidade: integer; const aAllowNewInstan
 
 implementation
 
-uses untCommonDMClient, untCommonDMConnection, Sics_Common_Parametros, untLog;
+uses
+  untCommonDMClient,
+  untCommonDMConnection,
+  Sics_Common_Parametros,
+  untLog;
 
 {$R *.fmx}
 
@@ -197,6 +201,7 @@ begin
     finally
       cdsPAs.Filtered  := LEstavaFiltrandoPAs;
       cdsAtds.Filtered := LEstavaFiltrandoAtend;
+
       if (LOldRecnoPA > -1) then
         cdsPAs.RecNo := LOldRecnoPA;
     end;
@@ -256,6 +261,7 @@ begin
     finally
       cdsPAs.Filtered := LEstavaFiltrandoPAs;
       cdsAtds.Filtered := LEstavaFiltrandoAtend;
+
       if (LOldRecnoAtds > -1) then
         cdsAtds.RecNo := LOldRecnoAtds;
     end;
@@ -541,6 +547,7 @@ begin
     cbbPausa.Items.Add(cFiltroTodos);
     nRecno          := LDMClient.cdsMotivosPausa.RecNo;
     LOldMotivoPausa := '';
+
     if (cbbPausa.ItemIndex > -1) then
       LOldMotivoPausa := cbbPausa.Items[cbbPausa.ItemIndex];
     try
@@ -553,6 +560,7 @@ begin
     finally
       if (nRecno > -1) then
         LDMClient.cdsMotivosPausa.RecNo := nRecno;
+
       if (LOldMotivoPausa <> '') then
         cbbPausa.ItemIndex := cbbPausa.Items.IndexOf(LOldMotivoPausa)
       else
@@ -578,6 +586,7 @@ begin
     cmbEstado.OnChange := nil;
     LOldRecno  := LDMClient.cdsStatusPAs.RecNo;
     LOldEstado := '';
+
     if (cmbEstado.ItemIndex > -1) then
       LOldEstado := cmbEstado.Items[cmbEstado.ItemIndex];
     try
@@ -592,6 +601,7 @@ begin
     finally
       if (LOldRecno > -1) then
         LDMClient.cdsStatusPAs.RecNo := LOldRecno;
+
       if (LOldEstado <> '') then
         cmbEstado.ItemIndex := cmbEstado.Items.IndexOf(LOldEstado)
       else
@@ -787,129 +797,134 @@ var
   bEstavaFiltrandoPAs, bEstavaFiltrandoAtds: Boolean;
   AtdLogado, PALogada: Integer;
 begin
-  AtdLogado := -1;
-  PALogada := -1;
+  try
+    AtdLogado := -1;
+    PALogada := -1;
 
-  with cdsAtdsClone do
-  begin
-    if ((Locate('ID_ATD', Atd, [])) and (not FieldByName('ID_PA').IsNull)) then
-      PALogada := FieldByName('ID_PA').AsInteger;
-  end;
-
-  with cdsPAsClone do
-  begin
-    if ((Locate('ID_PA', PA, [])) and (not FieldByName('ID_ATD').IsNull)) then
-      AtdLogado := FieldByName('ID_ATD').AsInteger;
-  end;
-
-  with cdsPAsClone do
-  begin
-    if PA <> PALogada then
+    with cdsAtdsClone do
     begin
-      if Locate('ID_PA', PALogada, []) then
+      if ((Locate('ID_ATD', Atd, [])) and (not FieldByName('ID_PA').IsNull)) then
+        PALogada := FieldByName('ID_PA').AsInteger;
+    end;
+
+    with cdsPAsClone do
+    begin
+      if ((Locate('ID_PA', PA, [])) and (not FieldByName('ID_ATD').IsNull)) then
+        AtdLogado := FieldByName('ID_ATD').AsInteger;
+    end;
+
+    with cdsPAsClone do
+    begin
+      if PA <> PALogada then
+      begin
+        if Locate('ID_PA', PALogada, []) then
+        begin
+          Edit;
+
+          FieldByName('Id_Status').AsInteger:= Integer(spDeslogado);
+          FieldByName('ID_ATD').Clear;
+          FieldByName('SENHA').Clear;
+          FieldByName('ID_FILA').Clear;
+          FieldByName('ID_MOTIVOPAUSA').Clear;
+          FieldByName('HORARIO').AsDateTime := TIM;
+
+          Post;
+        end;
+      end;
+
+      if Locate('ID_PA', PA, []) then
       begin
         Edit;
 
-        FieldByName('Id_Status').AsInteger:= Integer(spDeslogado);
-        FieldByName('ID_ATD').Clear;
-        FieldByName('SENHA').Clear;
-        FieldByName('ID_FILA').Clear;
-        FieldByName('ID_MOTIVOPAUSA').Clear;
-        FieldByName('HORARIO').AsDateTime := TIM;
+        if StatusPA = -1 then
+          FieldByName('Id_Status').AsInteger:= Integer(spDeslogado)
+        else
+          FieldByName('ID_STATUS').AsInteger := StatusPA;
+
+        if ATD = -1 then
+          FieldByName('ID_ATD').Clear
+        else
+          FieldByName('ID_ATD').AsInteger := ATD;
+
+        if ((PWD = '-1') or (PWD = '---')) then
+          FieldByName('SENHA').Clear
+        else
+          FieldByName('SENHA').AsString := PWD;
+
+        if FilaProveniente = -1 then
+          FieldByName('ID_FILA').Clear
+        else
+          FieldByName('ID_FILA').AsInteger := FilaProveniente;
+
+        if MotivoPausa = -1 then
+          FieldByName('ID_MOTIVOPAUSA').Clear
+        else
+          FieldByName('ID_MOTIVOPAUSA').AsInteger := MotivoPausa;
+
+        FieldByName('HORARIO').AsDateTime   := TIM;
+        FieldByName('NomeCliente').AsString := NomeCliente;
 
         Post;
       end;
     end;
 
-    if Locate('ID_PA', PA, []) then
+    with cdsAtdsClone do
     begin
-      Edit;
+      if ATD <> AtdLogado then
+      begin
+        if Locate('ID_ATD', AtdLogado, []) then
+        begin
+          Edit;
 
-      if StatusPA = -1 then
-        FieldByName('Id_Status').AsInteger:= Integer(spDeslogado)
-      else
-        FieldByName('ID_STATUS').AsInteger := StatusPA;
+          FieldByName('Id_Status').AsInteger:= Integer(spDeslogado);
+          FieldByName('ID_PA').Clear;
+          FieldByName('SENHA').Clear;
+          FieldByName('ID_FILA').Clear;
+          FieldByName('ID_MOTIVOPAUSA').Clear;
+          FieldByName('HORARIO').AsDateTime := TIM;
 
-      if ATD = -1 then
-        FieldByName('ID_ATD').Clear
-      else
-        FieldByName('ID_ATD').AsInteger := ATD;
+          Post;
+        end;
+      end;
 
-      if ((PWD = '-1') or (PWD = '---')) then
-        FieldByName('SENHA').Clear
-      else
-        FieldByName('SENHA').AsString := PWD;
-
-      if FilaProveniente = -1 then
-        FieldByName('ID_FILA').Clear
-      else
-        FieldByName('ID_FILA').AsInteger := FilaProveniente;
-
-      if MotivoPausa = -1 then
-        FieldByName('ID_MOTIVOPAUSA').Clear
-      else
-        FieldByName('ID_MOTIVOPAUSA').AsInteger := MotivoPausa;
-
-      FieldByName('HORARIO').AsDateTime   := TIM;
-      FieldByName('NomeCliente').AsString := NomeCliente;
-
-      Post;
-    end;
-  end;
-
-  with cdsAtdsClone do
-  begin
-    if ATD <> AtdLogado then
-    begin
-      if Locate('ID_ATD', AtdLogado, []) then
+      if Locate('ID_ATD', ATD, []) then
       begin
         Edit;
 
-        FieldByName('Id_Status').AsInteger:= Integer(spDeslogado);
-        FieldByName('ID_PA').Clear;
-        FieldByName('SENHA').Clear;
-        FieldByName('ID_FILA').Clear;
-        FieldByName('ID_MOTIVOPAUSA').Clear;
-        FieldByName('HORARIO').AsDateTime := TIM;
+        if StatusPA = -1 then
+          FieldByName('Id_Status').AsInteger:= Integer(spDeslogado)
+        else
+          FieldByName('ID_STATUS').AsInteger := StatusPA;
+
+        if PA = -1 then
+          FieldByName('ID_PA').Clear
+        else
+          FieldByName('ID_PA').AsInteger := PA;
+
+        if ((PWD = '-1') or (PWD = '---')) then
+          FieldByName('SENHA').Clear
+        else
+          FieldByName('SENHA').AsString := PWD;
+
+        if FilaProveniente = -1 then
+          FieldByName('ID_FILA').Clear
+        else
+          FieldByName('ID_FILA').AsInteger := FilaProveniente;
+
+        if MotivoPausa = -1 then
+          FieldByName('ID_MOTIVOPAUSA').Clear
+        else
+          FieldByName('ID_MOTIVOPAUSA').AsInteger := MotivoPausa;
+
+        FieldByName('HORARIO').AsDateTime   := TIM;
+        FieldByName('NomeCliente').AsString := NomeCliente;
 
         Post;
       end;
     end;
-
-    if Locate('ID_ATD', ATD, []) then
-    begin
-      Edit;
-
-      if StatusPA = -1 then
-        FieldByName('Id_Status').AsInteger:= Integer(spDeslogado)
-      else
-        FieldByName('ID_STATUS').AsInteger := StatusPA;
-
-      if PA = -1 then
-        FieldByName('ID_PA').Clear
-      else
-        FieldByName('ID_PA').AsInteger := PA;
-
-      if ((PWD = '-1') or (PWD = '---')) then
-        FieldByName('SENHA').Clear
-      else
-        FieldByName('SENHA').AsString := PWD;
-
-      if FilaProveniente = -1 then
-        FieldByName('ID_FILA').Clear
-      else
-        FieldByName('ID_FILA').AsInteger := FilaProveniente;
-
-      if MotivoPausa = -1 then
-        FieldByName('ID_MOTIVOPAUSA').Clear
-      else
-        FieldByName('ID_MOTIVOPAUSA').AsInteger := MotivoPausa;
-
-      FieldByName('HORARIO').AsDateTime   := TIM;
-      FieldByName('NomeCliente').AsString := NomeCliente;
-
-      Post;
-    end;
+  except
+    on E: Exception do
+      MyLogException(E);
   end;
 end;
 
@@ -969,6 +984,7 @@ begin
       cdsResumoStatus.CloneCursor(cdsPAs, True, False)
     else
       cdsResumoStatus.CloneCursor(cdsAtds, True, False);
+
     cdsResumoStatus.First;
     while not cdsResumoStatus.Eof do
     begin
@@ -981,23 +997,29 @@ begin
              MotivoInc(cdsResumoStatus.FieldByName('Id_MotivoPausa').AsString);
            end;
       end;
+
       cdsResumoStatus.Next;
     end;
+
     cdsResumoStatus.Close;
 
     lblQtdDisponivel.Text := LDisp.ToString;
     lblQtdAtendendo.Text  := LAten.ToString;
     lblQtdDeslogado.Text  := LDesl.ToString;
     lblQtdEmPausa.Text    := LPaus.ToString;
+
     if LPaus > 0 then
     begin
       lblQtdEmPausa.Text := lblQtdEmPausa.Text + ' (';
+
       for LMotivo in FResumoMotivosPausa.Keys do
-        lblQtdEmPausa.Text := lblQtdEmPausa.Text + GetNomeMotivo(LMotivo) + ': ' +
-                              FResumoMotivosPausa.Items[LMotivo].ToString + ', ';
+        lblQtdEmPausa.Text := lblQtdEmPausa.Text + GetNomeMotivo(LMotivo) + ': ' + FResumoMotivosPausa.Items[LMotivo].ToString + ', ';
+
       lblQtdEmPausa.Text := Copy(lblQtdEmPausa.Text, 1, Length(lblQtdEmPausa.Text)-2) + ')';
     end;
   except
+    on E: Exception do
+      MyLogException(E);
   end;
 end;
 

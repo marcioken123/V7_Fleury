@@ -283,7 +283,8 @@ uses
   System.StrUtils,
   ASPGenerator,
   UConexaoBD,
-  FMX.Dialogs, untCommonFormDadosAdicionais;
+  FMX.Dialogs,
+  untCommonFormDadosAdicionais;
 
 {$IFDEF FIREMONKEY}
 { %CLASSGROUP 'FMX.Controls.TControl' }
@@ -330,11 +331,9 @@ begin
   Result := TGenerator.NGetNextGenerator(GeneratorName, ANewSqlConnection);
 end;
 
-procedure TDMClient.SolicitarAtualizacaoPIs(const aIdUnidade: Integer;
-  const aAguardarRetorno: Boolean);
+procedure TDMClient.SolicitarAtualizacaoPIs(const aIdUnidade: Integer; const aAguardarRetorno: Boolean);
 begin
-  DMConnection(aIdUnidade, not CRIAR_SE_NAO_EXISTIR)
-    .EnviarComando(cProtocoloPAVazia + Chr($66),
+  DMConnection(aIdUnidade, not CRIAR_SE_NAO_EXISTIR).EnviarComando(cProtocoloPAVazia + Chr($66),
                    aIdUnidade,
                    'Solicitando atualização dos PIs',
                    aAguardarRetorno);
@@ -410,8 +409,7 @@ end;
 
 function TDMClient.ClientConectarViaDB: boolean;
 begin
- Result:= (vgParametrosModulo.DBDir <> '') and
-          (IdUnidade = vgParametrosModulo.UnidadePadrao);
+  Result:= (vgParametrosModulo.DBDir <> '') and (IdUnidade = vgParametrosModulo.UnidadePadrao);
 end;
 
 procedure TDMClient.ConnectarDB;
@@ -445,10 +443,9 @@ begin
   end;
 end;
 
-constructor TDMClient.Create(AOwner: TComponent;
-  const aIdUnidade: Integer);
+constructor TDMClient.Create(AOwner: TComponent; const aIdUnidade: Integer);
 begin
- Create(AOwner);
+  Create(AOwner);
   IdUnidade := aIdUnidade;
 end;
 
@@ -801,8 +798,7 @@ begin
    Result := FIDUnidade;
 end;
 
-class function TDMClient.GetInstancia(const aIDUnidade: integer;
-  const aAllowNewInstance: Boolean; const aOwner: TComponent): TDMClient;
+class function TDMClient.GetInstancia(const aIDUnidade: integer; const aAllowNewInstance: Boolean; const aOwner: TComponent): TDMClient;
 var
   LOwner: TComponent;
 begin
@@ -854,7 +850,6 @@ end;
 
 procedure TDMClient.InsertAtd(Atd: Integer; Nome, RegFuncional, SenhaLogin, aLogin: string; Grupo: Integer);
 begin
-
   with cdsAtendentes do
   begin
     if Locate('ID', Atd, []) then
@@ -869,6 +864,7 @@ begin
     FieldByName('RegistroFuncional').AsString := RegFuncional;
     FieldByName('SenhaLogin').AsString        := SenhaLogin;
     cdsAtendenteslogin.AsString               := aLogin;
+
     if Grupo = -1 then
       FieldByName('IdGrupo').Clear
     else
@@ -893,7 +889,6 @@ begin
   {$ENDIF CompilarPara_PA_MULTIPA}
   cdsPessoasFilaEsperaPA.Post;
 end;
-
 
 procedure TDMClient.InsertFila(Fila: Integer; Nome: string; Cor : integer);
 begin
@@ -969,7 +964,6 @@ end;
 
 procedure TDMClient.InsertGrupoPP(Grupo: Integer; Nome: string);
 begin
-
   with cdsGruposDePPs do
   begin
     if Locate('ID', Grupo, []) then
@@ -987,7 +981,6 @@ end;
 
 procedure TDMClient.InsertGrupoTAG(Grupo: Integer; Nome: string);
 begin
-
   with cdsGruposDeTAGs do
   begin
     if Locate('ID', Grupo, []) then
@@ -1053,7 +1046,6 @@ end;
 
 procedure TDMClient.InsertPP(IdPP: Integer; Nome: string; Grupo, Cor: Integer);
 begin
-
   with cdsPPs do
   begin
     if Locate('ID', IdPP, []) then
@@ -1115,12 +1107,10 @@ begin
   end;
 end;
 
-
 function TDMClient.ExistePA (IdPA : integer) : boolean;
 begin
   Result := cdsPAs.Locate('ID', IdPA, []);
 end;
-
 
 procedure TDMClient.LimparAgendamentos(PA: integer);
 begin
@@ -1149,7 +1139,6 @@ begin
     Post;
   end;
 end;
-
 
 function TDMClient.ExisteAgendamento(PA, Senha, Fila: integer; var DataHora: TDateTime): boolean;
 begin

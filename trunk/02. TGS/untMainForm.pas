@@ -17,7 +17,8 @@ uses
   FMX.Edit, FMX.Grid, System.Rtti, untCommonFormBaseOnLineTGS, FMX.Platform,
   MyAspFuncoesUteis,FMX.ListBox,
   FMX.Menus, FMX.Controls.Presentation, System.ImageList,
-  FMX.ImgList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components, FMX.SearchBox, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.DBScope, Data.DB,
+  FMX.ImgList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
+  FMX.SearchBox, System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.DBScope, Data.DB,
   Datasnap.DBClient,untCommonFormStyleBook, FMX.Effects, FMX.TabControl, FMX.Ani,FMX.Platform.Win;
 
 {$INCLUDE ..\SicsVersoes.pas}
@@ -109,8 +110,7 @@ type
     procedure cbbUnidadeAtivaChange(Sender: TObject);
     procedure lstItemDashboardConfigClick(Sender: TObject);
     procedure lstItemDashboardClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure lstItemClientesClick(Sender: TObject);
     procedure imgSetaAbrirClick(Sender: TObject);
     procedure lstItemSitefClick(Sender: TObject);
@@ -119,8 +119,7 @@ type
     procedure MyExceptionHandler(Sender: TObject; E: Exception);
     procedure GetAllParameters(const aIdUnidade: Integer);
     procedure ApresentarSelecaoMultiUnidades;
-    procedure AoMudarStatusConexaoUnidade(const aIdUnidade: Integer;
-      const aConectada: Boolean);
+    procedure AoMudarStatusConexaoUnidade(const aIdUnidade: Integer; const aConectada: Boolean);
   protected
 
     procedure SetIDUnidade(const Value: Integer); override;
@@ -190,10 +189,18 @@ uses
   untCommonFrameSituacaoAtendimento, ufrmLines, ufrmDadosPorUnidade,
   ufrmMensagemPainelEImpressora, udmCadPIS, ufrmCadPIS, udmCadHor, ufrmCadHor,
   ufrmCadAlarmes, ufrmConfiguraTabela, untCommonFormProcessoParalelo,
-  ufrmConfigPrioridades, Sics_Common_Splash, ufrmPesquisaRelatorio,
-  ufrmPesquisaRelatorioPausas, ufrmPesquisaRelatorioPP, ufrmCadBase,
-  untCommonDMConnection, untCommonDMUnidades, ufrmDashboard,
-  ufrmDashboardConfig,untCommonControleInstanciaAplicacao,ufrmPesquisaRelatorioSitef,
+  ufrmConfigPrioridades,
+  Sics_Common_Splash,
+  ufrmPesquisaRelatorio,
+  ufrmPesquisaRelatorioPausas,
+  ufrmPesquisaRelatorioPP,
+  ufrmCadBase,
+  untCommonDMConnection,
+  untCommonDMUnidades,
+  ufrmDashboard,
+  ufrmDashboardConfig,
+  untCommonControleInstanciaAplicacao,
+  ufrmPesquisaRelatorioSitef,
   ufrmPesquisaRelatorioTotem;
 
 procedure TMainForm.CarregarParametrosDB;
@@ -229,13 +236,14 @@ var
   LDMConnectionAtual, LDMConnectionNovo: TDMConnection;
   LfrmSicsConfigPrioridades: TFrmSicsConfigPrioridades;
 begin
-  LIdUnidadeSelecionada :=
-    dmUnidades.IdUnidadeConformePosicaoNaLista(cbbUnidadeAtiva.ItemIndex+1);
+  LIdUnidadeSelecionada := dmUnidades.IdUnidadeConformePosicaoNaLista(cbbUnidadeAtiva.ItemIndex+1);
+
   if LIdUnidadeSelecionada = IDUnidade then
     exit;
 
   LDMConnectionAtual := DMConnection(IDUnidade, CRIAR_SE_NAO_EXISTIR);
   LDMConnectionNovo  := DMConnection(LIdUnidadeSelecionada, CRIAR_SE_NAO_EXISTIR);
+
   if Assigned(LDMConnectionAtual) and Assigned(LDMConnectionNovo) then
   begin
     LDMConnectionAtual.tmrReconnect.Enabled := False;
@@ -298,7 +306,8 @@ var
   var
     LProcZerarFrameAtivoAoFechar: TProcOnHide;
   begin
-    LProcZerarFrameAtivoAoFechar := procedure (Sender: TObject) begin
+    LProcZerarFrameAtivoAoFechar := procedure (Sender: TObject)
+                                    begin
                                       FFrameAtivo := nil;
                                     end;
     FFrameAtivo := AFrame;
@@ -390,8 +399,7 @@ begin
           LfrmSicsConfigPrioridades.ProcIDUnidade :=
             procedure(IDUnidade: Integer)
             begin
-              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR)
-                .EnviarComando(cProtocoloPAVazia + Chr($26), IdUnidade);
+              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR).EnviarComando(cProtocoloPAVazia + Chr($26), IdUnidade);
             end;
 
           ExibeFormPorUnidade(LfrmSicsConfigPrioridades);
@@ -402,7 +410,9 @@ begin
           SetFrameAtivo(LfrmSicsConfigPrioridades);
           LfrmSicsConfigPrioridades.cbbPA.ItemIndex := 0;
           LfrmSicsConfigPrioridades.btnIncluir.SetFocus;
-        finally
+        except
+          on E: Exception do
+            MyLogException(E);
         end;
       end;
     INDEX_PainelEletronico:
@@ -414,18 +424,20 @@ begin
           LfrmMensagemPainelEImpressora.ProcPainel :=
             procedure(IdPainel: Integer; aMensagem: String; IdUnidade: Integer)
             begin
-              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR)
-                .EnviarComando(cProtocoloPAVazia + Chr($2B) +
+              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR).EnviarComando(cProtocoloPAVazia + Chr($2B) +
                                TAspEncode.AspIntToHex(IdPainel, 4) + aMensagem,
                                IdUnidade);
             end;
+
           ExibeFormPorUnidade(LfrmMensagemPainelEImpressora);
           LfrmMensagemPainelEImpressora.botaoMenu := btnConfiguracoes;
           LfrmMensagemPainelEImpressora.botaoSubMenu := lstItemPainelEletronico;
           LfrmMensagemPainelEImpressora.imgSeta := imgSetaConfiguracoes;
           LfrmMensagemPainelEImpressora.lytSubMenu := lytSubMenu;
           SetFrameAtivo(LfrmMensagemPainelEImpressora);
-        finally
+        except
+          on E: Exception do
+            MyLogException(E);
         end;
       end;
     INDEX_ImpressoraDeSenhas:
@@ -437,16 +449,18 @@ begin
           LFrmMensagemPainelEImpressora.ProcPainel :=
             procedure(IdPrinter: Integer; aMensagem: String; IdUnidade: Integer)
             begin
-              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR)
-                .EnviarComando(cProtocoloPAVazia + Chr($2C) + TAspEncode.AspIntToHex(IdPrinter,4) + aMensagem, IdUnidade);
+              DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR).EnviarComando(cProtocoloPAVazia + Chr($2C) + TAspEncode.AspIntToHex(IdPrinter,4) + aMensagem, IdUnidade);
             end;
+
           ExibeFormPorUnidade(LFrmMensagemPainelEImpressora);
           LfrmMensagemPainelEImpressora.botaoMenu := btnConfiguracoes;
           LfrmMensagemPainelEImpressora.botaoSubMenu := lstItemImpressoraSenhas;
           LfrmMensagemPainelEImpressora.imgSeta := imgSetaConfiguracoes;
           LfrmMensagemPainelEImpressora.lytSubMenu := lytSubMenu;
           SetFrameAtivo(LfrmMensagemPainelEImpressora);
-        finally
+        except
+          on E: Exception do
+            MyLogException(E);
         end;
       end;
     INDEX_Atendentes:
@@ -468,7 +482,9 @@ begin
            LFrmSicsConfiguraTabela.lytSubMenu := lytSubMenu;
            LFrmSicsConfiguraTabela.ExibirOcultarCampoBusca(false);
            SetFrameAtivo(LFrmSicsConfiguraTabela);
-         finally
+        except
+          on E: Exception do
+            MyLogException(E);
          end;
       end;
     INDEX_Clientes:
@@ -490,7 +506,9 @@ begin
            LFrmSicsConfiguraTabela.lytSubMenu := lytSubMenu;
            LFrmSicsConfiguraTabela.ExibirOcultarCampoBusca(false);
            SetFrameAtivo(LFrmSicsConfiguraTabela);
-         finally
+        except
+          on E: Exception do
+            MyLogException(E);
          end;
       end;
     INDEX_DashboardConfig:
@@ -550,10 +568,10 @@ begin
         SetFrameAtivo(LFrmSicsCadAlarmes);
       end;
     {$ENDREGION}
-
   else
     Exit;
   end;
+
   if Assigned(LListBoxItem) then
   begin
     LListBoxItem.Selectable := true;
@@ -563,7 +581,7 @@ end;
 
 procedure TMainForm.Fechar;
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TMainForm.FormActivate(Sender: TObject);
@@ -586,8 +604,7 @@ begin
   TdmControleInstanciaAplicacao.Create(self).Tela := self;
 end;
 
-procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
+procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
  inherited;
 
@@ -595,8 +612,7 @@ begin
      FFrameAtivo.OnKeyDown(Sender, Key, KeyChar, Shift);
 end;
 
-procedure TMainForm.FormMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
+procedure TMainForm.FormMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   inherited;
 
@@ -740,11 +756,13 @@ begin
     lytSubMenu.Visible := False;
     Exit;
   end;
+
   lytSubMenu.Opacity := 0;
   lytSubMenu.Visible := True;
   lytSubMenuPI.Visible := false;
   lstSubMenu.BeginUpdate;
   lytUnidadeAtiva.Visible := False;
+
   try
     while lstSubMenu.Items.Count > 0 do
       lstSubMenu.ItemByIndex(0).Parent := lstItensOcultos;
@@ -766,11 +784,13 @@ begin
              lstItemSituacaoFila.Index := INDEX_Lines;
              lstItemIndicadorPerformance.Parent := lstSubMenu;
              lstItemIndicadorPerformance.Index := INDEX_IndicadorPerformance;
+
              if not vgParametrosModulo.ModoCallCenter then
              begin
                lstItemSituacaoAtendimento.Parent := lstSubMenu;
                lstItemSituacaoAtendimento.Index := INDEX_SituacaoAtendimento;
              end;
+
              ApresentarSelecaoMultiUnidades;
            end;
        1 : begin
@@ -1016,8 +1036,7 @@ begin
   Close;
 end;
 
-procedure TMainForm.AoMudarStatusConexaoUnidade(
-  const aIdUnidade: Integer; const aConectada: Boolean);
+procedure TMainForm.AoMudarStatusConexaoUnidade(const aIdUnidade: Integer; const aConectada: Boolean);
 var
   LPosicao: Integer;
 begin
@@ -1046,14 +1065,13 @@ begin
     cbbUnidadeAtiva.BeginUpdate;
     try
       cbbUnidadeAtiva.Clear;
-      dmUnidades.PreencherListaUnidades(cbbUnidadeAtiva.Items,
-                                        dmUnidades.cdsUnidadesNOME.FieldName);
+      dmUnidades.PreencherListaUnidades(cbbUnidadeAtiva.Items, dmUnidades.cdsUnidadesNOME.FieldName);
       //percorre os itens do combobox deixando-os em vermelho
       for i := 0 to cbbUnidadeAtiva.Items.Count-1 do
       begin
         with cbbUnidadeAtiva.ListItems[i] do
         begin
-          if not dmUnidades.Conectada[dmUnidades.IdUnidadeConformePosicaoNaLista(i+1)] then
+          if not dmUnidades.Conectada[dmUnidades.IdUnidadeConformePosicaoNaLista(i + 1)] then
           begin
             StyledSettings := StyledSettings - [TStyledSetting.FontColor];
             FontColor      := TAlphaColorRec.Red;
@@ -1063,7 +1081,8 @@ begin
     finally
       cbbUnidadeAtiva.EndUpdate;
     end;
-    cbbUnidadeAtiva.ItemIndex := dmUnidades.PosicaoNaLista(dmUnidades.UnidadeAtiva)-1;
+
+    cbbUnidadeAtiva.ItemIndex := dmUnidades.PosicaoNaLista(dmUnidades.UnidadeAtiva) - 1;
   finally
     cbbUnidadeAtiva.OnChange := LOldChange;
   end;
@@ -1071,14 +1090,13 @@ begin
   IDUnidade := dmUnidades.UnidadeAtiva;
   ApresentarSelecaoMultiUnidades;
 
-  Application.Title := 'SICS - Terminal Gerenciador do Sistema(' +
-    vgParametrosModulo.Unidade + ')';
-  if(dmUnidades.cdsUnidades.Active and
-    (dmUnidades.Quantidade <= 1)) then
+  Application.Title := 'SICS - Terminal Gerenciador do Sistema(' + vgParametrosModulo.Unidade + ')';
+
+  if(dmUnidades.cdsUnidades.Active and (dmUnidades.Quantidade <= 1)) then
     Self.Caption := 'SICS - Módulo TGS - ' + vgParametrosModulo.Unidade;
 
   if(vgParametrosModulo.Unidade = '')then
-  Self.Caption := 'SICS - Módulo TGS'
+    Self.Caption := 'SICS - Módulo TGS';
 end;
 
 procedure TMainForm.DesabilitaListBoxItem;
@@ -1121,8 +1139,7 @@ end;
 procedure TMainForm.tmrBuscaSituacaoFilaTimer(Sender: TObject);
 begin
   inherited;
-  DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR)
-    .EnviarComando(cProtocoloPAVazia + Chr($34), FIDUnidade);
+  DMConnection(IDUnidade, not CRIAR_SE_NAO_EXISTIR).EnviarComando(cProtocoloPAVazia + Chr($34), FIDUnidade);
 end;
 
 procedure TMainForm.ApresentarSelecaoMultiUnidades;

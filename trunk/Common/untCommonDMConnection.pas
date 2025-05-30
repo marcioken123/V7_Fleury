@@ -656,8 +656,7 @@ begin
         end;
 
         {$IFDEF CompilarPara_PA_MULTIPA}
-        LBeginUpdatePA := Assigned(dmUnidades.FormClient)
-          and dmUnidades.FormClient.BeginUpdatePA(LListaPa);
+        LBeginUpdatePA := Assigned(dmUnidades.FormClient) and dmUnidades.FormClient.BeginUpdatePA(LListaPa);
 
         {$IFDEF CompilarPara_PA}
         if Assigned(dmUnidades.FormClient) then

@@ -1013,8 +1013,12 @@ begin
 
     Result := True;
   except
-    Result := False;
-    Exit;
+    on E: Exception do
+    begin
+      MyLogException(E);
+      Result := False;
+      Exit;
+    end;
   end;
 end;
 

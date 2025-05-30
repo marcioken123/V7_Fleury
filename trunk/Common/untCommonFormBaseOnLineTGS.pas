@@ -80,7 +80,8 @@ uses
   untCommonFrameIndicadorPerformance,
   untCommonDMUnidades,
   System.IniFiles,
-  APIs.Aspect.Sics.ImprimirEtiqueta, untCommonFormDadosAdicionais;
+  APIs.Aspect.Sics.ImprimirEtiqueta,
+  untCommonFormDadosAdicionais;
 
 procedure TFrmBase_OnLine_TGS.CarregarParametrosINI;
 begin
@@ -128,7 +129,6 @@ end;
 procedure TFrmBase_OnLine_TGS.SetModoConexaoAtual(const aIdUnidade: Integer;const Value: boolean);
 begin
   inherited;
-
 end;
 
 procedure TFrmBase_OnLine_TGS.DefinirNomeParaSenha(const aIdUnidade, Senha: Integer; const Nome: string);
@@ -145,10 +145,8 @@ begin
     LFrmProcessoParalelo.UpdateNomeCliente(Senha, Nome);
 end;
 
-
 destructor TFrmBase_OnLine_TGS.Destroy;
 begin
-
   inherited;
 end;
 
@@ -174,8 +172,7 @@ begin
   Application.Terminate;
 end;
 
-procedure TFrmBase_OnLine_TGS.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFrmBase_OnLine_TGS.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   canClose := PodeFechar;
   inherited;

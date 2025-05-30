@@ -735,19 +735,20 @@ begin
     cdsUnidadesclone.First;
     while not cdsUnidadesclone.Eof do
     begin
-        try
-          if aFuncao then
-            Result := True;
-        except
-          on E: Exception do
-          begin
-            ErrorMessage(Format('Erro ao executar para a unidade %n. %s',
-              [cdsUnidadesclone.FieldByName('ID').AsInteger,
-               sLineBreak + 'Erro: ' + E.Message]));
-            cdsUnidadesclone.Next;
-            Continue;
-          end;
+      try
+        if aFuncao then
+          Result := True;
+      except
+        on E: Exception do
+        begin
+          ErrorMessage(Format('Erro ao executar para a unidade %n. %s',
+            [cdsUnidadesclone.FieldByName('ID').AsInteger,
+             sLineBreak + 'Erro: ' + E.Message]));
+          cdsUnidadesclone.Next;
+          Continue;
         end;
+      end;
+
       cdsUnidadesclone.Next;
     end;
   end;
@@ -828,8 +829,7 @@ begin
   end;
 end;
 
-function TdmUnidades.IdUnidadeConformePosicaoNaLista(
-  const aPosicao: Integer): Integer;
+function TdmUnidades.IdUnidadeConformePosicaoNaLista(const aPosicao: Integer): Integer;
 begin
   cdsUnidadesClone.RecNo := aPosicao;
   result := cdsUnidadesClone.FieldByName(cdsUnidadesID.FieldName).AsInteger;
@@ -901,8 +901,7 @@ begin
     try
       while not dmUnidades.qryUnidades.Eof do
       begin
-        if ExisteNoIntArray(dmUnidades.qryUnidadesID.Value,
-                            vgParametrosModulo.UnidadesPermitidas) then
+        if ExisteNoIntArray(dmUnidades.qryUnidadesID.Value, vgParametrosModulo.UnidadesPermitidas) then
         begin
           LChave := Format(CHAVE, [dmUnidades.qryUnidadesID.Value]);
           LIdModulo := LIni.ReadInteger(SESSAO, LChave, -1);
