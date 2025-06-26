@@ -279,14 +279,14 @@ begin
           LDMClient.cdsTags.Filtered := True;
           LDMClient.cdsTags.First;
 
-          {$IFNDEF CompilarPara_TGS}
+          {$IF Defined(CompilarPara_PA) or Defined(CompilarPara_MULTIPA) or Defined(CompilarPara_ONLINE)}
           if (LDMClient.cdsTags.IsEmpty) or
              (not IntInArray(LDMClient.cdsTags.FieldByName('IDgrupo').AsInteger, vgParametrosModulo.GruposTAGSLayoutBotao)) then
           begin
             LDMClient.cdsGruposDeTAGs.Next;
             Continue;
           end;
-          {$ENDIF CompilarPara_TGS}
+          {$ENDIF}
 
           Inc(FMaxTAGsCriadas);
           LNomeGrupoTag := 'grpTags_' + IntToStr(FMaxTAGsCriadas);
@@ -735,7 +735,7 @@ begin
     LcdsTagsClone.Open;
     LcdsTagsClone.First;
 
-    {$IFNDEF CompilarPara_TGS}
+    {$IF Defined(CompilarPara_PA) or Defined(CompilarPara_MULTIPA) or Defined(CompilarPara_ONLINE)}
     while not LcdsTagsClone.Eof do
     begin
       if (IntInArray(LcdsTagsClone.FieldByName('IDgrupo').AsInteger, vgParametrosModulo.GruposTAGSLayoutBotao)) then
@@ -774,7 +774,7 @@ begin
 
       LcdsTagsClone.Next;
     end;
-    {$ENDIF CompilarPara_TGS}
+    {$ENDIF}
     FreeAndNil(LcdsTagsClone);
   end;
 end;

@@ -3935,8 +3935,7 @@ begin
   end; { with cds }
 end;
 
-procedure TfrmSicsMain.GetSendConfiguracoesGeraisText(var aRetorno: string;
-  const aFiltroIDConfig: String; const aIncluirID: Boolean);
+procedure TfrmSicsMain.GetSendConfiguracoesGeraisText(var aRetorno: string; const aFiltroIDConfig: String; const aIncluirID: Boolean);
 var
   aCloseCDS: TClientDataSet;
 begin
@@ -4010,8 +4009,10 @@ begin
   dmSicsMain.qryAux.SQL.Add('select A.ID_PA, A.ID_FILA');
   dmSicsMain.qryAux.SQL.Add('from NN_PAS_FILAS A INNER JOIN PAS B ON (A.ID_PA = B.ID and A.ID_UNIDADE = B.ID_UNIDADE)');
   dmSicsMain.qryAux.SQL.Add('where A.ID_UNIDADE = ' + vgParametrosModulo.IdUnidade.ToString + ' and B.ATIVO = ''T''');
+
   if aPA > 0 then
     dmSicsMain.qryAux.SQL.Add('and A.ID_PA = ' + aPA.ToString);
+
   dmSicsMain.qryAux.SQL.Add('order by A.ID_PA, A.POSICAO');
   dmSicsMain.qryAux.Open;
   s := '';
@@ -4033,6 +4034,7 @@ begin
     s := s + IntToHex(dmSicsMain.qryAux.FieldByName('ID_FILA').AsInteger, 4) + ';';
     dmSicsMain.qryAux.Next;
   end;
+
   Delete(s, Length(s), 1);
   dmSicsMain.qryAux.Close;
 end;
@@ -4256,8 +4258,8 @@ begin
   ShowMessage(FormatDateTime('hh:nn:ss', CalculaTEE(MyInputInteger, LQTDEPAProdutiva, LQTDEPessoasEspera, LID)));
 end;
 
-function TfrmSicsMain.AtualizaAtendente(const aIdAtd: Integer; const aAtivo: Boolean; const aNome, aLogin,
-      aSenhaLogin, aAtdRegFunc: string; const aGrupoAtend: Integer): Boolean;
+function TfrmSicsMain.AtualizaAtendente(const aIdAtd: Integer; const aAtivo: Boolean; const aNome, aLogin, aSenhaLogin, aAtdRegFunc: string;
+  const aGrupoAtend: Integer): Boolean;
 var
   BM: TBookmark;
 begin
@@ -4303,7 +4305,6 @@ begin
   end; { with cds }
 end;   { proc AtualizaAtendente }
 
-
 procedure TfrmSicsMain.BroadcastAgendamentosPorFila(Senha: integer);
 var
   BM                : TBookmark;
@@ -4336,7 +4337,6 @@ begin
     Application.ProcessMessages;
   end;
 end;
-
 
 procedure TfrmSicsMain.BroadcastChamadasComTE(PA, Senha: integer; DataHora: TDateTime);
 begin
@@ -4410,8 +4410,7 @@ begin
   end; { with cds }
 end;   { func InsereAtendente }
 
-function TfrmSicsMain.InsereGrupoAtendente(Id: Integer;
-  Nome: string): Boolean;
+function TfrmSicsMain.InsereGrupoAtendente(Id: Integer; Nome: string): Boolean;
 var
   BM    : TBookmark;
 begin
@@ -4999,6 +4998,7 @@ begin
 
     dmSicsMain.cdsFiltroFilas.Next;
   end;
+
   S := TAspEncode.AspIntToHex(I, 4) + S;
 end;
 
@@ -5079,17 +5079,20 @@ begin
   try
     vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, IdModulo);
 
-    if (vTipoModulo = msNone) then
-      Exit;
+    if vTipoModulo <> msCallCenter then
+    begin
+      if (vTipoModulo = msNone) then
+        Exit;
 
-    vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
-    vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgFila);
+      vNomeTabela := GetNomeTabelaDoModulo(vTipoModulo);
+      vNomeColuna := GetNomeColunaTipoGrupoPorModulo(vTipoModulo, tgFila);
 
-//    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
-//      Exit;
+  //    if (vNomeTabela = EmptyStr) or (vNomeColuna = EmptyStr) then
+  //      Exit;
 
-    if (vNomeTabela <> EmptyStr) and (vNomeColuna <> EmptyStr) then
-      vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+      if (vNomeTabela <> EmptyStr) and (vNomeColuna <> EmptyStr) then
+        vRangeIDs := GetListaIDPermitidosDoGrupo(dmSicsMain.connOnLine, vNomeTabela, vNomeColuna, IdModulo);
+    end;
 
     TfrmDebugParameters.Debugar(tbProtocoloSics, 'GetSendFilasNamesText. TipoModulo: ' + IntToStr(Ord(vTipoModulo)) +
                                                                        ' NomeTabela: ' + vNomeTabela +
@@ -5226,7 +5229,6 @@ var
   IdPP, Cor, I  : Integer;
   Grupo         : Integer;
   Nome          : string;
-  //aCDSPPSFiltro : TClientDataSet;
   vTipoModulo   : TModuloSics;
   LQuery        : TFDQuery;
   vNomeTabela   : string;
@@ -5296,12 +5298,9 @@ end;   { proc GetSendPPsTableText }
 
 procedure TfrmSicsMain.GetSendMotivosDePausaTableText(const AIDModulo: Integer; var S: string);
 var
-  IdMP : Integer;
-  Cor  : Integer;
-  Nome : string;
-  I    : Integer;
-  Grupo: Integer;
-  //aCDSPausaFiltro: TClientDataSet;
+  IdMP, Cor     : Integer;
+  Nome          : string;
+  I, Grupo      : Integer;
   vTipoModulo   : TModuloSics;
   LQuery        : TFDQuery;
   vNomeTabela   : string;
@@ -5373,11 +5372,9 @@ end; { proc GetSendMotivosDePausaTableText }
 
 function TfrmSicsMain.GetSendMotivosDePausaTableTextPA(const PA: Integer): String;
 var
-  IdMP : Integer;
-  Nome : string;
-  I    : Integer;
-//  aCDSPausaFiltro: TClientDataSet;
-  IdModulo      : Integer;
+  IdMP          : Integer;
+  Nome          : string;
+  I, IdModulo   : Integer;
   vTipoModulo   : TModuloSics;
   LQuery        : TFDQuery;
   vNomeTabela   : string;
@@ -5487,10 +5484,8 @@ end;   { proc GetSendStatusDasPAsTableText }
 
 procedure TfrmSicsMain.GetSendGruposNamesText(const aTipoGroupoPorModulo: TTipoGrupoPorModulo; var S: string);
 var
-  IdGrupo : Integer;
-  Nome    : string;
-//  BM      : TBookmark;
-//  cds     : TClientDataSet;
+  IdGrupo       : Integer;
+  Nome          : string;
   vTipoModulo   : TModuloSics;
   LQuery        : TFDQuery;
   vNomeTabela   : string;
@@ -5504,9 +5499,6 @@ begin
   if not (aTipoGroupoPorModulo.TipoDeGrupo in [tgPA, tgAtd, tgTAG, tgPP, tgPausa, tgFila]) then
     Exit;
  
-//  dmSicsMain.cdsFiltroGrupos.CloneCursor(cds, false, True);
-//  FiltraDataSetComPermitidas(dmSicsMain.connOnLine, dmSicsMain.cdsFiltroGrupos, aTipoGroupoPorModulo.IdModulo, aTipoGroupoPorModulo.TipoDeGrupo);
-//  cds := dmSicsMain.cdsFiltroGrupos;
   try
     vTipoModulo := GetModuleTypeByID(dmSicsMain.connOnLine, aTipoGroupoPorModulo.IdModulo);
 

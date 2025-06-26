@@ -1399,8 +1399,12 @@ const
 {$ENDREGION}  {$ENDIF}
 
 {$REGION 'SICS Totem Touch'} {$IFDEF CompilarPara_TOTEMTOUCH}
-  VERSAO = 'ASPECT Mídia'#13'Versão 7.1 07/11/2022';
+  VERSAO = 'ASPECT Mídia'#13'Versão 7.10.2 24/06/2025';
            // 1. Funcionamento com impressora USB (ainda com ToDo para obter status da impressora sem papel, pouco papel, offline, etc)
+
+//  VERSAO = 'ASPECT Mídia'#13'Versão 7.1 07/11/2022';
+           // 1. Funcionamento com impressora USB (ainda com ToDo para obter status da impressora sem papel, pouco papel, offline, etc)
+
   //VERSAO = 'ASPECT Mídia'#13'Versão 6.2 18/03/19';
            // 1. BT #1294 Criação do Modulo Totem Touch.
 {$ENDREGION}  {$ENDIF CompilarPara_TOTEMTOUCH}
